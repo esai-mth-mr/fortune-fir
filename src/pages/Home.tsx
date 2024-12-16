@@ -27,7 +27,7 @@ function Home() {
 
     return (
         <div className="board">
-            <div className='img'>
+            {/* <div className='img'>
                 <img
                     src={currentImage}
                     alt="Current Background"
@@ -38,22 +38,13 @@ function Home() {
                     alt="Next Background"
                     className={!fadeOut ? 'fade-in' : 'fade-out'}
                 />
+            </div> */}
+            <div className='header'>
+                <img className="landing" src="src/assets/landing.jpg"/>
+                {/* <div className='title'>Future Fir</div> */}
             </div>
-            
-            {/* <img className='title' src="src/assets/title.png" /> */}
-            {/* <img className='logo' src="src/assets/santa-cap.png" />  */}
-            <img className="rotating" src="src/assets/luck.png"/>
-            {/* <div className="logo"><img className="" src="src/assets/santa_hat.jpg" width="50px"/></div> */}
-            <div className="title">
-                Fortune Fir
-            </div>
-            <div className='content'>
-                There are so many lucky opportunities for you in the world
-            </div>
-            <div className="buttons">
-                <Link className='getstarted' to="/signup">Get Started</Link>
-                <Link className='contactus' to="/contactus">Contact Us</Link>
-                <Link className='help' to="/help">Help</Link>
+            <div className='buttons'>
+                <Link className='start' to="/signup">Get Started</Link>
             </div>
 
         </div>

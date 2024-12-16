@@ -4,6 +4,8 @@ function Required(){
     return(
         <div className='board'>
             <img src="src/assets/.png"/>
+            <div></div>
+            <div></div>
         </div>
     )
 }

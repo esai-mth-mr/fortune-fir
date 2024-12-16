@@ -14,5 +14,6 @@ export const backgroundImages = [
     '/src/assets/main_tree.png',
     '/src/assets/gift.png',
     '/src/assets/gift1.png',
-    '/src/assets/gift2.png'
+    '/src/assets/gift2.png',
+    '/src/assets/landing.jpg'
 ];

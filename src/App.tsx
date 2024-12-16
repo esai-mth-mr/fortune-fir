@@ -16,17 +16,7 @@ function App() {
       <div className='app'>
         <BrowserRouter>
           <Routes>
-            {/* <Toaster toastOptions={{
-              className: '',
-              duration: 3000,
-              style: {
-                borderRadius: '10px',
-                background: '#44475d',
-                color: '#fff',
-                animationTimeline: '3000'
-              },
-            }} 
-            /> */}
+          
             <Route path="/" element={<Home/>}/>
             <Route path="signup" element={<SignUp/>}/>
             <Route path="login" element={<LogIn/>}/>
