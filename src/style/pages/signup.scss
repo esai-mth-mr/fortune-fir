@@ -1,0 +1,66 @@
+.board {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    .sign_up_tree{
+        width: 30%;
+        height: auto;
+    }
+    .signup_title{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 25px;
+        font-weight: 500;
+    }
+    .signup_content{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 15px;
+        font-weight: 300;
+    }
+    form{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        div{
+            width: 80%;
+            // height: 50px;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 20px;
+            border-width: 5px;
+            input{
+                width: 100%;
+                height: 45px;
+                margin-top: 10px;
+            }
+            
+        }
+        .signup{
+            width: 80%;
+            height: 50px;
+            margin-top: 30px;
+            background-color: yellow;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+       
+    }
+    .choose{
+        display: flex;
+        margin-top: 10px;
+        gap: 10px;
+        .login{
+            
+        }
+    }
+}

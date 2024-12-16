@@ -1,0 +1,41 @@
+.board {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    .main_tree{
+        width: 90%;
+        height: auto;
+        position: absolute;
+    }
+    .month{
+        width: 100px;
+        height: 30px;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        font-size:25px;
+        font-weight: 700;
+        position: absolute;
+        top: 30px;
+        right: 20px;
+        color: white;
+        text-shadow: 1px 1px 5px black, 0 0 30px yellow;
+        // text-shadow: 1px 1px 5px black 0 0 20px yellow;
+    }
+    .gift_2{
+        width: 50px;
+        height: auto;
+        position: absolute;
+        top:240px;
+        left: 280px;
+    }
+    .gift_3{
+        width: 50px;
+        height: auto;
+        position: absolute;
+        top:315px;
+        left: 160px;
+    }
+}

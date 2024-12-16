@@ -1,8 +1,13 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Router from "./Router";
 import { Toaster } from 'react-hot-toast';
 
 import './App.css'
+import SignUp from "./pages/SingUp";
+import Home from "./pages/Home";
+import LogIn from "./pages/LogIn";
+import Continue from "./pages/Continue";
+import Main from "./pages/Main";
 
 function App() {
 
@@ -10,8 +15,26 @@ function App() {
     <>
       <div className='app'>
         <BrowserRouter>
-          <Router />
-          <Toaster toastOptions={{
+          <Routes>
+            {/* <Toaster toastOptions={{
+              className: '',
+              duration: 3000,
+              style: {
+                borderRadius: '10px',
+                background: '#44475d',
+                color: '#fff',
+                animationTimeline: '3000'
+              },
+            }} 
+            /> */}
+            <Route path="/" element={<Home/>}/>
+            <Route path="signup" element={<SignUp/>}/>
+            <Route path="login" element={<LogIn/>}/>
+            <Route path="continue" element={<Continue/>}/>
+            <Route path="main" element={<Main/>}/>
+          </Routes>
+          {/* <Router /> */}
+          {/* <Toaster toastOptions={{
             className: '',
             duration: 3000,
             style: {
@@ -20,7 +43,8 @@ function App() {
               color: '#fff',
               animationTimeline: '3000'
             },
-          }} />
+          }} 
+          /> */}
         </BrowserRouter>
       </div>
       {/* <div>

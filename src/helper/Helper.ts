@@ -9,5 +9,10 @@ export const backgroundImages = [
     '/src/assets/bg-3.png',
     '/src/assets/bg-4.png',
     '/src/assets/bg-5.png',
-    '/src/assets/bg-6.png'
+    '/src/assets/santa_cap.png',
+    '/src/assets/luck.png',
+    '/src/assets/main_tree.png',
+    '/src/assets/gift.png',
+    '/src/assets/gift1.png',
+    '/src/assets/gift2.png'
 ];
