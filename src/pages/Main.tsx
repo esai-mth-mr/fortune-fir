@@ -11,8 +11,10 @@ function Main(){
       const randomTrueOrFalse = Math.random() > 0.5;
       return randomTrueOrFalse ? 1 : -1
     });
-    const giftdisplay= gifts.map((gift, index)=>
-        <img className={`${"gift_"+index}`} src={`${"src/assets/gift_"+index+".png"}`}/>
+    const giftdisplay= gifts.map((gift, index)=>{
+        // const i=index+1;
+        <img className={`${"gift_"+index}`} src={`${"src/assets/gift_"+gift+".png"}`}/>
+        }
     );
     
     return(

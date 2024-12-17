@@ -25,8 +25,8 @@ export const backgroundImages = [
     '/src/assets/gift_8.png',
     '/src/assets/gift_9.png',
     '/src/assets/gift_10.png',
-    '/src/assets/gift_11.png',
-    '/src/assets/gift_12.png',
+    // '/src/assets/gift_11.png',
+    // '/src/assets/gift_12.png',
     //characters
     '/src/assets/main_characters.png',
     //month
