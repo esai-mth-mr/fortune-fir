@@ -1,45 +1,69 @@
-import '@src/style/global.scss';
-import '@src/style/pages/main.scss';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Stack } from '@mui/material';
-import { Pagination } from '@mui/material';
+import '@src/style/global.scss';  
+import '@src/style/pages/main.scss';  
+import { useEffect, useState } from 'react';  
+import { Link } from 'react-router-dom';  
+import { Stack } from '@mui/material';  
+import { Pagination } from '@mui/material';  
 
-function Main(){
-    const gifts =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const shuffeled = gifts.sort(() => {
-      const randomTrueOrFalse = Math.random() > 0.5;
-      return randomTrueOrFalse ? 1 : -1
-    });
-    const giftdisplay= gifts.map((gift, index)=>{
-        // const i=index+1;
-        <img className={`${"gift_"+index}`} src={`${"src/assets/gift_"+gift+".png"}`}/>
-        }
-    );
+function Main() {  
+    const [month, setMonth] = useState(1);
+    const [count, setCount]=useState(0);
+    const [gifts, setGifts]=useState([]);
+    const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];  
     
-    return(
-        <div className='board'>
-            <div className='month'>
-                <img className='characters' src="src/assets/main_characters.png"/>
-                <img className='month_icon' src="src/assets/months/1.png"/>
-            </div>
-            <img className='main_tree' src="src/assets/main_tree.png"></img>
-            <div className='main_header'>
-                <div className='ratings'>Ratings</div>
-                <div className='results'>Results</div>
-            </div>
+    // Shuffle gifts array  
+    useEffect(() => {  
+        // Shuffle gifts array  
+        const shuffledGifts = [...array].sort(() => Math.random() - 0.5);  
+
+        // Check if count is a multiple of 7 (excluding when count is 0 to prevent initial set)  
+        if (count > 0 && count % 7 === 0) {  
+            // setGifts(shuffledGifts); // Set shuffled gifts to state  
+        }  
+    }, [count, array]); // Only run when count changes  
+    
+   
+    // Create gift display elements  
+    const giftdisplay = gifts.map((gift, index) => (  
+        
+        <img   
+            onClick={()=>{setCount(count+1)}}
+            key={index}   
+            className={`gift_${index}`}   
+            src={`src/assets/gift_${gift}.png`}   
+            alt={`Gift ${gift}`}   
+        />  
+    ));  
+
+    useEffect(()=>{
+        console.log("month", month);
+        console.log("count", count)
+    })
+
+    return (  
+        <div className='board'>  
+            <div className='month'>  
+                <img className='characters' src="src/assets/main_characters.png" alt="Characters" />  
+                
+                <img className='month_icon' src={`${`src/assets/months/`+month+`.png`}`} alt="Month Icon" />  
+            </div>  
+            <img className='main_tree' src="src/assets/main_tree.png" alt="Main Tree" />  
+            <div className='main_header'>  
+                <div className='ratings'>Ratings</div>  
+                <div className='results'>Results</div>  
+            </div>  
             
-            <div className='main_footer'>
-                <Stack spacing={2}>
-                <Pagination count={10} variant="outlined" color="secondary" />
-                </Stack>
-            </div>
-            {giftdisplay}
+            <div className='main_footer'>  
+                <Stack spacing={2}>  
+                    <Pagination  onChange={(event, newPage) => setMonth(newPage)}   count={12} variant="outlined" color="secondary" />  
+                </Stack>  
+            </div>  
             
-            {/* <img className={`${"gift_2"}`} src={`${"src/assets/gift_2"+".png"}`}/> */}
-            
-        </div>
-    )
-}
+            <div className='gifts-container'> {/* Optional: You can style this container */}  
+                {giftdisplay}  
+            </div>  
+        </div>  
+    );  
+}  
 
 export default Main;
