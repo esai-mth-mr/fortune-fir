@@ -4,57 +4,89 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    .modal{
+        .verify{
             width: 80%;
-            height: 50%;
+            height: 60%;
             background-color: white;
             border-radius: 30px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            .modal_pic{
+            align-content: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            .verify_pic{
                 width: 30%;
                 height: auto;
                 display: flex;
                 justify-content: center;
                 align-items: end;
-                .modal_pic_icon{
+                .verify_pic_icon{
                     margin: 10%;
                     width: 80%;
                     height: auto;
                 }
             }
-            .modal_title{
+            .verify_title{
                 width: 100%;
-                height: 20%;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+            }
+            .verify_desc{
+                width: 80%;
+                height: auto;
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-            .modal_desc{
+
+            .verify_cap{
+                width: 80%;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                justify-items: center;
+                align-items: center;
+            }
+            .verify_cap2{
                 width: 100%;
-                height: 10%;
+                height: auto;
                 display: flex;
                 justify-content: center;
                 align-items: center;
             }
-            .modal_btn{
+            .verify_btn{
                 width: 100%;
-                height: 20%;
+                height: auto;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                .modal_btn_obj{
+                .verify_btn_obj{
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     width: auto;
                     height: 50%;
-                    background-color: blue;
+                    background-color: greenyellow;
+                    color: white;
+                    padding: 5px;
+                    border-radius: 10px;
                 }
             }
-        
-    }
-    
+            .verify_final{
+                width: 100%;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                .verify_contact{
+                    color: green;
+                }
+            }
+        }
 }

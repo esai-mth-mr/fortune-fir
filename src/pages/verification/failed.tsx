@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 function Failed(){
     return(
         <div className='board'>
-            <div className='modal'>
+            <div className='verify_failed'>
                 <div>
                     <img src=""/>
                 </div>

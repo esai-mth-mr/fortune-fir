@@ -5,30 +5,31 @@ import '@src/style/verify/required.scss';
 function Required(){
     return(
         <div className='board'>
-            <div className='modal'>
-                <div className='modal_pic'>
-                    <img className='modal_pic_icon' src='src/assets/modal.jpg'/> 
+            <div className='verify'>
+                <div className='verify_pic'>
+                    <img className='verify_pic_icon' src='src/assets/modal.jpg'/> 
                 </div>
-                <div className='modal_title'>
+                <div className='verify_title'>
                     Please verify your email
                 </div>
-                <div className='modal_desc'>
+                <div className='verify_desc'>
                     you are almost there? We sent an email to 
                 </div>
-                <div>
+                <div className='verify_cap'>
                     Just click on the link in that email to complete your signup.
                     If you don't see it,you may need to check your spam folder
                 </div>
-                <div>
+                <div className='verify_cap2'>
                     Still can't find the email?
                 </div>
-                <div className='modal_btn'>
-                    <div className='modal_btn_obj'>
+                <div className='verify_btn'>
+                    <div className='verify_btn_obj'>
                         Resend Email
                     </div>
                 </div>
-                <div>
-                    Need help? Contact Us
+                <div className='verify_final'>
+                    <div>Need help?</div>
+                    <div className='verify_contact'>Contact Us</div>
                 </div>
             </div>
         </div>
