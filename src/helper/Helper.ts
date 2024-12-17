@@ -12,8 +12,23 @@ export const backgroundImages = [
     '/src/assets/santa_cap.png',
     '/src/assets/luck.png',
     '/src/assets/main_tree.png',
-    '/src/assets/gift.png',
-    '/src/assets/gift1.png',
-    '/src/assets/gift2.png',
-    '/src/assets/landing.jpg'
+    '/src/assets/landing.jpg',
+    '/src/assets/modal.jpg',
+    //gift
+    '/src/assets/gift_1.png',
+    '/src/assets/gift_2.png',
+    '/src/assets/gift_3.png',
+    '/src/assets/gift_4.png',
+    '/src/assets/gift_5.png',
+    '/src/assets/gift_6.png',
+    '/src/assets/gift_7.png',
+    '/src/assets/gift_8.png',
+    '/src/assets/gift_9.png',
+    '/src/assets/gift_10.png',
+    '/src/assets/gift_11.png',
+    '/src/assets/gift_12.png',
+    //characters
+    '/src/assets/main_characters.png',
+    //month
+    '/src/assets/months/1.png',
 ];

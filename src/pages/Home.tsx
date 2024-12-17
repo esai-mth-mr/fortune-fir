@@ -41,10 +41,11 @@ function Home() {
             </div> */}
             <div className='header'>
                 <img className="landing" src="src/assets/landing.jpg"/>
-                {/* <div className='title'>Future Fir</div> */}
             </div>
             <div className='buttons'>
                 <Link className='start' to="/signup">Get Started</Link>
+                <Link className='start' to="/signup">Contact Us</Link>
+                <Link className='start' to="/signup">Help</Link>
             </div>
 
         </div>

@@ -8,6 +8,9 @@ import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
 import Continue from "./pages/Continue";
 import Main from "./pages/Main";
+import Required from "./pages/verification/required";
+import Succesful from "./pages/verification/succesful";
+import Failed from "./pages/verification/failed";
 
 function App() {
 
@@ -22,6 +25,10 @@ function App() {
             <Route path="login" element={<LogIn/>}/>
             <Route path="continue" element={<Continue/>}/>
             <Route path="main" element={<Main/>}/>
+
+            <Route path="required" element={<Required/>}/>
+            <Route path="successful" element={<Succesful/>}/>
+            <Route path="failed" element={<Failed/>}/>
           </Routes>
           {/* <Router /> */}
           {/* <Toaster toastOptions={{

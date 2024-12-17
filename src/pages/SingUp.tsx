@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 function SignUp(){
     return(
         <div className="board">
-            <img className='sign_up_tree' src="src/assets/sign_up_tree.png"/>
+            <div className='sign_header'>
+                <img className='sign_up_tree' src="src/assets/sign_up_tree.png"/>
+            </div>
             <div className='signup_title'>
                 Sign up to Fortune Fir
             </div>
@@ -26,9 +28,11 @@ function SignUp(){
                     <label>Password</label>
                     <input type='text'/>
                 </div>
-                <Link className='signup' to="/continue">
-                    Continue
-                </Link>
+                <div>
+                    <Link className='signup' to="/continue">
+                        Continue
+                    </Link>
+                </div>
             </form>
             <div className='choose'>
                 <div>have an account?</div>
