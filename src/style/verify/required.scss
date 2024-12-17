@@ -5,54 +5,56 @@
     justify-content: center;
     align-items: center;
     .modal{
-        width: 80%;
-        height: 50%;
-        background-color: white;
-        border-radius: 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: center;
-        .modal_pic{
-            width: 30%;
-            height: auto;
+            width: 80%;
+            height: 50%;
+            background-color: white;
+            border-radius: 30px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            align-items: end;
-            .modal_pic_icon{
-                margin: 10%;
-                width: 80%;
+            align-items: center;
+            .modal_pic{
+                width: 30%;
                 height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: end;
+                .modal_pic_icon{
+                    margin: 10%;
+                    width: 80%;
+                    height: auto;
+                }
             }
-        }
-        .modal_title{
-            width: 100%;
-            height: 20%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal_desc{
-            width: 100%;
-            height: 10%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal_btn{
-            width: 100%;
-            height: 20%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .modal_btn_obj{
+            .modal_title{
+                width: 100%;
+                height: 20%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: auto;
-                height: 50%;
-                background-color: blue;
             }
-        }
+            .modal_desc{
+                width: 100%;
+                height: 10%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .modal_btn{
+                width: 100%;
+                height: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .modal_btn_obj{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: auto;
+                    height: 50%;
+                    background-color: blue;
+                }
+            }
+        
     }
+    
 }
