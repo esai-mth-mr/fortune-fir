@@ -14,6 +14,7 @@ export const backgroundImages = [
     '/src/assets/main_tree.png',
     '/src/assets/landing.jpg',
     '/src/assets/modal.jpg',
+    '/src/assets/modal_tree.png',
     //gift
     '/src/assets/gift_1.png',
     '/src/assets/gift_2.png',
@@ -25,8 +26,10 @@ export const backgroundImages = [
     '/src/assets/gift_8.png',
     '/src/assets/gift_9.png',
     '/src/assets/gift_10.png',
-    // '/src/assets/gift_11.png',
-    // '/src/assets/gift_12.png',
+    '/src/assets/gift_11.png',
+    '/src/assets/gift_12.png',
+
+    '/src/assets/close.png',
     //characters
     '/src/assets/main_characters.png',
     //month

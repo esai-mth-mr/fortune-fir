@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';  
 import { Stack } from '@mui/material';  
 import { Pagination } from '@mui/material';  
-import Modal from '../components/Modal';
+// import Modal from '../components/Modal';
+import Modal from './modal/modal';
 
 function Main() {  
     const [month, setMonth] = useState(1);
@@ -12,6 +13,9 @@ function Main() {
     const [gifts, setGifts]=useState([]);
     const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];  
     const shuffledGifts = [...array].sort(() => Math.random() - 0.5);  
+
+    //modal
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     // Shuffle gifts array  
     // useEffect(() => {  
     //     // Shuffle gifts array  
@@ -23,7 +27,7 @@ function Main() {
     //     }  
     // }, [count, array]); // Only run when count changes  
     // Create gift display elements  
-    const giftdisplay = gifts.map((gift, index) => (  
+    const giftdisplay = shuffledGifts.map((gift, index) => (  
         <img   
             onClick={()=>{setCount(count+1)}}
             key={index}   
@@ -35,6 +39,7 @@ function Main() {
     
     //modal
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);  
+    const [isModalState, setModalState] = useState<number>(1);
 
     const openModal = () => setIsModalOpen(true);  
     const closeModal = () => setIsModalOpen(false);  
@@ -48,17 +53,19 @@ function Main() {
             </div>  
             <img className='main_tree' src="src/assets/main_tree.png" alt="Main Tree" />  
             <div className='main_header'>  
-                <button onClick={openModal}>Open Modal</button>  
-                <Modal isOpen={isModalOpen} onClose={closeModal} title="My Modal Title">  
+                <button className='main_header_rating' onClick={()=>{setIsOpen(true)} }>Ratings</button>  
+                {/* <Modal isOpen={isModalOpen} onClose={closeModal} title="My Modal Title">  
                     <p>This is the content of the modal!</p>  
-                </Modal> 
+                </Modal>  */}
+                {isOpen&&<Modal setIsOpen={setIsOpen}/>}
                 <div className='results'>Results</div>  
             </div>  
             
             <div className='main_footer'>  
-                <Stack spacing={2}>  
+                <div className='main_footer_btn'>Next</div>
+                {/* <Stack spacing={2}>  
                     <Pagination  onChange={(event, newPage) => setMonth(newPage)}   count={12} variant="outlined" color="secondary" />  
-                </Stack>  
+                </Stack>   */}
             </div>  
             
             <div className='gifts-container'> {/* Optional: You can style this container */}  
