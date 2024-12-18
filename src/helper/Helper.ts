@@ -4,17 +4,7 @@ export const getRandomNum = (from: number, to: number, num: number): number[] | 
 };
 
 export const backgroundImages = [
-    '/src/assets/bg-1.png',
-    '/src/assets/bg-2.png',
-    '/src/assets/bg-3.png',
-    '/src/assets/bg-4.png',
-    '/src/assets/bg-5.png',
-    '/src/assets/santa_cap.png',
-    '/src/assets/luck.png',
-    '/src/assets/main_tree.png',
-    '/src/assets/landing.jpg',
-    '/src/assets/modal.jpg',
-    '/src/assets/modal_tree.png',
+    '/src/assets/santa2.png',
     //gift
     '/src/assets/gift_1.png',
     '/src/assets/gift_2.png',
@@ -28,10 +18,4 @@ export const backgroundImages = [
     '/src/assets/gift_10.png',
     '/src/assets/gift_11.png',
     '/src/assets/gift_12.png',
-
-    '/src/assets/close.png',
-    //characters
-    '/src/assets/main_characters.png',
-    //month
-    '/src/assets/months/1.png',
 ];

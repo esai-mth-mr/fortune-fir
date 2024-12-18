@@ -39,14 +39,23 @@ function Home() {
                     className={!fadeOut ? 'fade-in' : 'fade-out'}
                 />
             </div> */}
-            <div className='header'>
-                <img className="landing" src="src/assets/landing.jpg"/>
+            <div className='home_header'>
+                <img className="landing" src="/src/assets/santa2.png"/>
             </div>
-            <div className='buttons'>
-                <Link className='start' to="/signup">Get Started</Link>
-                <Link className='start' to="/signup">Contact Us</Link>
-                <Link className='start' to="/signup">Help</Link>
+            <div className='home_footer'>
+                <div className='home_title'>
+                    Unwrap the Magic of Thoughtful Giving
+                </div>
+                <div className='home_content'>
+                    Get Ready for a Merry Christmas!
+                </div>
+                <div className='buttons'>
+                    <Link className='start' to="/signup">Get Started</Link>
+                    <Link className='start' to="/signup">Contact Us</Link>
+                    <Link className='start' to="/signup">Help</Link>
+                </div>
             </div>
+            
 
         </div>
     );

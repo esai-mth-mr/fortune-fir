@@ -10,10 +10,19 @@ import Modal from './modal/modal';
 function Main() {  
     const [month, setMonth] = useState(1);
     const [count, setCount]=useState(0);
-    const [gifts, setGifts]=useState([]);
+    const [gifts, setGifts]=useState<number[]>();
     const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];  
     const shuffledGifts = [...array].sort(() => Math.random() - 0.5);  
-    const giftarray = [...shuffledGifts];
+    
+    useEffect(()=>{
+        if(count%7==0){
+            setGifts([...shuffledGifts]);
+        }
+    }, [count])
+
+    useEffect(()=>{
+        console.log(count);
+    })
 
     // useEffect(()=>{
     //     if(count%7==0){
@@ -33,7 +42,7 @@ function Main() {
     //     }  
     // }, [count, array]); // Only run when count changes  
     // Create gift display elements  
-    const giftdisplay = giftarray.map((gift, index) => (  
+    const giftdisplay = gifts?.map((gift, index) => (  
         <img   
             onClick={()=>{setCount(count+1)}}
             key={index}   
@@ -67,7 +76,7 @@ function Main() {
             </div>   */}
             
             <div className='main_footer'>  
-                <div className='main_footer_btn' onClick={()=>month<12?setMonth(month+1):""}>
+                <div className='main_footer_btn' onClick={()=>{month<12?setMonth(month+1):""; setCount(0); setGifts([...shuffledGifts]);}}>
                     {month<12?"Next":""}
                     {month==12?"Finish":""}
                 </div>
