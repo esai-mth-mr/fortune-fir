@@ -26,8 +26,8 @@
         }
     }
     .main_tree{
-        width: 80%;
-        height: 70%;
+        width: 95%;
+        height: 75%;
         background-color: white;
         border-radius: 20px;
     }
@@ -37,6 +37,7 @@
         display: flex;
         justify-content: space-between;
         align-items: end;
+        // background-color: white;
        
         .ratings{
             width: 45%;
@@ -73,7 +74,7 @@
         }
     }
     .main_footer{
-        width: 80%;
+        width: 30%;
         height: 10%;
         display: flex;
         justify-content: center;
@@ -93,85 +94,85 @@
         width: 50px;
         height: auto;
         position: absolute;
-        top: 30%;
+        top: 32%;
         left: 36%;
     }
     .gift_1{
         width: 50px;
         height: auto;
         position: absolute;
-        top:30%;
+        top:32%;
         right: 36%;
     }
     .gift_2{
         width: 50px;
         height: auto;
         position: absolute;
-        top:40%;
-        left: 33%;
+        top:42%;
+        left: 32%;
     }
     .gift_3{
         width: 50px;
         height: auto;
         position: absolute;
-        top:40%;
-        right: 33%;
+        top:42%;
+        right: 32%;
     }
     .gift_4{
         width: 50px;
         height: auto;
         position: absolute;
-        top:48%;
-        left:30%;
+        top:51%;
+        left:28%;
     }
     .gift_5{
         width: 50px;
         height: auto;
         position: absolute;
-        top:48%;
-        right:30%;
+        top:51%;
+        right:28%;
     }
     .gift_6{
         width: 50px;
         height: auto;
         position: absolute;
-        top:57%;
-        left:25%;
+        top:61%;
+        left:21%;
     }
     .gift_7{
         width: 50px;
         height: auto;
         position: absolute;
-        top:57%;
-        right: 25%;
+        top:61%;
+        right: 20%;
     }
     .gift_8{
         width: 50px;
         height: auto;
         position: absolute;
-        top:67%;
-        left:18%;
+        top:71%;
+        left:13%;
     }
     .gift_9{
         width: 50px;
         height: auto;
         position: absolute;
-        top:67%;
-        right: 18%;
+        top:71%;
+        right: 12.5%;
     }
     .gift_10{
         width: 50px;
         height: auto;
         position: absolute;
-        top:54%;
+        top:57%;
         left:45.5%;
     }
     .gift_11{
         width: 50px;
         height: auto;
         position: absolute;
-        top:63%;
-        left:45.5%;
+        top:67.5%;
+        left:46%;
     }
 
 

@@ -13,9 +13,15 @@ function Main() {
     const [gifts, setGifts]=useState([]);
     const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];  
     const shuffledGifts = [...array].sort(() => Math.random() - 0.5);  
+    const giftarray = [...shuffledGifts];
 
+    // useEffect(()=>{
+    //     if(count%7==0){
+
+    //     }
+    // }, [month, count])
     //modal
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    // const [isOpen, setIsOpen] = useState<boolean>(false);
     // Shuffle gifts array  
     // useEffect(() => {  
     //     // Shuffle gifts array  
@@ -27,7 +33,7 @@ function Main() {
     //     }  
     // }, [count, array]); // Only run when count changes  
     // Create gift display elements  
-    const giftdisplay = shuffledGifts.map((gift, index) => (  
+    const giftdisplay = giftarray.map((gift, index) => (  
         <img   
             onClick={()=>{setCount(count+1)}}
             key={index}   
@@ -52,17 +58,19 @@ function Main() {
                 <img className='month_icon' src={`${`src/assets/months/`+month+`.png`}`} alt="Month Icon" />  
             </div>  
             <img className='main_tree' src="src/assets/main_tree.png" alt="Main Tree" />  
-            <div className='main_header'>  
-                <button className='main_header_rating' onClick={()=>{setIsOpen(true)} }>Ratings</button>  
-                {/* <Modal isOpen={isModalOpen} onClose={closeModal} title="My Modal Title">  
-                    <p>This is the content of the modal!</p>  
-                </Modal>  */}
-                {isOpen&&<Modal setIsOpen={setIsOpen}/>}
-                <div className='results'>Results</div>  
-            </div>  
+            {/* <div className='main_header'>  
+                <div className='main_header_rating' onClick={()=>{setIsOpen(true); setModalState(1)} }>Ratings</div>  
+                {isOpen&&<Modal setIsOpen={setIsOpen} modalstate={isModalState}/>}
+                <div className='results' onClick={()=>{setIsOpen(true); setModalState(2)}}>Results</div>  
+                {isOpen&&<Modal setIsOpen={setIsOpen} modalstate={isModalState}/>}
+                You can select 7 gifts in 12 items and you can edit only once for this month. Please select gifts and then move to next month.
+            </div>   */}
             
             <div className='main_footer'>  
-                <div className='main_footer_btn'>Next</div>
+                <div className='main_footer_btn' onClick={()=>month<12?setMonth(month+1):""}>
+                    {month<12?"Next":""}
+                    {month==12?"Finish":""}
+                </div>
                 {/* <Stack spacing={2}>  
                     <Pagination  onChange={(event, newPage) => setMonth(newPage)}   count={12} variant="outlined" color="secondary" />  
                 </Stack>   */}
