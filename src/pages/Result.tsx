@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import '@src/style/global.scss';  
+import '@src/style/pages/main.scss';  
 
 function Result(){
     const [month, setMonth] = useState(1);
     const [count, setCount] = useState(0);
-    const months=["","January", "Feburuary", "March", "April","May", "June", "July", "August", "September", "October", "November", "December", "Total Story"];
+    const months=["","Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
     return(
         <div className='board'>
             <div className='main_month'>
-                {months[month]}
+                <div className="month_title">2025</div>
+                <div className="month_num"><h6 style={{fontSize:"30px"}}>{months[month]}</h6></div>
             </div>
             <div className='main_img_field'>
                 <img className='main_img' src="/src/assets/backgroundImage _1.png"/>
