@@ -7,5 +7,5 @@ export const backgroundImages = [
     '/src/assets/santa2.png',
     '/src/assets/santamodel.png',
     '/src/assets/backgroundImage _1.png',
-
+    //gifts
 ];
