@@ -1,13 +1,14 @@
 .board {
     width: 100%;
     height: 100%;
+    min-height: 700px;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
     position: relative;
     overflow: hidden;
-    background-color: #e9ecee;
+    background-color: #F5F5F5;
     //         object-fit: cover;
     //         transition: opacity 2s ease-in-out;
     //     }
@@ -18,58 +19,70 @@
     //         opacity: 1;
     //     }
     // }
-    .header{
+    .home_header{
       width: 100%;
-      height: 70%;
-      background-color: #e9ecee;
+      height: 55%;
+      background-color: #F5F5F5;
+      overflow: hidden;
       position: relative;
       display: flex;
       justify-content: center;
-      align-items: center;
-      overflow-x: hidden;
+      align-items: end;
       .landing{
-        width: auto;
-        height: 100%;
+        width: 450px;
+        height: 450px;
+        overflow: hidden;
         border-bottom-right-radius: 50%;
         border-bottom-left-radius: 50%;
-        background-color: #e9ecee;
+        background-color: #F5F5F5;
       }
     }
-    
-    .buttons{
+    .home_footer{
+      width: 100%;
+      height: 45%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      width: 100%;
-      height: 30%;
-      .start{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 80%;
-        height: 50px;
-        margin: 5px;
-        border-radius: 15px;
-        background-color: white;
-        font-family: serif;
-        font-size: 20px;
-        font-weight: 700;
-        color: black;
+      padding-top: 10%;
+      padding-bottom: 10%;
+      background-color: #F5F5F5;
+      .home_title{
+        // width: 85%;  
+        font-family: 'ProstoOne-Regular';
+        font-size: 25px;
+        line-height: 26px;
+        text-wrap: balance;
+        text-align: center;
+        
       }
-    }   
-    
+      .home_content{
+        font-size: 18px;
+        line-height: 26px;
+        font-family: 'PlayfairDisplay-Regular';
+        font-weight: lighter
+      }
+      .buttons{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 60%;
+        .start{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 60%;
+          height: 45px;
+          border-radius: 30px;
+          background-color: #FF0000;
+          font-family: 'DM SANS';
+          font-size: 17px;
+          font-weight: bold;
+          color: white;
+        }
+      }  
+    }  
 }
 
-@media (max-width: 1290px) {
-  .board{
-    .header{
-      width: 100%;
-      .landing{
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-    
-  }

@@ -6,11 +6,13 @@ import './App.css'
 import SignUp from "./pages/SingUp";
 import Home from "./pages/Home";
 import LogIn from "./pages/LogIn";
-import Continue from "./pages/Continue";
+import Continue from "./pages/GetReady";
 import Main from "./pages/Main";
 import Required from "./pages/verification/required";
 import Succesful from "./pages/verification/succesful";
 import Failed from "./pages/verification/failed";
+import GetReady from "./pages/GetReady";
+import Result from "./pages/Result";
 
 function App() {
 
@@ -23,12 +25,13 @@ function App() {
             <Route path="/" element={<Home/>}/>
             <Route path="signup" element={<SignUp/>}/>
             <Route path="login" element={<LogIn/>}/>
-            <Route path="continue" element={<Continue/>}/>
+            <Route path="getready" element={<GetReady/>}/>
             <Route path="main" element={<Main/>}/>
 
             <Route path="required" element={<Required/>}/>
             <Route path="successful" element={<Succesful/>}/>
             <Route path="failed" element={<Failed/>}/>
+            <Route path="result" element={<Result/>}/>
           </Routes>
           {/* <Router /> */}
           {/* <Toaster toastOptions={{

@@ -3,41 +3,53 @@ import '@src/style/pages/signup.scss';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// import { ReactComponent as message_icon } from '../../src/svg/signup/message.svg';
+import Messagesvg from '../../src/svg/signup/message.svg';
+
 function SignUp(){
+    const [inputstate, setInputState]=useState(1);
     return(
         <div className="board">
-            <div className='sign_header'>
-                <img className='sign_up_tree' src="src/assets/sign_up_tree.png"/>
-            </div>
-            <div className='signup_title'>
-                Sign up to Fortune Fir
-            </div>
-            <div className='signup_content'>
-                Sign up and start your journey
-            </div>
-            <form>
-                <div>
-                    <label>User Name</label>
-                    <input type='text'/>
+            <img className='sign_header' src="/src/assets/santamodel.png"/>
+            <form className='form_field'>
+                <div className='form_input_field'>
+                    {/* <Messagesvg className='form_img'/> */}
+                    <img className='form_img' src='/src/svg/signup/message.svg'/>
+                    {/* <div className='form_input_content'>{inputstate==1?"Email...":"Gender"}</div> */}
+                    {inputstate==1?<input className='form_input' name='email' placeholder='Email'/>:
+                    <select className='form_input' name="gender" >
+                        <option value="" disabled selected>Gender</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                    </select>}
                 </div>
-                <div>
-                    <label>Email</label>
-                    <input type='text'/>
+                <div className='form_input_field'>
+                    {/* <Messagesvg className='form_img'/> */}
+                    <img className='form_img' src='/src/svg/signup/message.svg'/>
+                    {/* <div className='form_input_content'>{inputstate==1?"User Name...":"Date Of Birth"}</div> */}
+                    {inputstate==1?<input className='form_input' name='username' placeholder='User Name'/>:
+                    <input className='form_input' name='birthday' type='date'  placeholder="Date of birth"/>}
                 </div>
-                <div>
-                    <label>Password</label>
-                    <input type='text'/>
+                <div className='form_input_field'>
+                    {/* <Messagesvg className='form_img'/> */}
+                    <img className='form_img' src='/src/svg/signup/message.svg'/>
+                    {/* <div className='form_input_content'>{inputstate==1?"Password...":"Job"}</div> */}
+                    {inputstate==1?<input className='form_input' name='password' placeholder='Password'/>:
+                    <input className='form_input' name='job' placeholder='Job'/>}
                 </div>
-                <div>
-                    <Link className='signup' to="/continue">
-                        Continue
-                    </Link>
-                </div>
+
+                {/* <input className='form_input'/>
+                <input className='form_input'/> */}
             </form>
-            <div className='choose'>
-                <div>have an account?</div>
-                <Link className='login' to="/login">Sign In</Link>
+            <div className='sign_desc'>
+                I have already an account.<a href='/login'>Sign In.</a>
             </div>
+            {inputstate==1?<div onClick={()=>setInputState(2)} className='sign_btn'>
+                Continue
+            </div>:
+            <Link className='sign_btn' to="/login">
+               Sign Up
+            </Link>}
         </div>
     );
 }

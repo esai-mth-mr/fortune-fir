@@ -1,45 +1,46 @@
-import '@src/style/global.scss';
-import '@src/style/pages/main.scss';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Stack } from '@mui/material';
-import { Pagination } from '@mui/material';
+import '@src/style/global.scss';  
+import '@src/style/pages/main.scss';  
+import { useEffect, useState } from 'react';  
+import { Link } from 'react-router-dom';  
+import { Stack } from '@mui/material';  
+import { Pagination } from '@mui/material';  
+import 'animate.css';
 
-function Main(){
-    const gifts =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const shuffeled = gifts.sort(() => {
-      const randomTrueOrFalse = Math.random() > 0.5;
-      return randomTrueOrFalse ? 1 : -1
-    });
-    const giftdisplay= gifts.map((gift, index)=>{
-        // const i=index+1;
-        <img className={`${"gift_"+index}`} src={`${"src/assets/gift_"+gift+".png"}`}/>
-        }
-    );
-    
+function Main() {  
+    const [month, setMonth] = useState(1);
+    const [count, setCount] = useState(0);
+
+    const [isHovered, setIsHovered] = useState(false);  
+    const months=["","Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    const array=[1,2,3,4,5,6,7,8,9,10,11,12];
+    const shufflemonths=array.sort( () => .5 - Math.random());
     return(
         <div className='board'>
-            <div className='month'>
-                <img className='characters' src="src/assets/main_characters.png"/>
-                <img className='month_icon' src="src/assets/months/1.png"/>
+            <div className='main_month'>
+                <div className='month_title'>2025</div>
+                <div className='month_num'><h6 style={{ fontSize:"30px"}}>{months[month]}</h6></div>
             </div>
-            <img className='main_tree' src="src/assets/main_tree.png"></img>
-            <div className='main_header'>
-                <div className='ratings'>Ratings</div>
-                <div className='results'>Results</div>
+            <div className='main_img_field'>
+                <img className='main_img' src="/src/assets/backgroundImage _1.png"/>
             </div>
-            
-            <div className='main_footer'>
-                <Stack spacing={2}>
-                <Pagination count={10} variant="outlined" color="secondary" />
-                </Stack>
+            <div className='gifts_field'>
+                <div className='gift-field-child'>
+                {shufflemonths.map((item, index)=>( index%2==0?<div className='gifts_line'>
+                    {/* animate__animated animate__bounce */}
+                    <img key={item} className={`${`gift_l`}`} onClick={()=>{setCount(count+1)}} src={`${`/src/svg/Gifts/gift_`+item+`.svg`}`}/>
+                    <img key={shufflemonths[index+6]} className={`${`gift_r`}`} onClick={()=>setCount(count+1)} src={`${`/src/svg/Gifts/gift_`+shufflemonths[index+1]+`.svg`}`}/>
+                </div>:<></>))}
+                </div>
             </div>
-            {giftdisplay}
-            
-            {/* <img className={`${"gift_2"}`} src={`${"src/assets/gift_2"+".png"}`}/> */}
-            
+            <div onClick={()=>month!=12&&setMonth(month+1)} className='gift_next_btn'>
+                {month<12?"Next":""}
+                <Link className='gift_finish' to="/result">
+                    {month==12?"Finish":""}
+                </Link>
+            </div>
         </div>
     )
-}
+}  
 
 export default Main;

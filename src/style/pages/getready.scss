@@ -1,0 +1,32 @@
+.board{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    .getready_img_field{
+        width: 100%;
+        height: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        .getready_img{
+            width: 800px;
+            height: 800px;
+            display: flex;
+        }
+    }
+    
+    .getready_btn{
+        width: 70%;
+        background-color: #ff0000;
+        height: 45px;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: 'PlayfairDisplay-Regular';
+        margin-top: 20%;
+    }
+}

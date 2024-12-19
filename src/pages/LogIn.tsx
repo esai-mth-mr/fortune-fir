@@ -1,44 +1,40 @@
 import '@src/style/global.scss';
-import '@src/style/pages/login.scss';
+import '@src/style/pages/signup.scss';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+// import { ReactComponent as message_icon } from '../../src/svg/signup/message.svg';
+import Messagesvg from '../../src/svg/signup/message.svg';
 
 function LogIn(){
     return(
         <div className="board">
-        <div className='sign_header'>
-            <img className='sign_up_tree' src="src/assets/sign_up_tree.png"/>
-        </div>
-        <div className='signup_title'>
-            Log in to Fortune Fir
-        </div>
-        <div className='signup_content'>
-            Log in and start your journey
-        </div>
-        <form>
-            <div>
-                <label>User Name</label>
-                <input type='text'/>
+            <img className='sign_header' src="/src/assets/santamodel.png"/>
+            <form className='form_login_field'>
+                <div className='form_input_field'>
+                    {/* <Messagesvg className='form_img'/> */}
+                    <img className='form_img' src='/src/svg/signup/message.svg'/>
+                    {/* <div className='form_input_content'>Email...</div> */}
+                    <input className='form_input' name='username' placeholder='User Name'/>
+                </div>
+                
+                <div className='form_input_field'>
+                    {/* <Messagesvg className='form_img'/> */}
+                    <img className='form_img' src='/src/svg/signup/message.svg'/>
+                    {/* <div className='form_input_content'>Password...</div> */}
+                    <input className='form_input' name='password' placeholder='Password'/>
+                </div>
+
+                {/* <input className='form_input'/>
+                <input className='form_input'/> */}
+            </form>
+            <div className='login_desc'>
+                I have already an account.<a href='/signup'>Sign Up.</a>
             </div>
-            <div>
-                <label>Email</label>
-                <input type='text'/>
+            <div className='login_btn'>
+                Sign In
             </div>
-            <div>
-                <label>Password</label>
-                <input type='text'/>
-            </div>
-            <div>
-                <Link className='signup' to="/continue">
-                    Log In
-                </Link>
-            </div>
-        </form>
-        <div className='choose'>
-            <div>have an account?</div>
-            <Link className='login' to="/signup">Sign Up</Link>
         </div>
-    </div>
     );
 }
 
