@@ -1,4 +1,30 @@
+
+/* Custom scrollbar styles */
+.gift-field-child::-webkit-scrollbar {
+    width: 3px; /* Width of the scrollbar */
+  }
+  
+  .gift-field-child::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2); /* Background of the scrollbar track */
+  }
+  
+  .gift-field-child::-webkit-scrollbar-thumb {
+    background-color: rgba(195, 27, 27, 0.5); /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+  }
+  
+  .gift-field-child::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(223, 25, 25, 0.8); /* Darker color on hover */
+  }
+  
+
+
 .board{
+    position: relative;
+    @keyframes example {
+        0%   {left:0px; top:0px;}
+        100%  {left:200px; top:1000px;}
+    }
     .main_month{
         display: flex;
         flex-direction: column;
@@ -57,9 +83,9 @@
         flex-direction: column;
         margin-top: -50%;
         overflow: hidden;
-        position: relative;
+        // position: relative;
         .gift-field-child{
-            position: relative;
+            // position: relative;
             margin-top: 100px;
             top: 0;
             bottom: 0;
@@ -79,6 +105,9 @@
                     width: 40%;
                     height: auto;
                     cursor: pointer;
+                    // position: absolute;
+                    // animation-name: example;
+                    // animation-duration: 4s;
                 }
                 .gift_r{
                     width: 40%;
@@ -99,15 +128,15 @@
         justify-content: center;
         align-items: center;
         border-radius: 30px;
-        color: #ff0d0d;
+        color: white;
         width: 25%;
         height: 35px;
-        background-color: white;
+        background-color: #ff0d0d;
         position: absolute;
         bottom: 5%;
         opacity: 0.8;
         border: 2px solid #ff0d0d;
-        font-family: 'PlayfairDisplay-Bold';
+        font-family: 'DM Sans';
         font-size: 14px;
         font-weight: 900;
         cursor: pointer;

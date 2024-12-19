@@ -42,7 +42,7 @@ function SignUp(){
                 <input className='form_input'/> */}
             </form>
             <div className='sign_desc'>
-                I have already an account.<b>Sign In.</b>
+                I have already an account.<a href='/login'>Sign In.</a>
             </div>
             {inputstate==1?<div onClick={()=>setInputState(2)} className='sign_btn'>
                 Continue

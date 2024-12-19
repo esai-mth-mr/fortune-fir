@@ -29,7 +29,7 @@ function LogIn(){
                 <input className='form_input'/> */}
             </form>
             <div className='login_desc'>
-                I have already an account.<b>Sign Up.</b>
+                I have already an account.<a href='/signup'>Sign Up.</a>
             </div>
             <div className='login_btn'>
                 Sign In

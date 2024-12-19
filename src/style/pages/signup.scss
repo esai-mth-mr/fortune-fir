@@ -5,7 +5,7 @@
         width: 200px;
         height: 250px;
         position: absolute;
-        top: 0px;
+        top: 10px;
         z-index: 5;
     }
     .form_field{
@@ -15,7 +15,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: #c7c7c7;
+        background-color: #7d7d7d0a;
         border-radius: 10px;
         position: absolute;
         top: 30%;
@@ -71,7 +71,7 @@
         justify-content: center;
         align-items: center;
         // border: solid;
-        background-color: #c7c7c7;
+        background-color: #7d7d7d0a;
         border-radius: 10px;
         position: absolute;
         top: 30%;
@@ -98,7 +98,7 @@
             .form_input_content{
                 position: absolute;
                 left: 20%;
-                top: 25%;
+                top: 30%;
                 z-index: 5;
                 font-family: 'PlayfairDisplay-Regular';
                 font-size: 14px;
@@ -184,7 +184,8 @@
         justify-content: center;
         align-items: center;
         color: white;
-        font-family: 'PlayfairDisplay-Bold';
+        font-family: 'DM SANS';
+        font-weight: bold;
         position: absolute;
         bottom: 5%;
         cursor: pointer;
@@ -211,4 +212,10 @@
         bottom: 12%;
         cursor: pointer;
     }
+
+    @keyframes changeOpacity {
+        0%   { opacity: 0;}
+        50%  { opacity: 0.5;}
+        100%  { opacity: 1;}
+      }
 }
