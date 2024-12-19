@@ -2,6 +2,7 @@ import '@src/style/pages/home.scss';
 import '@src/style/global.scss';
 import { useEffect, useState } from 'react';
 import { backgroundImages } from '../helper/Helper';
+import { Link } from 'react-router-dom';
 
 function Home() {
     const [currentImage, setCurrentImage] = useState<string>(backgroundImages[0]);
@@ -9,24 +10,24 @@ function Home() {
     const [fadeOut, setFadeOut] = useState<boolean>(false);
     const [imageKey, setImageKey] = useState<number>(0);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setFadeOut(true);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setFadeOut(true);
 
-            setTimeout(() => {
-                setImageKey((prev) => prev + 1);
-                setNextImage(backgroundImages[(imageKey + 1) % backgroundImages.length]);
-                setFadeOut(false);
-            }, 2000);
+    //         setTimeout(() => {
+    //             setImageKey((prev) => prev + 1);
+    //             setNextImage(backgroundImages[(imageKey + 1) % backgroundImages.length]);
+    //             setFadeOut(false);
+    //         }, 2000);
 
-        }, 5000);
+    //     }, 4000);
 
-        return () => clearInterval(interval);
-    }, [imageKey]);
+    //     return () => clearInterval(interval);
+    // }, [imageKey]);
 
     return (
         <div className="board">
-            <div className='img'>
+            {/* <div className='img'>
                 <img
                     src={currentImage}
                     alt="Current Background"
@@ -37,9 +38,25 @@ function Home() {
                     alt="Next Background"
                     className={!fadeOut ? 'fade-in' : 'fade-out'}
                 />
+            </div> */}
+            <div className='home_header'>
+                <img className="landing" src="/src/assets/santa2.png"/>
             </div>
-            <img className='title' src="src/assets/title.png" />
-            <img className='logo' src="src/assets/logo.png" />
+            <div className='home_footer'>
+                <div className='home_title'>
+                    Unwrap the Magic of Thoughtful Giving
+                </div>
+                <div className='home_content'>
+                    Get Ready for a Merry Christmas!
+                </div>
+                <div className='buttons'>
+                    <Link className='start' to="/signup">Get Started</Link>
+                    <Link className='start' to="/signup">Contact Us</Link>
+                    <Link className='start' to="/signup">Help</Link>
+                </div>
+            </div>
+            
+
         </div>
     );
 }

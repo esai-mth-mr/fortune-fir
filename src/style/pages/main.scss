@@ -1,0 +1,161 @@
+
+/* Custom scrollbar styles */
+.gift-field-child::-webkit-scrollbar {
+    width: 3px; /* Width of the scrollbar */
+  }
+  
+  .gift-field-child::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2); /* Background of the scrollbar track */
+  }
+  
+  .gift-field-child::-webkit-scrollbar-thumb {
+    background-color: rgba(195, 27, 27, 0.5); /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+  }
+  
+  .gift-field-child::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(223, 25, 25, 0.8); /* Darker color on hover */
+  }
+  
+
+
+.board{
+    position: relative;
+    @keyframes example {
+        0%   {left:0px; top:0px;}
+        100%  {left:200px; top:1000px;}
+    }
+    .main_month{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        background-color: white;
+        color: red;
+        opacity: 0.8;
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        .month_title{
+            width: 100%;
+            height: 30%;
+            background-color: red;
+            font-family: 'PlayfairDisplay-Bold';
+            border-radius: 10px 10px 0px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .month_num{
+            width: 100%;
+            height: 70%;
+            background-color: white;
+            font-family: 'PlayfairDisplay-Bold';
+            border-radius: 0 0 10px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: red;
+            font-size: 10vw;
+            div{
+                font-size: 30px;
+            }
+        }
+    }
+    .main_img_field{
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        height: 45%;
+        .main_img{
+            width: 500px;
+            height: 500px;
+        }
+    }
+    .gifts_field{
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        margin-top: -50%;
+        overflow: hidden;
+        // position: relative;
+        .gift-field-child{
+            // position: relative;
+            margin-top: 100px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: -17px; /* Increase/Decrease this value for cross-browser compatibility */
+            overflow: auto;    
+            .gifts_line{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-right: 5%;
+                padding-left: 5%;
+    
+              
+    
+                .gift_l{
+                    width: 40%;
+                    height: auto;
+                    cursor: pointer;
+                    // position: absolute;
+                    // animation-name: example;
+                    // animation-duration: 4s;
+                }
+                .gift_r{
+                    width: 40%;
+                    height: auto;
+                    cursor: pointer;
+                }
+                .clicked_1{
+                    width: 42%;
+                    height: auto;
+                    transition: width 0.5s;
+                }
+            }
+        }
+        
+    }
+    .gift_next_btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        color: white;
+        width: 25%;
+        height: 35px;
+        background-color: #ff0d0d;
+        position: absolute;
+        bottom: 5%;
+        opacity: 0.8;
+        border: 2px solid #ff0d0d;
+        font-family: 'DM Sans';
+        font-size: 14px;
+        font-weight: 900;
+        cursor: pointer;
+        .gift_finish{
+            color: red;
+        }
+    }
+    //result page
+    .result_content{
+        display: flex;
+        width: 90%;
+        height: 55%;
+        overflow-y: hidden;
+        margin-top: -30%;
+        font-family: 'PlayfairDisplay-Regular';
+        font-size: 16px;
+        color: black;
+        text-align: center;
+        text-shadow: 1px 1px 1px white;
+        opacity: 1;
+    }
+}

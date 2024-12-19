@@ -4,10 +4,8 @@ export const getRandomNum = (from: number, to: number, num: number): number[] | 
 };
 
 export const backgroundImages = [
-    '/src/assets/bg-1.png',
-    '/src/assets/bg-2.png',
-    '/src/assets/bg-3.png',
-    '/src/assets/bg-4.png',
-    '/src/assets/bg-5.png',
-    '/src/assets/bg-6.png'
+    '/src/assets/santa2.png',
+    '/src/assets/santamodel.png',
+    '/src/assets/backgroundImage _1.png',
+    //gifts
 ];
