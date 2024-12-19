@@ -29,24 +29,42 @@
         display: flex;
         flex-direction: column;
         margin-top: -50%;
-        overflow-y: auto;
-        .gifts_line{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-right: 5%;
-            padding-left: 5%;
-            .gift_l{
-                width: 40%;
-                height: auto;
-                cursor: pointer;
-            }
-            .gift_r{
-                width: 40%;
-                height: auto;
-                cursor: pointer;
+        overflow: hidden;
+        position: relative;
+        .gift-field-child{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: -17px; /* Increase/Decrease this value for cross-browser compatibility */
+            overflow: scroll;
+            .gifts_line{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-right: 5%;
+                padding-left: 5%;
+    
+              
+    
+                .gift_l{
+                    width: 40%;
+                    height: auto;
+                    cursor: pointer;
+                }
+                .gift_r{
+                    width: 40%;
+                    height: auto;
+                    cursor: pointer;
+                }
+                .clicked_1{
+                    width: 42%;
+                    height: auto;
+                    transition: width 0.5s;
+                }
             }
         }
+        
     }
     .gift_next_btn{
         display: flex;

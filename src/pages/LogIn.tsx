@@ -14,15 +14,15 @@ function LogIn(){
                 <div className='form_input_field'>
                     {/* <Messagesvg className='form_img'/> */}
                     <img className='form_img' src='/src/svg/signup/message.svg'/>
-                    <div className='form_input_content'>Email...</div>
-                    <input className='form_input'/>
+                    {/* <div className='form_input_content'>Email...</div> */}
+                    <input className='form_input' name='username' placeholder='User Name'/>
                 </div>
                 
                 <div className='form_input_field'>
                     {/* <Messagesvg className='form_img'/> */}
                     <img className='form_img' src='/src/svg/signup/message.svg'/>
-                    <div className='form_input_content'>Password...</div>
-                    <input className='form_input'/>
+                    {/* <div className='form_input_content'>Password...</div> */}
+                    <input className='form_input' name='password' placeholder='Password'/>
                 </div>
 
                 {/* <input className='form_input'/>

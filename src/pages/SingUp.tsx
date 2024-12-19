@@ -15,20 +15,27 @@ function SignUp(){
                 <div className='form_input_field'>
                     {/* <Messagesvg className='form_img'/> */}
                     <img className='form_img' src='/src/svg/signup/message.svg'/>
-                    <div className='form_input_content'>{inputstate==1?"Email...":"Gender"}</div>
-                    <input className='form_input'/>
+                    {/* <div className='form_input_content'>{inputstate==1?"Email...":"Gender"}</div> */}
+                    {inputstate==1?<input className='form_input' name='email' placeholder='Email'/>:
+                    <select className='form_input' name="gender" >
+                        <option value="" disabled selected>Gender</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                    </select>}
                 </div>
                 <div className='form_input_field'>
                     {/* <Messagesvg className='form_img'/> */}
                     <img className='form_img' src='/src/svg/signup/message.svg'/>
-                    <div className='form_input_content'>{inputstate==1?"User Name...":"Age"}</div>
-                    <input className='form_input'/>
+                    {/* <div className='form_input_content'>{inputstate==1?"User Name...":"Date Of Birth"}</div> */}
+                    {inputstate==1?<input className='form_input' name='username' placeholder='User Name'/>:
+                    <input className='form_input' name='birthday' type='date'  placeholder="Date of birth"/>}
                 </div>
                 <div className='form_input_field'>
                     {/* <Messagesvg className='form_img'/> */}
                     <img className='form_img' src='/src/svg/signup/message.svg'/>
-                    <div className='form_input_content'>{inputstate==1?"Password...":"Job"}</div>
-                    <input className='form_input'/>
+                    {/* <div className='form_input_content'>{inputstate==1?"Password...":"Job"}</div> */}
+                    {inputstate==1?<input className='form_input' name='password' placeholder='Password'/>:
+                    <input className='form_input' name='job' placeholder='Job'/>}
                 </div>
 
                 {/* <input className='form_input'/>
