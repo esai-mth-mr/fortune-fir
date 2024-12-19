@@ -25,7 +25,9 @@ function Main() {
             </div>
             <div onClick={()=>setMonth(month+1)} className='gift_next_btn'>
                 {month<12?"Next":""}
-                {month==12?"Finish":""}
+                <Link className='gift_finish' to="/result">
+                    {month==12?"Finish":""}
+                </Link>
             </div>
         </div>
     )

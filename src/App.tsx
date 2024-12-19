@@ -12,6 +12,7 @@ import Required from "./pages/verification/required";
 import Succesful from "./pages/verification/succesful";
 import Failed from "./pages/verification/failed";
 import GetReady from "./pages/GetReady";
+import Result from "./pages/Result";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="required" element={<Required/>}/>
             <Route path="successful" element={<Succesful/>}/>
             <Route path="failed" element={<Failed/>}/>
+            <Route path="result" element={<Result/>}/>
           </Routes>
           {/* <Router /> */}
           {/* <Toaster toastOptions={{
