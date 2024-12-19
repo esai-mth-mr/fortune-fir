@@ -9,8 +9,13 @@ import Modal from './modal/modal';
 
 function Main() {  
     return(
-        <div>
-            
+        <div className='board'>
+            <div className='main_img_field'>
+                <img className='main_img' src="/src/assets/backgroundImage _1.png"/>
+            </div>
+            <div className='gifts_field'>
+                kjjkj;kj
+            </div>
         </div>
     )
 }  

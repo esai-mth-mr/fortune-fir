@@ -1,3 +1,15 @@
 .board{
-    
+    .main_img_field{
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        height: 30%;
+        .main_img{
+            width: 500px;
+            height: 500px;
+        }
+    }
+    .gifts_field{
+        
+    }
 }
