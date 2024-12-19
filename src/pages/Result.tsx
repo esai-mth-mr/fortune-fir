@@ -10,10 +10,10 @@ function Result(){
 
     return(
         <div className='board'>
-            <div className='main_month'>
+            {/* <div className='main_month'>
                 <div className="month_title">2025</div>
                 <div className="month_num"><h6 style={{fontSize:"30px"}}>{months[month]}</h6></div>
-            </div>
+            </div> */}
             <div className='main_img_field'>
                 <img className='main_img' src="/src/assets/backgroundImage _1.png"/>
             </div>
