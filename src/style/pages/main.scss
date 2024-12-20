@@ -140,8 +140,9 @@
         height: 45%;
 
         .main_img {
-            width: 500px;
-            height: 500px;
+            width: 520px;
+            height: 510px;
+            
         }
     }
 
@@ -163,6 +164,32 @@
             right: -17px;
             /* Increase/Decrease this value for cross-browser compatibility */
             overflow: auto;
+            display: flex;
+            justify-content: space-between;
+            .gifts-field-child-left{
+                width: 40%;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                .gift_l {
+                    width: 100%;
+                    height: auto;
+                    cursor: pointer;
+                    animation: zoom_left 1.8s infinite; /* Animation applied to this class */  
+                }
+            }
+            .gifts-field-child-right{
+                width: 40%;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                .gift_r {
+                    width:100%;
+                    height: auto;
+                    animation: zoom_right 1.5s infinite; /* Animation applied to this class */  
+                    cursor: pointer;
+                }
+            }
 
             .gifts_line {
                 display: flex;
@@ -177,11 +204,7 @@
                     width: 40%;
                     height: auto;
                     cursor: pointer;
-                    // position: absolute;
-                    // animation-name: example;
-                    // animation-duration: 4s;
                     animation: zoom_left 1.8s infinite; /* Animation applied to this class */  
-                
                 }
 
                 .gift_r {

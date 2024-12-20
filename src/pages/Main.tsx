@@ -16,6 +16,9 @@ function Main() {
     const array: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Type the array  
     const [shuffledMonths, setShuffledMonths] = useState<number[]>([...array]); // Ensure the state holds an array of numbers  
     const [gifts, setGifts] = useState<number[]>([]); // Make sure gifts holds an array of numbers  
+   
+    const allowopen: boolean[] = [true, true, true, true, true, true, true, true, true, true, true, true, true];
+    const [AllowOpen, setAllowOpen] = useState<boolean[]>([...allowopen]);
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -42,25 +45,48 @@ function Main() {
             <div className='score'>
                 <div className='score_content'>Score:300</div>
                 <div className='available'>
-                    <img src='/src/svg/Gifts/gift_1.SVG' width={20}/>X{7-count}
+                    <img src='/src/svg/Gifts/gift_1.svg'  draggable={false} alt="modal_gift" width={20}/>X{7-count}
                 </div>
             </div>
             <div className='main_img_field'>
-                <img className='main_img' src="/src/assets/backgroundImage _1.png"/>
+                <img className='main_img' src="/src/assets/backgroundImage _1.png"  draggable={false} alt="main_img"/>
             </div>
             <div className='gifts_field'>
                 <div className='gift-field-child'>
-                {gifts.map((item, index)=>( index%2==0?<div className='gifts_line'>
-                    {/* animate__animated animate__bounce */}
-                    <img key={item} className={`${`gift_l`}`} onClick={()=>{count<7&&setCount(count+1); setIsOpen(true);}} src={`${`/src/svg/Gifts/gift_`+item+`.svg`}`}/>
-                    <img key={gifts[index+6]} className={`${`gift_r`}`} onClick={()=>{count<7&&setCount(count+1); setIsOpen(true);}} src={`${`/src/svg/Gifts/gift_`+gifts[index+1]+`.svg`}`}/>
-                </div>:<></>))}
+                    <div className='gifts-field-child-left'>
+                        {gifts.map((item, index)=>(
+                            index%2==0?
+                            <img key={index} className={`${`gift_l`}`} src={`${`/src/svg/Gifts/gift_`+item+`.svg`}`} draggable={false} alt={`${`gift`+index}`}
+                            onClick={()=>{
+                                AllowOpen[index]==true&&count<7&&setCount(count+1);  
+                                setAllowOpen(AllowOpen.map((m, i) => {
+                                    return m==true&&i != index;
+                                })); 
+                                count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);}} 
+                            ></img>:<></>
+                        ))}
+                    </div>
+                    <div className='gifts-field-child-right'>
+                        {gifts.map((item, index)=>(
+                            index%2==1?
+                            <img key={index} className={`${`gift_r`}`} src={`${`/src/svg/Gifts/gift_`+item+`.svg`}`}  draggable={false} alt={`${`gift`+index}`}
+                            onClick={()=>{
+                                AllowOpen[index]==true&&count<7&&setCount(count+1);  
+                                setAllowOpen(AllowOpen.map((m, i) => {
+                                    return m==true&&i != index;
+                                })); 
+                                count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);}} 
+                            ></img>:<></>
+                        ))}
+                    </div>
                 </div>
             </div>
             {isOpen && <Modal setIsOpen={setIsOpen}/>} {/* Render the modal conditionally */}
             <div onClick={()=>{month!=12&&count==7&&setMonth(month+1);
                 month!=12&&count==7&&setCount(0);
-                
+                setAllowOpen(AllowOpen.map((m, i)=>{
+                    return true;
+                }))
             }} style={{backgroundColor: count<7?"#f5f5f5":"red",borderColor:count<7?"#c7c7c7":"red", color:count<7?"#c7c7c7":"white"}} className='gift_next_btn'>
                 {month<12?"Next":""}  
 
