@@ -104,7 +104,7 @@ function Main() {
             {isOpen && <Modal setIsOpen={setIsOpen}/>} {/* Render the modal conditionally */}
             <div onClick={()=>{month!=12&&count==7&&setMonth(month+1);
                 month!=12&&count==7&&setCount(0);
-                setAllowOpen(AllowOpen.map((m, i)=>{
+                count==7&&setAllowOpen(AllowOpen.map((m, i)=>{
                     return true;
                 }))
             }} style={{backgroundColor: count<7?"#f5f5f5":"red",borderColor:count<7?"#c7c7c7":"red", color:count<7?"#c7c7c7":"white"}} className='gift_next_btn'>

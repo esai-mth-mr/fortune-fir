@@ -196,3 +196,11 @@
   src:  url('./font/PlayfairDisplay-Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('./font/Caveat-VariableFont_wght.ttf') format('truetype');
+}
+
+
