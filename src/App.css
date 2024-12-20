@@ -138,6 +138,15 @@
   }
 }
 
+/* height */
+/* @media (min-height: 500px) {
+  .app{
+    height: 80vh;
+  }
+} */
+
+
+
 @font-face {
   font-family: 'ProstoOne-Regular';
   font-style: normal;

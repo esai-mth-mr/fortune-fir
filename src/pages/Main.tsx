@@ -6,6 +6,7 @@ import { Stack } from '@mui/material';
 import { Pagination } from '@mui/material';  
 import Modal from './modal/modal';
 import 'animate.css';
+import { getRandomNum } from '../helper/Helper';
 
 function Main() {  
     const [month, setMonth] = useState(1);
@@ -35,6 +36,22 @@ function Main() {
     useEffect(()=>{
         console.log(count);
     })
+
+    const [points, setPoints] = useState<Number[]>([]);
+    const [totalpoint, setTotalPoint] = useState(Number);
+    useEffect(()=>{
+        console.log(getRandomNum(200, 300, 1));
+    })
+
+    const selectedPoint=(lucklevel:string)=>{
+        if(lucklevel=="exe_good"){
+            return getRandomNum(200, 300, 1);
+        }
+        switch(lucklevel){
+            case "exe_good": return getRandomNum(200, 300, 1);
+            case "very_good": return getRandomNum(200, 300, 1);
+        }
+    }
     
     return(
         <div className='board'>
