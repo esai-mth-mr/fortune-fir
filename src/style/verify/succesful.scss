@@ -1,0 +1,43 @@
+.board{
+    width: 100%;
+    height: 100%;
+
+    .hero_img_field {
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        margin-top: -50%;
+        .hero_imgage {
+            width: 170%;
+            height: 75vh;
+        }
+    }
+    .successIcon_field{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        margin-top: -15%;
+        .successIcon{
+            width: 140px;
+            height: 100px;
+        }
+    }
+
+    .title{
+        font-family: 'DM sans';
+        font-size: 2rem;
+        font-weight: 600;
+        color: #000000;
+        
+    }
+
+    .content{
+        font-family: 'DM sans';
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: #000000;
+        margin-top: 40px;
+        text-align: center;
+    }
+    
+}
