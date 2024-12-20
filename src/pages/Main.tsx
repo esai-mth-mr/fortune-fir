@@ -56,12 +56,13 @@ function Main() {
                     <div className='gifts-field-child-left'>
                         {gifts.map((item, index)=>(
                             index%2==0?
-                            <img key={index} className={`${`gift_l`}`} src={`${`/src/svg/Gifts/gift_`+item+`.svg`}`} draggable={false} alt={`${`gift`+index}`}
+                            <img key={index} className={`${`gift_l`}`}  draggable={false} alt={`${`gift`+index}`}
+                            src={`${AllowOpen[index]==true?`/src/svg/Gifts/gift_`+item+`.svg`:`/src/assets/openbox.png`}`}
                             onClick={()=>{
                                 AllowOpen[index]==true&&count<7&&setCount(count+1);  
-                                setAllowOpen(AllowOpen.map((m, i) => {
+                                count<7?setAllowOpen(AllowOpen.map((m, i) => {
                                     return m==true&&i != index;
-                                })); 
+                                })):''; 
                                 count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);}} 
                             ></img>:<></>
                         ))}
@@ -69,14 +70,16 @@ function Main() {
                     <div className='gifts-field-child-right'>
                         {gifts.map((item, index)=>(
                             index%2==1?
-                            <img key={index} className={`${`gift_r`}`} src={`${`/src/svg/Gifts/gift_`+item+`.svg`}`}  draggable={false} alt={`${`gift`+index}`}
+                            <img key={index} className={`${`gift_r`}`}   draggable={false} alt={`${`gift`+index}`}
+                            src={`${AllowOpen[index]==true?`/src/svg/Gifts/`+`gift_`+item+`.svg`:`/src/assets/openbox.png`}`}
                             onClick={()=>{
                                 AllowOpen[index]==true&&count<7&&setCount(count+1);  
-                                setAllowOpen(AllowOpen.map((m, i) => {
+                                count<7?setAllowOpen(AllowOpen.map((m, i) => {
                                     return m==true&&i != index;
-                                })); 
+                                })):''; 
                                 count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);}} 
-                            ></img>:<></>
+                            ></img>
+                            :<></>
                         ))}
                     </div>
                 </div>

@@ -176,6 +176,7 @@
                     height: auto;
                     cursor: pointer;
                     animation: zoom_left 1.8s infinite; /* Animation applied to this class */  
+                    // animation: opacitypro 3s;
                 }
             }
             .gifts-field-child-right{
@@ -188,38 +189,11 @@
                     height: auto;
                     animation: zoom_right 1.5s infinite; /* Animation applied to this class */  
                     cursor: pointer;
+                    // animation: opacitypro 3s;
                 }
             }
 
-            .gifts_line {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding-right: 5%;
-                padding-left: 5%;
-
-
-
-                .gift_l {
-                    width: 40%;
-                    height: auto;
-                    cursor: pointer;
-                    animation: zoom_left 1.8s infinite; /* Animation applied to this class */  
-                }
-
-                .gift_r {
-                    width: 40%;
-                    height: auto;
-                    animation: zoom_right 1.5s infinite; /* Animation applied to this class */  
-                    cursor: pointer;
-                }
-
-                .clicked_1 {
-                    width: 42%;
-                    height: auto;
-                    transition: width 0.5s;
-                }
-            }
+            
         }
 
     }
@@ -241,24 +215,48 @@
         font-size: 14px;
         font-weight: 900;
         cursor: pointer;
-
+        // box-shadow: 0px 0px 10px red;
         .gift_finish {
             color: red;
         }
     }
 
     //result page
-    .result_content {
+    .result_field{
+        position: relative;
         display: flex;
         width: 90%;
         height: 55%;
-        overflow-y: hidden;
+        // overflow-y: hidden;
         margin-top: -30%;
-        font-family: 'PlayfairDisplay-Regular';
-        font-size: 16px;
-        color: black;
-        text-align: center;
-        text-shadow: 1px 1px 1px white;
-        opacity: 1;
+        .result_content {
+            height: 100%;
+            font-family: 'DM Sans';
+            font-weight: bold;
+            font-size: 16px;
+            color: #c7c7c7;
+            text-align: center;
+            text-shadow: 1px 1px 1px black;
+            opacity: 1;
+            overflow: hidden;
+    
+            animation-name: result;
+            animation-duration:5s;
+            // animation-fill-mode: both;
+            // animation-delay: 5s;
+            z-index: 40;
+            position: absolute;
+        }
     }
+    
+}
+
+@keyframes result {
+    0% {top: 40%; opacity: 1;}
+    100% {top: 0%;  opacity: 1;}
+  }
+
+@keyframes opacitypro {
+    0%{opacity: 0;}
+    100%{opacity: 1;}
 }

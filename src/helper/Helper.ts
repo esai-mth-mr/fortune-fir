@@ -15,5 +15,6 @@ export const backgroundImages = [
     '/src/assets/bad.png',
     '/src/assets/very_bad.png',
     '/src/assets/exe_bad.png',
+    '/src/assets/openbox.png'
     //gifts
 ];
