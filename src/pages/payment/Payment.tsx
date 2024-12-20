@@ -47,6 +47,7 @@ export default function AlertDialogSlide() {
         console.log(error);
       });
   };
+
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
