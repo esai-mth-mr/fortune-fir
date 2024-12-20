@@ -2,8 +2,8 @@ import '@src/style/global.scss';
 import '@src/style/pages/main.scss';  
 import { useEffect, useState } from 'react';  
 import { Link } from 'react-router-dom';  
-import { Stack } from '@mui/material';  
-import { Pagination } from '@mui/material';  
+// import { Stack } from '@mui/material';  
+// import { Pagination } from '@mui/material';  
 import Modal from './modal/modal';
 import 'animate.css';
 import { getRandomNum } from '../helper/Helper';
@@ -60,7 +60,7 @@ function Main() {
                 <div className='month_num'><h6 style={{ fontSize:"30px"}}>{months[month]}</h6></div>
             </div>
             <div className='score'>
-                <div className='score_content'>Score:300</div>
+                <div className={`${count==0?`score_content`:`score_content_2`}`}>Score:300</div>
                 <div className='available'>
                     <img src='/src/svg/Gifts/gift_1.svg'  draggable={false} alt="modal_gift" width={20}/>X{7-count}
                 </div>

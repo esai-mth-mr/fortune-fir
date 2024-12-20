@@ -1,3 +1,9 @@
+@import url('https://fonts.google.com/specimen/Rubik+Mono+One');
+
+body{
+  font-family: 'Rubik+Mono+One';
+}
+
 
 #root {
   width: 100vw;
@@ -9,6 +15,8 @@
   align-items: center;
   overflow: auto;
 }
+
+
 
 .app::-webkit-scrollbar {
   width: 3px;
@@ -146,7 +154,6 @@
 } */
 
 
-
 @font-face {
   font-family: 'ProstoOne-Regular';
   font-style: normal;
@@ -201,6 +208,34 @@
   font-style: normal;
   font-weight: normal;
   src:  url('./font/Caveat-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'TitanOne';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('./font/TitanOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RubikMonoOne';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('./font/RubikMonoOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PlaywriteDESASGuides';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('./font/PlaywriteDESASGuides-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AlfaSlabOne';
+  font-style: normal;
+  font-weight: normal;
+  src:  url('./font/AlfaSlabOne-Regular.ttf') format('truetype');
 }
 
 

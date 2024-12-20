@@ -4,7 +4,7 @@
     align-items: end;
     border-radius: 10px;
     .modal_darkbg {
-        backdrop-filter: blur(20px);
+        backdrop-filter: blur(50px);
         width: 100%;
         height: 75%;
         z-index: 15;
@@ -32,8 +32,8 @@
     }
 
     .modal_score{
-        font-family: 'DM Sans';
-        font-size: 20px;
+        font-family: 'RubikMonoOne';
+        font-size: 30px;
         color: yellow;
         font-weight: bold;
         position: absolute;
@@ -42,21 +42,67 @@
         animation-fill-mode: both;
         z-index: 40;
     }
-
-    .modal_luck_level{
-        width: 10%;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .modal_fortune{
         animation-name: luck;
-        animation-duration:3s;
+        animation-duration: 3s;
         animation-fill-mode: both;
         animation-delay: 1s;
         z-index: 40;
-        position: absolute;
     }
 
+    .modal_content{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        position: absolute;
+        top: 40%;
+        z-index: 40;
+        overflow-y: auto;
+        height: 55%;
+        animation-name: modal_opacity;
+        animation-duration: 5s;
+        .modal_icon{
+            font-family: 'RubikMonoOne';
+            font-size: 25px;
+            font-weight: 100;
+            text-align: center;
+            text-shadow: 1px 1px 1px  black;
+            color: #f8b7b7;
+        }
+        .modal_desc{
+            width: 95%;
+            height: 70%;
+            font-family: 'TitanOne';
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+            text-shadow: 1px 1px 1px  black;
+            color: white;
+        }
+    }
+
+    .modal_content::-webkit-scrollbar {
+        width: 3px;
+        /* Width of the scrollbar */
+    }
+    
+    .modal_content::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.2);
+        /* Background of the scrollbar track */
+    }
+    
+    .modal_content::-webkit-scrollbar-thumb {
+        background-color: rgba(195, 27, 27, 0.5);
+        /* Color of the scrollbar thumb */
+        border-radius: 10px;
+        /* Rounded corners for the thumb */
+    }
+    
+    .modal_content::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(223, 25, 25, 0.8);
+        /* Darker color on hover */
+    }
    
 }
 
@@ -68,7 +114,13 @@
 
 
 @keyframes score {
-    from {top: 45%; left: 45%; opacity: 1;}
-    to {top: 30%; left: 45%; opacity: 0;}
-    }
+    0% {top: 45%; left: 30%; opacity: 1;}
+    50% {top: 30%; left: 30%; opacity: 1; transform: scale(1);}
+    100% {top: 5%; left: 5%; opacity: 0; transform: scale(0.5);}
+}
+
+@keyframes modal_opacity {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
 

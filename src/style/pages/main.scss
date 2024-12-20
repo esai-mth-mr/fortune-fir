@@ -77,6 +77,14 @@
             font-weight: bold;
             color: red;
         }
+        .score_content_2{
+            font-family: 'DM Sans';
+            font-size: 14px;
+            font-weight: bold;
+            color: red;
+            animation: zoom_left 1.8s;
+            animation-delay: 3s;
+        }
         .available{
             margin-top: 10px;
             font-family: 'DM Sans';
@@ -224,31 +232,68 @@
     }
 
     //result page
+    .result-text-field{
+        
+    }
     .result_field{
         position: relative;
         display: flex;
+        flex-direction: column;
         width: 90%;
         height: 55%;
-        // overflow-y: hidden;
         margin-top: -30%;
-        .result_content {
-            height: 100%;
-            font-family: 'DM Sans';
+        overflow-y: auto;
+        z-index: 30;
+        animation-name: opacitypro;
+        animation-duration:2s;
+        .result_title{
+            color: lightcoral;
+            font-family: 'TitanOne';
+            font-size: 20px;
             font-weight: bold;
-            font-size: 16px;
-            color: #c7c7c7;
             text-align: center;
-            text-shadow: 1px 1px 1px black;
-            opacity: 1;
-            overflow: hidden;
-    
-            animation-name: result;
-            animation-duration:5s;
-            // animation-fill-mode: both;
-            // animation-delay: 5s;
-            z-index: 40;
+            text-shadow: 1px 1px 1px  black;
             position: absolute;
         }
+        .result_content {
+            color: lightcoral;
+            font-family: 'TitanOne';
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 1px 1px 1px  black;
+            // animation-fill-mode: both;
+            // animation-delay: 5s;
+            position: absolute;
+        }
+
+      
+    }
+    .result_field::-webkit-scrollbar {
+        width: 3px;
+        animation-name: opacitypro;
+        animation-duration:5s;
+        /* Width of the scrollbar */
+    }
+    
+    .result_field::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.2);
+        animation-name: opacitypro;
+        animation-duration:5s;
+    }
+    
+    .result_field::-webkit-scrollbar-thumb {
+        background-color: rgba(195, 27, 27, 0.5);
+        /* Color of the scrollbar thumb */
+        border-radius: 10px;
+        animation-name: opacitypro;
+        animation-duration:5s;
+    }
+    
+    .result_field::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(223, 25, 25, 0.8);
+        animation-name: opacitypro;
+        animation-duration:5s;
     }
     
 }
