@@ -18,6 +18,7 @@ import { jwtDecode } from "jwt-decode";
 import { logoutUser } from "./utils/logoutUser";
 import { ICustomJwtPayload } from "./types";
 import Contact from "./pages/Contact";
+import Payment from "./pages/payment/Payment";
 
 function App() {
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ function App() {
             <Route path="/main" element={<Main />}></Route>
           </Route>
           <Route path="/result" element={<Result />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
         {/* <Router /> */}
         <Toaster

@@ -1,0 +1,85 @@
+.paypal-button {
+    background-color: #ffc439;
+    /* PayPal yellow */
+    border: none;
+    border-radius: 5px;
+    color: #003087;
+    /* PayPal blue */
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+
+
+.paypal-button:hover {
+    background-color: #ffad34;
+    /* Slightly darker yellow */
+}
+
+.paypal-logo {
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.paypal-logo img {
+    height: 20px;
+    vertical-align: middle;
+}
+
+.crypto {
+    display: flex;
+    width: 100%;
+}
+
+.stripe {
+    margin-bottom: 10px;
+}
+
+.crypto {
+    width: 100%;
+}
+
+.crypto .container {
+    display: flex;
+    width: 100%;
+}
+
+.crypto .container .wallet {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.metamaskBtn:hover,
+.trustwalletBtn:hover,
+.coinbaseBtn:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    text-decoration: none;
+}
+
+.metamaskBtn {
+    background: linear-gradient(to right, rgb(240, 152, 25) 0%, rgb(237, 222, 93) 51%, rgb(240, 152, 25) 100%);
+    background-size: 200% auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.trustwalletBtn {
+    background: linear-gradient(to right, rgb(236, 233, 230) 0%, rgb(255, 255, 255) 51%, rgb(236, 233, 230) 100%);
+    background-size: 200% auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.coinbaseBtn {
+    background: linear-gradient(to right, #33c8c1 0%, #119bd2 50%, #33c8c1 100%);
+    background-size: 200% auto;
+    transition: all 0.3s ease-in-out;
+}
