@@ -8,8 +8,9 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import "./payment.css";
-import axios from "axios";
+import setAuthToken from "../../utils/setAuthToken";
 // import CryptoBoard from "./wallet";
+import axios from "../../utils/axios";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -22,10 +23,12 @@ const Transition = React.forwardRef(function Transition(
 
 export default function AlertDialogSlide() {
   const [open, setOpen] = React.useState(false);
+  const [header, setHeader] = React.useState(Object);
 
   //crypto part
 
   //end of crypto part
+
   //modal part
   const handleClickOpen = () => {
     setOpen(true);
@@ -37,17 +40,23 @@ export default function AlertDialogSlide() {
   //end of modal part
   const handlePayPal = () => {
     axios
-      .post("http://localhost:8000/api/payment/paypal/pay", {
-        action: "regeneration",
-      })
+      .post(
+        "api/payment/paypal/pay",
+        {
+          action: "regeneration",
+        },
+        setAuthToken()
+      )
       .then((res) => {
         console.log(res.data);
+        window.open(res.data.approvalUrl, "_blank");
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+  React.useEffect(() => {}, []);
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
