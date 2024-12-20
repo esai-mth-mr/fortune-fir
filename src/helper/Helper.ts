@@ -7,5 +7,14 @@ export const backgroundImages = [
     '/src/assets/santa2.png',
     '/src/assets/santamodel.png',
     '/src/assets/backgroundImage _1.png',
+    '/src/assets/star.png',
+    '/src/assets/star1.png',
+    '/src/assets/exe_good.png',
+    '/src/assets/very_good.png',
+    '/src/assets/good.png',
+    '/src/assets/bad.png',
+    '/src/assets/very_bad.png',
+    '/src/assets/exe_bad.png',
+    '/src/assets/openbox.png'
     //gifts
 ];

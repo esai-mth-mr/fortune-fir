@@ -1,31 +1,94 @@
-
 /* Custom scrollbar styles */
 .gift-field-child::-webkit-scrollbar {
-    width: 3px; /* Width of the scrollbar */
-  }
-  
-  .gift-field-child::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.2); /* Background of the scrollbar track */
-  }
-  
-  .gift-field-child::-webkit-scrollbar-thumb {
-    background-color: rgba(195, 27, 27, 0.5); /* Color of the scrollbar thumb */
-    border-radius: 10px; /* Rounded corners for the thumb */
-  }
-  
-  .gift-field-child::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(223, 25, 25, 0.8); /* Darker color on hover */
-  }
-  
+    width: 3px;
+    /* Width of the scrollbar */
+}
 
+.gift-field-child::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+    /* Background of the scrollbar track */
+}
 
-.board{
-    position: relative;
-    @keyframes example {
-        0%   {left:0px; top:0px;}
-        100%  {left:200px; top:1000px;}
+.gift-field-child::-webkit-scrollbar-thumb {
+    background-color: rgba(195, 27, 27, 0.5);
+    /* Color of the scrollbar thumb */
+    border-radius: 10px;
+    /* Rounded corners for the thumb */
+}
+
+.gift-field-child::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(223, 25, 25, 0.8);
+    /* Darker color on hover */
+}
+
+@keyframes zoom_left {
+    0% {
+        transform: scale(1);
+        /* Normal size */
     }
-    .main_month{
+
+    50% {
+        transform: scale(0.9);
+        /* Zoom out */
+    }
+
+    100% {
+        transform: scale(1);
+        /* Zoom in */
+    }
+}
+
+@keyframes zoom_right {
+    0% {
+        transform: scale(0.9);
+        /* Normal size */
+    }
+
+    50% {
+        transform: scale(1.0);
+        /* Zoom out */
+    }
+
+    100% {
+        transform: scale(0.9);
+        /* Zoom in */
+    }
+}
+
+.board {
+    position: relative;
+    .score{
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        opacity: 0.8;
+        top:5%;
+        left: 5%;
+        border-radius: 10px;
+
+        .score_content{
+            font-family: 'DM Sans';
+            font-size: 14px;
+            font-weight: bold;
+            color: red;
+        }
+        .available{
+            margin-top: 10px;
+            font-family: 'DM Sans';
+            font-size: 14px;
+            font-weight: bold;
+            color: red; 
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .main_month {
         display: flex;
         flex-direction: column;
         justify-content: start;
@@ -39,7 +102,8 @@
         width: 80px;
         height: 80px;
         border-radius: 10px;
-        .month_title{
+
+        .month_title {
             width: 100%;
             height: 30%;
             background-color: red;
@@ -50,80 +114,93 @@
             align-items: center;
             color: white;
         }
-        .month_num{
+
+        .month_num {
             width: 100%;
             height: 70%;
             background-color: white;
-            font-family: 'PlayfairDisplay-Bold';
+            font-family: 'DM Sans';
             border-radius: 0 0 10px 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             color: red;
             font-size: 10vw;
-            div{
+
+            div {
                 font-size: 30px;
             }
         }
     }
-    .main_img_field{
+
+    .main_img_field {
         display: flex;
         justify-content: center;
         align-items: end;
         height: 45%;
-        .main_img{
-            width: 500px;
-            height: 500px;
+
+        .main_img {
+            // width: 520px;
+            // height: 510px;
+            width: 170%;
+            height: 75vh;
+            
         }
     }
-    .gifts_field{
+
+    .gifts_field {
         width: 100%;
         height: 80%;
         display: flex;
         flex-direction: column;
         margin-top: -50%;
         overflow: hidden;
+
         // position: relative;
-        .gift-field-child{
+        .gift-field-child {
             // position: relative;
             margin-top: 100px;
             top: 0;
             bottom: 0;
             left: 0;
-            right: -17px; /* Increase/Decrease this value for cross-browser compatibility */
-            overflow: auto;    
-            .gifts_line{
+            right: -17px;
+            /* Increase/Decrease this value for cross-browser compatibility */
+            overflow: auto;
+            display: flex;
+            justify-content: space-between;
+            .gifts-field-child-left{
+                width: 40%;
+                height: auto;
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding-right: 5%;
-                padding-left: 5%;
-    
-              
-    
-                .gift_l{
-                    width: 40%;
+                flex-direction: column;
+                .gift_l {
+                    width: 100%;
                     height: auto;
                     cursor: pointer;
-                    // position: absolute;
-                    // animation-name: example;
-                    // animation-duration: 4s;
-                }
-                .gift_r{
-                    width: 40%;
-                    height: auto;
-                    cursor: pointer;
-                }
-                .clicked_1{
-                    width: 42%;
-                    height: auto;
-                    transition: width 0.5s;
+                    animation: zoom_left 1.8s infinite; /* Animation applied to this class */  
+                    // animation: opacitypro 3s;
                 }
             }
+            .gifts-field-child-right{
+                width: 40%;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                .gift_r {
+                    width:100%;
+                    height: auto;
+                    animation: zoom_right 1.5s infinite; /* Animation applied to this class */  
+                    cursor: pointer;
+                    // animation: opacitypro 3s;
+                }
+            }
+
+            
         }
-        
+
     }
-    .gift_next_btn{
+
+    .gift_next_btn {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -140,22 +217,92 @@
         font-size: 14px;
         font-weight: 900;
         cursor: pointer;
-        .gift_finish{
+        // box-shadow: 0px 0px 10px red;
+        .gift_finish {
             color: red;
         }
     }
+
     //result page
-    .result_content{
+    .result_field{
+        position: relative;
         display: flex;
         width: 90%;
         height: 55%;
-        overflow-y: hidden;
+        // overflow-y: hidden;
         margin-top: -30%;
-        font-family: 'PlayfairDisplay-Regular';
-        font-size: 16px;
-        color: black;
-        text-align: center;
-        text-shadow: 1px 1px 1px white;
-        opacity: 1;
+        .result_content {
+            height: 100%;
+            font-family: 'DM Sans';
+            font-weight: bold;
+            font-size: 16px;
+            color: #c7c7c7;
+            text-align: center;
+            text-shadow: 1px 1px 1px black;
+            opacity: 1;
+            overflow: hidden;
+    
+            animation-name: result;
+            animation-duration:5s;
+            // animation-fill-mode: both;
+            // animation-delay: 5s;
+            z-index: 40;
+            position: absolute;
+        }
+    }
+    
+}
+
+@keyframes result {
+    0% {top: 40%; opacity: 1;}
+    100% {top: 0%;  opacity: 1;}
+  }
+
+@keyframes opacitypro {
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
+@media (min-height: 600px) and (max-height: 700px){
+    .board{
+      width: 100%;
+      height: 150%;
+      .main_img_field{
+        width: 100%;
+        height: 50%;
+      }
+    }
+  }
+
+@media (min-height: 500px) and (max-height: 600px){
+    .board{
+        width: 100%;
+        height: 150%;
+        .main_img_field{
+        width: 150%;
+        height: 60%;
+        }
+    }
+}
+
+@media (min-height: 400px) and (max-height: 500px){
+    .board{
+        width: 100%;
+        height: 170%;
+        .main_img_field{
+        width: 150%;
+        height: 70%;
+        }
+    }
+}
+
+@media (min-height: 0px) and (max-height: 400px){
+    .board{
+        width: 100%;
+        height: 190%;
+        .main_img_field{
+        width: 170%;
+        height: 60%;
+        }
     }
 }
