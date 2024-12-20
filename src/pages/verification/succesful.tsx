@@ -1,21 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "@src/style/verify/succesful.scss";
 
-function Succesful(){
-    return(
-        <div className='board'>
-            <div>
-                <div>
-                    <img src=""/>
-                </div>
-                <div>
-                    Email Verification
-                </div>
-                <div>
-                    Your email was verified. You can continue using the application.
-                </div>
-            </div>
-        </div>
-    )
+function Succesful() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+  }, []);
+
+  return (
+    <div className="board">
+      <div className="hero_img_field">
+        <img
+          className="hero_imgage"
+          src="/src/assets/backgroundImage _1.png"
+          draggable={false}
+          alt="hero_imgage"
+        />
+      </div>
+      <div className="successIcon_field">
+        <img
+          src="/src/assets/successIcon.png"
+          draggable="false"
+          alt="successIcon"
+          className="successIcon"
+        ></img>
+      </div>
+      <div className="title">Email Verification</div>
+      <div className="content">
+        Your email was verified. <br />
+        You can continue using the application.
+      </div>
+    </div>
+  );
 }
 
 export default Succesful;
