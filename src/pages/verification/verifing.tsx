@@ -26,20 +26,21 @@ const Verifing: React.FC = () => {
     }
   }, []);
   return (
-    <div style={{ textAlign: "center", marginTop: "20%" }}>
-      <div className="spinner" style={{ marginBottom: "10px" }}>
+    <div className="body">
+      <div className="spinner_field">
         <div
           style={{
             width: "40px",
             height: "40px",
-            border: "4px solid #ccc",
-            borderTop: "4px solid #007bff",
+            border: "4px solid #fff",
+            borderTop: "4px solid #ff0d0d",
             borderRadius: "50%",
             animation: "spin 1s linear infinite",
+            marginBottom: "10px",
           }}
         ></div>
+        <p className="content_text">Loading...</p>
       </div>
-      <p>Loading...</p>
     </div>
   );
 };
