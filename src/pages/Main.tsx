@@ -12,9 +12,9 @@ function Main() {
     const [month, setMonth] = useState(1);
     const [count, setCount] = useState(0);
 
-    const data = [
-        {name: "", description: "", luck: ""}
-    ]
+    // const data = [
+    //     {name: "", description: "", luck: ""}
+    // ]
 
     const months=["","Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 

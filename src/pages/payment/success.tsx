@@ -1,15 +1,7 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "@src/style/verify/succesful.scss";
 
-function Succesful() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    setTimeout(() => {
-      navigate("/login");
-    }, 2000);
-  }, []);
-
+const Success = () => {
+  useEffect(() => {}, []);
   return (
     <div className="board">
       <div className="hero_img_field">
@@ -28,13 +20,13 @@ function Succesful() {
           className="successIcon"
         ></img>
       </div>
-      <div className="title">Email Verification</div>
+      <div className="title">Payment Successed!</div>
       <div className="content">
-        Your email was verified. <br />
-        You can continue using the application.
+        You can see the result. <br />
+        You can continue using the applications.
       </div>
     </div>
   );
-}
+};
 
-export default Succesful;
+export default Success;
