@@ -13,12 +13,12 @@ const Verifing: React.FC = () => {
     if (token) {
       axios
         .post("/api/auth/verify-Email", { verificationCode: token })
-        .then((res) => {
+        .then(() => {
           setTimeout(() => {
             navigate("/successful");
           }, 2000);
         })
-        .catch((error) => {
+        .catch(() => {
           setTimeout(() => {
             navigate("/failed");
           }, 2000);

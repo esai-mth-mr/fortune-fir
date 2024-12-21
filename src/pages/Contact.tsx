@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "@src/style/global.scss";
 import "@src/style/pages/contact.scss";
 import { TextField } from "@mui/material";
