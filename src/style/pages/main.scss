@@ -188,7 +188,7 @@
                 width: 100%;
                 height: 30%;
                 background-color: red;
-                font-family: 'PlayfairDisplay-Bold';
+                font-family: 'DM Sans';
                 border-radius: 10px 10px 0px 0px;
                 display: flex;
                 justify-content: center;
@@ -200,7 +200,7 @@
                 width: 100%;
                 height: 70%;
                 background-color: white;
-                font-family: 'AlfaSlabOne';
+                font-family: 'DM Sans';
                 border-radius: 0 0 10px 10px;
                 display: flex;
                 justify-content: center;
@@ -288,12 +288,12 @@
             align-items: center;
             border-radius: 30px;
             color: white;
-            width: 25%;
+            width: 30%;
             height: 35px;
             background-color: #ff0d0d;
             position: absolute;
             bottom: 5%;
-            left:38%;
+            left:35%;
             opacity: 0.8;
             border: 2px solid #ff0d0d;
             font-family: 'DM Sans';
@@ -302,14 +302,23 @@
             text-align: center;
             cursor: pointer;
             z-index: 50;
-            // box-shadow: 0px 0px 10px red;
-            .gift_finish {
-                color: white;
-                font-family: 'DM Sans';
-                font-size: 14px;
-                font-weight: 900;
-                text-align: center;
-            }
+        }
+        .common_btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+            color: white;
+            background-color: #ff0d0d;
+            position: absolute;
+            opacity: 0.8;
+            border: 2px solid #ff0d0d;
+            font-family: 'DM Sans';
+            font-size: 14px;
+            font-weight: 900;
+            text-align: center;
+            cursor: pointer;
+            z-index: 50;
         }
     
         //result page
@@ -336,14 +345,22 @@
             text-shadow: 1px 1px 1px black;
             
         }
+        .result_pagination{
+            width: 100%;
+            position: absolute;
+            left: 1%;
+            bottom: 5%;
+            display: flex;
+            justify-content: center;
+        }
         .result_field{
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: start;
-            width: 97%;
-            height: 55%;
+            width: 100%;
+            height: 50%;
             margin-top: -30%;
             overflow-y: auto;
             z-index: 30;
@@ -365,11 +382,8 @@
                 text-align: center;
                 text-shadow: 1px 1px 1px  black;
                 position: absolute;
-                // animation-name: opacitypro;
-                // animation-duration:2s;
             }
             .result_content2{
-                // backdrop-filter: blur(50px);
                 color: #6a6565;
                 font-family: 'monospace';
                 font-size: 18px;
