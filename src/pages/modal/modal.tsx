@@ -5,18 +5,28 @@ import { RiCloseLine } from 'react-icons/ri';
 
 interface ModalProps {
     setIsOpen: (isOpen: boolean) => void;
+    score: number
     // modalstate: number 
 }
 
-const Modal: React.FC<ModalProps> = ({ setIsOpen }) => {
+const Modal: React.FC<ModalProps> = ({ setIsOpen, score }) => {
+    const [allowclose, setAllowClose] = useState(false);
+    useEffect(()=>{
+        setTimeout(()=>{
+            setAllowClose(true);
+        }, 4600);
+    },[score])
     return (
         <>
         <div className="modal">
-            <div className="modal_close" onClick={()=>setIsOpen(false)}>X</div>
+            <div className="modal_close" onClick={()=>{
+                allowclose==true&&setIsOpen(false); setAllowClose(false)}}>
+                    X
+            </div>
             <div className="modal_darkbg" />
             <img className="modal_gift"  draggable={false} src='/src/svg/Gifts/holded_gift.SVG'/>
-            <div className="modal_score">
-                + 300 
+            <div className={`${score>0?`modal_score`:`modal_score1`}`}>
+                {score>0?"+"+score!:score}
             </div>
             {/* <img className="modal_fortune" draggable={false} src="https://drive.google.com/file/d/1H-8xs75_TAfPBt8_pZVwSg0Pp280rxDa/view?usp=sharing"/> */}
             <div className="modal_content">

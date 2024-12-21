@@ -12,6 +12,10 @@ function Main() {
     const [month, setMonth] = useState(1);
     const [count, setCount] = useState(0);
 
+    const data = [
+        {name: "", description: "", luck: ""}
+    ]
+
     const months=["","Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     const array: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Type the array  
@@ -33,26 +37,88 @@ function Main() {
         }  
     }, [count, shuffledMonths]); 
 
-    useEffect(()=>{
-        console.log(count);
-    })
+    const [yearpoint, setyearpoint] = useState<number>(0);
+    const [monthpoint, setmonthpoint] = useState<number>(0);
+    const [point, setPoint] = useState<number>(0);
 
-    const [points, setPoints] = useState<Number[]>([]);
-    const [totalpoint, setTotalPoint] = useState(Number);
-    useEffect(()=>{
-        console.log(getRandomNum(200, 300, 1));
-    })
-
-    const selectedPoint=(lucklevel:string)=>{
-        if(lucklevel=="exe_good"){
-            return getRandomNum(200, 300, 1);
-        }
+    const [yeardisplaypoint, setDisplayYear]=useState<number>(0);
+    const [displaypoint, setDisplaypoint] = useState<number>(0);
+    
+    //for animation
+    const [countnum, setCountNum] = useState<boolean>(false);   
+    //allow moving to next 
+    const [allownext, setAllowNext]=useState<boolean>(false);
+    
+    const getpoint=(lucklevel:string)=>{
         switch(lucklevel){
-            case "exe_good": return getRandomNum(200, 300, 1);
-            case "very_good": return getRandomNum(200, 300, 1);
+            case "exe_good":  return  Math.ceil(getRandomNum(200, 300)!);
+            case "very_good": return  Math.ceil(getRandomNum(100, 200)!);
+            case "good": return Math.ceil( getRandomNum(0, 100)!);
+            case "bad": return  Math.ceil(getRandomNum(-100, 0)!);
+            case "very_bad": return  Math.ceil(getRandomNum(-200, -100)!);
+            case "exe_bad": return  Math.ceil(getRandomNum(-300, -200)!);
         }
     }
-    
+
+    //display for animation
+    useEffect(()=>{
+        setTimeout(()=>{
+            setDisplaypoint(monthpoint);
+        }, 2500)
+        setTimeout(() => {
+            setmonthpoint(monthpoint+point);
+        }, 2600);
+
+        setTimeout(()=>{
+            setDisplayYear(yeardisplaypoint);
+        }, 2500)
+        setTimeout(() => {
+            setyearpoint(yeardisplaypoint+point);
+        }, 2600);
+    }, [point])
+
+    //display animate number for specific duration
+    useEffect(()=>{
+        if(point>0){
+            if(displaypoint!=monthpoint){
+                setTimeout(()=>{
+                    setDisplaypoint(displaypoint+1);
+                }, 2)
+            }  
+            
+            if(yeardisplaypoint!=yearpoint){
+                setTimeout(()=>{
+                    setDisplayYear(yeardisplaypoint+1);
+                }, 2)
+            }
+        }
+        else{
+            if(displaypoint!=monthpoint){
+                setTimeout(()=>{
+                    setDisplaypoint(displaypoint-1);
+                }, 2)
+            }  
+            
+            if(yeardisplaypoint!=yearpoint){
+                setTimeout(()=>{
+                    setDisplayYear(yeardisplaypoint-1);
+                }, 2)
+            }
+        }
+        
+    })
+
+    useEffect(()=>{
+        if(count==7){
+            setTimeout(()=>{
+                setAllowNext(true);
+            }, 100)
+        }
+        if(count==0){
+            setAllowNext(false);
+        }
+    },[count]);
+
     return(
         <div className='board'>
             <div className='main_month'>
@@ -60,9 +126,10 @@ function Main() {
                 <div className='month_num'><h6 style={{ fontSize:"30px"}}>{months[month]}</h6></div>
             </div>
             <div className='score'>
-                <div className={`${count==0?`score_content`:`score_content_2`}`}>Score:300</div>
-                <div className='available'>
-                    <img src='/src/svg/Gifts/gift_1.svg'  draggable={false} alt="modal_gift" width={20}/>X{7-count}
+                <div className='score_year'>Year:{yeardisplaypoint}</div>
+                <div className={`${`score_content`}`}>Month:{displaypoint!}</div>
+                <div className={`${countnum==false?`available`:`available1`}`}>
+                    <img className='modal_count_img' src='/src/svg/Gifts/gift_1.svg'  draggable={false} alt="modal_gift" width={22}/><div style={{width: "20px", display:'flex', justifyContent:'center'}}>x</div><div style={{fontSize:'16px'}}>{7-count}</div>
                 </div>
             </div>
             <div className='main_img_field'>
@@ -77,10 +144,13 @@ function Main() {
                             src={`${AllowOpen[index]==true?`/src/svg/Gifts/gift_`+item+`.svg`:`/src/assets/openbox.png`}`}
                             onClick={()=>{
                                 AllowOpen[index]==true&&count<7&&setCount(count+1);  
-                                count<7?setAllowOpen(AllowOpen.map((m, i) => {
+                                AllowOpen[index]==true&&count<7?setAllowOpen(AllowOpen.map((m, i) => {
                                     return m==true&&i != index;
                                 })):''; 
-                                count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);}} 
+                                AllowOpen[index]==true&&count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);
+                                AllowOpen[index]==true&&count<7&&setPoint(getpoint("exe_bad")!);
+                                AllowOpen[index]==true&&count<7&&setCountNum(!countnum);
+                                }} 
                             ></img>:<></>
                         ))}
                     </div>
@@ -91,22 +161,31 @@ function Main() {
                             src={`${AllowOpen[index]==true?`/src/svg/Gifts/`+`gift_`+item+`.svg`:`/src/assets/openbox.png`}`}
                             onClick={()=>{
                                 AllowOpen[index]==true&&count<7&&setCount(count+1);  
-                                count<7?setAllowOpen(AllowOpen.map((m, i) => {
+                                AllowOpen[index]==true&&count<7?setAllowOpen(AllowOpen.map((m, i) => {
                                     return m==true&&i != index;
                                 })):''; 
-                                count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);}} 
-                            ></img>
+                                AllowOpen[index]==true&&count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);
+                                AllowOpen[index]==true&&count<7&&setPoint(getpoint("exe_bad")!);
+                                AllowOpen[index]==true&&count<7&&setCountNum(!countnum);
+                            }} 
+                            >
+                            </img>
                             :<></>
                         ))}
                     </div>
                 </div>
             </div>
-            {isOpen && <Modal setIsOpen={setIsOpen}/>} {/* Render the modal conditionally */}
+            {isOpen && <Modal setIsOpen={setIsOpen} score={point}/>} {/* Render the modal conditionally */}
             <div onClick={()=>{month!=12&&count==7&&setMonth(month+1);
-                month!=12&&count==7&&setCount(0);
-                count==7&&setAllowOpen(AllowOpen.map((m, i)=>{
+                allownext==true&&month!=12&&count==7&&setCount(0);
+                allownext==true&&count==7&&setAllowOpen(AllowOpen.map((m, i)=>{
                     return true;
-                }))
+                }));
+                allownext==true&&count==7&&setmonthpoint(0);
+                allownext==true&&count==7&&setPoint(0);
+                allownext==true&&count==7&&setDisplaypoint(0);
+                allownext==true&&count==7&&setCountNum(false);
+
             }} style={{backgroundColor: count<7?"#f5f5f5":"red",borderColor:count<7?"#c7c7c7":"red", color:count<7?"#c7c7c7":"white"}} className='gift_next_btn'>
                 {month<12?"Next":""}  
 

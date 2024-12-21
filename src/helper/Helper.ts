@@ -1,7 +1,13 @@
-export const getRandomNum = (from: number, to: number, num: number): number[] | null => {    
-    if (to < from || num <= 0 || !Number.isInteger(num)) return null;
-    return Array.from({ length: num }, () => Math.random() * (to - from) + from);
-};
+// export const getRandomNum = (from: number, to: number, num: number): number[] | null => {    
+//     if (to < from || num <= 0 || !Number.isInteger(num)) return null;
+//     return Array.from({ length: num }, () => Math.random() * (to - from) + from);
+// };
+
+export const getRandomNum = (from: number, to: number): number | null => {    
+    if (to < from) return null;  
+    return Math.random() * (to - from) + from;  
+};  
+
 
 export const backgroundImages = [
     '/src/assets/santa2.png',
