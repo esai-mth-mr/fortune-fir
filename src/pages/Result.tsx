@@ -10,20 +10,20 @@ function Result(){
     const [paystate, setPayed] = useState<boolean>(false);
 
     //metadta
-    const allowata=[
-        {month: 1, story: "you are welcom", point: 300},
-        {month: 2, story: "you are welcom", point: 300},
-        {month: 3, story: "you are welcom", point: 300},
-        {month: 4, story: "you are welcom", point: 300},
-        {month: 5, story: "you are welcom", point: 300},
-        {month: 6, story: "you are welcom", point: 300},
-        {month: 7, story: "you are welcom", point: 300},
-        {month: 8, story: "you are welcom", point: 300},
-        {month: 9, story: "you are welcom", point: 300},
-        {month: 10, story: "you are welcom", point: 300},
-        {month: 11, story: "you are welcom", point: 300},
-        {month: 12, story: "you are welcom", point: 300},
-        {month: 13, story: "you are welcom", point: 300},
+    const allowdata=[
+        {month: 1, story: "you are welcom1", point: 300},
+        {month: 2, story: "you are welcom2", point: 300},
+        {month: 3, story: "you are welcom3", point: 300},
+        {month: 4, story: "you are welco4", point: 300},
+        {month: 5, story: "you are welcom5", point: 300},
+        {month: 6, story: "you are welco6", point: 300},
+        {month: 7, story: "you are welcom7", point: 300},
+        {month: 8, story: "you are welcom8", point: 300},
+        {month: 9, story: "you are welcom9", point: 300},
+        {month: 10, story: "you are welcom10", point: 300},
+        {month: 11, story: "you are welcom11", point: 300},
+        {month: 12, story: "you are welcom12", point: 300},
+        {month: 13, story: "you are welcom13", point: 300},
     ]
 
     const notallowdata=[
@@ -51,6 +51,10 @@ function Result(){
                 <div className='month_title'>2025</div>
                 <div className='month_num'><h6 style={{ fontSize:"30px"}}>{months[month]}</h6></div>
             </div>
+            <div className={`${month==13?`totalstory`:``}`}>
+                <div>Total</div>
+                <div>Story</div>
+            </div>
             <div className='main_img_field'>
                 <img className='main_img' src="/src/assets/backgroundImage _1.png"/>
             </div>
@@ -61,8 +65,8 @@ function Result(){
                 </Link>
             </div>
             <div className="result_field">
-                <div className={`${paystate==true?`result_content`:`result_content2`}`}>
-                    {month==1?"To create a compelling description for your item, the  that aligns with its  luck status, consider the following description: Description for Beach-BallThe beach-ball is not just your average inflatable toy; it’s a vibrant orb of joy that brings sunshine whs prediction prompt.":"kjljkj"}
+                <div className={`${paystate==false?`result_content`:`result_content2`}`}>
+                    {paystate==false?allowdata[month].story:""}
                 </div>
             </div>
         </div>
