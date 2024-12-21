@@ -121,77 +121,79 @@ function Main() {
 
     return(
         <div className='board'>
-            <div className='main_month'>
-                <div className='month_title'>2025</div>
-                <div className='month_num'><h6 style={{ fontSize:"30px"}}>{months[month]}</h6></div>
-            </div>
-            <div className='score'>
-                <div className='score_year'>Year:{yeardisplaypoint}</div>
-                <div className={`${`score_content`}`}>Month:{displaypoint!}</div>
-                <div className={`${countnum==false?`available`:`available1`}`}>
-                    <img className='modal_count_img' src='/src/svg/Gifts/gift_1.svg'  draggable={false} alt="modal_gift" width={22}/><div style={{width: "20px", display:'flex', justifyContent:'center'}}>x</div><div style={{fontSize:'16px'}}>{7-count}</div>
+            <div className='board_content'>
+                <div className='main_month'>
+                    <div className='month_title'>2025</div>
+                    <div className='month_num'><h6 style={{ fontSize:"30px"}}>{months[month]}</h6></div>
                 </div>
-            </div>
-            <div className='main_img_field'>
-                <img className='main_img' src="/src/assets/backgroundImage _1.png"  draggable={false} alt="main_img"/>
-            </div>
-            <div className='gifts_field'>
-                <div className='gift-field-child'>
-                    <div className='gifts-field-child-left'>
-                        {gifts.map((item, index)=>(
-                            index%2==0?
-                            <img key={index} className={`${`gift_l`}`}  draggable={false} alt={`${`gift`+index}`}
-                            src={`${AllowOpen[index]==true?`/src/svg/Gifts/gift_`+item+`.svg`:`/src/assets/openbox.png`}`}
-                            onClick={()=>{
-                                AllowOpen[index]==true&&count<7&&setCount(count+1);  
-                                AllowOpen[index]==true&&count<7?setAllowOpen(AllowOpen.map((m, i) => {
-                                    return m==true&&i != index;
-                                })):''; 
-                                AllowOpen[index]==true&&count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);
-                                AllowOpen[index]==true&&count<7&&setPoint(getpoint("exe_bad")!);
-                                AllowOpen[index]==true&&count<7&&setCountNum(!countnum);
+                <div className='score'>
+                    <div className='score_year'>Year:{yeardisplaypoint}</div>
+                    <div className={`${`score_content`}`}>Month:{displaypoint!}</div>
+                    <div className={`${countnum==false?`available`:`available1`}`}>
+                        <img className='modal_count_img' src='/src/svg/Gifts/gift_1.svg'  draggable={false} alt="modal_gift" width={22}/><div style={{width: "20px", display:'flex', justifyContent:'center'}}>x</div><div style={{fontSize:'16px'}}>{7-count}</div>
+                    </div>
+                </div>
+                <div className='main_img_field'>
+                    <img className='main_img' src="/src/assets/backgroundImage _1.png"  draggable={false} alt="main_img"/>
+                </div>
+                <div className='gifts_field'>
+                    <div className='gift-field-child'>
+                        <div className='gifts-field-child-left'>
+                            {gifts.map((item, index)=>(
+                                index%2==0?
+                                <img key={index} className={`${`gift_l`}`}  draggable={false} alt={`${`gift`+index}`}
+                                src={`${AllowOpen[index]==true?`/src/svg/Gifts/gift_`+item+`.svg`:`/src/assets/openbox.png`}`}
+                                onClick={()=>{
+                                    AllowOpen[index]==true&&count<7&&setCount(count+1);  
+                                    AllowOpen[index]==true&&count<7?setAllowOpen(AllowOpen.map((m, i) => {
+                                        return m==true&&i != index;
+                                    })):''; 
+                                    AllowOpen[index]==true&&count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);
+                                    AllowOpen[index]==true&&count<7&&setPoint(getpoint("exe_bad")!);
+                                    AllowOpen[index]==true&&count<7&&setCountNum(!countnum);
+                                    }} 
+                                ></img>:<></>
+                            ))}
+                        </div>
+                        <div className='gifts-field-child-right'>
+                            {gifts.map((item, index)=>(
+                                index%2==1?
+                                <img key={index} className={`${`gift_r`}`}   draggable={false} alt={`${`gift`+index}`}
+                                src={`${AllowOpen[index]==true?`/src/svg/Gifts/`+`gift_`+item+`.svg`:`/src/assets/openbox.png`}`}
+                                onClick={()=>{
+                                    AllowOpen[index]==true&&count<7&&setCount(count+1);  
+                                    AllowOpen[index]==true&&count<7?setAllowOpen(AllowOpen.map((m, i) => {
+                                        return m==true&&i != index;
+                                    })):''; 
+                                    AllowOpen[index]==true&&count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);
+                                    AllowOpen[index]==true&&count<7&&setPoint(getpoint("exe_bad")!);
+                                    AllowOpen[index]==true&&count<7&&setCountNum(!countnum);
                                 }} 
-                            ></img>:<></>
-                        ))}
-                    </div>
-                    <div className='gifts-field-child-right'>
-                        {gifts.map((item, index)=>(
-                            index%2==1?
-                            <img key={index} className={`${`gift_r`}`}   draggable={false} alt={`${`gift`+index}`}
-                            src={`${AllowOpen[index]==true?`/src/svg/Gifts/`+`gift_`+item+`.svg`:`/src/assets/openbox.png`}`}
-                            onClick={()=>{
-                                AllowOpen[index]==true&&count<7&&setCount(count+1);  
-                                AllowOpen[index]==true&&count<7?setAllowOpen(AllowOpen.map((m, i) => {
-                                    return m==true&&i != index;
-                                })):''; 
-                                AllowOpen[index]==true&&count<7?setIsOpen(AllowOpen[index]):setIsOpen(false);
-                                AllowOpen[index]==true&&count<7&&setPoint(getpoint("exe_bad")!);
-                                AllowOpen[index]==true&&count<7&&setCountNum(!countnum);
-                            }} 
-                            >
-                            </img>
-                            :<></>
-                        ))}
+                                >
+                                </img>
+                                :<></>
+                            ))}
+                        </div>
                     </div>
                 </div>
-            </div>
-            {isOpen && <Modal setIsOpen={setIsOpen} score={point}/>} {/* Render the modal conditionally */}
-            <div onClick={()=>{month!=12&&count==7&&setMonth(month+1);
-                allownext==true&&month!=12&&count==7&&setCount(0);
-                allownext==true&&count==7&&setAllowOpen(AllowOpen.map((m, i)=>{
-                    return true;
-                }));
-                allownext==true&&count==7&&setmonthpoint(0);
-                allownext==true&&count==7&&setPoint(0);
-                allownext==true&&count==7&&setDisplaypoint(0);
-                allownext==true&&count==7&&setCountNum(false);
+                {isOpen && <Modal setIsOpen={setIsOpen} score={point}/>} {/* Render the modal conditionally */}
+                <div onClick={()=>{month!=12&&count==7&&setMonth(month+1);
+                    allownext==true&&month!=12&&count==7&&setCount(0);
+                    allownext==true&&count==7&&setAllowOpen(AllowOpen.map((m, i)=>{
+                        return true;
+                    }));
+                    allownext==true&&count==7&&setmonthpoint(0);
+                    allownext==true&&count==7&&setPoint(0);
+                    allownext==true&&count==7&&setDisplaypoint(0);
+                    allownext==true&&count==7&&setCountNum(false);
 
-            }} style={{backgroundColor: count<7?"#f5f5f5":"red",borderColor:count<7?"#c7c7c7":"red", color:count<7?"#c7c7c7":"white"}} className='gift_next_btn'>
-                {month<12?"Next":""}  
+                }} style={{backgroundColor: count<7?"#f5f5f5":"red",borderColor:count<7?"#c7c7c7":"red", color:count<7?"#c7c7c7":"white"}} className='gift_next_btn'>
+                    {month<12?"Next":""}  
 
-                <Link className='gift_finish' to="/result">
-                    {month==12?"Finish":""}
-                </Link>
+                    <Link className='gift_finish' to="/result">
+                        {month==12?"Finish":""}
+                    </Link>
+                </div>
             </div>
         </div>
 

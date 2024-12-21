@@ -11,6 +11,7 @@ import "./payment.css";
 import setAuthToken from "../../utils/setAuthToken";
 // import CryptoBoard from "./wallet";
 import axios from "../../utils/axios";
+import toast from "react-hot-toast";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -21,12 +22,10 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogSlide() {
+export default function Payment() {
   const [open, setOpen] = React.useState(false);
-  const [header, setHeader] = React.useState(Object);
-
+  const [loading, setLoading] = React.useState(true);
   //crypto part
-
   //end of crypto part
 
   //modal part
@@ -48,11 +47,10 @@ export default function AlertDialogSlide() {
         setAuthToken()
       )
       .then((res) => {
-        console.log(res.data);
         window.open(res.data.approvalUrl, "_blank");
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error.response.data.message);
       });
   };
 
