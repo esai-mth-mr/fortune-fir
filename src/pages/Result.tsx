@@ -47,7 +47,7 @@ function Result(){
 
     return(
         <div className='board'>
-            <div className='main_month'>
+            <div className={`${month<=12?`main_month`:``}`}>
                 <div className='month_title'>2025</div>
                 <div className='month_num'><h6 style={{ fontSize:"30px"}}>{months[month]}</h6></div>
             </div>
@@ -55,9 +55,9 @@ function Result(){
                 <img className='main_img' src="/src/assets/backgroundImage _1.png"/>
             </div>
             <div onClick={()=>setMonth(month+1)} className='gift_next_btn'>
-                {month<12?"Next":""}
+                {month<13?"Next":""}
                 <Link className='gift_finish' to="/main">
-                    {month==12?"Finish":""}
+                    {month==13?"Finish":""}
                 </Link>
             </div>
             <div className="result_field">
