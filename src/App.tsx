@@ -19,7 +19,9 @@ import { logoutUser } from "./utils/logoutUser";
 import { ICustomJwtPayload } from "./types";
 import Contact from "./pages/Contact";
 import Payment from "./pages/payment/Payment";
-
+import Failure from "./pages/payment/failure";
+import Success from "./pages/payment/success";
+import ResultPayment from "./pages/payment/Result";
 function App() {
   const navigate = useNavigate();
 
@@ -58,6 +60,9 @@ function App() {
           </Route>
           <Route path="/result" element={<Result />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/payment/paypal/result" element={<ResultPayment />} />
+          <Route path="/payment/cancel" element={<Failure />} />
+          <Route path="/payment/success" element={<Success />} />
         </Routes>
         {/* <Router /> */}
         <Toaster
