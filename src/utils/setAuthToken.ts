@@ -5,7 +5,6 @@ const setAuthToken = (): any | null => {
     const pretoken = localStorage.getItem('token');
     if (pretoken) {
         const token = decryptToken(pretoken);
-        console.log(token)
         return {
             headers: {
                 Authorization: `Bearer ${token}`
