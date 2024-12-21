@@ -12,7 +12,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import axios from "../utils/axios";
 import { useNavigate } from "react-router-dom";
-import Alert from "@mui/material/Alert";
 import toast from "react-hot-toast";
 
 type ErrorType = {

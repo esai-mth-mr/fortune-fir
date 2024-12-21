@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import setAuthToken from "../../utils/setAuthToken";
-import axios from "../../utils/axios";
+import { useEffect } from "react";
 
 const Success = () => {
   useEffect(() => {}, []);
