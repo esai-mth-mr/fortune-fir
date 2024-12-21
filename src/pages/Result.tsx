@@ -42,6 +42,7 @@ function Result() {
   //     {month: 11, point: 300},
   //     {month: 12, point: 300},
   //     {month: 13, point: 300},
+
   // ]
 
   const months = [
