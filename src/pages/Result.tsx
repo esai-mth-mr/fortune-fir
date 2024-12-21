@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import '@src/style/global.scss';  
 import '@src/style/pages/main.scss';  
 
 function Result(){
     const [month, setMonth] = useState(1);
-    const [count, setCount] = useState(0);
+    // const [count, setCount] = useState(0);
 
     const [paystate, setPayed] = useState<boolean>(false);
 
@@ -23,7 +23,7 @@ function Result(){
         {month: 10, story: "you are welcom10", point: 300},
         {month: 11, story: "you are welcom11", point: 300},
         {month: 12, story: "you are welcom12", point: 300},
-        {month: 13, story: "you are welcom13", point: 300},
+        {month: 13, story: "you are welcom13", point: 900},
     ]
 
     const notallowdata=[
@@ -45,29 +45,50 @@ function Result(){
 
     const months=["","Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+    useEffect(()=>{
+        console.log(month);
+        }
+    )
+
     return(
         <div className='board'>
+            <div className="board_content">
             <div className={`${month<=12?`main_month`:``}`}>
                 <div className='month_title'>2025</div>
-                <div className='month_num'><h6 style={{ fontSize:"30px"}}>{months[month]}</h6></div>
+                <div className='month_num'><h6 style={{ fontSize:"30px"}}>{months[month]!}</h6></div>
             </div>
             <div className={`${month==13?`totalstory`:``}`}>
-                <div>Total</div>
-                <div>Story</div>
+                Total<br></br>story
+            </div>
+
+            {month<=12?<><div className={`${`result_score`}`}>
+                {month<=12?<><div>Year:{allowdata[12].point}</div>
+                <div>Month:{allowdata[month-1].point}</div></>:<>Year:{allowdata[12].point}</>}
+            </div></>:<></>}
+
+            <div className={`${month<=12?`result_score`:``}`}>
+                {month<=12?<><div>Year:{allowdata[12].point}</div>
+                <div>Month:{allowdata[month-1].point}</div></>:<>Year:{allowdata[12].point}</>}
+            </div>
+            
+            <div className={`${month==13?`result_year_score`:``}`}>
+                <div>Year Point</div>
+                <div>{allowdata[12].point}</div>
             </div>
             <div className='main_img_field'>
                 <img className='main_img' src="/src/assets/backgroundImage _1.png"/>
             </div>
             <div onClick={()=>setMonth(month+1)} className='gift_next_btn'>
-                {month<13?"Next":""}
+                {month<13?"Next":"previous"}
                 <Link className='gift_finish' to="/main">
                     {month==13?"Finish":""}
                 </Link>
             </div>
             <div className="result_field">
                 <div className={`${paystate==false?`result_content`:`result_content2`}`}>
-                    {paystate==false?allowdata[month].story:""}
+                    {paystate==false?allowdata[month-1].story!:""}
                 </div>
+            </div>
             </div>
         </div>
     )
