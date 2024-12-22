@@ -15,14 +15,14 @@ function Succesful() {
       <div className="hero_img_field">
         <img
           className="hero_imgage"
-          src="/src/assets/backgroundImage _1.png"
+          src="/assets/backgroundImage _1.png"
           draggable={false}
           alt="hero_imgage"
         />
       </div>
       <div className="successIcon_field">
         <img
-          src="/src/assets/successIcon.png"
+          src="/assets/successIcon.png"
           draggable="false"
           alt="successIcon"
           className="successIcon"

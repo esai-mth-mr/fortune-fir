@@ -111,7 +111,7 @@ function Result() {
         <div className="main_img_field">
           <img
             className="main_img"
-            src="/src/assets/backgroundImage _1.png"
+            src="/assets/backgroundImage _1.png"
             alt="main"
             draggable="false"
           />

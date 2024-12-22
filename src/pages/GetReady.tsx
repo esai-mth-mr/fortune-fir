@@ -8,7 +8,7 @@ function GetReady() {
       <div className="getready_img_field">
         <img
           className="getready_img"
-          src="/src/assets/backgroundImage _1.png"
+          src="/assets/backgroundImage _1.png"
           alt="ready"
           draggable="false"
         />

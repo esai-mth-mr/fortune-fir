@@ -238,7 +238,7 @@ function Main() {
         <div className="main_img_field">
           <img
             className="main_img"
-            src="/src/assets/backgroundImage _1.png"
+            src="/assets/backgroundImage _1.png"
             draggable={false}
             alt="main_img"
           />
