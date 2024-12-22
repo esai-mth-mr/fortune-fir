@@ -4,7 +4,6 @@ import '@src/style/global.scss';
 import '@src/style/pages/main.scss';  
 import { Stack } from '@mui/material';  
 import { Pagination } from '@mui/material';  
-import { count } from "console";
 
 function Result(){
     const [month, setMonth] = useState(1);
@@ -13,6 +12,14 @@ function Result(){
     const [currentPage, setCurrentPage] = useState(1);
     const [paystate, setPayed] = useState<boolean>(false);
 
+    const eval_content=[
+      {eval_state: "Extremely Good", eval_content:""},
+      {eval_state: "Very Good", eval_content:""},
+      {eval_state: "Good", eval_content:""},
+      {eval_state: "Bad", eval_content:""},
+      {eval_state: "Very Bad", eval_content:""},
+      {eval_state: "Extremely Bad", eval_content:""},
+    ]
     //metadta
     const allowdata=[
         {month: 1, story: "you are welcom1", point: 300},
