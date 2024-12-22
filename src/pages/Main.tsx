@@ -246,7 +246,7 @@ function Main() {
           <div className={`${countnum == false ? `available` : `available1`}`}>
             <img
               className="modal_count_img"
-              src="/src/svg/Gifts/gift_1.svg"
+              src="svg/Gifts/gift_1.svg"
               draggable={false}
               alt="modal_gift"
               width={22}
@@ -266,7 +266,7 @@ function Main() {
         <div className="main_img_field">
           <img
             className="main_img"
-            src="/src/assets/backgroundImage _1.png"
+            src="assets/backgroundImage _1.png"
             draggable={false}
             alt="main_img"
           />
@@ -283,8 +283,8 @@ function Main() {
                     alt={`gift_${index}`}
                     src={
                       AllowOpen[index]
-                        ? `/src/svg/Gifts/gift_${gifts[index]}.svg`
-                        : `/src/assets/openbox.png`
+                        ? `svg/Gifts/gift_${gifts[index]}.svg`
+                        : `assets/openbox.png`
                     }
                     onClick={() => {
                       if (AllowOpen[index] && count < 7) {
@@ -318,8 +318,8 @@ function Main() {
                       alt={`gift_${index}`} // Updated alt for better readability
                       src={
                         AllowOpen[index]
-                          ? `/src/svg/Gifts/gift_${gifts[index]}.svg`
-                          : `/src/assets/openbox.png`
+                          ? `svg/Gifts/gift_${gifts[index]}.svg`
+                          : `assets/openbox.png`
                       }
                       onClick={() => {
                         if (AllowOpen[index] && count < 7) {

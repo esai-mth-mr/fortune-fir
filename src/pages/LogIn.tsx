@@ -36,7 +36,12 @@ function LogIn() {
 
   return (
     <div className="board">
-      <img className="sign_header" src="/src/assets/santamodel.png" />
+      <img
+        className="sign_header"
+        src="/assets/santamodel.png"
+        alt="hero"
+        draggable="false"
+      />
       <div className="form_field">
         <div className="form_input_field">
           <TextField
