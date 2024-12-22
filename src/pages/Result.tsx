@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import {ReactEventHandler, useEffect, useState } from "react";
 import { Link,useNavigate,useLocation } from "react-router-dom";
-=======
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
->>>>>>> 6ee56c55483761c898ab6aa9d47a68a8812275fa
 import "@src/style/global.scss";
 import "@src/style/pages/main.scss";
 import { Stack } from '@mui/material';  
@@ -13,7 +8,6 @@ import { Pagination } from '@mui/material';
 function Result() {
     const [isresultOpen, setIsResultOpen]=useState<boolean>(true);
   const [month, setMonth] = useState(1);
-<<<<<<< HEAD
   const [paystate, setPayed] = useState<boolean>(false);
   const navigate = useNavigate();
   const location= useLocation();
@@ -25,12 +19,6 @@ function Result() {
     {eval_state: "Very Bad", eval_content:"Expect a series of unfortunate events that could derail your plans and ambitions, leading to feelings of hopelessness and discouragement in various aspects of life."},
     {eval_state: "Extremely Bad", eval_content:"Social interactions can be highly detrimental; relationships may become toxic or nonexistent, leading to profound feelings of loneliness and disconnection from the world around you."},
   ]
-=======
-  // const [count, setCount] = useState(0);
-
-  const [paystate, setPayed] = useState<boolean>(false);
-
->>>>>>> 6ee56c55483761c898ab6aa9d47a68a8812275fa
   //metadta
   const allowdata = [
     { month: 1, story: "you are welcom1", point: 300 },
@@ -90,7 +78,6 @@ function Result() {
     setPayed(false);
   });
 
-<<<<<<< HEAD
   //navigate
   const handleRegenerate= () =>{
     navigate(`/main/?result_month=${month.toString()+"_"+(allowdata[12].point-allowdata[month].point).toString()}"`);
@@ -134,7 +121,7 @@ function Result() {
         <div className="main_img_field">
           <img
             className="main_img"
-            src="/src/assets/backgroundImage _1.png"
+            src="assets/backgroundImage _1.png"
             alt="main"
             draggable="false"
           />
@@ -186,84 +173,15 @@ function Result() {
             {allowdata[month-1].point>=-2100&&allowdata[month-1].point<-1400?eval_data[5].eval_content:""}
           </div>
 
-          <img onClick={()=>setIsResultOpen(false)} className="result_close" src="/src/assets/close.png" draggable={false} alt="result_close"/>
-          <img className="result_santa" src="/src/assets/santa.png" draggable={false} alt="result_close"/>
+          <img onClick={()=>setIsResultOpen(false)} className="result_close" src="assets/close.png" draggable={false} alt="result_close"/>
+          <img className="result_santa" src="assets/santa.png" draggable={false} alt="result_close"/>
 
-          {allowdata[month-1].point>=1400&&allowdata[month-1].point<=2100?<img className="result_anim_luck" src="/src/assets/exe_good.png" draggable={false} alt="result_anim"/>:""}
-          {allowdata[month-1].point>=700&&allowdata[month-1].point<1400?<img className="result_anim_luck" src="/src/assets/very_good.png" draggable={false} alt="result_anim"/>:""}
-          {allowdata[month-1].point>=0&&allowdata[month-1].point<700?<img className="result_anim_luck" src="/src/assets/good.png" draggable={false} alt="result_anim"/>:""}
-          {allowdata[month-1].point>=-700&&allowdata[month-1].point<0?<img className="result_anim_luck" src="/src/assets/bad.png" draggable={false} alt="result_anim"/>:""}
-          {allowdata[month-1].point>=-1400&&allowdata[month-1].point<-700?<img className="result_anim_luck" src="/src/assets/very_bad.png" draggable={false} alt="result_anim"/>:""}
-          {allowdata[month-1].point>=-2100&&allowdata[month-1].point<-1400?<img className="result_anim_luck" src="/src/assets/exe_bad.png" draggable={false} alt="result_anim"/>:""}
-=======
-  return (
-    <div className="board">
-      <div className="board_content">
-        <div className={`${month <= 12 ? `main_month` : ``}`}>
-          <div className="month_title">2025</div>
-          <div className="month_num">
-            <h6 style={{ fontSize: "30px" }}>{months[month]!}</h6>
-          </div>
-        </div>
-        <div className={`${month == 13 ? `totalstory` : ``}`}>
-          Total<br></br>story
-        </div>
-
-        {month <= 12 ? (
-          <>
-            <div className={`${`result_score`}`}>
-              {month <= 12 ? (
-                <>
-                  <div>Year:{allowdata[12].point}</div>
-                  <div>Month:{allowdata[month - 1].point}</div>
-                </>
-              ) : (
-                <>Year:{allowdata[12].point}</>
-              )}
-            </div>
-          </>
-        ) : (
-          <></>
-        )}
-
-        <div className={`${month <= 12 ? `result_score` : ``}`}>
-          {month <= 12 ? (
-            <>
-              <div>Year:{allowdata[12].point}</div>
-              <div>Month:{allowdata[month - 1].point}</div>
-            </>
-          ) : (
-            <>Year:{allowdata[12].point}</>
-          )}
-        </div>
-
-        <div className={`${month == 13 ? `result_year_score` : ``}`}>
-          <div>Year Point</div>
-          <div>{allowdata[12].point}</div>
-        </div>
-        <div className="main_img_field">
-          <img
-            className="main_img"
-            src="/assets/backgroundImage _1.png"
-            alt="main"
-            draggable="false"
-          />
-        </div>
-        <div onClick={() => setMonth(month + 1)} className="gift_next_btn">
-          {month < 13 ? "Next" : "previous"}
-          <Link className="gift_finish" to="/main">
-            {month == 13 ? "Finish" : ""}
-          </Link>
-        </div>
-        <div className="result_field">
-          <div
-            className={`${
-              paystate == false ? `result_content` : `result_content2`
-            }`}
-          >
-            {paystate == false ? allowdata[month - 1].story! : ""}
-          </div>
->>>>>>> 6ee56c55483761c898ab6aa9d47a68a8812275fa
+          {allowdata[month-1].point>=1400&&allowdata[month-1].point<=2100?<img className="result_anim_luck" src="assets/exe_good.png" draggable={false} alt="result_anim"/>:""}
+          {allowdata[month-1].point>=700&&allowdata[month-1].point<1400?<img className="result_anim_luck" src="assets/very_good.png" draggable={false} alt="result_anim"/>:""}
+          {allowdata[month-1].point>=0&&allowdata[month-1].point<700?<img className="result_anim_luck" src="assets/good.png" draggable={false} alt="result_anim"/>:""}
+          {allowdata[month-1].point>=-700&&allowdata[month-1].point<0?<img className="result_anim_luck" src="assets/bad.png" draggable={false} alt="result_anim"/>:""}
+          {allowdata[month-1].point>=-1400&&allowdata[month-1].point<-700?<img className="result_anim_luck" src="assets/very_bad.png" draggable={false} alt="result_anim"/>:""}
+          {allowdata[month-1].point>=-2100&&allowdata[month-1].point<-1400?<img className="result_anim_luck" src="assets/exe_bad.png" draggable={false} alt="result_anim"/>:""}
         </div>
       </div>
     </div>
