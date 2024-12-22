@@ -28,7 +28,7 @@ function Contact() {
     }
 
     if (!formData.message) {
-      newErrors.message = "message is required";
+      newErrors.message = "message is required!";
     }
 
     setErrors(newErrors);
