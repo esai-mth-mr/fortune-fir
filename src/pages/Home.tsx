@@ -30,7 +30,7 @@ function Home() {
       <div className="home_header">
         <img
           className="landing"
-          src="/src/assets/santa2.png"
+          src="/assets/santa2.png"
           alt="santa"
           draggable={false}
         />

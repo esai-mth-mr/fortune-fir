@@ -38,7 +38,7 @@ function LogIn() {
     <div className="board">
       <img
         className="sign_header"
-        src="/src/assets/santamodel.png"
+        src="/assets/santamodel.png"
         alt="hero"
         draggable="false"
       />

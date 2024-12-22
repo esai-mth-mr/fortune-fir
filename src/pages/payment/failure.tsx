@@ -10,14 +10,14 @@ const Failure = () => {
       <div className="hero_img_field">
         <img
           className="hero_imgage"
-          src="/src/assets/backgroundImage _1.png"
+          src="/assets/backgroundImage _1.png"
           draggable={false}
           alt="hero_imgage"
         />
       </div>
       <div className="failIcon_field">
         <img
-          src="/src/assets/failIcon.png"
+          src="/assets/failIcon.png"
           draggable="false"
           alt="failIcon"
           className="failIcon"

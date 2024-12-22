@@ -30,14 +30,14 @@ function Required() {
       <div className="verify_hero_img_field">
         <img
           className="hero_image"
-          src="/src/assets/backgroundImage _1.png"
+          src="/assets/backgroundImage _1.png"
           draggable={false}
           alt="hero_image"
         />
       </div>
       <div className="verifyIcon_field">
         <img
-          src="/src/assets/verify.png"
+          src="/assets/verify.png"
           draggable="false"
           alt="verifyIcon"
           className="verifyIcon"
