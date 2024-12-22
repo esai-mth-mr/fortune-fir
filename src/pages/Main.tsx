@@ -10,9 +10,20 @@ import { getRandomNum } from "../helper/Helper";
 import { getInitDataApi } from "../api/getInitDataApi";
 import toast from "react-hot-toast";
 
-function Main() {
-  const [month, setMonth] = useState(1);
-  const [count, setCount] = useState(0);
+interface DataType {
+  _id: string;
+  name: string;
+  luck: string;
+  index: number;
+  description: string;
+  url: string;
+}
+
+interface ModalDataType {
+  name: string;
+  desc: string;
+}
+
 function Main() {
   const [month, setMonth] = useState(1);
   const [count, setCount] = useState(0);
@@ -35,26 +46,6 @@ function Main() {
     "Dec",
   ];
 
-  const array: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Type the array
-  const [shuffledMonths, setShuffledMonths] = useState<number[]>([...array]); // Ensure the state holds an array of numbers
-  const [gifts, setGifts] = useState<number[]>([]); // Make sure gifts holds an array of numbers
-
-  const allowopen: boolean[] = [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-  ];
-  const [AllowOpen, setAllowOpen] = useState<boolean[]>([...allowopen]);
   const array: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Type the array
   const [shuffledMonths, setShuffledMonths] = useState<number[]>([...array]); // Ensure the state holds an array of numbers
   const [gifts, setGifts] = useState<number[]>([]); // Make sure gifts holds an array of numbers
@@ -113,135 +104,58 @@ function Main() {
   const [yearpoint, setyearpoint] = useState<number>(0);
   const [monthpoint, setmonthpoint] = useState<number>(0);
   const [point, setPoint] = useState<number>(0);
-  const [yearpoint, setyearpoint] = useState<number>(0);
-  const [monthpoint, setmonthpoint] = useState<number>(0);
-  const [point, setPoint] = useState<number>(0);
-
-  const [yeardisplaypoint, setDisplayYear] = useState<number>(0);
-  const [displaypoint, setDisplaypoint] = useState<number>(0);
-
-  //for animation
-  const [countnum, setCountNum] = useState<boolean>(false);
-  //allow moving to next
-  const [allownext, setAllowNext] = useState<boolean>(false);
-
-  const getpoint = (lucklevel: string) => {
-    switch (lucklevel) {
-      case "exe_good":
-        return Math.ceil(getRandomNum(200, 300)!);
-      case "very_good":
-        return Math.ceil(getRandomNum(100, 200)!);
-      case "good":
-        return Math.ceil(getRandomNum(0, 100)!);
-      case "bad":
-        return Math.ceil(getRandomNum(-100, 0)!);
-      case "very_bad":
-        return Math.ceil(getRandomNum(-200, -100)!);
-      case "exe_bad":
-        return Math.ceil(getRandomNum(-300, -200)!);
-    }
-  };
-  const [yeardisplaypoint, setDisplayYear] = useState<number>(0);
-  const [displaypoint, setDisplaypoint] = useState<number>(0);
-
-  //for animation
-  const [countnum, setCountNum] = useState<boolean>(false);
-  //allow moving to next
-  const [allownext, setAllowNext] = useState<boolean>(false);
-
-  const getpoint = (lucklevel: string) => {
-    switch (lucklevel) {
-      case "exe_good":
-        return Math.ceil(getRandomNum(200, 300)!);
-      case "very_good":
-        return Math.ceil(getRandomNum(100, 200)!);
-      case "good":
-        return Math.ceil(getRandomNum(0, 100)!);
-      case "bad":
-        return Math.ceil(getRandomNum(-100, 0)!);
-      case "very_bad":
-        return Math.ceil(getRandomNum(-200, -100)!);
-      case "exe_bad":
-        return Math.ceil(getRandomNum(-300, -200)!);
-    }
-  };
-
-  //display for animation
-  useEffect(() => {
-    setTimeout(() => {
-      setDisplaypoint(monthpoint);
-    }, 2500);
-    setTimeout(() => {
-      setmonthpoint(monthpoint + point);
-    }, 2600);
-  //display for animation
-  useEffect(() => {
-    setTimeout(() => {
-      setDisplaypoint(monthpoint);
-    }, 2500);
-    setTimeout(() => {
-      setmonthpoint(monthpoint + point);
-    }, 2600);
-
-    setTimeout(() => {
-      setDisplayYear(yeardisplaypoint);
-    }, 2500);
-    setTimeout(() => {
-      setyearpoint(yeardisplaypoint + point);
-    }, 2600);
-  }, [point]);
-
-  //display animate number for specific duration
-  useEffect(() => {
-    if (point > 0) {
-      if (displaypoint != monthpoint) {
-    setTimeout(() => {
-      setDisplayYear(yeardisplaypoint);
-    }, 2500);
-    setTimeout(() => {
-      setyearpoint(yeardisplaypoint + point);
-    }, 2600);
-  }, [point]);
-
-  //display animate number for specific duration
-  useEffect(() => {
-    if (point > 0) {
-      if (displaypoint != monthpoint) {
-        setTimeout(() => {
-          setDisplaypoint(displaypoint + 1);
-        }, 2);
-      }
-
-      if (yeardisplaypoint != yearpoint) {
-        setTimeout(() => {
-          setDisplayYear(yeardisplaypoint + 1);
-        }, 2);
-      }
-    } else {
-      if (displaypoint != monthpoint) {
-        setTimeout(() => {
-          setDisplaypoint(displaypoint - 1);
-        }, 2);
-      }
-
-      if (yeardisplaypoint != yearpoint) {
-        setTimeout(() => {
-          setDisplayYear(yeardisplaypoint - 1);
-        }, 2);
-      }
-    }
+  const [modalData, setModalData] = useState<ModalDataType>({
+    name: "",
+    desc: "",
   });
 
+  const [yeardisplaypoint, setDisplayYear] = useState<number>(0);
+  const [displaypoint, setDisplaypoint] = useState<number>(0);
+
+  //for animation
+  const [countnum, setCountNum] = useState<boolean>(false);
+  //allow moving to next
+  const [allownext, setAllowNext] = useState<boolean>(false);
+
+  const getpoint = (lucklevel: string) => {
+    switch (lucklevel) {
+      case "extremely good":
+        return Math.ceil(getRandomNum(200, 300)!);
+      case "very good":
+        return Math.ceil(getRandomNum(100, 200)!);
+      case "good":
+        return Math.ceil(getRandomNum(0, 100)!);
+      case "bad":
+        return Math.ceil(getRandomNum(-100, 0)!);
+      case "very bad":
+        return Math.ceil(getRandomNum(-200, -100)!);
+      case "extremely bad":
+        return Math.ceil(getRandomNum(-300, -200)!);
+    }
+  };
+
+  //display for animation
   useEffect(() => {
-    if (count == 7) {
-      setTimeout(() => {
-        setAllowNext(true);
-      }, 100);
-    }
-    if (count == 0) {
-      setAllowNext(false);
-    }
-  }, [count]);
+    setTimeout(() => {
+      setDisplaypoint(monthpoint);
+    }, 2500);
+    setTimeout(() => {
+      setmonthpoint(monthpoint + point);
+    }, 2600);
+
+    setTimeout(() => {
+      setDisplayYear(yeardisplaypoint);
+    }, 2500);
+    setTimeout(() => {
+      setyearpoint(yeardisplaypoint + point);
+    }, 2600);
+  }, [point]);
+
+  //display animate number for specific duration
+  useEffect(() => {
+    if (point > 0) {
+      if (displaypoint != monthpoint) {
+        setTimeout(() => {
           setDisplaypoint(displaypoint + 1);
         }, 2);
       }
@@ -279,7 +193,19 @@ function Main() {
 
   return (
     <div className="board">
-      <div className="board_content">
+      {/* Loading Overlay */}
+      {loading && (
+        <div className="loading-overlay">
+          <div className="spinner"></div>
+          <p>Loading...</p>
+        </div>
+      )}
+
+      {/* Main Content */}
+
+      <div
+        className={loading ? "disabled-content board_content" : "board_content"}
+      >
         <div className="main_month">
           <div className="month_title">2025</div>
           <div className="month_num">
@@ -320,88 +246,75 @@ function Main() {
         <div className="gifts_field">
           <div className="gift-field-child">
             <div className="gifts-field-child-left">
-              {gifts.map((item, index) =>
-                index % 2 == 0 ? (
+              {data.map((item: DataType, index) =>
+                index % 2 === 0 ? (
                   <img
-                    key={index}
-                    className={`${`gift_l`}`}
+                    key={item._id} // Use a unique identifier as the key
+                    className="gift_l"
                     draggable={false}
-                    alt={`${`gift` + index}`}
-                    src={`${
-                      AllowOpen[index] == true
-                        ? `/src/svg/Gifts/gift_` + item + `.svg`
+                    alt={`gift_${index}`}
+                    src={
+                      AllowOpen[index]
+                        ? `/src/svg/Gifts/gift_${gifts[index]}.svg`
                         : `/src/assets/openbox.png`
-                    }`}
+                    }
                     onClick={() => {
-                      AllowOpen[index] == true &&
-                        count < 7 &&
-                        setCount(count + 1);
-                      AllowOpen[index] == true && count < 7
-                        ? setAllowOpen(
-                            AllowOpen.map((m, i) => {
-                              return m == true && i != index;
-                            })
+                      if (AllowOpen[index] && count < 7) {
+                        setCount((prev) => prev + 1);
+                        setAllowOpen((prev) =>
+                          prev.map((isOpen, i) =>
+                            i === index ? false : isOpen
                           )
-                        : "";
-                      AllowOpen[index] == true && count < 7
-                        ? setIsOpen(AllowOpen[index])
-                        : setIsOpen(false);
-                      AllowOpen[index] == true &&
-                        count < 7 &&
-                        setPoint(getpoint("exe_bad")!);
-                      AllowOpen[index] == true &&
-                        count < 7 &&
-                        setCountNum(!countnum);
+                        );
+                        setIsOpen(true);
+                        setPoint(getpoint(item.luck)!);
+                        setModalData({
+                          name: item.name,
+                          desc: item.description,
+                        });
+                        setCountNum((prev) => !prev);
+                      }
                     }}
-                  ></img>
-                ) : (
-                  <></>
-                )
+                  />
+                ) : null
               )}
             </div>
             <div className="gifts-field-child-right">
-              {gifts.map((item, index) =>
-                index % 2 == 1 ? (
-                  <img
-                    key={index}
-                    className={`${`gift_r`}`}
-                    draggable={false}
-                    alt={`${`gift` + index}`}
-                    src={`${
-                      AllowOpen[index] == true
-                        ? `/src/svg/Gifts/` + `gift_` + item + `.svg`
-                        : `/src/assets/openbox.png`
-                    }`}
-                    onClick={() => {
-                      AllowOpen[index] == true &&
-                        count < 7 &&
-                        setCount(count + 1);
-                      AllowOpen[index] == true && count < 7
-                        ? setAllowOpen(
-                            AllowOpen.map((m, i) => {
-                              return m == true && i != index;
-                            })
-                          )
-                        : "";
-                      AllowOpen[index] == true && count < 7
-                        ? setIsOpen(AllowOpen[index])
-                        : setIsOpen(false);
-                      AllowOpen[index] == true &&
-                        count < 7 &&
-                        setPoint(getpoint("exe_bad")!);
-                      AllowOpen[index] == true &&
-                        count < 7 &&
-                        setCountNum(!countnum);
-                    }}
-                  ></img>
-                ) : (
-                  <></>
-                )
+              {data.map(
+                (item: DataType, index) =>
+                  index % 2 === 1 ? (
+                    <img
+                      key={item._id} // Use a unique key
+                      className="gift_r" // Simplified className
+                      draggable={false}
+                      alt={`gift_${index}`} // Updated alt for better readability
+                      src={
+                        AllowOpen[index]
+                          ? `/src/svg/Gifts/gift_${gifts[index]}.svg`
+                          : `/src/assets/openbox.png`
+                      }
+                      onClick={() => {
+                        if (AllowOpen[index] && count < 7) {
+                          setCount((prev) => prev + 1);
+                          setAllowOpen((prev) =>
+                            prev.map((isOpen, i) =>
+                              i === index ? false : isOpen
+                            )
+                          );
+                          setIsOpen(true);
+                          setPoint(getpoint(item.luck)!);
+                          setCountNum((prev) => !prev);
+                        }
+                      }}
+                    />
+                  ) : null // Return null instead of <></> for unused elements
               )}
             </div>
           </div>
         </div>
-        {isOpen && <Modal setIsOpen={setIsOpen} score={point} />}{" "}
+        {isOpen && (
+          <Modal setIsOpen={setIsOpen} score={point} modalData={modalData} />
+        )}{" "}
         {/* Render the modal conditionally */}
         <div
           onClick={() => {
