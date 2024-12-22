@@ -123,7 +123,7 @@ export default function Payment() {
               >
                 <img
                   style={{ width: "100%", height: "30px" }}
-                  src="/src/assets/stripe.svg"
+                  src="/assets/stripe.svg"
                 ></img>
               </button>
             </div>
@@ -131,7 +131,7 @@ export default function Payment() {
               <button style={{ width: "100%" }} onClick={handlePayPal}>
                 <img
                   style={{ width: "100%", height: "30px" }}
-                  src="/src/assets/paypal.svg"
+                  src="/assets/paypal.svg"
                   alt="PayPal Logo"
                   draggable="false"
                 ></img>

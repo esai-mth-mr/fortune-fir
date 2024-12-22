@@ -6,14 +6,14 @@ function NotFound() {
       <div className="notfound-hero_img_field">
         <img
           className="notfound-hero_image"
-          src="/src/assets/backgroundImage _1.png"
+          src="/assets/backgroundImage _1.png"
           draggable={false}
           alt="notfound-hero_imgage"
         />
       </div>
       <div className="notfound-failIcon_field">
         <img
-          src="/src/assets/failIcon.png"
+          src="/assets/failIcon.png"
           draggable="false"
           alt="failIcon"
           className="notfound-failIcon"

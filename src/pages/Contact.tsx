@@ -71,7 +71,7 @@ function Contact() {
       <div className="title">Contact US</div>
       <div className="contact_img_field">
         <img
-          src="/src/assets/plane.png"
+          src="/assets/plane.png"
           alt="plane"
           draggable="false"
           className="contact_img"
