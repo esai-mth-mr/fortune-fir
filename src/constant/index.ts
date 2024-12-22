@@ -1,4 +1,4 @@
-const BACKEND_URL = "https://howlucky2025";
+const BACKEND_URL = "https://howlucky2025.com";
 const TOKEN_SECRET_KEY = "aceron20030612";
 
 
