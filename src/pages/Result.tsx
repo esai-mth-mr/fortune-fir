@@ -1,18 +1,17 @@
 import React, { ReactEventHandler, useEffect, useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link,useNavigate,useLocation } from "react-router-dom";
 import '@src/style/global.scss';  
 import '@src/style/pages/main.scss';  
 import { Stack } from '@mui/material';  
 import { Pagination } from '@mui/material';  
 
-
 function Result(){
-    const [month, setMonth] = useState<number>(1);
-    // const [count, setCount] = useState(0);
+    const [isresultOpen, setIsResultOpen]=useState<boolean>(true);
 
-    // const [currentPage, setCurrentPage] = useState(1);
-    const [paystate, setPayed] = useState<boolean>(false);
+    const [month, setMonth] = useState<number>(1);
+    const [paystate, setPayed] = useState<boolean>(true);
     const navigate = useNavigate();
+    const location= useLocation();
 
     const eval_data=[
       {eval_state: "Extremely Good", eval_content:"Living here means you will experience success in various endeavors. Opportunities will arise, from lucrative investments to meeting inspiring individuals who can change your life for the better."},
@@ -24,7 +23,7 @@ function Result(){
     ]
     //metadta
     const allowdata=[
-        {month: 1, story: "you are welcom1", point: 300},
+        {month: 1, story: "you are welcom1", point: 1500},
         {month: 2, story: "you are welcom2", point: 300},
         {month: 3, story: "you are welcom3", point: 300},
         {month: 4, story: "you are welco4", point: 300},
@@ -36,7 +35,7 @@ function Result(){
         {month: 10, story: "you are welcom10", point: 300},
         {month: 11, story: "you are welcom11", point: 300},
         {month: 12, story: "you are welcom12", point: 300},
-        {month: 13, story: "you are welcom13", point: 900},
+        {month: 13, story: "you are welcom13", point: 1500},
     ]
 
     const notallowdata=[
@@ -55,22 +54,31 @@ function Result(){
         {month: 13, point: 300},
     ]
     const months=["","Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    // useEffect(()=>{setMonth(currentPage)},[currentPage]);
     const handlePageChange = (
         event: React.ChangeEvent<unknown>,
         value: number
       ) => {
         setMonth(value);
-        console.log(value)
       };
 
-      const handleRegenerate= () =>{
-        const queryParam = new  URLSearchParams(String(month));
-console.log(queryParam);
-        //navigate(`/main/?month=${month}`);
-        setMonth(13);
-
-      }
+    //navigate
+    const handleRegenerate= () =>{
+      navigate(`/main/?result_month=${month.toString()+"_"+(allowdata[12].point-allowdata[month].point).toString()}"`);
+    }
+    const handleReround = () => {
+        navigate(`/main`);
+    }
+    //navigate with main
+    useEffect(()=>{
+        const queryParams = new URLSearchParams(location.search);
+        if(queryParams.size==1){
+            const result_month = queryParams.get("main_month");
+            setMonth(parseInt(result_month!));
+        }
+        else{
+            setMonth(1);
+        }
+    },[]);    
     return(
         <div className='board'>
             <div className="board_content">
@@ -94,37 +102,42 @@ console.log(queryParam);
               </div>:<></>}
               
               <div className='main_img_field'>
-                  <img className='main_img' src="/src/assets/backgroundImage _1.png"/>
+                  <img className='main_img' src="/src/assets/backgroundImage _1.png" draggable={false} alt="main_img"/>
               </div>
               <div className="result_pagination">
-                  <Stack style={{width: "100%"}} spacing={1}>
+                <div className="result_page">
+                    <Stack style={{width: "100%"}} spacing={1}>
                       <Pagination 
                       onChange={handlePageChange}   
                       count={12}   
                       variant="outlined"  
                       />
-                  </Stack>
+                    </Stack>
+                </div>
               </div>
               {paystate==true?
-                  <><div onClick={()=>setMonth(13)} style={{left:"15%", bottom:"12%", width:"30%", height:"30px"}} className='common_btn'>Total Story</div>
-                  <Link onClick={handleRegenerate} style={{right:"15%", bottom:"12%", width:"30%", height:"30px"}} className='common_btn' to="/main">Regenerate</Link></>
+                  <>
+                  <div onClick={handleRegenerate} style={{left:"1%", bottom:"12%", width:"30%", height:"30px"}} className='common_btn'>Regenerate</div>
+                  <div onClick={()=>setMonth(13)} style={{left:"35%", bottom:"12%", width:"30%", height:"30px"}} className='common_btn'>Total Story</div>
+                  <div onClick={handleReround} style={{right:"1%", bottom:"12%", width:"30%", height:"30px"}} className='common_btn' >Reround</div></>
               :<>
-                  <div onClick={()=>setMonth(13)} style={{left:"1%", bottom:"12%", width:"30%", height:"30px"}} className='common_btn'>Total Story</div>
-                  <div style={{left:"35%", bottom:"12%", width:"30%", height:"30px"}} className='common_btn'>Preview</div>
-                  <Link onClick={handleRegenerate} style={{right:"1%", bottom:"12%", width:"30%", height:"30px"}} className='common_btn' to="/main">Regenerate</Link>
+                  <div onClick={()=>setMonth(13)} style={{left:"5%", bottom:"12%", width:"40%", height:"30px"}} className='common_btn'>Total Story</div>
+                  <div style={{right:"5%", bottom:"12%", width:"40%", height:"30px"}} className='common_btn'>Preview</div>
+                  <div onClick={handleRegenerate} style={{left:"5%", bottom:"18%", width:"40%", height:"30px"}} className='common_btn' >Regenerate</div>
+                  <div onClick={handleReround} style={{right:"5%", bottom:"18%", width:"40%", height:"30px"}} className='common_btn' >Reround</div>
               </>
               }
-              <div className="result_field">
+              <div className={`${`result_field`}`} style={{height: paystate==true?"50%":"45%"}}>
                   <div className={`${paystate==true?`result_content`:`result_content2`}`}>
                       {paystate==true?allowdata[month-1].story!:allowdata[month-1].story}
                   </div>
               </div>
               {/* display for description */}
-              {/* <div className="result_state_desc">
+              <div className={`${isresultOpen==true?`result_state_desc`:`result_state_desc1`}`}>
                 <div className="result_state_desc_title">
                   {allowdata[month-1].point>=1400&&allowdata[month-1].point<=2100?eval_data[0].eval_state:""}
                   {allowdata[month-1].point>=700&&allowdata[month-1].point<1400?eval_data[1].eval_state:""}
-                  {allowdata[month-1].point>=0&&allowdata[month-1].point<1400?eval_data[2].eval_state:""}
+                  {allowdata[month-1].point>=0&&allowdata[month-1].point<700?eval_data[2].eval_state:""}
                   {allowdata[month-1].point>=-700&&allowdata[month-1].point<0?eval_data[3].eval_state:""}
                   {allowdata[month-1].point>=-1400&&allowdata[month-1].point<-700?eval_data[4].eval_state:""}
                   {allowdata[month-1].point>=-2100&&allowdata[month-1].point<-1400?eval_data[5].eval_state:""}
@@ -132,12 +145,22 @@ console.log(queryParam);
                 <div className="result_state_desc_desc">
                   {allowdata[month-1].point>=1400&&allowdata[month-1].point<=2100?eval_data[0].eval_content:""}
                   {allowdata[month-1].point>=700&&allowdata[month-1].point<1400?eval_data[1].eval_content:""}
-                  {allowdata[month-1].point>=0&&allowdata[month-1].point<1400?eval_data[2].eval_content:""}
+                  {allowdata[month-1].point>=0&&allowdata[month-1].point<700?eval_data[2].eval_content:""}
                   {allowdata[month-1].point>=-700&&allowdata[month-1].point<0?eval_data[3].eval_content:""}
                   {allowdata[month-1].point>=-1400&&allowdata[month-1].point<-700?eval_data[4].eval_content:""}
                   {allowdata[month-1].point>=-2100&&allowdata[month-1].point<-1400?eval_data[5].eval_content:""}
                 </div>
-              </div> */}
+ 
+                <img onClick={()=>setIsResultOpen(false)} className="result_close" src="/src/assets/close.png" draggable={false} alt="result_close"/>
+                <img className="result_santa" src="/src/assets/santa.png" draggable={false} alt="result_close"/>
+
+                {allowdata[month-1].point>=1400&&allowdata[month-1].point<=2100?<img className="result_anim_luck" src="/src/assets/exe_good.png" draggable={false} alt="result_anim"/>:""}
+                {allowdata[month-1].point>=700&&allowdata[month-1].point<1400?<img className="result_anim_luck" src="/src/assets/very_good.png" draggable={false} alt="result_anim"/>:""}
+                {allowdata[month-1].point>=0&&allowdata[month-1].point<700?<img className="result_anim_luck" src="/src/assets/good.png" draggable={false} alt="result_anim"/>:""}
+                {allowdata[month-1].point>=-700&&allowdata[month-1].point<0?<img className="result_anim_luck" src="/src/assets/bad.png" draggable={false} alt="result_anim"/>:""}
+                {allowdata[month-1].point>=-1400&&allowdata[month-1].point<-700?<img className="result_anim_luck" src="/src/assets/very_bad.png" draggable={false} alt="result_anim"/>:""}
+                {allowdata[month-1].point>=-2100&&allowdata[month-1].point<-1400?<img className="result_anim_luck" src="/src/assets/exe_bad.png" draggable={false} alt="result_anim"/>:""}
+              </div>
             </div>
         </div>
     )

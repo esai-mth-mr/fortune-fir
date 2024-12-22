@@ -7,15 +7,13 @@ import { Link,useNavigate,useLocation } from 'react-router-dom';
 import Modal from './modal/modal';
 import 'animate.css';
 import { getRandomNum } from '../helper/Helper';
+import { setegid } from 'process';
 
 function Main() {  
     const [month, setMonth] = useState(1);
     const [count, setCount] = useState(0);
     const navigate = useNavigate();
     const location= useLocation();
-    // const data = [
-    //     {name: "", description: "", luck: ""}
-    // ]
 
     const months=["","Jan", "Feb", "Mar", "Apr","May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -28,6 +26,9 @@ function Main() {
 
     const [isOpen, setIsOpen] = useState(false);
 
+    //for edit private month
+    const [isEdit, setEdit]=useState<boolean>(false);
+
     const shuffleArray = (array: number[]): number[] => {  
         return array.sort(() => 0.5 - Math.random());  
     };  
@@ -38,12 +39,10 @@ function Main() {
         }  
     }, [count, shuffledMonths]); 
 
-    useEffect(()=>{
-        const queryParams = new URLSearchParams(location.search);
-        const month = queryParams.get("month");
-        console.log(month);
-    },[]);
-    
+    //navigate
+    const handleRegenerate= () =>{
+        navigate(`/result/?main_month=${month}`);
+    }
 
     const [yearpoint, setyearpoint] = useState<number>(0);
     const [monthpoint, setmonthpoint] = useState<number>(0);
@@ -70,24 +69,26 @@ function Main() {
 
     //display for animation
     useEffect(()=>{
-        setTimeout(()=>{
-            setDisplaypoint(monthpoint);
-        }, 2500)
-        setTimeout(() => {
-            setmonthpoint(monthpoint+point);
-        }, 2600);
+        if(point!=0){
+              setTimeout(()=>{
+                    setDisplaypoint(monthpoint);
+                }, 2500)
+                setTimeout(() => {
+                    setmonthpoint(monthpoint+point);
+                }, 2600);
 
-        setTimeout(()=>{
-            setDisplayYear(yeardisplaypoint);
-        }, 2500)
-        setTimeout(() => {
-            setyearpoint(yeardisplaypoint+point);
-        }, 2600);
+                setTimeout(()=>{
+                    setDisplayYear(yeardisplaypoint);
+                }, 2500)
+                setTimeout(() => {
+                    setyearpoint(yeardisplaypoint+point);
+                }, 2600);
+            }
     }, [point])
 
     //display animate number for specific duration
     useEffect(()=>{
-        if(point>0){
+        if(point>0&&point!=0){
             if(displaypoint!=monthpoint){
                 setTimeout(()=>{
                     setDisplaypoint(displaypoint+1);
@@ -100,7 +101,7 @@ function Main() {
                 }, 2)
             }
         }
-        else{
+        else if(point<0&&point!=0){
             if(displaypoint!=monthpoint){
                 setTimeout(()=>{
                     setDisplaypoint(displaypoint-1);
@@ -113,7 +114,6 @@ function Main() {
                 }, 2)
             }
         }
-        
     })
 
     useEffect(()=>{
@@ -127,12 +127,32 @@ function Main() {
         }
     },[count]);
 
+    useEffect(()=>{
+        const queryParams = new URLSearchParams(location.search);
+
+        if(queryParams.size==1){
+            let result_month = queryParams.get("result_month");
+            const result_data = [...result_month?.split("_")!];
+            console.log("result_data", result_data[0])
+            console.log("result_data_1", result_data[1])
+            if (result_month) {  
+                setMonth(parseInt(result_data[0]));
+                setDisplayYear(parseInt(result_data[1]));
+                setyearpoint(parseInt(result_data[1]));
+            }  
+            setEdit(true);
+        }
+        else{
+            setMonth(1);
+            setEdit(false);
+        }
+    },[]);   
     return(
         <div className='board'>
             <div className='board_content'>
                 <div className='main_month'>
                     <div className='month_title'>2025</div>
-                    <div className='month_num'><h6 style={{ fontSize:"30px"}}>{months[month]}</h6></div>
+                    <div className='month_num'><h6 style={{ fontSize:"30px"}}>{isEdit==false?months[month]:months[month]}</h6></div>
                 </div>
                 <div className='score'>
                     <div className='score_year'>Year:{yeardisplaypoint}</div>
@@ -185,22 +205,25 @@ function Main() {
                     </div>
                 </div>
                 {isOpen && <Modal setIsOpen={setIsOpen} score={point}/>} {/* Render the modal conditionally */}
-                <div onClick={()=>{month!=12&&count==7&&setMonth(month+1);
-                    allownext==true&&month!=12&&count==7&&setCount(0);
-                    allownext==true&&count==7&&setAllowOpen(AllowOpen.map((m, i)=>{
+                <div onClick={()=>{
+                    isEdit==false&&allownext==true&&month!=12&&count==7&&setMonth(month+1);
+                    isEdit==false&&allownext==true&&month!=12&&count==7&&setCount(0);
+                    isEdit==false&&allownext==true&&count==7&&setAllowOpen(AllowOpen.map((m, i)=>{
                         return true;
                     }));
-                    allownext==true&&count==7&&setmonthpoint(0);
-                    allownext==true&&count==7&&setPoint(0);
-                    allownext==true&&count==7&&setDisplaypoint(0);
-                    allownext==true&&count==7&&setCountNum(false);
+                    isEdit==false&&allownext==true&&count==7&&setmonthpoint(0);
+                    isEdit==false&&allownext==true&&count==7&&setPoint(0);
+                    isEdit==false&&allownext==true&&count==7&&setDisplaypoint(0);
+                    isEdit==false&&allownext==true&&count==7&&setCountNum(false);
+                    isEdit==false&&allownext==true&&count==7&&setyearpoint(0);
 
-                }} style={{backgroundColor: count<7?"#f5f5f5":"red",borderColor:count<7?"#c7c7c7":"red", color:count<7?"#c7c7c7":"white"}} className='gift_next_btn'>
-                    {month<12?"Next":""}  
+                    isEdit==true&&handleRegenerate()
+                }} style={{backgroundColor: isEdit==false?count<7?"#f5f5f5":"red":"red",borderColor:isEdit==false?count<7?"#c7c7c7":"red":"white", color:isEdit==false?count<7?"#c7c7c7":"white":"white"}} className={`${isEdit==false?`gift_next_btn`:`edit_btn`}`}>
+                    {isEdit==false?month<12?"Next":"":"View Result"}  
 
-                    <Link className='gift_finish' to="/result">
-                        {month==12?"Finish":""}
-                    </Link>
+                    {isEdit==false?<Link className='gift_finish' to="/result">
+                        {isEdit==false?month==12?"Finish":"":""}
+                    </Link>:<></>}
                 </div>
             </div>
         </div>
