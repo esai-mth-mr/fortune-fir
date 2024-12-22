@@ -1,9 +1,7 @@
 import "@src/style/global.scss";
 import "@src/style/pages/main.scss";
 import { useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
-// import { Stack } from '@mui/material';
-// import { Pagination } from '@mui/material';
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "./modal/modal";
 import "animate.css";
 import { getRandomNum } from "../helper/Helper";
@@ -27,6 +25,8 @@ interface ModalDataType {
 function Main() {
   const [month, setMonth] = useState(1);
   const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+  const location= useLocation();
 
   const [data, setData] = useState([]);
 
@@ -67,6 +67,13 @@ function Main() {
   const [AllowOpen, setAllowOpen] = useState<boolean[]>([...allowopen]);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const [isEdit, setEdit]=useState<boolean>(false);
+
+    //navigate
+    const handleRegenerate= () =>{
+        navigate(`/result/?main_month=${month}`);
+    }
 
   const [loading, setLoading] = useState(false);
 
@@ -190,6 +197,27 @@ function Main() {
       setAllowNext(false);
     }
   }, [count]);
+
+  useEffect(()=>{
+    const queryParams = new URLSearchParams(location.search);
+
+    if(queryParams.size==1){
+        let result_month = queryParams.get("result_month");
+        const result_data = [...result_month?.split("_")!];
+        console.log("result_data", result_data[0])
+        console.log("result_data_1", result_data[1])
+        if (result_month) {  
+            setMonth(parseInt(result_data[0]));
+            setDisplayYear(parseInt(result_data[1]));
+            setyearpoint(parseInt(result_data[1]));
+        }  
+        setEdit(true);
+    }
+    else{
+        setMonth(1);
+        setEdit(false);
+    }
+    },[]);   
 
   return (
     <div className="board">
@@ -318,32 +346,29 @@ function Main() {
         {/* Render the modal conditionally */}
         <div
           onClick={() => {
-            month != 12 && count == 7 && setMonth(month + 1);
-            allownext == true && month != 12 && count == 7 && setCount(0);
-            allownext == true &&
+            isEdit==false && allownext == true && month != 12 && count == 7 && setMonth(month + 1);
+            isEdit==false &&allownext == true && month != 12 && count == 7 && setCount(0);
+            isEdit==false &&allownext == true &&
               count == 7 &&
               setAllowOpen(
                 AllowOpen.map(() => {
                   return true;
                 })
               );
-            allownext == true && count == 7 && setmonthpoint(0);
-            allownext == true && count == 7 && setPoint(0);
-            allownext == true && count == 7 && setDisplaypoint(0);
-            allownext == true && count == 7 && setCountNum(false);
-          }}
-          style={{
-            backgroundColor: count < 7 ? "#f5f5f5" : "red",
-            borderColor: count < 7 ? "#c7c7c7" : "red",
-            color: count < 7 ? "#c7c7c7" : "white",
-          }}
-          className="gift_next_btn"
-        >
-          {month < 12 ? "Next" : ""}
+            isEdit==false &&allownext == true && count == 7 && setmonthpoint(0);
+            isEdit==false &&allownext == true && count == 7 && setPoint(0);
+            isEdit==false &&allownext == true && count == 7 && setDisplaypoint(0);
+            isEdit==false && allownext == true && count == 7 && setCountNum(false);
+            isEdit==false&&allownext==true&&count==7&&setyearpoint(0);
+            isEdit==true&&handleRegenerate()
+        }}
+        style={{backgroundColor: isEdit==false?count<7?"#f5f5f5":"red":"red",borderColor:isEdit==false?count<7?"#c7c7c7":"red":"white", color:isEdit==false?count<7?"#c7c7c7":"white":"white"}} 
+        className={`${isEdit==false?`gift_next_btn`:`edit_btn`}`}>
+            {isEdit==false?month<12?"Next":"":"View Result"}  
 
-          <Link className="gift_finish" to="/result">
-            {month == 12 ? "Finish" : ""}
-          </Link>
+            {isEdit==false?<Link className='gift_finish' to="/result">
+                {isEdit==false?month==12?"Finish":"":""}
+            </Link>:<></>}
         </div>
       </div>
     </div>
