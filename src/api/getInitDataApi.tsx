@@ -3,7 +3,7 @@ import setAuthToken from "../utils/setAuthToken";
 
 export const getInitDataApi = async () => {
   try {
-    const res = await axios.get("api/asset/init", setAuthToken());
+    const res = await axios.post("api/asset/init", {}, setAuthToken());
     return {
       status: 200,
       message: res.data,

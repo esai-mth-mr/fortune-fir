@@ -10,7 +10,7 @@ function Home() {
     const pretoken = localStorage.getItem("token");
     if (pretoken) {
       axios
-        .get("/api/auth/checkUser", setAuthToken())
+        .post("/api/auth/checkUser", {}, setAuthToken())
         .then((res) => {
           console.log(res.data.message);
           navigate("/main");
