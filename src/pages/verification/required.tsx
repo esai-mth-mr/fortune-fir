@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "@src/style/verify/required.scss";
 import axios from "../../utils/axios";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 function Required() {
   const [email, setEmail] = useState<string>("");
@@ -57,7 +58,10 @@ function Required() {
       </div>
 
       <div className="verify_button_field" style={{ marginTop: "10px" }}>
-        Need help? &nbsp;<div className="verify_button">Contact Us</div>
+        Need help? &nbsp;
+        <Link className="verify_button" to="/contact">
+          Contact Us
+        </Link>
       </div>
     </div>
   );

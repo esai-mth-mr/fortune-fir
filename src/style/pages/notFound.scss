@@ -1,0 +1,41 @@
+.notfound-board{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    .notfound-hero_img_field {
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        margin-top: -95%;
+        .notfound-hero_image {
+            width: 170%;
+            height: 75vh;
+        }
+    }
+    .notfound-failIcon_field{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        margin-top: -10%;
+        .notfound-failIcon{
+            width: 70px;
+            height: 70px;
+        }
+    }
+
+    .notfound-title{
+        font-family: 'DM sans';
+        font-size: 2rem;
+        font-weight: 600;
+        color: #ff0d0d;
+        margin-top: 30px;
+
+    }
+
+   
+    
+}

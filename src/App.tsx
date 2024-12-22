@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
 import SignUp from "./pages/SingUp";
@@ -12,7 +12,6 @@ import Failed from "./pages/verification/failed";
 import GetReady from "./pages/GetReady";
 import Result from "./pages/Result";
 import Verifing from "./pages/verification/verifing";
-import { PrivateRoute } from "./components/PrivateRoute";
 import { decryptToken } from "./utils/cryptToken";
 import { jwtDecode } from "jwt-decode";
 import { logoutUser } from "./utils/logoutUser";
@@ -22,6 +21,9 @@ import Payment from "./pages/payment/Payment";
 import Failure from "./pages/payment/failure";
 import Success from "./pages/payment/success";
 import ResultPayment from "./pages/payment/Result";
+import NotFound from "./pages/NotFound";
+import Help from "./pages/Help";
+
 function App() {
   const navigate = useNavigate();
 
@@ -43,6 +45,13 @@ function App() {
   return (
     <>
       <div className="app">
+        <Link className="app-logo" to="/">
+          <img
+            src="/src/assets/HowLucky2025_logo.png"
+            width="50px"
+            height="50px"
+          ></img>
+        </Link>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
@@ -53,18 +62,20 @@ function App() {
           <Route path="/successful" element={<Succesful />} />
           <Route path="/failed" element={<Failed />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/help" element={<Help />} />
 
           {/* private routes */}
           {/* <Route path="/main" element={<PrivateRoute />}>
             <Route path="/main" element={<Main />}></Route>
           </Route> */}
-            <Route path="/main" element={<Main />}></Route>
-          
+          <Route path="/main" element={<Main />}></Route>
+
           <Route path="/result" element={<Result />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/payment/paypal/result" element={<ResultPayment />} />
           <Route path="/payment/cancel" element={<Failure />} />
           <Route path="/payment/success" element={<Success />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         {/* <Router /> */}
         <Toaster
