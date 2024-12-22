@@ -133,6 +133,7 @@ export default function Payment() {
                   style={{ width: "100%", height: "30px" }}
                   src="/src/assets/paypal.svg"
                   alt="PayPal Logo"
+                  draggable="false"
                 ></img>
               </button>
             </div>
