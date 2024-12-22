@@ -19,10 +19,7 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
       setAllowClose(true);
     }, 4600);
   }, [score]);
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
   return (
     <>
       <div className="modal">

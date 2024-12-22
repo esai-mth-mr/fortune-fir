@@ -1,22 +1,19 @@
-@import url('https://fonts.google.com/specimen/Rubik+Mono+One');
+@import url("https://fonts.google.com/specimen/Rubik+Mono+One");
 
-body{
-  font-family: 'Rubik+Mono+One';
+body {
+  font-family: "Rubik+Mono+One";
 }
-
 
 #root {
   width: 100vw;
   height: 100vh;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   justify-content: center;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: auto;
 }
-
-
 
 .app::-webkit-scrollbar {
   width: 3px;
@@ -42,7 +39,7 @@ body{
 }
 
 .app {
-  width: 100%; 
+  width: 100%;
   height: 100%;
   overflow: auto;
   /* border-radius: 30px; */
@@ -50,11 +47,19 @@ body{
 
 .app {
   height: 100vh; /* Full height */
+  position: relative;
+}
+
+.app-logo {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  z-index: 100;
 }
 
 @media (max-width: 450px) {
   .app {
-    width: 100%; 
+    width: 100%;
     height: 100%;
     border: black;
     border: solid;
@@ -66,7 +71,7 @@ body{
 
 @media (min-width: 450px) and (max-width: 500px) {
   .app {
-    width: 80%; 
+    width: 80%;
     height: 95%;
     border: black;
     border: solid;
@@ -78,7 +83,7 @@ body{
 
 @media (min-width: 500px) and (max-width: 600px) {
   .app {
-    width: 60%; 
+    width: 60%;
     height: 95%;
     border: black;
     border: solid;
@@ -90,7 +95,7 @@ body{
 
 @media (min-width: 600px) and (max-width: 700px) {
   .app {
-    width: 50%; 
+    width: 50%;
     height: 95%;
     border: black;
     border: solid;
@@ -102,7 +107,7 @@ body{
 
 @media (min-width: 700px) and (max-width: 800px) {
   .app {
-    width: 40%; 
+    width: 40%;
     height: 95%;
     border: black;
     border: solid;
@@ -114,7 +119,7 @@ body{
 
 @media (min-width: 800px) and (max-width: 1000px) {
   .app {
-    width: 40%; 
+    width: 40%;
     height: 95%;
     border: black;
     border: solid;
@@ -125,7 +130,7 @@ body{
 
 @media (min-width: 1000px) and (max-width: 1200px) {
   .app {
-    width: 30%; 
+    width: 30%;
     height: 95%;
     border: black;
     border: solid;
@@ -136,7 +141,7 @@ body{
 
 @media (min-width: 1200px) {
   .app {
-    width: 25%; 
+    width: 25%;
     height: 95%;
     /* border: red; */
     border: solid;
@@ -153,89 +158,86 @@ body{
   }
 } */
 
-
 @font-face {
-  font-family: 'ProstoOne-Regular';
+  font-family: "ProstoOne-Regular";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/ProstoOne-Regular.ttf') format('truetype');
+  src: url("./font/ProstoOne-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'PlayfairDisplay-Black';
+  font-family: "PlayfairDisplay-Black";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/PlayfairDisplay-Black.ttf') format('truetype');
+  src: url("./font/PlayfairDisplay-Black.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'PlayfairDisplay-BlackItalic';
+  font-family: "PlayfairDisplay-BlackItalic";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/PlayfairDisplay-BlackItalic.ttf') format('truetype');
+  src: url("./font/PlayfairDisplay-BlackItalic.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'PlayfairDisplay-Bold';
+  font-family: "PlayfairDisplay-Bold";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/PlayfairDisplay-Bold.ttf') format('truetype');
+  src: url("./font/PlayfairDisplay-Bold.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'PlayfairDisplay-BoldItalic';
+  font-family: "PlayfairDisplay-BoldItalic";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/PlayfairDisplay-BoldItalic.ttf') format('truetype');
+  src: url("./font/PlayfairDisplay-BoldItalic.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'PlayfairDisplay-Italic';
+  font-family: "PlayfairDisplay-Italic";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/PlayfairDisplay-Italic.ttf') format('truetype');
+  src: url("./font/PlayfairDisplay-Italic.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'PlayfairDisplay-Regular';
+  font-family: "PlayfairDisplay-Regular";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/PlayfairDisplay-Regular.ttf') format('truetype');
+  src: url("./font/PlayfairDisplay-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'Caveat';
+  font-family: "Caveat";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/Caveat-VariableFont_wght.ttf') format('truetype');
+  src: url("./font/Caveat-VariableFont_wght.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'TitanOne';
+  font-family: "TitanOne";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/TitanOne-Regular.ttf') format('truetype');
+  src: url("./font/TitanOne-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'RubikMonoOne';
+  font-family: "RubikMonoOne";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/RubikMonoOne-Regular.ttf') format('truetype');
+  src: url("./font/RubikMonoOne-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'PlaywriteDESASGuides';
+  font-family: "PlaywriteDESASGuides";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/PlaywriteDESASGuides-Regular.ttf') format('truetype');
+  src: url("./font/PlaywriteDESASGuides-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'AlfaSlabOne';
+  font-family: "AlfaSlabOne";
   font-style: normal;
   font-weight: normal;
-  src:  url('./font/AlfaSlabOne-Regular.ttf') format('truetype');
+  src: url("./font/AlfaSlabOne-Regular.ttf") format("truetype");
 }
-
-

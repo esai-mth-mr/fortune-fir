@@ -60,7 +60,7 @@ function Result() {
   ];
 
   useEffect(() => {
-    console.log(month);
+    setPayed(false);
   });
 
   return (
