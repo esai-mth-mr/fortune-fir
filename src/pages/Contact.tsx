@@ -51,7 +51,7 @@ function Contact() {
   const handleSubmit = () => {
     if (!validateInputs()) {
       toast.error(
-        errors.email || errors.message || "All inputs must be filled."
+        errors.email || errors.message || "All inputs must be filled!"
       );
       return;
     }
