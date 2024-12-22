@@ -9,6 +9,8 @@ function GetReady() {
         <img
           className="getready_img"
           src="/src/assets/backgroundImage _1.png"
+          alt="ready"
+          draggable="false"
         />
       </div>
       <Link className="getready_btn" to="/main">

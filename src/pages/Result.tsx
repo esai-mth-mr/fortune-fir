@@ -109,7 +109,12 @@ function Result() {
           <div>{allowdata[12].point}</div>
         </div>
         <div className="main_img_field">
-          <img className="main_img" src="/src/assets/backgroundImage _1.png" />
+          <img
+            className="main_img"
+            src="/src/assets/backgroundImage _1.png"
+            alt="main"
+            draggable="false"
+          />
         </div>
         <div onClick={() => setMonth(month + 1)} className="gift_next_btn">
           {month < 13 ? "Next" : "previous"}
