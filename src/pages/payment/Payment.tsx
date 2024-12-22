@@ -12,6 +12,11 @@ import setAuthToken from "../../utils/setAuthToken";
 // import CryptoBoard from "./wallet";
 import axios from "../../utils/axios";
 import toast from "react-hot-toast";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51QXkg1A9YfpPkxIlDXG9iEGhAWo0bEaxfukGsLYfyzBkcMV4jipebVVh3XnfKjj9YZjL3uv8uiexgIkwgoWTcTqu00tZhUIpUx"
+);
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -24,7 +29,6 @@ const Transition = React.forwardRef(function Transition(
 
 export default function Payment() {
   const [open, setOpen] = React.useState(false);
-  const [loading, setLoading] = React.useState(true);
   //crypto part
   //end of crypto part
 
@@ -37,6 +41,8 @@ export default function Payment() {
     setOpen(false);
   };
   //end of modal part
+
+  //paypayl part
   const handlePayPal = () => {
     axios
       .post(
@@ -53,6 +59,42 @@ export default function Payment() {
         toast.error(error.response.data.message);
       });
   };
+  //end of paypayl part
+
+  //stripe part
+  const handleStripe = () => {
+    axios
+      .post(
+        "api/payment/stripe/session-initiate",
+        { action: "regeneration" },
+        setAuthToken()
+      )
+      .then(async (res) => {
+        console.log(res);
+
+        if (res.status === 200) {
+          const stripe = await stripePromise;
+          const sessionId = res.data.sessionId;
+          if (!stripe) {
+            toast.error("failed to load stripe");
+            return;
+          }
+          if (!sessionId) {
+            toast.error("sessionId not found");
+            return;
+          }
+          const { error } = await stripe?.redirectToCheckout({ sessionId });
+          if (error) {
+            toast.error("Error redirecting to Stripe");
+          }
+        }
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        //toast.error(error.response.data.message);
+      });
+  };
+  //end of stripe part
 
   React.useEffect(() => {}, []);
   return (
@@ -67,7 +109,9 @@ export default function Payment() {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>PAY: $0.99</DialogTitle>
+        <DialogTitle>
+          <div style={{ fontFamily: "PlayfairDisplay-Bold" }}>$0.99</div>
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <div className="stripe">
@@ -75,6 +119,7 @@ export default function Payment() {
                 style={{
                   width: "100%",
                 }}
+                onClick={handleStripe}
               >
                 <img
                   style={{ width: "100%", height: "30px" }}
@@ -84,7 +129,6 @@ export default function Payment() {
             </div>
             <div className="paypal">
               <button style={{ width: "100%" }} onClick={handlePayPal}>
-                {" "}
                 <img
                   style={{ width: "100%", height: "30px" }}
                   src="/src/assets/paypal.svg"

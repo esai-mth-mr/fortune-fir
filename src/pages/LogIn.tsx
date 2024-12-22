@@ -1,6 +1,6 @@
 import "@src/style/global.scss";
 import "@src/style/pages/signup.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TextField, InputAdornment } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import EmailIcon from "@mui/icons-material/Email";

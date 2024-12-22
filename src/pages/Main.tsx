@@ -13,6 +13,9 @@ import toast from "react-hot-toast";
 function Main() {
   const [month, setMonth] = useState(1);
   const [count, setCount] = useState(0);
+function Main() {
+  const [month, setMonth] = useState(1);
+  const [count, setCount] = useState(0);
 
   const [data, setData] = useState([]);
 
@@ -32,6 +35,26 @@ function Main() {
     "Dec",
   ];
 
+  const array: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Type the array
+  const [shuffledMonths, setShuffledMonths] = useState<number[]>([...array]); // Ensure the state holds an array of numbers
+  const [gifts, setGifts] = useState<number[]>([]); // Make sure gifts holds an array of numbers
+
+  const allowopen: boolean[] = [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+  ];
+  const [AllowOpen, setAllowOpen] = useState<boolean[]>([...allowopen]);
   const array: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Type the array
   const [shuffledMonths, setShuffledMonths] = useState<number[]>([...array]); // Ensure the state holds an array of numbers
   const [gifts, setGifts] = useState<number[]>([]); // Make sure gifts holds an array of numbers
@@ -90,7 +113,34 @@ function Main() {
   const [yearpoint, setyearpoint] = useState<number>(0);
   const [monthpoint, setmonthpoint] = useState<number>(0);
   const [point, setPoint] = useState<number>(0);
+  const [yearpoint, setyearpoint] = useState<number>(0);
+  const [monthpoint, setmonthpoint] = useState<number>(0);
+  const [point, setPoint] = useState<number>(0);
 
+  const [yeardisplaypoint, setDisplayYear] = useState<number>(0);
+  const [displaypoint, setDisplaypoint] = useState<number>(0);
+
+  //for animation
+  const [countnum, setCountNum] = useState<boolean>(false);
+  //allow moving to next
+  const [allownext, setAllowNext] = useState<boolean>(false);
+
+  const getpoint = (lucklevel: string) => {
+    switch (lucklevel) {
+      case "exe_good":
+        return Math.ceil(getRandomNum(200, 300)!);
+      case "very_good":
+        return Math.ceil(getRandomNum(100, 200)!);
+      case "good":
+        return Math.ceil(getRandomNum(0, 100)!);
+      case "bad":
+        return Math.ceil(getRandomNum(-100, 0)!);
+      case "very_bad":
+        return Math.ceil(getRandomNum(-200, -100)!);
+      case "exe_bad":
+        return Math.ceil(getRandomNum(-300, -200)!);
+    }
+  };
   const [yeardisplaypoint, setDisplayYear] = useState<number>(0);
   const [displaypoint, setDisplaypoint] = useState<number>(0);
 
@@ -124,6 +174,14 @@ function Main() {
     setTimeout(() => {
       setmonthpoint(monthpoint + point);
     }, 2600);
+  //display for animation
+  useEffect(() => {
+    setTimeout(() => {
+      setDisplaypoint(monthpoint);
+    }, 2500);
+    setTimeout(() => {
+      setmonthpoint(monthpoint + point);
+    }, 2600);
 
     setTimeout(() => {
       setDisplayYear(yeardisplaypoint);
@@ -137,7 +195,53 @@ function Main() {
   useEffect(() => {
     if (point > 0) {
       if (displaypoint != monthpoint) {
+    setTimeout(() => {
+      setDisplayYear(yeardisplaypoint);
+    }, 2500);
+    setTimeout(() => {
+      setyearpoint(yeardisplaypoint + point);
+    }, 2600);
+  }, [point]);
+
+  //display animate number for specific duration
+  useEffect(() => {
+    if (point > 0) {
+      if (displaypoint != monthpoint) {
         setTimeout(() => {
+          setDisplaypoint(displaypoint + 1);
+        }, 2);
+      }
+
+      if (yeardisplaypoint != yearpoint) {
+        setTimeout(() => {
+          setDisplayYear(yeardisplaypoint + 1);
+        }, 2);
+      }
+    } else {
+      if (displaypoint != monthpoint) {
+        setTimeout(() => {
+          setDisplaypoint(displaypoint - 1);
+        }, 2);
+      }
+
+      if (yeardisplaypoint != yearpoint) {
+        setTimeout(() => {
+          setDisplayYear(yeardisplaypoint - 1);
+        }, 2);
+      }
+    }
+  });
+
+  useEffect(() => {
+    if (count == 7) {
+      setTimeout(() => {
+        setAllowNext(true);
+      }, 100);
+    }
+    if (count == 0) {
+      setAllowNext(false);
+    }
+  }, [count]);
           setDisplaypoint(displaypoint + 1);
         }, 2);
       }
