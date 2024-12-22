@@ -47,7 +47,7 @@ function App() {
       <div className="app">
         <Link className="app-logo" to="/">
           <img
-            src="/assets/HowLucky2025_logo.png"
+            src="assets/HowLucky2025_logo.png"
             width="50px"
             height="50px"
           ></img>

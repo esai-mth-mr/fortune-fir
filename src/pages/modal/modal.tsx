@@ -36,7 +36,7 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
         <img
           className="modal_gift"
           draggable={false}
-          src="/src/svg/Gifts/holded_gift.SVG"
+          src="svg/Gifts/holded_gift.SVG"
         />
         <div className={`${score > 0 ? `modal_score` : `modal_score1`}`}>
           {score > 0 ? "+" + score! : score}
