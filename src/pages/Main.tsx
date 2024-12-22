@@ -1,7 +1,7 @@
 import '@src/style/global.scss';  
 import '@src/style/pages/main.scss';  
 import { useEffect, useState } from 'react';  
-import { Link } from 'react-router-dom';  
+import { Link,useNavigate,useLocation } from 'react-router-dom';  
 // import { Stack } from '@mui/material';  
 // import { Pagination } from '@mui/material';  
 import Modal from './modal/modal';
@@ -11,7 +11,8 @@ import { getRandomNum } from '../helper/Helper';
 function Main() {  
     const [month, setMonth] = useState(1);
     const [count, setCount] = useState(0);
-
+    const navigate = useNavigate();
+    const location= useLocation();
     // const data = [
     //     {name: "", description: "", luck: ""}
     // ]
@@ -37,6 +38,13 @@ function Main() {
         }  
     }, [count, shuffledMonths]); 
 
+    useEffect(()=>{
+        const queryParams = new URLSearchParams(location.search);
+        const month = queryParams.get("month");
+        console.log(month);
+    },[]);
+    
+
     const [yearpoint, setyearpoint] = useState<number>(0);
     const [monthpoint, setmonthpoint] = useState<number>(0);
     const [point, setPoint] = useState<number>(0);
@@ -53,7 +61,7 @@ function Main() {
         switch(lucklevel){
             case "exe_good":  return  Math.ceil(getRandomNum(200, 300)!);
             case "very_good": return  Math.ceil(getRandomNum(100, 200)!);
-            case "good": return Math.ceil( getRandomNum(0, 100)!);
+            case "good": return Math.ceil(getRandomNum(0, 100)!);
             case "bad": return  Math.ceil(getRandomNum(-100, 0)!);
             case "very_bad": return  Math.ceil(getRandomNum(-200, -100)!);
             case "exe_bad": return  Math.ceil(getRandomNum(-300, -200)!);
