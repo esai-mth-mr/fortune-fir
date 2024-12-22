@@ -41,7 +41,6 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
         <div className={`${score > 0 ? `modal_score` : `modal_score1`}`}>
           {score > 0 ? "+" + score! : score}
         </div>
-        {/* <img className="modal_fortune" draggable={false} src="https://drive.google.com/file/d/1H-8xs75_TAfPBt8_pZVwSg0Pp280rxDa/view?usp=sharing"/> */}
         <div className="modal_content">
           <div className="modal_icon">{modalData.name}</div>
           <div className="modal_desc">{modalData.desc}</div>
