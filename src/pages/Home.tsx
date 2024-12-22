@@ -1,8 +1,30 @@
 import "@src/style/pages/home.scss";
 import "@src/style/global.scss";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "../utils/axios";
+import setAuthToken from "../utils/setAuthToken";
 
 function Home() {
+  const navigate = useNavigate();
+  const handleStart = () => {
+    const pretoken = localStorage.getItem("token");
+    if (pretoken) {
+      axios
+        .post("/api/auth/checkUser", {}, setAuthToken())
+        .then((res) => {
+          console.log(res.data.message);
+          navigate("/main");
+        })
+        .catch((err) => {
+          console.log(err);
+          navigate("/login");
+        });
+
+      return;
+    }
+    navigate("/login");
+  };
+
   return (
     <div className="board">
       <div className="home_header">
@@ -17,15 +39,25 @@ function Home() {
         <div className="home_title">Unwrap the Magic of Thoughtful Giving</div>
         <div className="home_content">Get Ready for a Merry Christmas!</div>
         <div className="buttons">
-          <Link className="start" to="/signup">
+          <div className="start" onClick={handleStart}>
             Get Started
-          </Link>
-          <Link className="start" to="/signup">
+          </div>
+          <div
+            className="start"
+            onClick={() => {
+              navigate("/contact");
+            }}
+          >
             Contact Us
-          </Link>
-          <Link className="start" to="/signup">
+          </div>
+          <div
+            className="start"
+            onClick={() => {
+              navigate("/help");
+            }}
+          >
             Help
-          </Link>
+          </div>
         </div>
       </div>
     </div>

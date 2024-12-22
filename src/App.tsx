@@ -55,9 +55,11 @@ function App() {
           <Route path="/contact" element={<Contact />} />
 
           {/* private routes */}
-          <Route path="/main" element={<PrivateRoute />}>
+          {/* <Route path="/main" element={<PrivateRoute />}>
             <Route path="/main" element={<Main />}></Route>
-          </Route>
+          </Route> */}
+          <Route path="/main" element={<Main />}></Route>
+
           <Route path="/result" element={<Result />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/payment/paypal/result" element={<ResultPayment />} />

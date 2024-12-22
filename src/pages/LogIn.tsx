@@ -26,7 +26,6 @@ function LogIn() {
     axios
       .post("api/auth/login", formData)
       .then((res) => {
-        console.log(res.data);
         localStorage.setItem("token", encryptToken(res.data.token));
         navigate("/main");
       })

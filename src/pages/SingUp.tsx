@@ -104,7 +104,7 @@ const SignUp: React.FC = () => {
         navigate("/required");
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        toast.error("Please Sign up later");
       });
   };
 
