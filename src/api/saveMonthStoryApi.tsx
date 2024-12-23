@@ -9,11 +9,13 @@ export const saveMonthStoryApi = async (data: any) => {
       data,
       setAuthToken()
     );
+    console.log(res.data);
     return {
       status: 200,
       message: res.data.message,
     };
   } catch (error: any) {
+    console.log(error.response);
     if (error.response) {
       return {
         status: error.response.status,
