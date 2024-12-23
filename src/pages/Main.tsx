@@ -115,7 +115,6 @@ function Main() {
         setMonth(res.message.month);
         setDisplayYear(res.message.year_point);
         setyearpoint(res.message.year_point);
-        console.log(res.message);
       }
     } catch (error) {
       toast.error("Failed to fetch data!");
@@ -256,7 +255,6 @@ function Main() {
         assets: sendArray,
         month: month,
       };
-
       const result = await saveMonthStory(sendData);
 
       if (result) {
