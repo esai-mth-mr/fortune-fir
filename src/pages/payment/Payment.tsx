@@ -13,6 +13,7 @@ import setAuthToken from "../../utils/setAuthToken";
 import axios from "../../utils/axios";
 import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
+import getImageURL from "../../utils/getImageURL";
 
 const stripePromise = loadStripe(
   "pk_test_51QXkg1A9YfpPkxIlDXG9iEGhAWo0bEaxfukGsLYfyzBkcMV4jipebVVh3XnfKjj9YZjL3uv8uiexgIkwgoWTcTqu00tZhUIpUx"
@@ -123,7 +124,7 @@ export default function Payment() {
               >
                 <img
                   style={{ width: "100%", height: "30px" }}
-                  src="/assets/stripe.svg"
+                  src={getImageURL("./assets/stripe.svg")}
                 ></img>
               </button>
             </div>
@@ -131,7 +132,7 @@ export default function Payment() {
               <button style={{ width: "100%" }} onClick={handlePayPal}>
                 <img
                   style={{ width: "100%", height: "30px" }}
-                  src="/assets/paypal.svg"
+                  src={getImageURL("./assets/paypal.svg")}
                   alt="PayPal Logo"
                   draggable="false"
                 ></img>

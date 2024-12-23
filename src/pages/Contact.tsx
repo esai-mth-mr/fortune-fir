@@ -4,6 +4,7 @@ import "@src/style/pages/contact.scss";
 import { TextField } from "@mui/material";
 import axios from "../utils/axios";
 import toast from "react-hot-toast";
+import getImageURL from "../utils/getImageURL";
 
 type ErrorType = {
   email?: string;
@@ -71,7 +72,7 @@ function Contact() {
       <div className="title">Contact US</div>
       <div className="contact_img_field">
         <img
-          src="/assets/plane.png"
+          src={getImageURL("./assets/plane.png")}
           alt="plane"
           draggable="false"
           className="contact_img"

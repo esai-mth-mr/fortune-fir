@@ -1,13 +1,13 @@
 import "@src/style/global.scss";
 import "@src/style/pages/help.scss";
-
+import getImageURL from "../utils/getImageURL";
 function Help() {
   return (
     <div className="help-board">
       <div className="help-getready_img_field">
         <img
           className="help-sign_header"
-          src="/assets/santamodel.png"
+          src={getImageURL("./assets/santamodel.png")}
           alt="hero"
           draggable="false"
         />

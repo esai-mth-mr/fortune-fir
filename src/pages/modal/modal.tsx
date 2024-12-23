@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "@src/style/modal/modal.scss";
+import getImageURL from "../../utils/getImageURL";
 
 interface ModalProps {
   setIsOpen: (isOpen: boolean) => void;
@@ -36,7 +37,7 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
         <img
           className="modal_gift"
           draggable={false}
-          src="/src/svg/Gifts/holded_gift.SVG"
+          src={getImageURL("./assets/svg/Gifts/holded_gift.svg")}
         />
         <div className={`${score > 0 ? `modal_score` : `modal_score1`}`}>
           {score > 0 ? "+" + score! : score}

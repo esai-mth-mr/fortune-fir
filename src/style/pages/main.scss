@@ -58,38 +58,6 @@
 .board {
     // position: relative;
     //result page
-
-    .loading-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000; /* Ensure it appears above all other content */
-        color: black;
-        flex-direction: column;
-      }
-    
-    .spinner {
-        width: 40px;
-        height: 40px;
-        border: 4px solid #ccc;
-        border-top: 4px solid #ff0d0d;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-bottom: 10px;
-    }
-    /* Disable Interaction */
-    .disabled-content {
-    pointer-events: none; /* Disable all interactions */
-    opacity: 0.5; /* Make the content slightly faded */
-    }
-
-
     .board_content{
         width: 100%;
         height: 100%;
@@ -220,7 +188,7 @@
                 width: 100%;
                 height: 30%;
                 background-color: red;
-                font-family: 'PlayfairDisplay-Bold';
+                font-family: 'DM Sans';
                 border-radius: 10px 10px 0px 0px;
                 display: flex;
                 justify-content: center;
@@ -232,7 +200,7 @@
                 width: 100%;
                 height: 70%;
                 background-color: white;
-                font-family: 'AlfaSlabOne';
+                font-family: 'DM Sans';
                 border-radius: 0 0 10px 10px;
                 display: flex;
                 justify-content: center;
@@ -319,13 +287,11 @@
             justify-content: center;
             align-items: center;
             border-radius: 30px;
-            color: white;
-            width: 25%;
+            width: 30%;
             height: 35px;
-            background-color: #ff0d0d;
             position: absolute;
             bottom: 5%;
-            left:38%;
+            left:35%;
             opacity: 0.8;
             border: 2px solid #ff0d0d;
             font-family: 'DM Sans';
@@ -334,14 +300,44 @@
             text-align: center;
             cursor: pointer;
             z-index: 50;
-            // box-shadow: 0px 0px 10px red;
-            .gift_finish {
-                color: white;
-                font-family: 'DM Sans';
-                font-size: 14px;
-                font-weight: 900;
-                text-align: center;
-            }
+        }
+        //display for edit
+        .edit_btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+            width: 30%;
+            height: 35px;
+            position: absolute;
+            bottom: 5%;
+            left:35%;
+            opacity: 0.8;
+            border: 2px solid #ff0d0d;
+            font-family: 'DM Sans';
+            font-size: 14px;
+            font-weight: 900;
+            text-align: center;
+            cursor: pointer;
+            z-index: 50;
+        }
+
+        .common_btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+            color: white;
+            background-color: #ff0d0d;
+            position: absolute;
+            opacity: 0.8;
+            border: 2px solid #ff0d0d;
+            font-family: 'DM Sans';
+            font-size: 14px;
+            font-weight: 900;
+            text-align: center;
+            cursor: pointer;
+            z-index: 50;
         }
     
         //result page
@@ -368,10 +364,77 @@
             text-shadow: 1px 1px 1px black;
             
         }
+        .result_state_desc{
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            text-align: center;
+            z-index: 70;
+            width: 100%;
+            height: 70%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: whitesmoke;
+            .result_state_desc_title{
+                margin-top: 15%;
+                width: 100%;
+                height: 10%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'DM Sans';
+                font-size: 40px;
+                color: red;
+                font-weight: 900;
+                text-shadow: 1px 1px 1px black;
+            }
+            .result_anim_luck{
+                width: 10%;
+                position: absolute;
+                top: 3%;
+                left: 5%;
+            }
+            .result_state_desc_desc{
+                width: 97%;
+                height: 75%;
+                font-family: 'DM Sans';
+                font-size: 18px;
+                font-weight: 500;
+                color:black;
+                text-shadow: 1px 1p 1px white;
+            }
+            .result_close{
+                position: absolute;
+                right: 5%;
+                width: 10%;
+                top: 3%;
+                cursor: pointer;
+            }
+            .result_santa{
+                position: absolute;
+                opacity: 1;
+                right: 12%;
+                width: 70%;
+                bottom: -12%;
+            }
+        }
+        .result_state_desc1{
+            opacity: 0;
+            z-index: 0;
+        }
+
         .result_pagination{
             width: 100%;
             position: absolute;
             bottom: 5%;
+            display: flex;
+            justify-content: center;
+            z-index: 70;
+            .result_page{
+                width: 95%;
+            }
         }
         .result_field{
             position: relative;
@@ -379,8 +442,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: start;
-            width: 97%;
-            height: 55%;
+            width: 100%;
+            height: 50%;
             margin-top: -30%;
             overflow-y: auto;
             z-index: 30;
@@ -398,15 +461,12 @@
             .result_content {
                 color: #6a6565;
                 font-family: "monospace";
-                font-size: 16px;
+                font-size: 18px;
                 text-align: center;
                 text-shadow: 1px 1px 1px  black;
                 position: absolute;
-                // animation-name: opacitypro;
-                // animation-duration:2s;
             }
             .result_content2{
-                // backdrop-filter: blur(50px);
                 color: #6a6565;
                 font-family: 'monospace';
                 font-size: 18px;
@@ -414,7 +474,6 @@
                 text-shadow: 1px 1px 1px  black;
                 position: absolute;
                 filter: blur(2.5px);
-    
             }
     
           

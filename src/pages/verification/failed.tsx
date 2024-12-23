@@ -1,5 +1,6 @@
 import "@src/style/verify/failed.scss";
 import { useNavigate } from "react-router-dom";
+import getImageURL from "../../utils/getImageURL";
 
 function Failed() {
   const navigate = useNavigate();
@@ -13,14 +14,14 @@ function Failed() {
       <div className="hero_img_field">
         <img
           className="hero_imgage"
-          src="/assets/backgroundImage _1.png"
+          src={getImageURL("./assets/backgroundImage _1.png")}
           draggable={false}
           alt="hero_imgage"
         />
       </div>
       <div className="failIcon_field">
         <img
-          src="/assets/failIcon.png"
+          src={getImageURL("./assets/failIcon.png")}
           draggable="false"
           alt="failIcon"
           className="failIcon"

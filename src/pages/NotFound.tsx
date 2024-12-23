@@ -1,4 +1,5 @@
 import "@src/style/pages/notFound.scss";
+import getImageURL from "../utils/getImageURL";
 
 function NotFound() {
   return (
@@ -6,14 +7,14 @@ function NotFound() {
       <div className="notfound-hero_img_field">
         <img
           className="notfound-hero_image"
-          src="/assets/backgroundImage _1.png"
+          src={getImageURL("./assets/backgroundImage _1.png")}
           draggable={false}
           alt="notfound-hero_imgage"
         />
       </div>
       <div className="notfound-failIcon_field">
         <img
-          src="/assets/failIcon.png"
+          src={getImageURL("./assets/failIcon.png")}
           draggable="false"
           alt="failIcon"
           className="notfound-failIcon"
