@@ -23,6 +23,7 @@ import Success from "./pages/payment/success";
 import ResultPayment from "./pages/payment/Result";
 import NotFound from "./pages/NotFound";
 import Help from "./pages/Help";
+import getImageURL from "./utils/getImageURL";
 
 function App() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ function App() {
       <div className="app">
         <Link className="app-logo" to="/">
           <img
-            src="assets/HowLucky2025_logo.png"
+            src={getImageURL("./assets/HowLucky2025_logo.png")}
             width="50px"
             height="50px"
           ></img>

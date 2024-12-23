@@ -8,6 +8,7 @@ import axios from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 import { encryptToken } from "../utils/cryptToken";
 import toast from "react-hot-toast";
+import getImageURL from "../utils/getImageURL";
 
 function LogIn() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ function LogIn() {
     <div className="board">
       <img
         className="sign_header"
-        src="/assets/santamodel.png"
+        src={getImageURL("./assets/santamodel.png")}
         alt="hero"
         draggable="false"
       />

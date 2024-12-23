@@ -1,6 +1,7 @@
 import "@src/style/global.scss";
 import "@src/style/pages/getready.scss";
 import { Link } from "react-router-dom";
+import getImageURL from "../utils/getImageURL";
 
 function GetReady() {
   return (
@@ -8,7 +9,7 @@ function GetReady() {
       <div className="getready_img_field">
         <img
           className="getready_img"
-          src="/assets/backgroundImage _1.png"
+          src={getImageURL("./assets/backgroundImage _1.png")}
           alt="ready"
           draggable="false"
         />

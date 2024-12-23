@@ -3,6 +3,7 @@ import "@src/style/global.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "../utils/axios";
 import setAuthToken from "../utils/setAuthToken";
+import getImageURL from "../utils/getImageURL";
 
 function Home() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function Home() {
       <div className="home_header">
         <img
           className="landing"
-          src="/assets/santa2.png"
+          src={getImageURL("./assets/santa2.png")}
           alt="santa"
           draggable={false}
         />
