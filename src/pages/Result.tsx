@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { checkRegenerationApi } from "../api/checkRegenerationApi";
 import { upgradeRoundApi } from "../api/upgradeRoundApi";
 import Loading from "../common/Loading";
+import AudioPlayer from "../common/AudioPlayer";
 
 function Result() {
   const [isresultOpen, setIsResultOpen] = useState<boolean>(true);
@@ -209,7 +210,9 @@ function Result() {
     <div className="board">
       {loading && <Loading />}
       <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
+      <AudioPlayer/>
       <div className="board_content">
+        <AudioPlayer/>
         {month <= 12 ? (
           <div className="main_month">
             <div className="month_title">2025</div>
@@ -379,7 +382,6 @@ function Result() {
         </div>
         {/* display for description */}
         <div
-          onClick={() => setIsResultOpen(false)}
           className={`${
             isresultOpen == true ? `result_state_desc` : `result_state_desc1`
           }`}
@@ -433,7 +435,6 @@ function Result() {
             alt="result_close"
           />
           <img
-            onClick={() => setIsResultOpen(false)}
             className="result_santa"
             src={getImageURL("./assets/santa-1.webp")}
             draggable={false}
