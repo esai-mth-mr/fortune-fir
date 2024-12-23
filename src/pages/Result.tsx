@@ -12,10 +12,6 @@ import { checkRegenerationApi } from "../api/checkRegenerationApi";
 import { upgradeRoundApi } from "../api/upgradeRoundApi";
 import Loading from "../common/Loading";
 import PredictionAndTipsComponent from "../components/PredictionAndTipsComponent";
-<<<<<<< Updated upstream
-=======
-import test from "node:test";
->>>>>>> Stashed changes
 
 function Result() {
   const [isresultOpen, setIsResultOpen] = useState<boolean>(true);
