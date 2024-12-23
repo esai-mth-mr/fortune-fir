@@ -29,19 +29,26 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Payment() {
+export default function Payment(props: {
+  action: string;
+  open: boolean;
+  setOpen: any;
+}) {
   const [open, setOpen] = React.useState(false);
   const [action, setAction] = React.useState("");
   //crypto part
   //end of crypto part
 
   //modal part
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  React.useEffect(() => {
+    console.log("heeeeeee");
+    console.log(props.open);
+    setOpen(props.open);
+  }, []);
 
   const handleClose = () => {
-    setOpen(false);
+    //setOpen(false);
+    props.setOpen(false);
   };
   //end of modal part
 
@@ -51,7 +58,7 @@ export default function Payment() {
       .post(
         "api/payment/paypal/pay",
         {
-          action: "regeneration",
+          action: props.action,
         },
         setAuthToken()
       )
@@ -98,131 +105,119 @@ export default function Payment() {
   //end of stripe part
 
   React.useEffect(() => {
+    console.log(props.action);
     setAction("regeneration");
   }, []);
   return (
-    <div className="board">
-      <div className="hero_img_field">
-        <img
-          className="hero_imgage"
-          src="/src/assets/backgroundImage _1.png"
-          draggable={false}
-          alt="hero_imgage"
-        />
-      </div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Slide in alert dialog
-      </Button>
-      <Dialog
-        open={open}
-        maxWidth="xl"
+    <Dialog
+      open={props.open}
+      maxWidth="xl"
+      sx={{
+        "& .MuiPaper-root": {
+          borderRadius: "10px",
+          width: "280px",
+          height: "470px",
+        },
+      }}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={handleClose}
+      aria-describedby="alert-dialog-slide-description"
+    >
+      {/* Ribbon */}
+      <Box
         sx={{
-          "& .MuiPaper-root": {
-            borderRadius: "10px",
-            width: "280px",
-            height: "470px",
-          },
+          position: "absolute",
+          top: "68px", // Adjust to fine-tune the position
+          left: "10px", // Adjust to fine-tune the position
+          // backgroundColor: "red",
+          color: "white",
+          padding: "5px 30px",
+          fontSize: "14px",
+          fontFamily: "Poppins-bold",
+          transform: "translate(-29.3%) rotate(-45deg)",
+          transformOrigin: "top left",
+          zIndex: 2, // Ensure it is above other content
+          boxShadow: "0px 4px 6px rgba(0,0,0,0.2)", // Optional: Add shadow for a better
+          background:
+            "linear-gradient(to right, rgb(28, 216, 210) 0%, rgb(147, 237, 199) 51%, rgb(28, 216, 210) 100%)",
+          backgroundSize: "200% auto",
         }}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
       >
-        {/* Ribbon */}
-        <Box
-          sx={{
-            position: "absolute",
-            top: "68px", // Adjust to fine-tune the position
-            left: "10px", // Adjust to fine-tune the position
-            // backgroundColor: "red",
-            color: "white",
-            padding: "5px 30px",
-            fontSize: "14px",
-            fontFamily: "Poppins-bold",
-            transform: "translate(-29.3%) rotate(-45deg)",
-            transformOrigin: "top left",
-            zIndex: 2, // Ensure it is above other content
-            boxShadow: "0px 4px 6px rgba(0,0,0,0.2)", // Optional: Add shadow for a better
-            background:
-              "linear-gradient(to right, rgb(28, 216, 210) 0%, rgb(147, 237, 199) 51%, rgb(28, 216, 210) 100%)",
-            backgroundSize: "200% auto",
-          }}
-        >
-          Christmas!
-        </Box>
-        <DialogTitle>
-          <div
-            style={{
-              //fontFamily: "PlayfairDisplay-Bold",
-              fontWeight: "900",
-              fontSize: "40px",
-              fontFamily: "Poppins-bold",
-            }}
-            className="gradient-text"
-          >
-            $0.99
-          </div>
-        </DialogTitle>
-        <DialogContent sx={{ zIndex: 1 }}>
-          <DialogContentText
-            id="alert-dialog-slide-description"
-            sx={{
-              marginTop: "10px",
-            }}
-          >
-            <div className="stripe">
-              <button
-                style={{
-                  width: "100%",
-                }}
-                className="stripeBtn"
-                onClick={handleStripe}
-              >
-                <img
-                  style={{ width: "100%", height: "30px" }}
-                  src={getImageURL("./assets/stripe.svg")}
-                ></img>
-              </button>
-            </div>
-            <div className="paypal">
-              <button
-                style={{ width: "100%" }}
-                onClick={handlePayPal}
-                className="paypalBtn"
-              >
-                <img
-                  style={{ width: "100%", height: "30px" }}
-                  src={getImageURL("./assets/paypal.svg")}
-                  alt="PayPal Logo"
-                  draggable="false"
-                ></img>
-              </button>
-            </div>
-            <hr style={{ opacity: 20, zIndex: -1 }}></hr>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions sx={{ zIndex: 1 }}>
-          <Button onClick={handleClose} sx={{ fontFamily: "Poppins-bold" }}>
-            Close
-          </Button>
-        </DialogActions>
+        Christmas!
+      </Box>
+      <DialogTitle>
         <div
           style={{
-            position: "absolute",
-            zIndex: 0,
-            bottom: "0",
-            right: "0",
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
+            //fontFamily: "PlayfairDisplay-Bold",
+            fontWeight: "900",
+            fontSize: "40px",
+            fontFamily: "Poppins-bold",
+          }}
+          className="gradient-text"
+        >
+          $0.99
+        </div>
+      </DialogTitle>
+      <DialogContent sx={{ zIndex: 1 }}>
+        <DialogContentText
+          id="alert-dialog-slide-description"
+          sx={{
+            marginTop: "10px",
           }}
         >
-          <img
-            style={{ objectFit: "cover" }}
-            src={getImageURL("./assets/santa.png")}
-          ></img>
-        </div>
-      </Dialog>
-    </div>
+          <div className="stripe">
+            <button
+              style={{
+                width: "100%",
+              }}
+              className="stripeBtn"
+              onClick={handleStripe}
+            >
+              <img
+                style={{ width: "100%", height: "30px" }}
+                src={getImageURL("./assets/stripe.svg")}
+              ></img>
+            </button>
+          </div>
+          <div className="paypal">
+            <button
+              style={{ width: "100%" }}
+              onClick={handlePayPal}
+              className="paypalBtn"
+            >
+              <img
+                style={{ width: "100%", height: "30px" }}
+                src={getImageURL("./assets/paypal.svg")}
+                alt="PayPal Logo"
+                draggable="false"
+              ></img>
+            </button>
+          </div>
+          <hr style={{ opacity: 20, zIndex: -1 }}></hr>
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions sx={{ zIndex: 1 }}>
+        <Button onClick={handleClose} sx={{ fontFamily: "Poppins-bold" }}>
+          Close
+        </Button>
+      </DialogActions>
+      <div
+        style={{
+          position: "absolute",
+          zIndex: 0,
+          bottom: "0",
+          right: "0",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <img
+          style={{ objectFit: "cover" }}
+          src={getImageURL("./assets/santa.png")}
+        ></img>
+      </div>
+    </Dialog>
   );
 }

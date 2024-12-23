@@ -5,11 +5,14 @@ import "@src/style/pages/main.scss";
 import { Stack } from "@mui/material";
 import { Pagination } from "@mui/material";
 import getImageURL from "../utils/getImageURL";
+import Payment from "./payment/Payment";
 
 function Result() {
   const [isresultOpen, setIsResultOpen] = useState<boolean>(true);
   const [month, setMonth] = useState(1);
   const [paystate, setPayed] = useState<boolean>(false);
+  const [action, setAction] = useState<string>("");
+  const [openPayment, setOpenPayment] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
   const eval_data = [
@@ -84,12 +87,19 @@ function Result() {
     setMonth(value);
   };
 
-  useEffect(() => {
-    setPayed(false);
-  });
+  // useEffect(() => {
+  //   setPayed(false);
+  // });
 
   //navigate
+  const handlePreview = () => {
+    // axios.post("/api/")
+    setOpenPayment(true);
+    setAction("preview");
+  };
   const handleRegenerate = () => {
+    setAction("regeneration");
+    setOpenPayment(true);
     navigate(
       `/main/?result_month=${
         month.toString() +
@@ -114,6 +124,7 @@ function Result() {
 
   return (
     <div className="board">
+      <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
       <div className="board_content">
         {month <= 12 ? (
           <div className={`${month <= 12 ? `main_month` : ``}`}>
@@ -237,6 +248,7 @@ function Result() {
                 height: "30px",
               }}
               className="common_btn"
+              onClick={handlePreview}
             >
               Preview
             </div>
