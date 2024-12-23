@@ -279,7 +279,7 @@ function Result() {
             {month <= 12 ? (
               <>
                 <div>Year:{year_point}</div>
-                <div>Month:{month_point}</div>
+                <div>Mon:{month_point}</div>
               </>
             ) : (
               <>Year:{year_point}</>
