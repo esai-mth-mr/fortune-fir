@@ -18,7 +18,7 @@ import getImageURL from "../../utils/getImageURL";
 import Loading from "../../common/Loading";
 
 const stripePromise = loadStripe(
-  "pk_test_51QXkg1A9YfpPkxIlDXG9iEGhAWo0bEaxfukGsLYfyzBkcMV4jipebVVh3XnfKjj9YZjL3uv8uiexgIkwgoWTcTqu00tZhUIpUx"
+  "pk_live_51QXkg1A9YfpPkxIlsLfvi5mV2iQiCf02XalFhJPCMaQ1lma1ZqTri9B8O4jjo8UESH3PGIS5Xgttgu8BooVpZjgi00nInxQPOY"
 );
 
 const Transition = React.forwardRef(function Transition(
