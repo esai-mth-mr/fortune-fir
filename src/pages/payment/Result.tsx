@@ -74,7 +74,6 @@ const Result = () => {
           <img
             className="hero_imgage"
             src={getImageURL("./assets/santa2.webp")}
-            // src="/src/assets/santa2.webp"
             draggable={false}
             alt="hero_imgage"
           />

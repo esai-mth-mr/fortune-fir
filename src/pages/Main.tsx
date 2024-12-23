@@ -64,6 +64,8 @@ function Main() {
     "Dec",
   ];
 
+
+
   const array: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Type the array
   const [gifts, setGifts] = useState<number[]>([]); // Make sure gifts holds an array of numbers
 
@@ -99,6 +101,25 @@ function Main() {
     return array.sort(() => 0.5 - Math.random());
   };
 
+
+  interface DataType {
+    _id: string;
+    name: string;
+    luck: string;
+    index: number;
+    description: string;
+    url: string;
+  }
+
+  const shuffleData = (array: DataType[]): DataType[] => {  
+    for (let i = array.length - 1; i > 0; i--) {  
+        const j = Math.floor(Math.random() * (i + 1)); // Get a random index  
+        // Swap the elements at indices i and j  
+        [array[i], array[j]] = [array[j], array[i]];  
+    }  
+    return array;  
+  }  
+
   // API functions
   const getInitData = useCallback(async () => {
     setLoading(true); // Start loading
@@ -112,10 +133,12 @@ function Main() {
         toast.error(res.message);
       } else {
         setData(res.message.data);
+        setGifts(shuffleArray([...array]));
+
         setMonth(res.message.month);
         setDisplayYear(res.message.year_point);
         setyearpoint(res.message.year_point);
-        console.log(res.message);
+        console.log("database",res.message);
       }
     } catch (error) {
       toast.error("Failed to fetch data!");
@@ -183,14 +206,10 @@ function Main() {
   };
 
   useEffect(() => {
-    if (count % 7 === 0) {
+    if (count % 1 === 0) {
       setGifts(shuffleArray([...array]));
     }
   }, [count]);
-
-  // useEffect(() => {
-  //   getInitData();
-  // }, [getInitData]);
 
   const [yearpoint, setyearpoint] = useState<number>(0);
   const [monthpoint, setmonthpoint] = useState<number>(0);
@@ -232,7 +251,7 @@ function Main() {
     description: string,
     assetIndex: number
   ) => {
-    if (AllowOpen[index] && count < 7) {
+    if (AllowOpen[index] && count < 1) {
       setCount((prev) => prev + 1);
       setAllowOpen((prev) =>
         prev.map((isOpen, i) => (i === index ? false : isOpen))
@@ -249,7 +268,7 @@ function Main() {
   };
 
   const handleNextButton = async () => {
-    if (!isEdit && allownext && count === 7) {
+    if (!isEdit && allownext && count === 1) {
       const sendData = {
         point: monthpoint,
         total_point: yearpoint,
@@ -288,7 +307,7 @@ function Main() {
       setSendArray([]);
     }
 
-    if (isEdit && count === 7) {
+    if (isEdit && count === 1) {
       handleRegenerate();
     }
   };
@@ -342,7 +361,7 @@ function Main() {
   });
 
   useEffect(() => {
-    if (count == 7) {
+    if (count == 1) {
       setTimeout(() => {
         setAllowNext(true);
       }, 1000);
@@ -416,7 +435,7 @@ function Main() {
             >
               x
             </div>
-            <div style={{ fontSize: "16px" }}>{7 - count}</div>
+            <div style={{ fontSize: "16px" }}>{1 - count}</div>
           </div>
         </div>
         <div className="main_img_field">
@@ -495,9 +514,9 @@ function Main() {
         <div
           onClick={handleNextButton}
           style={{
-            backgroundColor: !isEdit ? (count < 7 ? "#f5f5f5" : "red") : "red",
-            borderColor: !isEdit ? (count < 7 ? "#c7c7c7" : "red") : "white",
-            color: !isEdit ? (count < 7 ? "#c7c7c7" : "white") : "white",
+            backgroundColor: !isEdit ? (count < 1 ? "#f5f5f5" : "red") : "red",
+            borderColor: !isEdit ? (count < 1 ? "#c7c7c7" : "red") : "white",
+            color: !isEdit ? (count < 1 ? "#c7c7c7" : "white") : "white",
           }}
           className={`${!isEdit ? "gift_next_btn" : "edit_btn"}`}
         >
