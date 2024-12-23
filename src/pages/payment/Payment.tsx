@@ -115,8 +115,6 @@ export default function Payment(props: {
   //end of stripe part
 
   React.useEffect(() => {
-    console.log(props.action);
-
     setAction("regeneration");
   }, []);
   return (

@@ -288,7 +288,7 @@ function Main() {
       setSendArray([]);
     }
 
-    if (isEdit && count ===7) {
+    if (isEdit && count === 7) {
       handleRegenerate();
     }
   };
@@ -374,14 +374,14 @@ function Main() {
     }
   }, []);
 
-  useEffect(() => {  
-    const audio = document.getElementById('main-audio') as HTMLAudioElement;  
-    if (audio) {  
-      audio.play().catch((error) => {  
-        console.error('Failed to play audio:', error);  
-      });  
-    }  
-  }, []); // Empty dependency array means this runs once on mount  
+  useEffect(() => {
+    const audio = document.getElementById("main-audio") as HTMLAudioElement;
+    if (audio) {
+      audio.play().catch((error) => {
+        console.error("Failed to play audio:", error);
+      });
+    }
+  }, []); // Empty dependency array means this runs once on mount
 
   return (
     <div className="board">
@@ -390,11 +390,6 @@ function Main() {
       <div
         className={loading ? "disabled-content board_content" : "board_content"}
       >
-        {/* <div className="main_audio">
-          <audio id="main-audio" className="hidden" autoPlay loop>
-            <source  src="./sounds/main_page.mp3" />
-          </audio>
-        </div> */}
         <div className="main_month">
           <div className="month_title">2025</div>
           <div className="month_num">
@@ -515,7 +510,11 @@ function Main() {
             // </div>
           }
         </div>
-        {isEdit&&<div className="cancel_btn" onClick={handleRegenerate}>Cancel</div>}
+        {isEdit && (
+          <div className="cancel_btn" onClick={handleRegenerate}>
+            Cancel
+          </div>
+        )}
       </div>
     </div>
   );
