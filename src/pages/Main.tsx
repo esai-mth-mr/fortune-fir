@@ -1,6 +1,6 @@
 import "@src/style/global.scss";
 import "@src/style/pages/main.scss";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect,useRef, useState, useCallback } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Modal from "./modal/modal";
 import "animate.css";
@@ -143,22 +143,40 @@ function Main() {
     }
   };
 
+  // const audioRef = useRef(null);  
+
+  // useEffect(() => {  
+  //   const audio = audioRef.current;  
+
+  //   // Play audio when the component mounts  
+  //   if (audio) {  
+  //     audio.play();  
+  //   }  
+
+  //   return () => {  
+  //     // Pause audio when the component unmounts  
+  //     if (audio) {  
+  //       audio.pause();  
+  //     }  
+  //   };  
+  // }, []);  
+
   //display for animation
   useEffect(() => {
     if (point != 0) {
       setTimeout(() => {
         setDisplaypoint(monthpoint);
-      }, 2500);
+      }, 1000);
       setTimeout(() => {
         setmonthpoint(monthpoint + point);
-      }, 2600);
+      }, 1000);
 
       setTimeout(() => {
         setDisplayYear(yeardisplaypoint);
-      }, 2500);
+      }, 1000);
       setTimeout(() => {
         setyearpoint(yeardisplaypoint + point);
-      }, 2600);
+      }, 1000);
     }
   }, [point]);
 
@@ -168,25 +186,25 @@ function Main() {
       if (displaypoint != monthpoint) {
         setTimeout(() => {
           setDisplaypoint(displaypoint + 1);
-        }, 2);
+        }, 0.5);
       }
 
       if (yeardisplaypoint != yearpoint) {
         setTimeout(() => {
           setDisplayYear(yeardisplaypoint + 1);
-        }, 2);
+        }, 0.5);
       }
     } else if (point < 0 && point != 0) {
       if (displaypoint != monthpoint) {
         setTimeout(() => {
           setDisplaypoint(displaypoint - 1);
-        }, 2);
+        }, 0.5);
       }
 
       if (yeardisplaypoint != yearpoint) {
         setTimeout(() => {
           setDisplayYear(yeardisplaypoint - 1);
-        }, 2);
+        }, 0.5);
       }
     }
   });
@@ -239,6 +257,9 @@ function Main() {
       <div
         className={loading ? "disabled-content board_content" : "board_content"}
       >
+        <div>
+          <audio className="main_audio" autoPlay loop ><source src="./sounds/main_page.mp3" /></audio>
+        </div>
         <div className="main_month">
           <div className="month_title">2025</div>
           <div className="month_num">

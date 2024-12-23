@@ -3,13 +3,7 @@
     justify-content: center;
     align-items: end;
     border-radius: 10px;
-<<<<<<< Updated upstream
-    // position: absolute;
-    // bottom: 0;
-    // height: 75%;
-=======
     // position: relative;
->>>>>>> Stashed changes
     .modal_darkbg {
         backdrop-filter: blur(50px);
         width: 100%;
@@ -18,6 +12,16 @@
         bottom: 0px;
         position: absolute;
         border-radius:0 0 10px 10px;
+    }
+    .modal_luck{
+        width: 20%;
+        position: absolute;
+        animation-name: move_icon;
+        animation-duration: 1s;
+        animation-delay: 0.3s;
+        animation-fill-mode: both;
+        z-index: 65;
+        text-shadow: 1px 1px 1px black;
     }
     .modal_close{
         font-family: 'DM Sans';
@@ -48,7 +52,7 @@
         font-weight: bold;
         position: absolute;
         animation-name: score;
-        animation-duration: 3s;
+        animation-duration: 1s;
         animation-fill-mode: both;
         z-index: 65;
         text-shadow: 1px 1px 1px black;
@@ -60,7 +64,7 @@
         font-weight: bold;
         position: absolute;
         animation-name: score;
-        animation-duration: 3s;
+        animation-duration: 1s;
         animation-fill-mode: both;
         z-index: 65;
         text-shadow: 1px 1px 1px black;
@@ -104,6 +108,7 @@
             text-shadow: 1px 1px 10px  white;
             color: black;
         }
+        
     }
 
     .modal_content::-webkit-scrollbar {
@@ -149,7 +154,8 @@
 }
 
 @keyframes move_icon{
-    0%{ top: 45%; left:35%;}
-    100%{top: 30%; left:35%;}
+    0%{ top: 45%; left:42%; opacity: 1;}
+    // 95%{top: 30%; left:35%; opacity: 1;}
+    100%{top: 32%; left:42%; opacity: 0;}
 }
 

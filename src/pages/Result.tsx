@@ -83,23 +83,11 @@ function Result() {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
-    console.log(event);
     setMonth(value);
-  };
-
-  // useEffect(() => {
-  //   setPayed(false);
-  // });
-
-  //display express level
-  useEffect(()=>{
-    console.log("month", month);
     setIsResultOpen(true);
-  },[month])
-
+  };
   //navigate
   const handlePreview = () => {
-    // axios.post("/api/")
     setOpenPayment(true);
     setAction("preview");
   };
@@ -119,7 +107,7 @@ function Result() {
   };
   //navigate with main
   useEffect(() => {
-    setPayed(false);
+    setPayed(true);
     const queryParams = new URLSearchParams(location.search);
     if (queryParams.size == 1) {
       const result_month = queryParams.get("main_month");
@@ -133,6 +121,9 @@ function Result() {
     <div className="board">
       <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
       <div className="board_content">
+        <div className="result_audio">
+          <audio className="hidden" autoPlay loop ><source src="./sounds/main_page.mp3" /></audio>
+        </div>
         {month <= 12 ? (
           <div className={`${month <= 12 ? `main_month` : ``}`}>
             <div className="month_title">2025</div>
@@ -187,10 +178,12 @@ function Result() {
           <div className="result_page">
             <Stack style={{ width: "100%" }} spacing={1}>
               <Pagination
-                onChange={()=>handlePageChange}
+                sx={{display:"flex" ,justifyContent: "center"}}
+                onChange={handlePageChange}
                 count={12}
                 variant="outlined"
                 boundaryCount={1}
+                size="small"
               />
             </Stack>
           </div>
@@ -357,8 +350,8 @@ function Result() {
               : ""}
           </div>
 
-          <img onClick={()=>setIsResultOpen(false)} className="result_close" src="assets/close.png" draggable={false} alt="result_close"/>
-          <img className="result_santa" src="assets/santa.png" draggable={false} alt="result_santa"/>
+          <img onClick={()=>setIsResultOpen(false)} className="result_close" src="/assets/close.png" draggable={false} alt="result_close"/>
+          <img className="result_santa" src="/assets/santa.png" draggable={false} alt="result_santa"/>
 
           {allowdata[month - 1].point >= 1400 &&
           allowdata[month - 1].point <= 2100 ? (
