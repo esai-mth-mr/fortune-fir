@@ -11,7 +11,6 @@ import toast from "react-hot-toast";
 import { checkRegenerationApi } from "../api/checkRegenerationApi";
 import { upgradeRoundApi } from "../api/upgradeRoundApi";
 import Loading from "../common/Loading";
-import AudioPlayer from "../common/AudioPlayer";
 
 function Result() {
   const [isresultOpen, setIsResultOpen] = useState<boolean>(true);
@@ -75,35 +74,6 @@ function Result() {
     "Nov",
     "Dec",
   ];
-
-  //API functions
-  const showResult = async (sendData: number) => {
-    setLoading(true); // Start loading
-    try {
-      const res = await showResultApi(sendData);
-      if (res.status !== 200) {
-        toast.error(res.message);
-        navigate("/main");
-        return false;
-      } else {
-        setMonth(res.message.message.month);
-        setMonthPoint(res.message.message.point);
-        setYearPoint(res.message.message.year_point);
-        setPayed(res.message.display);
-        if (res.message.message.story) setDesc(res.message.message.story);
-        console.log(res.message);
-        return true;
-      }
-    } catch (error) {
-      toast.error("Failed to fetch data!");
-      navigate("/main");
-
-      return false;
-    } finally {
-      setLoading(false); // Stop loading
-    }
-  };
-
   const handlePageChange = async (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -124,390 +94,415 @@ function Result() {
     if (!paystate) {
       setOpenPayment(true);
       setAction("preview");
-    } else {
-      toast.success("You have already paid.");
     }
-    const handleRegenerate = async () => {
-      setAction("regeneration");
+  };
+  const handleRegenerate = async () => {
+    setAction("regeneration");
 
-      const result = await checkRegeneration();
+    const result = await checkRegeneration();
 
-      if (result) {
-        navigate(
-          `/main/?result_month=${
-            month.toString() + "_" + (year_point - month_point).toString()
-          }"`
-        );
+    if (result) {
+      navigate(
+        `/main/?result_month=${
+          month.toString() + "_" + (year_point - month_point).toString()
+        }"`
+      );
 
-        return;
-      }
-    };
-    const handleReround = async () => {
-      if (await upgradeRound()) {
+      return;
+    }
+  };
+  const handleReround = async () => {
+    if (await upgradeRound()) {
+      navigate("/main");
+    }
+  };
+
+  //API functions
+  const showResult = async (sendData: number) => {
+    setLoading(true); // Start loading
+    try {
+      const res = await showResultApi(sendData);
+      if (res.status !== 200) {
+        toast.error(res.message);
         navigate("/main");
-      }
-    };
-
-    const checkRegeneration = async () => {
-      setLoading(true); // Start loading
-      try {
-        const res = await checkRegenerationApi(month);
-        if (res.status !== 200) {
-          toast.error(res.message);
-          return false;
-        } else {
-          if (res.message.payment) {
-            setPayed(true);
-            return true;
-          } else {
-            setOpenPayment(true);
-            setPayed(false);
-            return false;
-
-            // return true;
-          }
-        }
-      } catch (error) {
-        toast.error("Failed to fetch data!");
         return false;
-      } finally {
-        setLoading(false); // Stop loading
-      }
-    };
-
-    const upgradeRound = async () => {
-      setLoading(true); // Start loading
-      try {
-        const res = await upgradeRoundApi();
-        if (res.status !== 200) {
-          toast.error(res.message);
-          return false;
-        } else {
-          return true;
-        }
-      } catch (error) {
-        toast.error("Failed to fetch data!");
-        return false;
-      } finally {
-        setLoading(false); // Stop loading
-      }
-    };
-
-    //navigate with main
-    useEffect(() => {
-      const queryParams = new URLSearchParams(location.search);
-      if (queryParams.size == 1) {
-        const result_month = queryParams.get("main_month");
-        setMonth(parseInt(result_month!));
       } else {
-        setMonth(1);
+        setMonth(res.message.message.month);
+        setMonthPoint(res.message.message.point);
+        setYearPoint(res.message.message.year_point);
+        setPayed(res.message.display);
+        if (res.message.message.story) setDesc(res.message.message.story);
+        return true;
       }
-    }, []);
+    } catch (error) {
+      toast.error("Failed to fetch data!");
+      navigate("/main");
 
-    useEffect(() => {
-      showResult(month);
-    }, [month]);
+      return false;
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
 
-    return (
-      <div className="board">
-        {loading && <Loading />}
-        <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
-        <AudioPlayer />
-        <div className="board_content">
-          <AudioPlayer />
-          {month <= 12 ? (
-            <div className="main_month">
-              <div className="month_title">2025</div>
-              <div className="month_num">
-                <h6 style={{ fontSize: "30px" }}>{months[month]!}</h6>
-              </div>
-            </div>
-          ) : (
-            <></>
-          )}
+  const checkRegeneration = async () => {
+    setLoading(true); // Start loading
+    try {
+      const res = await checkRegenerationApi(month);
+      if (res.status !== 200) {
+        toast.error(res.message);
+        return false;
+      } else {
+        if (res.message.payment) {
+          setPayed(true);
+          return true;
+        } else {
+          setOpenPayment(true);
+          setPayed(false);
+          return false;
 
-          {month === 13 ? (
-            <div className="totalstory">
-              Total<br></br>story
-            </div>
-          ) : (
-            <></>
-          )}
+          // return true;
+        }
+      }
+    } catch (error) {
+      toast.error("Failed to fetch data!");
+      return false;
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
 
-          {month <= 12 ? (
-            <div className="result_score">
-              {month <= 12 ? (
-                <>
-                  <div>Year:{year_point}</div>
-                  <div>Month:{month_point}</div>
-                </>
-              ) : (
-                <>Year:{year_point}</>
-              )}
-            </div>
-          ) : (
-            <></>
-          )}
+  const upgradeRound = async () => {
+    setLoading(true); // Start loading
+    try {
+      const res = await upgradeRoundApi();
+      if (res.status !== 200) {
+        toast.error(res.message);
+        return false;
+      } else {
+        return true;
+      }
+    } catch (error) {
+      toast.error("Failed to fetch data!");
+      return false;
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
 
-          {month === 13 ? (
-            <div className="result_year_score">
-              <div>Year Point</div>
-              <div>{year_point}</div>
-            </div>
-          ) : (
-            <></>
-          )}
-          <div className="main_img_field">
-            <img
-              className="main_img"
-              src={getImageURL("./assets/backgroundImage _1.webp")}
-              alt="main"
-              draggable="false"
-            />
-          </div>
-          <div className="result_pagination">
-            <div className="result_page">
-              <Stack style={{ width: "100%" }} spacing={1}>
-                <Pagination
-                  sx={{ display: "flex", justifyContent: "center" }}
-                  onChange={handlePageChange}
-                  count={12}
-                  variant="outlined"
-                  boundaryCount={1}
-                  size="small"
-                />
-              </Stack>
-            </div>
-          </div>
-          {paystate == true ? (
-            <>
-              <div
-                onClick={handleRegenerate}
-                style={{
-                  left: "1%",
-                  bottom: "12%",
-                  width: "30%",
-                  height: "30px",
-                }}
-                className="common_btn"
-              >
-                Regenerate
-              </div>
-              <div
-                onClick={handleShowTotalStory}
-                style={{
-                  left: "35%",
-                  bottom: "12%",
-                  width: "30%",
-                  height: "30px",
-                }}
-                className="common_btn"
-              >
-                Total Story
-              </div>
-              <div
-                onClick={handleReround}
-                style={{
-                  right: "1%",
-                  bottom: "12%",
-                  width: "30%",
-                  height: "30px",
-                }}
-                className="common_btn"
-              >
-                Reround
-              </div>
-            </>
-          ) : (
-            <>
-              <div
-                onClick={() => setMonth(13)}
-                style={{
-                  left: "5%",
-                  bottom: "12%",
-                  width: "40%",
-                  height: "30px",
-                }}
-                className="common_btn"
-              >
-                Total Story
-              </div>
-              <div
-                style={{
-                  right: "5%",
-                  bottom: "12%",
-                  width: "40%",
-                  height: "30px",
-                }}
-                className="common_btn"
-                onClick={handlePreview}
-              >
-                Preview
-              </div>
-              <div
-                onClick={handleRegenerate}
-                style={{
-                  left: "5%",
-                  bottom: "18%",
-                  width: "40%",
-                  height: "30px",
-                }}
-                className="common_btn"
-              >
-                Regenerate
-              </div>
-              <div
-                onClick={handleReround}
-                style={{
-                  right: "5%",
-                  bottom: "18%",
-                  width: "40%",
-                  height: "30px",
-                }}
-                className="common_btn"
-              >
-                Reround
-              </div>
-            </>
-          )}
-          <div
-            className={`${`result_field`}`}
-            style={{ height: paystate == true ? "50%" : "45%" }}
-          >
-            <div
-              className={`${
-                paystate == true ? `result_content` : `result_content2`
-              }`}
-            >
-              {paystate && desc}
+  //navigate with main
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    if (queryParams.size == 1) {
+      const result_month = queryParams.get("main_month");
+      setMonth(parseInt(result_month!));
+    } else {
+      setMonth(1);
+    }
+  }, []);
+
+  useEffect(() => {
+    showResult(month);
+  }, [month]);
+
+  return (
+    <div className="board">
+      {loading && <Loading />}
+      <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
+      <div className="board_content">
+        {month <= 12 ? (
+          <div className="main_month">
+            <div className="month_title">2025</div>
+            <div className="month_num">
+              <h6 style={{ fontSize: "30px" }}>{months[month]!}</h6>
             </div>
           </div>
-          {/* display for description */}
-          <div
-            className={`${
-              isresultOpen == true ? `result_state_desc` : `result_state_desc1`
-            }`}
-          >
-            <div className="result_state_desc_title">
-              {month_point >= 1400 && month_point <= 2100
-                ? eval_data[0].eval_state
-                : ""}
-              {month_point >= 700 && month_point < 1400
-                ? eval_data[1].eval_state
-                : ""}
-              {month_point >= 0 && month_point < 700
-                ? eval_data[2].eval_state
-                : ""}
-              {month_point >= -700 && month_point < 0
-                ? eval_data[3].eval_state
-                : ""}
-              {month_point >= -1400 && month_point < -700
-                ? eval_data[4].eval_state
-                : ""}
-              {month_point >= -2100 && month_point < -1400
-                ? eval_data[5].eval_state
-                : ""}
-            </div>
-            <div className="result_state_desc_desc">
-              {month_point >= 1400 && month_point <= 2100
-                ? eval_data[0].eval_content
-                : ""}
-              {month_point >= 700 && month_point < 1400
-                ? eval_data[1].eval_content
-                : ""}
-              {month_point >= 0 && month_point < 700
-                ? eval_data[2].eval_content
-                : ""}
-              {month_point >= -700 && month_point < 0
-                ? eval_data[3].eval_content
-                : ""}
-              {month_point >= -1400 && month_point < -700
-                ? eval_data[4].eval_content
-                : ""}
-              {month_point >= -2100 && month_point < -1400
-                ? eval_data[5].eval_content
-                : ""}
-            </div>
+        ) : (
+          <></>
+        )}
 
-            <img
-              onClick={() => setIsResultOpen(false)}
-              className="result_close"
-              src={getImageURL("./assets/close.webp")}
-              draggable={false}
-              alt="result_close"
-            />
-            <img
-              className="result_santa"
-              src={getImageURL("./assets/santa-1.webp")}
-              draggable={false}
-              alt="result_santa"
-            />
+        {month === 13 ? (
+          <div className="totalstory">
+            Total<br></br>story
+          </div>
+        ) : (
+          <></>
+        )}
 
-            {month_point >= 1400 && month_point <= 2100 ? (
-              <img
-                className="result_anim_luck"
-                src={getImageURL("./assets/exe_good.webp")}
-                draggable={false}
-                alt="result_anim"
-              />
+        {month <= 12 ? (
+          <div className="result_score">
+            {month <= 12 ? (
+              <>
+                <div>Year:{year_point}</div>
+                <div>Month:{month_point}</div>
+              </>
             ) : (
-              ""
+              <>Year:{year_point}</>
             )}
-            {month_point >= 700 && month_point < 1400 ? (
-              <img
-                className="result_anim_luck"
-                src={getImageURL("./assets/very_good.webp")}
-                draggable={false}
-                alt="result_anim"
+          </div>
+        ) : (
+          <></>
+        )}
+
+        {month === 13 ? (
+          <div className="result_year_score">
+            <div>Year Point</div>
+            <div>{year_point}</div>
+          </div>
+        ) : (
+          <></>
+        )}
+        <div className="main_img_field">
+          <img
+            className="main_img"
+            src={getImageURL("./assets/backgroundImage _1.webp")}
+            alt="main"
+            draggable="false"
+          />
+        </div>
+        <div className="result_pagination">
+          <div className="result_page">
+            <Stack style={{ width: "100%" }} spacing={1}>
+              <Pagination
+                sx={{ display: "flex", justifyContent: "center" }}
+                onChange={handlePageChange}
+                count={12}
+                variant="outlined"
+                boundaryCount={1}
+                size="small"
               />
-            ) : (
-              ""
-            )}
-            {month_point >= 0 && month_point < 700 ? (
-              <img
-                className="result_anim_luck"
-                src={getImageURL("./assets/good.webp")}
-                draggable={false}
-                alt="result_anim"
-              />
-            ) : (
-              ""
-            )}
-            {month_point >= -700 && month_point < 0 ? (
-              <img
-                className="result_anim_luck"
-                src={getImageURL("./assets/bad.webp")}
-                draggable={false}
-                alt="result_anim"
-              />
-            ) : (
-              ""
-            )}
-            {month_point >= -1400 && month_point < -700 ? (
-              <img
-                className="result_anim_luck"
-                src={getImageURL("./assets/very_bad.webp")}
-                draggable={false}
-                alt="result_anim"
-              />
-            ) : (
-              ""
-            )}
-            {month_point >= -2100 && month_point < -1400 ? (
-              <img
-                className="result_anim_luck"
-                src={getImageURL("./assets/exe_bad.webp")}
-                draggable={false}
-                alt="result_anim"
-              />
-            ) : (
-              ""
-            )}
+            </Stack>
           </div>
         </div>
+        {paystate == true ? (
+          <>
+            <div
+              onClick={handleRegenerate}
+              style={{
+                left: "1%",
+                bottom: "12%",
+                width: "30%",
+                height: "30px",
+              }}
+              className="common_btn"
+            >
+              Regenerate
+            </div>
+            <div
+              onClick={handleShowTotalStory}
+              style={{
+                left: "35%",
+                bottom: "12%",
+                width: "30%",
+                height: "30px",
+              }}
+              className="common_btn"
+            >
+              Total Story
+            </div>
+            <div
+              onClick={handleReround}
+              style={{
+                right: "1%",
+                bottom: "12%",
+                width: "30%",
+                height: "30px",
+              }}
+              className="common_btn"
+            >
+              Reround
+            </div>
+          </>
+        ) : (
+          <>
+            <div
+              onClick={() => setMonth(13)}
+              style={{
+                left: "5%",
+                bottom: "12%",
+                width: "40%",
+                height: "30px",
+              }}
+              className="common_btn"
+            >
+              Total Story
+            </div>
+            <div
+              style={{
+                right: "5%",
+                bottom: "12%",
+                width: "40%",
+                height: "30px",
+              }}
+              className="common_btn"
+              onClick={handlePreview}
+            >
+              Preview
+            </div>
+            <div
+              onClick={handleRegenerate}
+              style={{
+                left: "5%",
+                bottom: "18%",
+                width: "40%",
+                height: "30px",
+              }}
+              className="common_btn"
+            >
+              Regenerate
+            </div>
+            <div
+              onClick={handleReround}
+              style={{
+                right: "5%",
+                bottom: "18%",
+                width: "40%",
+                height: "30px",
+              }}
+              className="common_btn"
+            >
+              Reround
+            </div>
+          </>
+        )}
+        <div
+          className={`${`result_field`}`}
+          style={{ height: paystate == true ? "50%" : "45%" }}
+        >
+          <div
+            className={`${
+              paystate == true ? `result_content` : `result_content2`
+            }`}
+          >
+            {paystate && desc}
+          </div>
+        </div>
+        {/* display for description */}
+        <div
+          onClick={() => setIsResultOpen(false)}
+          className={`${
+            isresultOpen == true ? `result_state_desc` : `result_state_desc1`
+          }`}
+        >
+          <div className="result_state_desc_title">
+            {month_point >= 1400 && month_point <= 2100
+              ? eval_data[0].eval_state
+              : ""}
+            {month_point >= 700 && month_point < 1400
+              ? eval_data[1].eval_state
+              : ""}
+            {month_point >= 0 && month_point < 700
+              ? eval_data[2].eval_state
+              : ""}
+            {month_point >= -700 && month_point < 0
+              ? eval_data[3].eval_state
+              : ""}
+            {month_point >= -1400 && month_point < -700
+              ? eval_data[4].eval_state
+              : ""}
+            {month_point >= -2100 && month_point < -1400
+              ? eval_data[5].eval_state
+              : ""}
+          </div>
+          <div className="result_state_desc_desc">
+            {month_point >= 1400 && month_point <= 2100
+              ? eval_data[0].eval_content
+              : ""}
+            {month_point >= 700 && month_point < 1400
+              ? eval_data[1].eval_content
+              : ""}
+            {month_point >= 0 && month_point < 700
+              ? eval_data[2].eval_content
+              : ""}
+            {month_point >= -700 && month_point < 0
+              ? eval_data[3].eval_content
+              : ""}
+            {month_point >= -1400 && month_point < -700
+              ? eval_data[4].eval_content
+              : ""}
+            {month_point >= -2100 && month_point < -1400
+              ? eval_data[5].eval_content
+              : ""}
+          </div>
+
+          <img
+            onClick={() => setIsResultOpen(false)}
+            className="result_close"
+            src={getImageURL("./assets/close.webp")}
+            draggable={false}
+            alt="result_close"
+          />
+          <img
+            onClick={() => setIsResultOpen(false)}
+            className="result_santa"
+            src={getImageURL("./assets/santa-1.webp")}
+            draggable={false}
+            alt="result_santa"
+          />
+
+          {month_point >= 1400 && month_point <= 2100 ? (
+            <img
+              className="result_anim_luck"
+              src={getImageURL("./assets/exe_good.webp")}
+              draggable={false}
+              alt="result_anim"
+            />
+          ) : (
+            ""
+          )}
+          {month_point >= 700 && month_point < 1400 ? (
+            <img
+              className="result_anim_luck"
+              src={getImageURL("./assets/very_good.webp")}
+              draggable={false}
+              alt="result_anim"
+            />
+          ) : (
+            ""
+          )}
+          {month_point >= 0 && month_point < 700 ? (
+            <img
+              className="result_anim_luck"
+              src={getImageURL("./assets/good.webp")}
+              draggable={false}
+              alt="result_anim"
+            />
+          ) : (
+            ""
+          )}
+          {month_point >= -700 && month_point < 0 ? (
+            <img
+              className="result_anim_luck"
+              src={getImageURL("./assets/bad.webp")}
+              draggable={false}
+              alt="result_anim"
+            />
+          ) : (
+            ""
+          )}
+          {month_point >= -1400 && month_point < -700 ? (
+            <img
+              className="result_anim_luck"
+              src={getImageURL("./assets/very_bad.webp")}
+              draggable={false}
+              alt="result_anim"
+            />
+          ) : (
+            ""
+          )}
+          {month_point >= -2100 && month_point < -1400 ? (
+            <img
+              className="result_anim_luck"
+              src={getImageURL("./assets/exe_bad.webp")}
+              draggable={false}
+              alt="result_anim"
+            />
+          ) : (
+            ""
+          )}
+        </div>
       </div>
-    );
-  };
+    </div>
+  );
 }
 
 export default Result;

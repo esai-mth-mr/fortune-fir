@@ -35,8 +35,6 @@ export default function Payment(props: {
   open: boolean;
   setOpen: any;
 }) {
-  // const [open, setOpen] = React.useState(false);
-  const [action, setAction] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   //crypto part
   //end of crypto part
@@ -82,7 +80,7 @@ export default function Payment(props: {
     await axios
       .post(
         "api/payment/stripe/session-initiate",
-        { action: action },
+        { action: props.action },
         setAuthToken()
       )
       .then(async (res) => {
@@ -114,8 +112,7 @@ export default function Payment(props: {
   //end of stripe part
 
   React.useEffect(() => {
-
-    setAction("regeneration");
+    //setAction(props.action);
   }, []);
   return (
     <div>
