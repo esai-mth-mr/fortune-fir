@@ -6,15 +6,26 @@ import { Stack } from "@mui/material";
 import { Pagination } from "@mui/material";
 import getImageURL from "../utils/getImageURL";
 import Payment from "./payment/Payment";
+import { showResultApi } from "../api/showResultApi";
+import toast from "react-hot-toast";
+import { checkRegenerationApi } from "../api/checkRegenerationApi";
+import { upgradeRoundApi } from "../api/upgradeRoundApi";
+import Loading from "../common/Loading";
 
 function Result() {
   const [isresultOpen, setIsResultOpen] = useState<boolean>(true);
-  const [month, setMonth] = useState(1);
   const [paystate, setPayed] = useState<boolean>(false);
   const [action, setAction] = useState<string>("");
   const [openPayment, setOpenPayment] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  //interacting database data
+  const [month, setMonth] = useState(1);
+  const [month_point, setMonthPoint] = useState<number>(0);
+  const [year_point, setYearPoint] = useState<number>(0);
+  const [desc, setDesc] = useState<String>("");
+
   const eval_data = [
     {
       eval_state: "Extremely Good",
@@ -47,22 +58,6 @@ function Result() {
         "Social interactions can be highly detrimental; relationships may become toxic or nonexistent, leading to profound feelings of loneliness and disconnection from the world around you.",
     },
   ];
-  //metadta
-  const allowdata = [
-    { month: 1, story: "you are welcom1", point: 300 },
-    { month: 2, story: "you are welcom2", point: 300 },
-    { month: 3, story: "you are welcom3", point: 300 },
-    { month: 4, story: "you are welco4", point: 300 },
-    { month: 5, story: "you are welcom5", point: 300 },
-    { month: 6, story: "you are welco6", point: 300 },
-    { month: 7, story: "you are welcom7", point: 300 },
-    { month: 8, story: "you are welcom8", point: 300 },
-    { month: 9, story: "you are welcom9", point: 300 },
-    { month: 10, story: "you are welcom10", point: 300 },
-    { month: 11, story: "you are welcom11", point: 300 },
-    { month: 12, story: "you are welcom12", point: 300 },
-    { month: 13, story: "you are welcom13", point: 900 },
-  ];
 
   const months = [
     "",
@@ -79,35 +74,121 @@ function Result() {
     "Nov",
     "Dec",
   ];
-  const handlePageChange = (
+  const handlePageChange = async (
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
+    console.log(event);
+    await showResult(value);
     setMonth(value);
     setIsResultOpen(true);
   };
+
+  const handleShowTotalStory = async () => {
+    await showResult(13);
+    setMonth(13);
+  };
+
   //navigate
   const handlePreview = () => {
     setOpenPayment(true);
     setAction("preview");
   };
-  const handleRegenerate = () => {
+  const handleRegenerate = async () => {
     setAction("regeneration");
-    setOpenPayment(true);
-    navigate(
-      `/main/?result_month=${
-        month.toString() +
-        "_" +
-        (allowdata[12].point - allowdata[month].point).toString()
-      }"`
-    );
+
+    const result = await checkRegeneration();
+
+    if (result) {
+      navigate(
+        `/main/?result_month=${
+          month.toString() + "_" + (year_point - month_point).toString()
+        }"`
+      );
+
+      return;
+    }
   };
-  const handleReround = () => {
-    navigate(`/main`);
+  const handleReround = async () => {
+    if (await upgradeRound()) {
+      navigate("/main");
+    }
   };
+
+  //API functions
+  const showResult = async (sendData: number) => {
+    setLoading(true); // Start loading
+    try {
+      const res = await showResultApi(sendData);
+      if (res.status !== 200) {
+        toast.error(res.message);
+        navigate("/main");
+        return false;
+      } else {
+        setMonth(res.message.message.month);
+        setMonthPoint(res.message.message.point);
+        setYearPoint(res.message.message.year_point);
+        setPayed(res.message.display);
+        if (res.message.message.story) setDesc(res.message.message.story);
+        console.log(res.message);
+        return true;
+      }
+    } catch (error) {
+      toast.error("Failed to fetch data!");
+      navigate("/main");
+
+      return false;
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
+
+  const checkRegeneration = async () => {
+    setLoading(true); // Start loading
+    try {
+      const res = await checkRegenerationApi(month);
+      if (res.status !== 200) {
+        toast.error(res.message);
+        return false;
+      } else {
+        if (res.message.payment) return true;
+        else {
+          setOpenPayment(true);
+
+          return false;
+
+          // return true;
+        }
+      }
+    } catch (error) {
+      toast.error("Failed to fetch data!");
+      return false;
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
+
+  const upgradeRound = async () => {
+    setLoading(true); // Start loading
+    try {
+      const res = await upgradeRoundApi();
+      if (res.status !== 200) {
+        toast.error(res.message);
+        return false;
+      } else {
+        return true;
+      }
+    } catch (error) {
+      toast.error("Failed to fetch data!");
+      return false;
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
+
   //navigate with main
   useEffect(() => {
-    setPayed(true);
+    // setPayed(true);
     const queryParams = new URLSearchParams(location.search);
     if (queryParams.size == 1) {
       const result_month = queryParams.get("main_month");
@@ -117,26 +198,17 @@ function Result() {
     }
   }, []);
 
-  useEffect(() => {  
-    const audio = document.getElementById('result-audio') as HTMLAudioElement;  
-    if (audio) {  
-      audio.play().catch((error) => {  
-        console.error('Failed to play audio:', error);  
-      });  
-    }  
-  }, []); // Empty dependency array means this runs once on mount  
+  useEffect(() => {
+    showResult(month);
+  }, [month]);
 
   return (
     <div className="board">
+      {loading && <Loading />}
       <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
       <div className="board_content">
-        <div className="result_audio">
-          <audio id="result-audio" className="hidden" autoPlay loop >
-            <source src="./sounds/result_page.mp3" />
-          </audio>
-        </div>
         {month <= 12 ? (
-          <div className={`${month <= 12 ? `main_month` : ``}`}>
+          <div className="main_month">
             <div className="month_title">2025</div>
             <div className="month_num">
               <h6 style={{ fontSize: "30px" }}>{months[month]!}</h6>
@@ -146,8 +218,8 @@ function Result() {
           <></>
         )}
 
-        {month == 13 ? (
-          <div className={`${month == 13 ? `totalstory` : ``}`}>
+        {month === 13 ? (
+          <div className="totalstory">
             Total<br></br>story
           </div>
         ) : (
@@ -155,24 +227,24 @@ function Result() {
         )}
 
         {month <= 12 ? (
-          <div className={`${month <= 12 ? `result_score` : ``}`}>
+          <div className="result_score">
             {month <= 12 ? (
               <>
-                <div>Year:{allowdata[12].point}</div>
-                <div>Month:{allowdata[month - 1].point}</div>
+                <div>Year:{year_point}</div>
+                <div>Month:{month_point}</div>
               </>
             ) : (
-              <>Year:{allowdata[month - 1].point}</>
+              <>Year:{year_point}</>
             )}
           </div>
         ) : (
           <></>
         )}
 
-        {month == 13 ? (
-          <div className={`${month == 13 ? `result_year_score` : ``}`}>
+        {month === 13 ? (
+          <div className="result_year_score">
             <div>Year Point</div>
-            <div>{allowdata[12].point}</div>
+            <div>{year_point}</div>
           </div>
         ) : (
           <></>
@@ -189,7 +261,7 @@ function Result() {
           <div className="result_page">
             <Stack style={{ width: "100%" }} spacing={1}>
               <Pagination
-                sx={{display:"flex" ,justifyContent: "center"}}
+                sx={{ display: "flex", justifyContent: "center" }}
                 onChange={handlePageChange}
                 count={12}
                 variant="outlined"
@@ -214,7 +286,7 @@ function Result() {
               Regenerate
             </div>
             <div
-              onClick={() => setMonth(13)}
+              onClick={handleShowTotalStory}
               style={{
                 left: "35%",
                 bottom: "12%",
@@ -299,74 +371,73 @@ function Result() {
               paystate == true ? `result_content` : `result_content2`
             }`}
           >
-            {paystate == true
-              ? allowdata[month - 1].story!
-              : allowdata[month - 1].story}
+            {paystate && desc}
           </div>
         </div>
         {/* display for description */}
         <div
-          onClick={()=>setIsResultOpen(false)}
+          onClick={() => setIsResultOpen(false)}
           className={`${
             isresultOpen == true ? `result_state_desc` : `result_state_desc1`
           }`}
         >
           <div className="result_state_desc_title">
-            {allowdata[month - 1].point >= 1400 &&
-            allowdata[month - 1].point <= 2100
+            {month_point >= 1400 && month_point <= 2100
               ? eval_data[0].eval_state
               : ""}
-            {allowdata[month - 1].point >= 700 &&
-            allowdata[month - 1].point < 1400
+            {month_point >= 700 && month_point < 1400
               ? eval_data[1].eval_state
               : ""}
-            {allowdata[month - 1].point >= 0 && allowdata[month - 1].point < 700
+            {month_point >= 0 && month_point < 700
               ? eval_data[2].eval_state
               : ""}
-            {allowdata[month - 1].point >= -700 &&
-            allowdata[month - 1].point < 0
+            {month_point >= -700 && month_point < 0
               ? eval_data[3].eval_state
               : ""}
-            {allowdata[month - 1].point >= -1400 &&
-            allowdata[month - 1].point < -700
+            {month_point >= -1400 && month_point < -700
               ? eval_data[4].eval_state
               : ""}
-            {allowdata[month - 1].point >= -2100 &&
-            allowdata[month - 1].point < -1400
+            {month_point >= -2100 && month_point < -1400
               ? eval_data[5].eval_state
               : ""}
           </div>
-          <div onClick={()=>setIsResultOpen(false)} className="result_state_desc_desc">
-            {allowdata[month - 1].point >= 1400 &&
-            allowdata[month - 1].point <= 2100
+          <div className="result_state_desc_desc">
+            {month_point >= 1400 && month_point <= 2100
               ? eval_data[0].eval_content
               : ""}
-            {allowdata[month - 1].point >= 700 &&
-            allowdata[month - 1].point < 1400
+            {month_point >= 700 && month_point < 1400
               ? eval_data[1].eval_content
               : ""}
-            {allowdata[month - 1].point >= 0 && allowdata[month - 1].point < 700
+            {month_point >= 0 && month_point < 700
               ? eval_data[2].eval_content
               : ""}
-            {allowdata[month - 1].point >= -700 &&
-            allowdata[month - 1].point < 0
+            {month_point >= -700 && month_point < 0
               ? eval_data[3].eval_content
               : ""}
-            {allowdata[month - 1].point >= -1400 &&
-            allowdata[month - 1].point < -700
+            {month_point >= -1400 && month_point < -700
               ? eval_data[4].eval_content
               : ""}
-            {allowdata[month - 1].point >= -2100 &&
-            allowdata[month - 1].point < -1400
+            {month_point >= -2100 && month_point < -1400
               ? eval_data[5].eval_content
               : ""}
           </div>
 
-          <img onClick={()=>setIsResultOpen(false)} className="result_close" src={getImageURL("./assets/close.webp")} draggable={false} alt="result_close"/>
-          <img onClick={()=>setIsResultOpen(false)} className="result_santa" src={getImageURL("./assets/santa-1.webp")} draggable={false} alt="result_santa"/>
+          <img
+            onClick={() => setIsResultOpen(false)}
+            className="result_close"
+            src={getImageURL("./assets/close.webp")}
+            draggable={false}
+            alt="result_close"
+          />
+          <img
+            onClick={() => setIsResultOpen(false)}
+            className="result_santa"
+            src={getImageURL("./assets/santa-1.webp")}
+            draggable={false}
+            alt="result_santa"
+          />
 
-          {allowdata[month - 1].point >= 1400 &&
-          allowdata[month - 1].point <= 2100 ? (
+          {month_point >= 1400 && month_point <= 2100 ? (
             <img
               className="result_anim_luck"
               src={getImageURL("./assets/exe_good.webp")}
@@ -376,8 +447,7 @@ function Result() {
           ) : (
             ""
           )}
-          {allowdata[month - 1].point >= 700 &&
-          allowdata[month - 1].point < 1400 ? (
+          {month_point >= 700 && month_point < 1400 ? (
             <img
               className="result_anim_luck"
               src={getImageURL("./assets/very_good.webp")}
@@ -387,8 +457,7 @@ function Result() {
           ) : (
             ""
           )}
-          {allowdata[month - 1].point >= 0 &&
-          allowdata[month - 1].point < 700 ? (
+          {month_point >= 0 && month_point < 700 ? (
             <img
               className="result_anim_luck"
               src={getImageURL("./assets/good.webp")}
@@ -398,8 +467,7 @@ function Result() {
           ) : (
             ""
           )}
-          {allowdata[month - 1].point >= -700 &&
-          allowdata[month - 1].point < 0 ? (
+          {month_point >= -700 && month_point < 0 ? (
             <img
               className="result_anim_luck"
               src={getImageURL("./assets/bad.webp")}
@@ -409,8 +477,7 @@ function Result() {
           ) : (
             ""
           )}
-          {allowdata[month - 1].point >= -1400 &&
-          allowdata[month - 1].point < -700 ? (
+          {month_point >= -1400 && month_point < -700 ? (
             <img
               className="result_anim_luck"
               src={getImageURL("./assets/very_bad.webp")}
@@ -420,8 +487,7 @@ function Result() {
           ) : (
             ""
           )}
-          {allowdata[month - 1].point >= -2100 &&
-          allowdata[month - 1].point < -1400 ? (
+          {month_point >= -2100 && month_point < -1400 ? (
             <img
               className="result_anim_luck"
               src={getImageURL("./assets/exe_bad.webp")}

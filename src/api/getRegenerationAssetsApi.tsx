@@ -1,16 +1,18 @@
 import axios from "../utils/axios";
 import setAuthToken from "../utils/setAuthToken";
 
-export const saveYearStoryApi = async (data: any) => {
+export const getRegenerationAssetsApi = async (data: any) => {
+  console.log(data);
+
   try {
     const res = await axios.post(
-      "api/story/add-year-story",
-      data,
+      "api/story/regeneration",
+      { month: data },
       setAuthToken()
     );
     return {
       status: 200,
-      message: res.data.message,
+      message: res.data,
     };
   } catch (error: any) {
     if (error.response) {
