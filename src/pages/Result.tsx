@@ -95,7 +95,8 @@ function Result() {
     if (!paystate) {
       setOpenPayment(true);
       setAction("preview");
-    }
+    } else{
+    toast.success("You have already paid.");
   };
   const handleRegenerate = async () => {
     setAction("regeneration");
@@ -133,7 +134,6 @@ function Result() {
         setYearPoint(res.message.message.year_point);
         setPayed(res.message.display);
         if (res.message.message.story) setDesc(res.message.message.story);
-        console.log(res.message);
         return true;
       }
     } catch (error) {
