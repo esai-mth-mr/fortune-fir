@@ -63,9 +63,6 @@ function App() {
           ></img>
         </Link>
         <AudioPlayer />
-        {/* <audio id="main-audio" className="hidden" autoPlay loop>
-          <source  src="./sounds/main_page.mp3" />
-        </audio> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
