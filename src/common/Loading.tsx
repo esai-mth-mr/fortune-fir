@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 
+import { CircularProgress } from "@mui/material";
+import Box from "@mui/material/Box";
 import "./Loading.css";
 import getImageURL from "../utils/getImageURL";
+import { error } from "console";
 const Loading = () => {
   const [loadingText, setLoadingText] = useState("Loading");
   //const [leftYear, setLeftYear] = useState("");
@@ -28,7 +31,17 @@ const Loading = () => {
       <div className="loading-content">
         {/* <div className="front-text gradient-text">{leftYear}</div> */}
         <div className="spinner-img-container">
+          <Box 
+            sx={{ display: 'flex'}}
+          >
+            <CircularProgress 
+              color="error"
+              sx={{position:'absolute',right:'9px',top:'5px', display:'flex', justifyContent:'center', alignItems:'center', width: '50px', height: '50px'}}
+              // size={'30rem'}
+            />
+          </Box>
           <img
+            className="loading_img"
             width={60}
             height={60}
             src={getImageURL("./assets/HowLucky2025_logo.webp")}
@@ -36,12 +49,12 @@ const Loading = () => {
         </div>
         {/* <div className="back-text gradient-text">{rightYear}</div> */}
       </div>
-      <p
+      {/* <p
         className="loading-text gradient-text"
         style={{ opacity: 20, fontFamily: "Poppins" }}
       >
         {loadingText}
-      </p>
+      </p> */}
     </div>
   );
 };
