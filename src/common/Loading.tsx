@@ -38,7 +38,7 @@ const Loading = () => {
       </div>
       <p
         className="loading-text gradient-text"
-        style={{ opacity: 20, fontFamily: "Poppins-boldItalic" }}
+        style={{ opacity: 20, fontFamily: "Poppins" }}
       >
         {loadingText}
       </p>

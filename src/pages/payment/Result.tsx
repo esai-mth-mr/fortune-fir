@@ -79,7 +79,7 @@ const Result = () => {
         <div
           className="gradient-text"
           style={{
-            fontFamily: "Poppins-boldItalic",
+            fontFamily: "Poppins",
             fontSize: "40px",
             marginTop: "100px",
           }}

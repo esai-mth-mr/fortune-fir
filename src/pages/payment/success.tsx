@@ -29,7 +29,7 @@ const Success = () => {
         className="gradient-text"
         style={{
           fontSize: "30px",
-          fontFamily: "Poppins-Bold",
+          fontFamily: "Poppin",
         }}
       >
         Payment Successed!
@@ -41,7 +41,7 @@ const Success = () => {
               "linear-gradient(to right, rgb(86, 171, 47) 0%, rgb(168, 224, 99) 51%, rgb(86, 171, 47) 100%)",
             backgroundSize: "200% auto",
             fontSize: "20px",
-            fontFamily: "Poppins-bold",
+            fontFamily: "Poppins",
             borderRadius: "20px",
             color: "white",
           }}

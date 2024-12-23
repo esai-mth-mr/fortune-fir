@@ -28,7 +28,7 @@ const Failure = () => {
         className="gradient-text-1"
         style={{
           fontSize: "30px",
-          fontFamily: "Poppins-Bold",
+          fontFamily: "Poppins",
           marginBottom: "60px",
         }}
       >
