@@ -153,8 +153,9 @@
 }
 
 @keyframes move_icon{
-    0%{ top: 45%; left:42%; opacity: 1;}
-    90%{top: 30%; left:42%; opacity: 1;}
+    0%{ top: 45%; left:42%; opacity: 0;}
+    10%{ top: 45%; left:42%; opacity: 1;}
+    95%{top: 29%; left:42%; opacity: 1;}
     100%{top: 29%; left:42%; opacity: 0;}
 }
 
