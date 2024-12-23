@@ -315,13 +315,34 @@
             justify-content: center;
             align-items: center;
             border-radius: 30px;
-            width: 30%;
+            width: 40%;
             height: 35px;
             position: absolute;
             bottom: 5%;
-            left:35%;
+            left: 5%;
             opacity: 0.8;
             border: 2px solid #ff0d0d;
+            font-family: 'DM Sans';
+            font-size: 14px;
+            font-weight: 900;
+            text-align: center;
+            cursor: pointer;
+            z-index: 50;
+        }
+        .cancel_btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: red;
+            color: white;
+            border-radius: 30px;
+            width: 40%;
+            height: 35px;
+            position: absolute;
+            bottom: 5%;
+            right:5%;
+            opacity: 0.8;
+            border: 2px solid white;
             font-family: 'DM Sans';
             font-size: 14px;
             font-weight: 900;

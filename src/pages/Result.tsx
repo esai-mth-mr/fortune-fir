@@ -306,6 +306,7 @@ function Result() {
         </div>
         {/* display for description */}
         <div
+          onClick={()=>setIsResultOpen(false)}
           className={`${
             isresultOpen == true ? `result_state_desc` : `result_state_desc1`
           }`}
@@ -335,7 +336,7 @@ function Result() {
               ? eval_data[5].eval_state
               : ""}
           </div>
-          <div className="result_state_desc_desc">
+          <div onClick={()=>setIsResultOpen(false)} className="result_state_desc_desc">
             {allowdata[month - 1].point >= 1400 &&
             allowdata[month - 1].point <= 2100
               ? eval_data[0].eval_content
@@ -362,7 +363,7 @@ function Result() {
           </div>
 
           <img onClick={()=>setIsResultOpen(false)} className="result_close" src={getImageURL("./assets/close.png")} draggable={false} alt="result_close"/>
-          <img className="result_santa" src={getImageURL("./assets/santa.png")} draggable={false} alt="result_santa"/>
+          <img onClick={()=>setIsResultOpen(false)} className="result_santa" src={getImageURL("./assets/santa.png")} draggable={false} alt="result_santa"/>
 
           {allowdata[month - 1].point >= 1400 &&
           allowdata[month - 1].point <= 2100 ? (

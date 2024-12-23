@@ -262,7 +262,7 @@ function Main() {
       setSendArray([]);
     }
 
-    if (isEdit) {
+    if (isEdit && count ===7) {
       handleRegenerate();
     }
   };
@@ -478,7 +478,7 @@ function Main() {
           }}
           className={`${!isEdit ? "gift_next_btn" : "edit_btn"}`}
         >
-          {!isEdit ? (month < 12 ? "Next" : "") : "View Result"}
+          {!isEdit ? (month < 12 ? "Next" : "") : "Submit"}
           {
             !isEdit &&
               month === 12 &&
@@ -487,6 +487,7 @@ function Main() {
             // </div>
           }
         </div>
+        {isEdit&&<div className="cancel_btn" onClick={handleRegenerate}>Cancel</div>}
       </div>
     </div>
   );
