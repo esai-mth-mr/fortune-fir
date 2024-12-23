@@ -9,7 +9,6 @@ import Main from "./pages/Main";
 import Required from "./pages/verification/required";
 import Succesful from "./pages/verification/succesful";
 import Failed from "./pages/verification/failed";
-import GetReady from "./pages/GetReady";
 import Result from "./pages/Result";
 import Verifing from "./pages/verification/verifing";
 import { decryptToken } from "./utils/cryptToken";
@@ -29,15 +28,14 @@ import AudioPlayer from "./common/AudioPlayer";
 function App() {
   const navigate = useNavigate();
 
-  useEffect(() => {  
-    const audio = document.getElementById('main-audio') as HTMLAudioElement;  
-    if (audio) {  
-      audio.play().catch((error) => {  
-        console.error('Failed to play audio:', error);  
-      });  
-    }  
-  }, []); // Empty dependency array means this runs once on mount  
-
+  useEffect(() => {
+    const audio = document.getElementById("main-audio") as HTMLAudioElement;
+    if (audio) {
+      audio.play().catch((error) => {
+        console.error("Failed to play audio:", error);
+      });
+    }
+  }, []); // Empty dependency array means this runs once on mount
 
   useEffect(() => {
     try {
@@ -64,12 +62,11 @@ function App() {
             height="50px"
           ></img>
         </Link>
-        <AudioPlayer/>
+        <AudioPlayer />
         {/* <audio id="main-audio" className="hidden" autoPlay loop>
           <source  src="./sounds/main_page.mp3" />
         </audio> */}
         <Routes>
-          
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
