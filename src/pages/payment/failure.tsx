@@ -24,14 +24,26 @@ const Failure = () => {
           className="failIcon"
         ></img>
       </div>
-      <div className="title">Payment Failed</div>
-      <div className="content">
-        Your Paymenet Failed.
-        <br />
-        Please try again.
+      <div
+        className="gradient-text-1"
+        style={{
+          fontSize: "30px",
+          fontFamily: "Poppins-Bold",
+          marginBottom: "60px",
+        }}
+      >
+        Payment Failed!
       </div>
-
-      <div className="button_field">
+      <div
+        className=""
+        style={{
+          fontSize: "16px",
+          fontFamily: "Poppins",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      ></div>
+      <div className="button_field" style={{ marginBottom: "200px" }}>
         <button className="button" onClick={handleBack}>
           Back
         </button>

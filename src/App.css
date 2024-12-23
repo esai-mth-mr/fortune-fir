@@ -1,7 +1,8 @@
 @import url("https://fonts.google.com/specimen/Rubik+Mono+One");
 
 body {
-  font-family: "Rubik+Mono+One";
+  font-family: 'Rubik+Mono+One';
+
 }
 
 #root {
@@ -46,7 +47,8 @@ body {
 }
 
 .app {
-  height: 100vh; /* Full height */
+  height: 100vh;
+  /* Full height */
   position: relative;
 }
 
@@ -55,6 +57,9 @@ body {
   top: 3px;
   left: 3px;
   z-index: 100;
+  height: 100vh;
+  /* Full height */
+
 }
 
 @media (max-width: 450px) {
@@ -240,4 +245,14 @@ body {
   font-style: normal;
   font-weight: normal;
   src: url("./font/AlfaSlabOne-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins-bold";
+  src: url("./font/Poppins/Poppins-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins-boldItalic";
+  src: url("./font/Poppins/Poppins-BoldItalic.ttf") format("truetype");
 }
