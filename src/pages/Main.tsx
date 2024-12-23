@@ -7,6 +7,8 @@ import "animate.css";
 import { getRandomNum } from "../helper/Helper";
 import { getInitDataApi } from "../api/getInitDataApi";
 import toast from "react-hot-toast";
+import getImageURL from "../utils/getImageURL";
+import Loading from "../common/Loading";
 
 interface DataType {
   _id: string;
@@ -26,7 +28,7 @@ function Main() {
   const [month, setMonth] = useState(1);
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
-  const location= useLocation();
+  const location = useLocation();
 
   const [data, setData] = useState([]);
 
@@ -68,12 +70,12 @@ function Main() {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [isEdit, setEdit]=useState<boolean>(false);
+  const [isEdit, setEdit] = useState<boolean>(false);
 
-    //navigate
-    const handleRegenerate= () =>{
-        navigate(`/result/?main_month=${month}`);
-    }
+  //navigate
+  const handleRegenerate = () => {
+    navigate(`/result/?main_month=${month}`);
+  };
 
   const [loading, setLoading] = useState(false);
 
@@ -143,24 +145,26 @@ function Main() {
 
   //display for animation
   useEffect(() => {
-    setTimeout(() => {
-      setDisplaypoint(monthpoint);
-    }, 2500);
-    setTimeout(() => {
-      setmonthpoint(monthpoint + point);
-    }, 2600);
+    if (point != 0) {
+      setTimeout(() => {
+        setDisplaypoint(monthpoint);
+      }, 2500);
+      setTimeout(() => {
+        setmonthpoint(monthpoint + point);
+      }, 2600);
 
-    setTimeout(() => {
-      setDisplayYear(yeardisplaypoint);
-    }, 2500);
-    setTimeout(() => {
-      setyearpoint(yeardisplaypoint + point);
-    }, 2600);
+      setTimeout(() => {
+        setDisplayYear(yeardisplaypoint);
+      }, 2500);
+      setTimeout(() => {
+        setyearpoint(yeardisplaypoint + point);
+      }, 2600);
+    }
   }, [point]);
 
   //display animate number for specific duration
   useEffect(() => {
-    if (point > 0) {
+    if (point > 0 && point != 0) {
       if (displaypoint != monthpoint) {
         setTimeout(() => {
           setDisplaypoint(displaypoint + 1);
@@ -172,7 +176,7 @@ function Main() {
           setDisplayYear(yeardisplaypoint + 1);
         }, 2);
       }
-    } else {
+    } else if (point < 0 && point != 0) {
       if (displaypoint != monthpoint) {
         setTimeout(() => {
           setDisplaypoint(displaypoint - 1);
@@ -198,36 +202,37 @@ function Main() {
     }
   }, [count]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
 
-    if(queryParams.size==1){
-        let result_month = queryParams.get("result_month");
-        const result_data = [...result_month?.split("_")!];
-        console.log("result_data", result_data[0])
-        console.log("result_data_1", result_data[1])
-        if (result_month) {  
-            setMonth(parseInt(result_data[0]));
-            setDisplayYear(parseInt(result_data[1]));
-            setyearpoint(parseInt(result_data[1]));
-        }  
-        setEdit(true);
+    if (queryParams.size == 1) {
+      let result_month = queryParams.get("result_month");
+      const result_data = [...result_month?.split("_")!];
+      console.log("result_data", result_data[0]);
+      console.log("result_data_1", result_data[1]);
+      if (result_month) {
+        setMonth(parseInt(result_data[0]));
+        setDisplayYear(parseInt(result_data[1]));
+        setyearpoint(parseInt(result_data[1]));
+      }
+      setEdit(true);
+    } else {
+      setMonth(1);
+      setEdit(false);
     }
-    else{
-        setMonth(1);
-        setEdit(false);
-    }
-    },[]);   
+  }, []);
 
   return (
     <div className="board">
       {/* Loading Overlay */}
-      {loading && (
+      {/* {loading && (
         <div className="loading-overlay">
           <div className="spinner"></div>
           <p>Loading...</p>
         </div>
-      )}
+      )} */}
+
+      {loading && <Loading />}
 
       {/* Main Content */}
 
@@ -246,7 +251,7 @@ function Main() {
           <div className={`${countnum == false ? `available` : `available1`}`}>
             <img
               className="modal_count_img"
-              src="svg/Gifts/gift_1.svg"
+              src={getImageURL("./assets/svg/Gifts/gift_1.svg")}
               draggable={false}
               alt="modal_gift"
               width={22}
@@ -266,7 +271,7 @@ function Main() {
         <div className="main_img_field">
           <img
             className="main_img"
-            src="assets/backgroundImage _1.png"
+            src={getImageURL("./assets/backgroundImage _1.png")}
             draggable={false}
             alt="main_img"
           />
@@ -283,8 +288,10 @@ function Main() {
                     alt={`gift_${index}`}
                     src={
                       AllowOpen[index]
-                        ? `svg/Gifts/gift_${gifts[index]}.svg`
-                        : `assets/openbox.png`
+                        ? getImageURL(
+                            `./assets/svg/Gifts/gift_${gifts[index]}.svg`
+                          )
+                        : getImageURL(`./assets/openbox.png`)
                     }
                     onClick={() => {
                       if (AllowOpen[index] && count < 7) {
@@ -318,8 +325,10 @@ function Main() {
                       alt={`gift_${index}`} // Updated alt for better readability
                       src={
                         AllowOpen[index]
-                          ? `svg/Gifts/gift_${gifts[index]}.svg`
-                          : `assets/openbox.png`
+                          ? getImageURL(
+                              `./assets/svg/Gifts/gift_${gifts[index]}.svg`
+                            )
+                          : getImageURL(`./assets/openbox.png`)
                       }
                       onClick={() => {
                         if (AllowOpen[index] && count < 7) {
@@ -346,29 +355,62 @@ function Main() {
         {/* Render the modal conditionally */}
         <div
           onClick={() => {
-            isEdit==false && allownext == true && month != 12 && count == 7 && setMonth(month + 1);
-            isEdit==false &&allownext == true && month != 12 && count == 7 && setCount(0);
-            isEdit==false &&allownext == true &&
+            isEdit == false &&
+              allownext == true &&
+              month != 12 &&
+              count == 7 &&
+              setMonth(month + 1);
+            isEdit == false &&
+              allownext == true &&
+              month != 12 &&
+              count == 7 &&
+              setCount(0);
+            isEdit == false &&
+              allownext == true &&
               count == 7 &&
               setAllowOpen(
                 AllowOpen.map(() => {
                   return true;
                 })
               );
-            isEdit==false &&allownext == true && count == 7 && setmonthpoint(0);
-            isEdit==false &&allownext == true && count == 7 && setPoint(0);
-            isEdit==false &&allownext == true && count == 7 && setDisplaypoint(0);
-            isEdit==false && allownext == true && count == 7 && setCountNum(false);
-            isEdit==false&&allownext==true&&count==7&&setyearpoint(0);
-            isEdit==true&&handleRegenerate()
-        }}
-        style={{backgroundColor: isEdit==false?count<7?"#f5f5f5":"red":"red",borderColor:isEdit==false?count<7?"#c7c7c7":"red":"white", color:isEdit==false?count<7?"#c7c7c7":"white":"white"}} 
-        className={`${isEdit==false?`gift_next_btn`:`edit_btn`}`}>
-            {isEdit==false?month<12?"Next":"":"View Result"}  
+            isEdit == false &&
+              allownext == true &&
+              count == 7 &&
+              setmonthpoint(0);
+            isEdit == false && allownext == true && count == 7 && setPoint(0);
+            isEdit == false &&
+              allownext == true &&
+              count == 7 &&
+              setDisplaypoint(0);
+            isEdit == false &&
+              allownext == true &&
+              count == 7 &&
+              setCountNum(false);
+            isEdit == false &&
+              allownext == true &&
+              count == 7 &&
+              setyearpoint(0);
+            isEdit == true && handleRegenerate();
+          }}
+          style={{
+            backgroundColor:
+              isEdit == false ? (count < 7 ? "#f5f5f5" : "red") : "red",
+            borderColor:
+              isEdit == false ? (count < 7 ? "#c7c7c7" : "red") : "white",
+            color:
+              isEdit == false ? (count < 7 ? "#c7c7c7" : "white") : "white",
+          }}
+          className={`${isEdit == false ? `gift_next_btn` : `edit_btn`}`}
+        >
+          {isEdit == false ? (month < 12 ? "Next" : "") : "View Result"}
 
-            {isEdit==false?<Link className='gift_finish' to="/result">
-                {isEdit==false?month==12?"Finish":"":""}
-            </Link>:<></>}
+          {isEdit == false ? (
+            <Link className="gift_finish" to="/result">
+              {isEdit == false ? (month == 12 ? "Finish" : "") : ""}
+            </Link>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

@@ -13,6 +13,7 @@ import Select from "@mui/material/Select";
 import axios from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import getImageURL from "../utils/getImageURL";
 
 type ErrorType = {
   username?: string;
@@ -123,7 +124,7 @@ const SignUp: React.FC = () => {
     <div className="board">
       <img
         className="sign_header"
-        src="/assets/santamodel.png"
+        src={getImageURL("./assets/santamodel.png")}
         alt="Header"
         draggable="false"
       />
