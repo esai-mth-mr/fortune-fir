@@ -72,7 +72,7 @@ function Contact() {
       <div className="title">Contact US</div>
       <div className="contact_img_field">
         <img
-          src={getImageURL("./assets/plane.png")}
+          src={getImageURL("./assets/plane.webp")}
           alt="plane"
           draggable="false"
           className="contact_img"

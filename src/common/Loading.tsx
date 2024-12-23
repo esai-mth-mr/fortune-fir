@@ -31,7 +31,7 @@ const Loading = () => {
           <img
             width={60}
             height={60}
-            src={getImageURL("./assets/HowLucky2025_logo.png")}
+            src={getImageURL("./assets/HowLucky2025_logo.webp")}
           ></img>
         </div>
         {/* <div className="back-text gradient-text">{rightYear}</div> */}

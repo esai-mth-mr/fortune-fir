@@ -31,14 +31,14 @@ function Required() {
       <div className="verify_hero_img_field">
         <img
           className="hero_image"
-          src={getImageURL("./assets/backgroundImage _1.png")}
+          src={getImageURL("./assets/backgroundImage _1.webp")}
           draggable={false}
           alt="hero_image"
         />
       </div>
       <div className="verifyIcon_field">
         <img
-          src={getImageURL("./assets/verify.png")}
+          src={getImageURL("./assets/verify.webp")}
           draggable="false"
           alt="verifyIcon"
           className="verifyIcon"

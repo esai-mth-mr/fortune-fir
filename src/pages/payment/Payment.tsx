@@ -15,6 +15,7 @@ import axios from "../../utils/axios";
 import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import getImageURL from "../../utils/getImageURL";
+import Loading from "../../common/Loading";
 
 const stripePromise = loadStripe(
   "pk_test_51QXkg1A9YfpPkxIlDXG9iEGhAWo0bEaxfukGsLYfyzBkcMV4jipebVVh3XnfKjj9YZjL3uv8uiexgIkwgoWTcTqu00tZhUIpUx"
@@ -36,6 +37,7 @@ export default function Payment(props: {
 }) {
   // const [open, setOpen] = React.useState(false);
   const [action, setAction] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   //crypto part
   //end of crypto part
 
@@ -51,8 +53,10 @@ export default function Payment(props: {
   //end of modal part
 
   //paypayl part
-  const handlePayPal = () => {
-    axios
+  const handlePayPal = async () => {
+    setLoading(true);
+    handleClose();
+    await axios
       .post(
         "api/payment/paypal/pay",
         {
@@ -61,17 +65,21 @@ export default function Payment(props: {
         setAuthToken()
       )
       .then((res) => {
+        setLoading(false);
         window.open(res.data.approvalUrl, "_blank");
       })
       .catch((error) => {
+        setLoading(false);
         toast.error(error.response.data.message);
       });
   };
   //end of paypayl part
 
   //stripe part
-  const handleStripe = () => {
-    axios
+  const handleStripe = async () => {
+    setLoading(true);
+    handleClose();
+    await axios
       .post(
         "api/payment/stripe/session-initiate",
         { action: action },
@@ -82,7 +90,7 @@ export default function Payment(props: {
           const stripe = await stripePromise;
           const sessionId = res.data.sessionId;
           if (!stripe) {
-            toast.error("failed to load stripe");
+            toast.error("Failed to load stripe");
             return;
           }
           if (!sessionId) {
@@ -91,131 +99,148 @@ export default function Payment(props: {
           }
           const { error } = await stripe?.redirectToCheckout({ sessionId });
           if (error) {
+            console.log("heheheheheh");
             toast.error("Error redirecting to Stripe");
           }
+          setLoading(false);
         }
       })
       .catch((error) => {
-        toast.error(error.response.data.message);
-        //toast.error(error.response.data.message);
+        setLoading(false);
+        if (error.response.data.error === true)
+          toast.error(error.response.data.message);
+        else toast.success(error.response.data.message);
       });
   };
   //end of stripe part
 
   React.useEffect(() => {
     console.log(props.action);
+
     setAction("regeneration");
   }, []);
   return (
-    <Dialog
-      open={props.open}
-      maxWidth="xl"
-      sx={{
-        "& .MuiPaper-root": {
-          borderRadius: "10px",
-          width: "280px",
-          height: "470px",
-        },
-      }}
-      TransitionComponent={Transition}
-      keepMounted
-      onClose={handleClose}
-      aria-describedby="alert-dialog-slide-description"
-    >
-      {/* Ribbon */}
-      <Box
+    <div>
+      {loading && <Loading />}
+      <Dialog
+        open={props.open}
+        maxWidth="xl"
         sx={{
-          position: "absolute",
-          top: "68px", // Adjust to fine-tune the position
-          left: "10px", // Adjust to fine-tune the position
-          // backgroundColor: "red",
-          color: "white",
-          padding: "5px 30px",
-          fontSize: "14px",
-          fontFamily: "Poppins-bold",
-          transform: "translate(-29.3%) rotate(-45deg)",
-          transformOrigin: "top left",
-          zIndex: 2, // Ensure it is above other content
-          boxShadow: "0px 4px 6px rgba(0,0,0,0.2)", // Optional: Add shadow for a better
-          background:
-            "linear-gradient(to right, rgb(28, 216, 210) 0%, rgb(147, 237, 199) 51%, rgb(28, 216, 210) 100%)",
-          backgroundSize: "200% auto",
+          "& .MuiPaper-root": {
+            borderRadius: "10px",
+            width: "280px",
+            height: "470px",
+            backgroundColor: "#f5f5f5",
+          },
         }}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
       >
-        Christmas!
-      </Box>
-      <DialogTitle>
+        {/* Ribbon */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "68px", // Adjust to fine-tune the position
+            left: "10px", // Adjust to fine-tune the position
+            // backgroundColor: "red",
+            color: "white",
+            padding: "5px 30px",
+            fontSize: "14px",
+            fontFamily: "Poppins-bold",
+            transform: "translate(-29.3%) rotate(-45deg)",
+            transformOrigin: "top left",
+            zIndex: 2, // Ensure it is above other content
+            boxShadow: "0px 4px 6px rgba(0,0,0,0.2)", // Optional: Add shadow for a better
+            background:
+              "linear-gradient(to right, rgb(28, 216, 210) 0%, rgb(147, 237, 199) 51%, rgb(28, 216, 210) 100%)",
+            backgroundSize: "200% auto",
+          }}
+        >
+          Christmas!
+        </Box>
+        <DialogTitle>
+          <div
+            style={{
+              //fontFamily: "PlayfairDisplay-Bold",
+              fontWeight: "900",
+              fontSize: "40px",
+              fontFamily: "Poppins-bold",
+            }}
+            className="gradient-text"
+          >
+            $0.99
+          </div>
+        </DialogTitle>
+        <DialogContent sx={{ zIndex: 1 }}>
+          <DialogContentText
+            id="alert-dialog-slide-description"
+            sx={{
+              marginTop: "10px",
+            }}
+          >
+            <div className="stripe">
+              <button
+                style={{
+                  width: "100%",
+                }}
+                className="stripeBtn"
+                onClick={handleStripe}
+              >
+                <img
+                  style={{
+                    objectFit: "contain",
+                    width: "100%",
+                    height: "30px",
+                  }}
+                  src={getImageURL("./assets/stripe.webp")}
+                ></img>
+              </button>
+            </div>
+            <div className="paypal">
+              <button
+                style={{ width: "100%" }}
+                onClick={handlePayPal}
+                className="paypalBtn"
+              >
+                <img
+                  style={{
+                    objectFit: "contain",
+                    width: "100%",
+                    height: "30px",
+                  }}
+                  src={getImageURL("./assets/paypal.webp")}
+                  alt="PayPal Logo"
+                  draggable="false"
+                ></img>
+              </button>
+            </div>
+            <hr style={{ opacity: 20, zIndex: -1 }}></hr>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions sx={{ zIndex: 1 }}>
+          <Button onClick={handleClose} sx={{ fontFamily: "Poppins-bold" }}>
+            Close
+          </Button>
+        </DialogActions>
         <div
           style={{
-            //fontFamily: "PlayfairDisplay-Bold",
-            fontWeight: "900",
-            fontSize: "40px",
-            fontFamily: "Poppins-bold",
+            position: "absolute",
+            zIndex: 0,
+            bottom: "0",
+            right: "0",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
           }}
-          className="gradient-text"
         >
-          $0.99
+          <img
+            style={{ objectFit: "cover" }}
+            src={getImageURL("./assets/santa-1.webp")}
+          ></img>
         </div>
-      </DialogTitle>
-      <DialogContent sx={{ zIndex: 1 }}>
-        <DialogContentText
-          id="alert-dialog-slide-description"
-          sx={{
-            marginTop: "10px",
-          }}
-        >
-          <div className="stripe">
-            <button
-              style={{
-                width: "100%",
-              }}
-              className="stripeBtn"
-              onClick={handleStripe}
-            >
-              <img
-                style={{ width: "100%", height: "30px" }}
-                src={getImageURL("./assets/stripe.svg")}
-              ></img>
-            </button>
-          </div>
-          <div className="paypal">
-            <button
-              style={{ width: "100%" }}
-              onClick={handlePayPal}
-              className="paypalBtn"
-            >
-              <img
-                style={{ width: "100%", height: "30px" }}
-                src={getImageURL("./assets/paypal.svg")}
-                alt="PayPal Logo"
-                draggable="false"
-              ></img>
-            </button>
-          </div>
-          <hr style={{ opacity: 20, zIndex: -1 }}></hr>
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions sx={{ zIndex: 1 }}>
-        <Button onClick={handleClose} sx={{ fontFamily: "Poppins-bold" }}>
-          Close
-        </Button>
-      </DialogActions>
-      <div
-        style={{
-          position: "absolute",
-          zIndex: 0,
-          bottom: "0",
-          right: "0",
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <img
-          style={{ objectFit: "cover" }}
-          src={getImageURL("./assets/santa.png")}
-        ></img>
-      </div>
-    </Dialog>
+      </Dialog>
+    </div>
   );
 }

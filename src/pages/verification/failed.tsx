@@ -14,14 +14,14 @@ function Failed() {
       <div className="hero_img_field">
         <img
           className="hero_imgage"
-          src={getImageURL("./assets/backgroundImage _1.png")}
+          src={getImageURL("./assets/backgroundImage _1.webp")}
           draggable={false}
           alt="hero_imgage"
         />
       </div>
       <div className="failIcon_field">
         <img
-          src={getImageURL("./assets/failIcon.png")}
+          src={getImageURL("./assets/failIcon.webp")}
           draggable="false"
           alt="failIcon"
           className="failIcon"

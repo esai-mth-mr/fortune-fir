@@ -1,14 +1,16 @@
 import "@src/style/global.scss";
 import "@src/style/pages/main.scss";
 import { useEffect, useState, useCallback } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "./modal/modal";
 import "animate.css";
 import { getRandomNum } from "../helper/Helper";
 import { getInitDataApi } from "../api/getInitDataApi";
+import { saveMonthStoryApi } from "../api/saveMonthStoryApi";
 import toast from "react-hot-toast";
 import getImageURL from "../utils/getImageURL";
 import Loading from "../common/Loading";
+import { saveYearStoryApi } from "../api/saveYearStoryApi";
 
 interface DataType {
   _id: string;
@@ -24,11 +26,23 @@ interface ModalDataType {
   desc: string;
 }
 
+interface SaveSendDataType {
+  point: number;
+  total_point: number;
+  assets: number[];
+  month: number;
+}
+
+interface SaveSendYearDataType {
+  total_point: number;
+}
+
 function Main() {
   const [month, setMonth] = useState(1);
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
+  const [sendArray, setSendArray] = useState<number[]>([]);
 
   const [data, setData] = useState([]);
 
@@ -83,6 +97,7 @@ function Main() {
     return array.sort(() => 0.5 - Math.random());
   };
 
+  // API functions
   const getInitData = useCallback(async () => {
     setLoading(true); // Start loading
     try {
@@ -91,7 +106,10 @@ function Main() {
         toast.error(res.message);
       } else {
         setData(res.message.data);
-        console.log(res.message.data);
+        setMonth(res.message.month);
+        setDisplayYear(res.message.year_point);
+        setyearpoint(res.message.year_point);
+        console.log(res.message);
       }
     } catch (error) {
       toast.error("Failed to fetch data!");
@@ -99,6 +117,44 @@ function Main() {
       setLoading(false); // Stop loading
     }
   }, []);
+
+  const saveMonthStory = async (sendData: SaveSendDataType) => {
+    setLoading(true); // Start loading
+    try {
+      const res = await saveMonthStoryApi(sendData);
+      if (res.status !== 200) {
+        toast.error(res.message);
+        return false;
+      } else {
+        console.log(res.message);
+        return true;
+      }
+    } catch (error) {
+      toast.error("Failed to fetch data!");
+      return false;
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
+
+  const saveYearStory = async (sendData: SaveSendYearDataType) => {
+    setLoading(true); // Start loading
+    try {
+      const res = await saveYearStoryApi(sendData);
+      if (res.status !== 200) {
+        toast.error(res.message);
+        return false;
+      } else {
+        console.log(res.message);
+        return true;
+      }
+    } catch (error) {
+      toast.error("Failed to fetch data!");
+      return false;
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
 
   useEffect(() => {
     if (count % 7 === 0) {
@@ -143,22 +199,90 @@ function Main() {
     }
   };
 
+  const handleItemClick = (
+    index: number,
+    luck: string,
+    name: string,
+    description: string,
+    assetIndex: number
+  ) => {
+    if (AllowOpen[index] && count < 7) {
+      setCount((prev) => prev + 1);
+      setAllowOpen((prev) =>
+        prev.map((isOpen, i) => (i === index ? false : isOpen))
+      );
+      setIsOpen(true);
+      setPoint(getpoint(luck)!);
+      setModalData({
+        name: name,
+        desc: description,
+      });
+      setCountNum((prev) => !prev);
+      setSendArray((prev) => [...prev, assetIndex]);
+    }
+  };
+
+  const handleNextButton = async () => {
+    if (!isEdit && allownext && count === 7) {
+      const sendData = {
+        point: monthpoint,
+        total_point: yearpoint,
+        assets: sendArray,
+        month: month,
+      };
+
+      const result = await saveMonthStory(sendData);
+
+      if (result) {
+        if (month !== 12) {
+          setMonth(month + 1);
+        } else {
+          const sendYearData = {
+            total_point: yearpoint,
+          };
+          const result_year = await saveYearStory(sendYearData);
+          if (result_year) {
+            navigate("/result");
+            return;
+          } else {
+            toast.error("Failed save year story. Please try agin.");
+          }
+        }
+      }
+
+      getInitData();
+
+      setCount(0);
+      setAllowOpen(AllowOpen.map(() => true));
+      setmonthpoint(0);
+      setPoint(0);
+      setDisplaypoint(0);
+      setCountNum(false);
+      // setyearpoint(0);
+      setSendArray([]);
+    }
+
+    if (isEdit && count ===7) {
+      handleRegenerate();
+    }
+  };
+
   //display for animation
   useEffect(() => {
     if (point != 0) {
       setTimeout(() => {
         setDisplaypoint(monthpoint);
-      }, 2500);
+      }, 1000);
       setTimeout(() => {
         setmonthpoint(monthpoint + point);
-      }, 2600);
+      }, 1000);
 
       setTimeout(() => {
         setDisplayYear(yeardisplaypoint);
-      }, 2500);
+      }, 1000);
       setTimeout(() => {
         setyearpoint(yeardisplaypoint + point);
-      }, 2600);
+      }, 1000);
     }
   }, [point]);
 
@@ -168,25 +292,25 @@ function Main() {
       if (displaypoint != monthpoint) {
         setTimeout(() => {
           setDisplaypoint(displaypoint + 1);
-        }, 2);
+        }, 0.5);
       }
 
       if (yeardisplaypoint != yearpoint) {
         setTimeout(() => {
           setDisplayYear(yeardisplaypoint + 1);
-        }, 2);
+        }, 0.5);
       }
     } else if (point < 0 && point != 0) {
       if (displaypoint != monthpoint) {
         setTimeout(() => {
           setDisplaypoint(displaypoint - 1);
-        }, 2);
+        }, 0.5);
       }
 
       if (yeardisplaypoint != yearpoint) {
         setTimeout(() => {
           setDisplayYear(yeardisplaypoint - 1);
-        }, 2);
+        }, 0.5);
       }
     }
   });
@@ -195,7 +319,7 @@ function Main() {
     if (count == 7) {
       setTimeout(() => {
         setAllowNext(true);
-      }, 100);
+      }, 1000);
     }
     if (count == 0) {
       setAllowNext(false);
@@ -222,23 +346,27 @@ function Main() {
     }
   }, []);
 
+  useEffect(() => {  
+    const audio = document.getElementById('main-audio') as HTMLAudioElement;  
+    if (audio) {  
+      audio.play().catch((error) => {  
+        console.error('Failed to play audio:', error);  
+      });  
+    }  
+  }, []); // Empty dependency array means this runs once on mount  
+
   return (
     <div className="board">
-      {/* Loading Overlay */}
-      {/* {loading && (
-        <div className="loading-overlay">
-          <div className="spinner"></div>
-          <p>Loading...</p>
-        </div>
-      )} */}
-
       {loading && <Loading />}
-
       {/* Main Content */}
-
       <div
         className={loading ? "disabled-content board_content" : "board_content"}
       >
+        {/* <div className="main_audio">
+          <audio id="main-audio" className="hidden" autoPlay loop>
+            <source  src="./sounds/main_page.mp3" />
+          </audio>
+        </div> */}
         <div className="main_month">
           <div className="month_title">2025</div>
           <div className="month_num">
@@ -251,7 +379,7 @@ function Main() {
           <div className={`${countnum == false ? `available` : `available1`}`}>
             <img
               className="modal_count_img"
-              src={getImageURL("./assets/svg/Gifts/gift_1.svg")}
+              src={getImageURL("./assets/svg/Gifts/gift_1.webp")}
               draggable={false}
               alt="modal_gift"
               width={22}
@@ -271,7 +399,7 @@ function Main() {
         <div className="main_img_field">
           <img
             className="main_img"
-            src={getImageURL("./assets/backgroundImage _1.png")}
+            src={getImageURL("./assets/backgroundImage _1.webp")}
             draggable={false}
             alt="main_img"
           />
@@ -289,26 +417,18 @@ function Main() {
                     src={
                       AllowOpen[index]
                         ? getImageURL(
-                            `./assets/svg/Gifts/gift_${gifts[index]}.svg`
+                            `./assets/svg/Gifts/gift_${gifts[index]}.webp`
                           )
-                        : getImageURL(`./assets/openbox.png`)
+                        : getImageURL(`./assets/openbox.webp`)
                     }
                     onClick={() => {
-                      if (AllowOpen[index] && count < 7) {
-                        setCount((prev) => prev + 1);
-                        setAllowOpen((prev) =>
-                          prev.map((isOpen, i) =>
-                            i === index ? false : isOpen
-                          )
-                        );
-                        setIsOpen(true);
-                        setPoint(getpoint(item.luck)!);
-                        setModalData({
-                          name: item.name,
-                          desc: item.description,
-                        });
-                        setCountNum((prev) => !prev);
-                      }
+                      handleItemClick(
+                        index,
+                        item.luck,
+                        item.name,
+                        item.description,
+                        item.index
+                      );
                     }}
                   />
                 ) : null
@@ -326,22 +446,18 @@ function Main() {
                       src={
                         AllowOpen[index]
                           ? getImageURL(
-                              `./assets/svg/Gifts/gift_${gifts[index]}.svg`
+                              `./assets/svg/Gifts/gift_${gifts[index]}.webp`
                             )
-                          : getImageURL(`./assets/openbox.png`)
+                          : getImageURL(`./assets/openbox.webp`)
                       }
                       onClick={() => {
-                        if (AllowOpen[index] && count < 7) {
-                          setCount((prev) => prev + 1);
-                          setAllowOpen((prev) =>
-                            prev.map((isOpen, i) =>
-                              i === index ? false : isOpen
-                            )
-                          );
-                          setIsOpen(true);
-                          setPoint(getpoint(item.luck)!);
-                          setCountNum((prev) => !prev);
-                        }
+                        handleItemClick(
+                          index,
+                          item.luck,
+                          item.name,
+                          item.description,
+                          item.index
+                        );
                       }}
                     />
                   ) : null // Return null instead of <></> for unused elements
@@ -354,64 +470,24 @@ function Main() {
         )}{" "}
         {/* Render the modal conditionally */}
         <div
-          onClick={() => {
-            isEdit == false &&
-              allownext == true &&
-              month != 12 &&
-              count == 7 &&
-              setMonth(month + 1);
-            isEdit == false &&
-              allownext == true &&
-              month != 12 &&
-              count == 7 &&
-              setCount(0);
-            isEdit == false &&
-              allownext == true &&
-              count == 7 &&
-              setAllowOpen(
-                AllowOpen.map(() => {
-                  return true;
-                })
-              );
-            isEdit == false &&
-              allownext == true &&
-              count == 7 &&
-              setmonthpoint(0);
-            isEdit == false && allownext == true && count == 7 && setPoint(0);
-            isEdit == false &&
-              allownext == true &&
-              count == 7 &&
-              setDisplaypoint(0);
-            isEdit == false &&
-              allownext == true &&
-              count == 7 &&
-              setCountNum(false);
-            isEdit == false &&
-              allownext == true &&
-              count == 7 &&
-              setyearpoint(0);
-            isEdit == true && handleRegenerate();
-          }}
+          onClick={handleNextButton}
           style={{
-            backgroundColor:
-              isEdit == false ? (count < 7 ? "#f5f5f5" : "red") : "red",
-            borderColor:
-              isEdit == false ? (count < 7 ? "#c7c7c7" : "red") : "white",
-            color:
-              isEdit == false ? (count < 7 ? "#c7c7c7" : "white") : "white",
+            backgroundColor: !isEdit ? (count < 7 ? "#f5f5f5" : "red") : "red",
+            borderColor: !isEdit ? (count < 7 ? "#c7c7c7" : "red") : "white",
+            color: !isEdit ? (count < 7 ? "#c7c7c7" : "white") : "white",
           }}
-          className={`${isEdit == false ? `gift_next_btn` : `edit_btn`}`}
+          className={`${!isEdit ? "gift_next_btn" : "edit_btn"}`}
         >
-          {isEdit == false ? (month < 12 ? "Next" : "") : "View Result"}
-
-          {isEdit == false ? (
-            <Link className="gift_finish" to="/result">
-              {isEdit == false ? (month == 12 ? "Finish" : "") : ""}
-            </Link>
-          ) : (
-            <></>
-          )}
+          {!isEdit ? (month < 12 ? "Next" : "") : "Submit"}
+          {
+            !isEdit &&
+              month === 12 &&
+              // <div className="gift_finish">
+              "Finish"
+            // </div>
+          }
         </div>
+        {isEdit&&<div className="cancel_btn" onClick={handleRegenerate}>Cancel</div>}
       </div>
     </div>
   );

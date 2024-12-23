@@ -38,6 +38,12 @@ const Result = () => {
   useEffect(() => {
     setIsLoading(true);
     if (!payerId || !paymentId || !state) {
+      // axios
+      //   .post("/api/stripe/session-complete", {}, setAuthToken())
+      //   .then((res) => {
+      //     console.log(res.data);
+      //   })
+      //   .catch((err) => console.error(err));
       navigate("/payment/cancel");
       return;
     }
@@ -64,8 +70,8 @@ const Result = () => {
         <div className="hero_img_field">
           <img
             className="hero_imgage"
-            src={getImageURL("./assets/santa2.png")}
-            // src="/src/assets/santa2.png"
+            src={getImageURL("./assets/santa2.webp")}
+            // src="/src/assets/santa2.webp"
             draggable={false}
             alt="hero_imgage"
           />
