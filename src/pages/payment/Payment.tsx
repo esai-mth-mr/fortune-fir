@@ -55,6 +55,7 @@ export default function Payment(props: {
   //paypayl part
   const handlePayPal = async () => {
     setLoading(true);
+    handleClose();
     await axios
       .post(
         "api/payment/paypal/pay",
@@ -64,12 +65,13 @@ export default function Payment(props: {
         setAuthToken()
       )
       .then((res) => {
+        setLoading(false);
         window.open(res.data.approvalUrl, "_blank");
       })
       .catch((error) => {
+        setLoading(false);
         toast.error(error.response.data.message);
       });
-    setLoading(false);
   };
   //end of paypayl part
 
@@ -97,19 +99,24 @@ export default function Payment(props: {
           }
           const { error } = await stripe?.redirectToCheckout({ sessionId });
           if (error) {
+            console.log("heheheheheh");
             toast.error("Error redirecting to Stripe");
           }
+          setLoading(false);
         }
       })
       .catch((error) => {
-        toast.error(error.response.data.message);
+        setLoading(false);
+        if (error.response.data.error === true)
+          toast.error(error.response.data.message);
+        else toast.success(error.response.data.message);
       });
-    setLoading(false);
   };
   //end of stripe part
 
   React.useEffect(() => {
     console.log(props.action);
+
     setAction("regeneration");
   }, []);
   return (
@@ -123,6 +130,7 @@ export default function Payment(props: {
             borderRadius: "10px",
             width: "280px",
             height: "470px",
+            backgroundColor: "#f5f5f5",
           },
         }}
         TransitionComponent={Transition}
@@ -181,8 +189,12 @@ export default function Payment(props: {
                 onClick={handleStripe}
               >
                 <img
-                  style={{ width: "100%", height: "30px" }}
-                  src={getImageURL("./assets/stripe.svg")}
+                  style={{
+                    objectFit: "contain",
+                    width: "100%",
+                    height: "30px",
+                  }}
+                  src={getImageURL("./assets/stripe.webp")}
                 ></img>
               </button>
             </div>
@@ -193,8 +205,12 @@ export default function Payment(props: {
                 className="paypalBtn"
               >
                 <img
-                  style={{ width: "100%", height: "30px" }}
-                  src={getImageURL("./assets/paypal.svg")}
+                  style={{
+                    objectFit: "contain",
+                    width: "100%",
+                    height: "30px",
+                  }}
+                  src={getImageURL("./assets/paypal.webp")}
                   alt="PayPal Logo"
                   draggable="false"
                 ></img>
@@ -221,74 +237,10 @@ export default function Payment(props: {
         >
           <img
             style={{ objectFit: "cover" }}
-            src={getImageURL("./assets/santa.png")}
+            src={getImageURL("./assets/santa-1.webp")}
           ></img>
         </div>
-<<<<<<< HEAD
       </Dialog>
     </div>
-=======
-      </DialogTitle>
-      <DialogContent sx={{ zIndex: 1 }}>
-        <DialogContentText
-          id="alert-dialog-slide-description"
-          sx={{
-            marginTop: "10px",
-          }}
-        >
-          <div className="stripe">
-            <button
-              style={{
-                width: "100%",
-              }}
-              className="stripeBtn"
-              onClick={handleStripe}
-            >
-              <img
-                style={{ width: "100%", height: "30px" }}
-                src={getImageURL("./assets/stripe.webp")}
-              ></img>
-            </button>
-          </div>
-          <div className="paypal">
-            <button
-              style={{ width: "100%" }}
-              onClick={handlePayPal}
-              className="paypalBtn"
-            >
-              <img
-                style={{ width: "100%", height: "30px" }}
-                src={getImageURL("./assets/paypal.webp")}
-                alt="PayPal Logo"
-                draggable="false"
-              ></img>
-            </button>
-          </div>
-          <hr style={{ opacity: 20, zIndex: -1 }}></hr>
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions sx={{ zIndex: 1 }}>
-        <Button onClick={handleClose} sx={{ fontFamily: "Poppins-bold" }}>
-          Close
-        </Button>
-      </DialogActions>
-      <div
-        style={{
-          position: "absolute",
-          zIndex: 0,
-          bottom: "0",
-          right: "0",
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <img
-          style={{ objectFit: "cover" }}
-          src={getImageURL("./assets/santa-1.webp")}
-        ></img>
-      </div>
-    </Dialog>
->>>>>>> 52281012f2354aec25a1445db1cc4796feb54058
   );
 }

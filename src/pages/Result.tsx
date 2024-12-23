@@ -6,6 +6,7 @@ import { Stack } from "@mui/material";
 import { Pagination } from "@mui/material";
 import getImageURL from "../utils/getImageURL";
 import Payment from "./payment/Payment";
+import toast from "react-hot-toast";
 
 function Result() {
   const [isresultOpen, setIsResultOpen] = useState<boolean>(true);
@@ -88,26 +89,32 @@ function Result() {
   };
   //navigate
   const handlePreview = () => {
-    setOpenPayment(true);
-    setAction("preview");
+    if (!paystate) {
+      setOpenPayment(true);
+      setAction("preview");
+    }
   };
   const handleRegenerate = () => {
     setAction("regeneration");
-    setOpenPayment(true);
-    navigate(
-      `/main/?result_month=${
-        month.toString() +
-        "_" +
-        (allowdata[12].point - allowdata[month].point).toString()
-      }"`
-    );
+    if (paystate === false) {
+      setOpenPayment(true);
+    } else {
+      toast.success("You've already paid");
+    }
+    // navigate(
+    //   `/main/?result_month=${
+    //     month.toString() +
+    //     "_" +
+    //     (allowdata[12].point - allowdata[month].point).toString()
+    //   }"`
+    // );
   };
   const handleReround = () => {
     navigate(`/main`);
   };
   //navigate with main
   useEffect(() => {
-    setPayed(true);
+    //setPayed(true);
     const queryParams = new URLSearchParams(location.search);
     if (queryParams.size == 1) {
       const result_month = queryParams.get("main_month");
@@ -117,21 +124,21 @@ function Result() {
     }
   }, []);
 
-  useEffect(() => {  
-    const audio = document.getElementById('result-audio') as HTMLAudioElement;  
-    if (audio) {  
-      audio.play().catch((error) => {  
-        console.error('Failed to play audio:', error);  
-      });  
-    }  
-  }, []); // Empty dependency array means this runs once on mount  
+  useEffect(() => {
+    const audio = document.getElementById("result-audio") as HTMLAudioElement;
+    if (audio) {
+      audio.play().catch((error) => {
+        console.error("Failed to play audio:", error);
+      });
+    }
+  }, []); // Empty dependency array means this runs once on mount
 
   return (
     <div className="board">
       <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
       <div className="board_content">
         <div className="result_audio">
-          <audio id="result-audio" className="hidden" autoPlay loop >
+          <audio id="result-audio" className="hidden" autoPlay loop>
             <source src="./sounds/result_page.mp3" />
           </audio>
         </div>
@@ -189,7 +196,7 @@ function Result() {
           <div className="result_page">
             <Stack style={{ width: "100%" }} spacing={1}>
               <Pagination
-                sx={{display:"flex" ,justifyContent: "center"}}
+                sx={{ display: "flex", justifyContent: "center" }}
                 onChange={handlePageChange}
                 count={12}
                 variant="outlined"
@@ -306,7 +313,7 @@ function Result() {
         </div>
         {/* display for description */}
         <div
-          onClick={()=>setIsResultOpen(false)}
+          onClick={() => setIsResultOpen(false)}
           className={`${
             isresultOpen == true ? `result_state_desc` : `result_state_desc1`
           }`}
@@ -336,7 +343,10 @@ function Result() {
               ? eval_data[5].eval_state
               : ""}
           </div>
-          <div onClick={()=>setIsResultOpen(false)} className="result_state_desc_desc">
+          <div
+            onClick={() => setIsResultOpen(false)}
+            className="result_state_desc_desc"
+          >
             {allowdata[month - 1].point >= 1400 &&
             allowdata[month - 1].point <= 2100
               ? eval_data[0].eval_content
@@ -362,8 +372,20 @@ function Result() {
               : ""}
           </div>
 
-          <img onClick={()=>setIsResultOpen(false)} className="result_close" src={getImageURL("./assets/close.webp")} draggable={false} alt="result_close"/>
-          <img onClick={()=>setIsResultOpen(false)} className="result_santa" src={getImageURL("./assets/santa-1.webp")} draggable={false} alt="result_santa"/>
+          <img
+            onClick={() => setIsResultOpen(false)}
+            className="result_close"
+            src={getImageURL("./assets/close.webp")}
+            draggable={false}
+            alt="result_close"
+          />
+          <img
+            onClick={() => setIsResultOpen(false)}
+            className="result_santa"
+            src={getImageURL("./assets/santa-1.webp")}
+            draggable={false}
+            alt="result_santa"
+          />
 
           {allowdata[month - 1].point >= 1400 &&
           allowdata[month - 1].point <= 2100 ? (
