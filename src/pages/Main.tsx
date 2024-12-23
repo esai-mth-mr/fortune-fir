@@ -13,33 +13,17 @@ import Loading from "../common/Loading";
 import { saveYearStoryApi } from "../api/saveYearStoryApi";
 import { getRegenerationAssetsApi } from "../api/getRegenerationAssetsApi";
 import { GETDATA_ERROR } from "../constant";
-
-interface DataType {
-  _id: string;
-  name: string;
-  luck: string;
-  index: number;
-  description: string;
-  url: string;
-}
-
-interface ModalDataType {
-  name: string;
-  desc: string;
-}
-
-interface SaveSendDataType {
-  point: number;
-  total_point: number;
-  assets: number[];
-  month: number;
-}
-
-interface SaveSendYearDataType {
-  total_point: number;
-}
+import {
+  IInitDataType,
+  IModalDataType,
+  ISaveSendDataType,
+  ISaveSendYearDataType,
+} from "../types";
+import { shuffleData } from "../utils/randomArrangeArray";
 
 function Main() {
+  //========================Declare variables================================
+
   const [month, setMonth] = useState(1);
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
@@ -64,8 +48,6 @@ function Main() {
     "Dec",
   ];
 
-
-
   const array: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Type the array
   const [gifts, setGifts] = useState<number[]>([]); // Make sure gifts holds an array of numbers
 
@@ -89,38 +71,25 @@ function Main() {
   const [isOpen, setIsOpen] = useState(false);
 
   const [isEdit, setEdit] = useState<boolean>(false);
-
-  //navigate
-  const handleRegenerate = () => {
-    navigate(`/result/?main_month=${month}`);
-  };
-
   const [loading, setLoading] = useState(false);
 
-  const shuffleArray = (array: number[]): number[] => {
-    return array.sort(() => 0.5 - Math.random());
-  };
+  const [yearpoint, setyearpoint] = useState<number>(0);
+  const [monthpoint, setmonthpoint] = useState<number>(0);
+  const [point, setPoint] = useState<number>(0);
+  const [modalData, setModalData] = useState<IModalDataType>({
+    name: "",
+    desc: "",
+  });
 
+  const [yeardisplaypoint, setDisplayYear] = useState<number>(0);
+  const [displaypoint, setDisplaypoint] = useState<number>(0);
 
-  interface DataType {
-    _id: string;
-    name: string;
-    luck: string;
-    index: number;
-    description: string;
-    url: string;
-  }
+  //for animation
+  const [countnum, setCountNum] = useState<boolean>(false);
+  //allow moving to next
+  const [allownext, setAllowNext] = useState<boolean>(false);
 
-  const shuffleData = (array: DataType[]): DataType[] => {  
-    for (let i = array.length - 1; i > 0; i--) {  
-        const j = Math.floor(Math.random() * (i + 1)); // Get a random index  
-        // Swap the elements at indices i and j  
-        [array[i], array[j]] = [array[j], array[i]];  
-    }  
-    return array;  
-  }  
-
-  // API functions
+  // =============================API functions===================================
   const getInitData = useCallback(async () => {
     setLoading(true); // Start loading
     try {
@@ -132,7 +101,7 @@ function Main() {
         }
         toast.error(res.message);
       } else {
-        setData(res.message.data);
+        setData(shuffleData(res.message.data));
         setGifts(shuffleArray([...array]));
 
         setMonth(res.message.month);
@@ -166,7 +135,7 @@ function Main() {
     }
   };
 
-  const saveMonthStory = async (sendData: SaveSendDataType) => {
+  const saveMonthStory = async (sendData: ISaveSendDataType) => {
     setLoading(true); // Start loading
     try {
       const res = await saveMonthStoryApi(sendData);
@@ -185,7 +154,7 @@ function Main() {
     }
   };
 
-  const saveYearStory = async (sendData: SaveSendYearDataType) => {
+  const saveYearStory = async (sendData: ISaveSendYearDataType) => {
     setLoading(true); // Start loading
     try {
       const res = await saveYearStoryApi(sendData);
@@ -204,111 +173,13 @@ function Main() {
     }
   };
 
+  //======================================hook==================================
+
   useEffect(() => {
     if (count % 1 === 0) {
       setGifts(shuffleArray([...array]));
     }
   }, [count]);
-
-  const [yearpoint, setyearpoint] = useState<number>(0);
-  const [monthpoint, setmonthpoint] = useState<number>(0);
-  const [point, setPoint] = useState<number>(0);
-  const [modalData, setModalData] = useState<ModalDataType>({
-    name: "",
-    desc: "",
-  });
-
-  const [yeardisplaypoint, setDisplayYear] = useState<number>(0);
-  const [displaypoint, setDisplaypoint] = useState<number>(0);
-
-  //for animation
-  const [countnum, setCountNum] = useState<boolean>(false);
-  //allow moving to next
-  const [allownext, setAllowNext] = useState<boolean>(false);
-
-  const getpoint = (lucklevel: string) => {
-    switch (lucklevel) {
-      case "extremely good":
-        return Math.ceil(getRandomNum(200, 300)!);
-      case "very good":
-        return Math.ceil(getRandomNum(100, 200)!);
-      case "good":
-        return Math.ceil(getRandomNum(0, 100)!);
-      case "bad":
-        return Math.ceil(getRandomNum(-100, 0)!);
-      case "very bad":
-        return Math.ceil(getRandomNum(-200, -100)!);
-      case "extremely bad":
-        return Math.ceil(getRandomNum(-300, -200)!);
-    }
-  };
-
-  const handleItemClick = (
-    index: number,
-    luck: string,
-    name: string,
-    description: string,
-    assetIndex: number
-  ) => {
-    if (AllowOpen[index] && count < 1) {
-      setCount((prev) => prev + 1);
-      setAllowOpen((prev) =>
-        prev.map((isOpen, i) => (i === index ? false : isOpen))
-      );
-      setIsOpen(true);
-      setPoint(getpoint(luck)!);
-      setModalData({
-        name: name,
-        desc: description,
-      });
-      setCountNum((prev) => !prev);
-      setSendArray((prev) => [...prev, assetIndex]);
-    }
-  };
-
-  const handleNextButton = async () => {
-    if (!isEdit && allownext && count === 1) {
-      const sendData = {
-        point: monthpoint,
-        total_point: yearpoint,
-        assets: sendArray,
-        month: month,
-      };
-      const result = await saveMonthStory(sendData);
-
-      if (result) {
-        if (month !== 12) {
-          setMonth(month + 1);
-        } else {
-          const sendYearData = {
-            total_point: yearpoint,
-          };
-          const result_year = await saveYearStory(sendYearData);
-          if (result_year) {
-            navigate("/result");
-            return;
-          } else {
-            toast.error("Failed save year story. Please try agin.");
-          }
-        }
-      }
-
-      getInitData();
-
-      setCount(0);
-      setAllowOpen(AllowOpen.map(() => true));
-      setmonthpoint(0);
-      setPoint(0);
-      setDisplaypoint(0);
-      setCountNum(false);
-      // setyearpoint(0);
-      setSendArray([]);
-    }
-
-    if (isEdit && count === 1) {
-      handleRegenerate();
-    }
-  };
 
   //display for animation
   useEffect(() => {
@@ -398,7 +269,103 @@ function Main() {
         console.error("Failed to play audio:", error);
       });
     }
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
+
+  //===============================custom functions===================================
+
+  const shuffleArray = (array: number[]): number[] => {
+    return array.sort(() => 0.5 - Math.random());
+  };
+
+  const getpoint = (lucklevel: string) => {
+    switch (lucklevel) {
+      case "extremely good":
+        return Math.ceil(getRandomNum(200, 300)!);
+      case "very good":
+        return Math.ceil(getRandomNum(100, 200)!);
+      case "good":
+        return Math.ceil(getRandomNum(0, 100)!);
+      case "bad":
+        return Math.ceil(getRandomNum(-100, 0)!);
+      case "very bad":
+        return Math.ceil(getRandomNum(-200, -100)!);
+      case "extremely bad":
+        return Math.ceil(getRandomNum(-300, -200)!);
+    }
+  };
+
+  //==========================handle data===============================
+  const handleRegenerate = () => {
+    navigate(`/result/?main_month=${month}`);
+  };
+
+  const handleItemClick = (
+    index: number,
+    luck: string,
+    name: string,
+    description: string,
+    assetIndex: number
+  ) => {
+    if (AllowOpen[index] && count < 1) {
+      setCount((prev) => prev + 1);
+      setAllowOpen((prev) =>
+        prev.map((isOpen, i) => (i === index ? false : isOpen))
+      );
+      setIsOpen(true);
+      setPoint(getpoint(luck)!);
+      setModalData({
+        name: name,
+        desc: description,
+      });
+      setCountNum((prev) => !prev);
+      setSendArray((prev) => [...prev, assetIndex]);
+    }
+  };
+
+  const handleNextButton = async () => {
+    if (!isEdit && allownext && count === 1) {
+      const sendData = {
+        point: monthpoint,
+        total_point: yearpoint,
+        assets: sendArray,
+        month: month,
+      };
+
+      const result = await saveMonthStory(sendData);
+
+      if (result) {
+        if (month !== 12) {
+          setMonth(month + 1);
+        } else {
+          const sendYearData = {
+            total_point: yearpoint,
+          };
+          const result_year = await saveYearStory(sendYearData);
+          if (result_year) {
+            navigate("/result");
+            return;
+          } else {
+            toast.error("Failed save year story. Please try agin.");
+          }
+        }
+      }
+
+      getInitData();
+
+      setCount(0);
+      setAllowOpen(AllowOpen.map(() => true));
+      setmonthpoint(0);
+      setPoint(0);
+      setDisplaypoint(0);
+      setCountNum(false);
+      // setyearpoint(0);
+      setSendArray([]);
+    }
+
+    if (isEdit && count === 1) {
+      handleRegenerate();
+    }
+  };
 
   return (
     <div className="board">
@@ -447,7 +414,7 @@ function Main() {
         <div className="gifts_field">
           <div className="gift-field-child">
             <div className="gifts-field-child-left">
-              {data.map((item: DataType, index) =>
+              {data.map((item: IInitDataType, index) =>
                 index % 2 === 0 ? (
                   <img
                     key={item._id} // Use a unique identifier as the key
@@ -476,7 +443,7 @@ function Main() {
             </div>
             <div className="gifts-field-child-right">
               {data.map(
-                (item: DataType, index) =>
+                (item: IInitDataType, index) =>
                   index % 2 === 1 ? (
                     <img
                       key={item._id} // Use a unique key
