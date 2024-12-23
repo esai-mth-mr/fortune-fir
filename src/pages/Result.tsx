@@ -190,6 +190,7 @@ function Result() {
                 onChange={()=>handlePageChange}
                 count={12}
                 variant="outlined"
+                boundaryCount={1}
               />
             </Stack>
           </div>
