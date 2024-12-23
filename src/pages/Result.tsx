@@ -350,8 +350,8 @@ function Result() {
               : ""}
           </div>
 
-          <img onClick={()=>setIsResultOpen(false)} className="result_close" src="/assets/close.png" draggable={false} alt="result_close"/>
-          <img className="result_santa" src="/assets/santa.png" draggable={false} alt="result_santa"/>
+          <img onClick={()=>setIsResultOpen(false)} className="result_close" src={getImageURL("./assets/close.png")} draggable={false} alt="result_close"/>
+          <img className="result_santa" src={getImageURL("./assets/santa.png")} draggable={false} alt="result_santa"/>
 
           {allowdata[month - 1].point >= 1400 &&
           allowdata[month - 1].point <= 2100 ? (
