@@ -21,10 +21,34 @@ const Success = () => {
           className="successIcon"
         ></img>
       </div>
-      <div className="title">Payment Successed!</div>
-      <div className="content">
-        You can see the result. <br />
-        You can continue using the applications.
+      <div
+        className="gradient-text"
+        style={{
+          fontSize: "30px",
+          fontFamily: "Poppins-Bold",
+          marginBottom: "60px",
+        }}
+      >
+        Payment Successed!
+      </div>
+      <div
+        className=""
+        style={{
+          fontSize: "16px",
+          fontFamily: "Poppins",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            padding: "0px 20px",
+            textAlign: "center",
+            marginBottom: "40px",
+          }}
+        >
+          You can see the result. You can continue using the applications.
+        </div>
       </div>
     </div>
   );

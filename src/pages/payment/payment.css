@@ -60,7 +60,9 @@
 
 .metamaskBtn:hover,
 .trustwalletBtn:hover,
-.coinbaseBtn:hover {
+.coinbaseBtn:hover,
+.stripeBtn:hover,
+.paypalBtn:hover {
     background-position: right center;
     /* change the direction of the change here */
     text-decoration: none;
@@ -82,4 +84,51 @@
     background: linear-gradient(to right, #33c8c1 0%, #119bd2 50%, #33c8c1 100%);
     background-size: 200% auto;
     transition: all 0.3s ease-in-out;
+}
+
+.stripeBtn {
+    background: linear-gradient(to right, rgb(54, 209, 220) 0%, #646ede 51%, rgb(54, 209, 220) 100%);
+    background-size: 200% auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.paypalBtn {
+    background: linear-gradient(to right, rgb(242, 153, 74) 0%, rgb(242, 201, 76) 51%, rgb(242, 153, 74) 100%);
+    background-size: 200% auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.MuiDialogTitle-root {
+    display: flex;
+    justify-content: center;
+}
+
+.gradient-text {
+    /* Adjust size as needed */
+    background: linear-gradient(to right, rgb(86, 171, 47) 0%, rgb(168, 224, 99) 51%, rgb(86, 171, 47) 100%);
+    background-size: 200%;
+    /* Gradient colors */
+    background-clip: text;
+    /* Clip background to text */
+    -webkit-background-clip: text;
+    /* For Safari */
+    color: transparent;
+    /* Make text transparent to show gradient */
+    text-align: center;
+    /* Center the text */
+}
+
+.gradient-text-1 {
+    /* Adjust size as needed */
+    background: linear-gradient(to right, rgb(240, 0, 0) 0%, rgb(220, 40, 30) 51%, rgb(240, 0, 0) 100%);
+    background-size: 200%;
+    /* Gradient colors */
+    background-clip: text;
+    /* Clip background to text */
+    -webkit-background-clip: text;
+    /* For Safari */
+    color: transparent;
+    /* Make text transparent to show gradient */
+    text-align: center;
+    /* Center the text */
 }
