@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import { checkRegenerationApi } from "../api/checkRegenerationApi";
 import { upgradeRoundApi } from "../api/upgradeRoundApi";
 import Loading from "../common/Loading";
+import PredictionAndTipsComponent from "../components/PredictionAndTipsComponent";
 
 function Result() {
   const [isresultOpen, setIsResultOpen] = useState<boolean>(true);
@@ -25,6 +26,33 @@ function Result() {
   const [month_point, setMonthPoint] = useState<number>(0);
   const [year_point, setYearPoint] = useState<number>(0);
   const [desc, setDesc] = useState<String>("");
+
+  //For the Description Fullscreen flag
+  const [dFullScreen, setDFullScreen] = useState<boolean>(false);
+
+  const test_input = `  Prediction: This is example prediction. Oh boy, it's time to buckle up for a month that's as
+            unpredictable as trying to use a broken compass! With your current
+            choice of items, it seems your days might feel more like a sitcom
+            episode filled with comical misadventures than your usual student
+            routine. Got an exam? Hope your pencil doesn't snap! Heading to a
+            lecture? Watch out for that banana peel right by the door
+            (compliments of our cheeky ghost friend)! Despite the bumps, there's
+            a spark of magic in the mayhem. Each unfortunate mishap might just
+            be setting the stage for some legendary tales to tell around the
+            cafeteria. Remember, every misstep is an opportunity for an
+            uproarious comeback, and who knows? Your winning charm might turn
+            mix-ups into meet-cutes or create classically funny memories!
+            ////////// Tips: 1. Keep Snacks Handy: You might find your lunch
+            mysteriously lost to the ghostly realm, so pack an extra sandwich!
+            2. Double-Check Everything: Whether it's your backpack in the
+            morning or the answers on your test, a quick double-check could save
+            you from spectral sabotage. 3. Laugh It Off: When the going gets
+            weird, the weird turn pro. Keep a light heart and share the laughs,
+            turning your misfortunes into your classmates' entertainment. 4.
+            Record the Quirks: Start a blog or diary of your spectral month!
+            It's not every day you get pranked by the universe, so why not make
+            it immortal? 5. Stay Positive: They say a positive attitude repels
+            bad vibes – it's worth a shot to counterbalance your luck level!`;
 
   const eval_data = [
     {
@@ -204,10 +232,28 @@ function Result() {
     showResult(month);
   }, [month]);
 
+  // Handle Click of the description full screen modal show
+  const _handleClickFullScrenn = () => {
+    setDFullScreen(!dFullScreen);
+    if (paystate === false) setDFullScreen(false);
+  };
   return (
     <div className="board">
       {loading && <Loading />}
       <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
+      <div
+        className="modal_description_full"
+        style={
+          dFullScreen
+            ? { height: "100%" }
+            : { height: "0px", margin: "0px", padding: "0px" }
+        }
+      >
+        <PredictionAndTipsComponent
+          input={{ inputString: test_input }}
+          onZoomClick={_handleClickFullScrenn}
+        />
+      </div>
       <div className="board_content">
         {month <= 12 ? (
           <div className="main_month">
@@ -368,12 +414,18 @@ function Result() {
           className={`${`result_field`}`}
           style={{ height: paystate == true ? "50%" : "45%" }}
         >
-          <div
-            className={`${
-              paystate == true ? `result_content` : `result_content2`
-            }`}
-          >
-            {paystate && desc}
+          <div className={paystate ? "result_content" : "result_content2"}>
+            {paystate ? (
+              <PredictionAndTipsComponent
+                input={{ inputString: desc.toString() }}
+                onZoomClick={_handleClickFullScrenn}
+              />
+            ) : (
+              <PredictionAndTipsComponent
+                input={{ inputString: test_input }}
+                onZoomClick={_handleClickFullScrenn}
+              />
+            )}
           </div>
         </div>
         {/* display for description */}
