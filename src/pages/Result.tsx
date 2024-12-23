@@ -119,6 +119,7 @@ function Result() {
   };
   //navigate with main
   useEffect(() => {
+    setPayed(false);
     const queryParams = new URLSearchParams(location.search);
     if (queryParams.size == 1) {
       const result_month = queryParams.get("main_month");

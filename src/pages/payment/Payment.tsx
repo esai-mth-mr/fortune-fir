@@ -34,16 +34,14 @@ export default function Payment(props: {
   open: boolean;
   setOpen: any;
 }) {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   const [action, setAction] = React.useState("");
   //crypto part
   //end of crypto part
 
   //modal part
   React.useEffect(() => {
-    console.log("heeeeeee");
-    console.log(props.open);
-    setOpen(props.open);
+    props.setOpen(props.open);
   }, []);
 
   const handleClose = () => {
