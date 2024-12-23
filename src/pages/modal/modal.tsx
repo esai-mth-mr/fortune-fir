@@ -29,14 +29,14 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
             setAllowClose(false);
           }}
           className="modal_close" 
-          src="/assets/close.png" 
+          src={getImageURL("./assets/close.png")} 
           draggable={false} 
           alt="modal_close"/>
         <div className="modal_darkbg" />
         <img
           className="modal_gift"
           draggable={false}
-          src={getImageURL("/assets/svg/Gifts/holded_gift.svg")}
+          src={getImageURL("./assets/svg/Gifts/holded_gift.svg")}
         />
         <div className={`${score > 0 ? `modal_score` : `modal_score1`}`}>
           {score > 0 ? "+" + score! : score}
@@ -54,12 +54,12 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
         {score>-200&&score<=-100?<audio className="hidden" controls autoPlay><source src="./sounds/very_bad.mp3" /></audio>:<></>}
         {score>-200&&score<=-300?<audio className="hidden" controls autoPlay><source src="./sounds/exe_bad.wav" /></audio>:<></>}
 
-        {score>200&&score<=300?<img src={getImageURL("/assets/exe_good.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
-        {score>100&&score<=200?<img src={getImageURL("/assets/very_good.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
-        {score>0&&score<=100?<img src={getImageURL("/assets/good.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
-        {score>-100&&score<=0?<img src={getImageURL("/assets/bad.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
-        {score>-200&&score<=-100?<img src={getImageURL("/assets/very_bad.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
-        {score>-300&&score<=-200?<img src={getImageURL("/assets/exe_bad.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
+        {score>200&&score<=300?<img src={getImageURL("./assets/exe_good.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
+        {score>100&&score<=200?<img src={getImageURL("./assets/very_good.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
+        {score>0&&score<=100?<img src={getImageURL("./assets/good.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
+        {score>-100&&score<=0?<img src={getImageURL("./assets/bad.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
+        {score>-200&&score<=-100?<img src={getImageURL("./assets/very_bad.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
+        {score>-300&&score<=-200?<img src={getImageURL("./assets/exe_bad.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
 
       </div>
     </>
