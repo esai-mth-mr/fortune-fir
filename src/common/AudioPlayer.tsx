@@ -1,25 +1,24 @@
-import { useEffect, useRef } from 'react';  
-import wavfile from '../../public/sounds/main_page.mp3';
+// import { useEffect, useRef } from "react";
+// import wavfile from "../../public/sounds/main_page.mp3";
 
-const AudioPlayer = () => {  
-  const audioRef = useRef(new Audio(wavfile));  
+import { useEffect } from "react";
 
-  useEffect(() => {  
-    const audio = audioRef.current;  
+const AudioPlayer = () => {
+  // const audioRef = useRef(new Audio(wavfile));
 
-    // Set the audio to loop  
-    audio.loop = true;  
+  useEffect(() => {
+    // const audio = audioRef.current;
+    // // Set the audio to loop
+    // audio.loop = true;
+    // // Play the audio
+    // audio.play();
+    // // Cleanup function to pause the audio when the component unmounts
+    // return () => {
+    //   audio.play();
+    // };
+  }, []);
 
-    // Play the audio  
-    audio.play();  
+  return null; // This component doesn't need to render anything
+};
 
-    // Cleanup function to pause the audio when the component unmounts  
-    return () => {  
-      audio.play();  
-    };  
-  }, []);  
-
-  return null; // This component doesn't need to render anything  
-};  
-
-export default AudioPlayer;  
+export default AudioPlayer;
