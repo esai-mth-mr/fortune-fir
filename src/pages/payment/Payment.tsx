@@ -145,7 +145,7 @@ export default function Payment(props: {
             color: "white",
             padding: "5px 30px",
             fontSize: "14px",
-            fontFamily: "Poppins-bold",
+            fontFamily: "Poppins",
             transform: "translate(-29.3%) rotate(-45deg)",
             transformOrigin: "top left",
             zIndex: 2, // Ensure it is above other content
@@ -163,7 +163,7 @@ export default function Payment(props: {
               //fontFamily: "PlayfairDisplay-Bold",
               fontWeight: "900",
               fontSize: "40px",
-              fontFamily: "Poppins-bold",
+              fontFamily: "Poppins",
             }}
             className="gradient-text"
           >
@@ -217,7 +217,7 @@ export default function Payment(props: {
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{ zIndex: 1 }}>
-          <Button onClick={handleClose} sx={{ fontFamily: "Poppins-bold" }}>
+          <Button onClick={handleClose} sx={{ fontFamily: "Poppins" }}>
             Close
           </Button>
         </DialogActions>

@@ -1,8 +1,3 @@
-@import url("https://fonts.google.com/specimen/Rubik+Mono+One");
-
-body {
-  font-family: 'Rubik+Mono+One';
-}
 
 #root {
   width: 100vw;
@@ -150,49 +145,4 @@ body {
     border-width: 1px;
     border: 1px solid #f38b8b;
   }
-}
-
-@font-face {
-  font-family: "ProstoOne-Regular";
-  font-style: normal;
-  font-weight: normal;
-  src: url("./font/ProstoOne-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "TitanOne";
-  font-style: normal;
-  font-weight: normal;
-  src: url("./font/TitanOne-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "RubikMonoOne";
-  font-style: normal;
-  font-weight: normal;
-  src: url("./font/RubikMonoOne-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "PlaywriteDESASGuides";
-  font-style: normal;
-  font-weight: normal;
-  src: url("./font/PlaywriteDESASGuides-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "AlfaSlabOne";
-  font-style: normal;
-  font-weight: normal;
-  src: url("./font/AlfaSlabOne-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Poppins-bold";
-  src: url("./font/Poppins/Poppins-Bold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Poppins-boldItalic";
-  src: url("./font/Poppins/Poppins-BoldItalic.ttf") format("truetype");
 }
