@@ -11,6 +11,8 @@ import toast from "react-hot-toast";
 import getImageURL from "../utils/getImageURL";
 import Loading from "../common/Loading";
 import { saveYearStoryApi } from "../api/saveYearStoryApi";
+import { getRegenerationAssetsApi } from "../api/getRegenerationAssetsApi";
+import { GETDATA_ERROR } from "../constant";
 
 interface DataType {
   _id: string;
@@ -103,6 +105,10 @@ function Main() {
     try {
       const res = await getInitDataApi();
       if (res.status !== 200) {
+        if (res.message === GETDATA_ERROR) {
+          navigate("/result");
+          return;
+        }
         toast.error(res.message);
       } else {
         setData(res.message.data);
@@ -117,6 +123,26 @@ function Main() {
       setLoading(false); // Stop loading
     }
   }, []);
+
+  const getRegenerateData = async (data: any) => {
+    setLoading(true); // Start loading
+    try {
+      const res = await getRegenerationAssetsApi(data);
+      if (res.status !== 200) {
+        toast.error(res.message);
+      } else {
+        setData(res.message.data);
+        setMonth(res.message.month);
+        setDisplayYear(res.message.year_point);
+        setyearpoint(res.message.year_point);
+        console.log(res.message);
+      }
+    } catch (error) {
+      toast.error("Failed to fetch data!");
+    } finally {
+      setLoading(false); // Stop loading
+    }
+  };
 
   const saveMonthStory = async (sendData: SaveSendDataType) => {
     setLoading(true); // Start loading
@@ -162,9 +188,9 @@ function Main() {
     }
   }, [count]);
 
-  useEffect(() => {
-    getInitData();
-  }, [getInitData]);
+  // useEffect(() => {
+  //   getInitData();
+  // }, [getInitData]);
 
   const [yearpoint, setyearpoint] = useState<number>(0);
   const [monthpoint, setmonthpoint] = useState<number>(0);
@@ -340,9 +366,11 @@ function Main() {
         setyearpoint(parseInt(result_data[1]));
       }
       setEdit(true);
+
+      getRegenerateData(parseInt(result_month!));
     } else {
-      setMonth(1);
       setEdit(false);
+      getInitData();
     }
   }, []);
 
