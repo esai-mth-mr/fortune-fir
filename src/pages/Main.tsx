@@ -298,17 +298,17 @@ function Main() {
     if (point != 0) {
       setTimeout(() => {
         setDisplaypoint(monthpoint);
-      }, 1000);
+      }, 1500);
       setTimeout(() => {
         setmonthpoint(monthpoint + point);
-      }, 1000);
+      }, 1500);
 
       setTimeout(() => {
         setDisplayYear(yeardisplaypoint);
-      }, 1000);
+      }, 1500);
       setTimeout(() => {
         setyearpoint(yeardisplaypoint + point);
-      }, 1000);
+      }, 1500);
     }
   }, [point]);
 
@@ -318,25 +318,25 @@ function Main() {
       if (displaypoint != monthpoint) {
         setTimeout(() => {
           setDisplaypoint(displaypoint + 1);
-        }, 0.5);
+        }, 2);
       }
 
       if (yeardisplaypoint != yearpoint) {
         setTimeout(() => {
           setDisplayYear(yeardisplaypoint + 1);
-        }, 0.5);
+        }, 2);
       }
     } else if (point < 0 && point != 0) {
       if (displaypoint != monthpoint) {
         setTimeout(() => {
           setDisplaypoint(displaypoint - 1);
-        }, 0.5);
+        }, 2);
       }
 
       if (yeardisplaypoint != yearpoint) {
         setTimeout(() => {
           setDisplayYear(yeardisplaypoint - 1);
-        }, 0.5);
+        }, 2);
       }
     }
   });

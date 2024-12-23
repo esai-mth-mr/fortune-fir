@@ -99,7 +99,6 @@ export default function Payment(props: {
           }
           const { error } = await stripe?.redirectToCheckout({ sessionId });
           if (error) {
-            console.log("heheheheheh");
             toast.error("Error redirecting to Stripe");
           }
           setLoading(false);
@@ -115,6 +114,7 @@ export default function Payment(props: {
   //end of stripe part
 
   React.useEffect(() => {
+
     setAction("regeneration");
   }, []);
   return (
@@ -129,6 +129,8 @@ export default function Payment(props: {
             width: "280px",
             height: "470px",
             backgroundColor: "#f5f5f5",
+            boxShadow:
+              "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px !important",
           },
         }}
         TransitionComponent={Transition}
