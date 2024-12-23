@@ -117,12 +117,23 @@ function Result() {
     }
   }, []);
 
+  useEffect(() => {  
+    const audio = document.getElementById('result-audio') as HTMLAudioElement;  
+    if (audio) {  
+      audio.play().catch((error) => {  
+        console.error('Failed to play audio:', error);  
+      });  
+    }  
+  }, []); // Empty dependency array means this runs once on mount  
+
   return (
     <div className="board">
       <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
       <div className="board_content">
         <div className="result_audio">
-          <audio className="hidden" autoPlay loop ><source src="./sounds/main_page.mp3" /></audio>
+          <audio id="result-audio" className="hidden" autoPlay loop >
+            <source src="./sounds/result_page.mp3" />
+          </audio>
         </div>
         {month <= 12 ? (
           <div className={`${month <= 12 ? `main_month` : ``}`}>
@@ -295,6 +306,7 @@ function Result() {
         </div>
         {/* display for description */}
         <div
+          onClick={()=>setIsResultOpen(false)}
           className={`${
             isresultOpen == true ? `result_state_desc` : `result_state_desc1`
           }`}
@@ -324,7 +336,7 @@ function Result() {
               ? eval_data[5].eval_state
               : ""}
           </div>
-          <div className="result_state_desc_desc">
+          <div onClick={()=>setIsResultOpen(false)} className="result_state_desc_desc">
             {allowdata[month - 1].point >= 1400 &&
             allowdata[month - 1].point <= 2100
               ? eval_data[0].eval_content
@@ -351,7 +363,7 @@ function Result() {
           </div>
 
           <img onClick={()=>setIsResultOpen(false)} className="result_close" src={getImageURL("./assets/close.png")} draggable={false} alt="result_close"/>
-          <img className="result_santa" src={getImageURL("./assets/santa.png")} draggable={false} alt="result_santa"/>
+          <img onClick={()=>setIsResultOpen(false)} className="result_santa" src={getImageURL("./assets/santa.png")} draggable={false} alt="result_santa"/>
 
           {allowdata[month - 1].point >= 1400 &&
           allowdata[month - 1].point <= 2100 ? (
