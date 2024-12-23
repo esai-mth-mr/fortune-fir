@@ -5,6 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Box from "@mui/material/Box";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import "./payment.css";
@@ -30,6 +31,7 @@ const Transition = React.forwardRef(function Transition(
 
 export default function Payment() {
   const [open, setOpen] = React.useState(false);
+  const [action, setAction] = React.useState("");
   //crypto part
   //end of crypto part
 
@@ -67,12 +69,10 @@ export default function Payment() {
     axios
       .post(
         "api/payment/stripe/session-initiate",
-        { action: "regeneration" },
+        { action: action },
         setAuthToken()
       )
       .then(async (res) => {
-        console.log(res);
-
         if (res.status === 200) {
           const stripe = await stripePromise;
           const sessionId = res.data.sessionId;
@@ -97,39 +97,107 @@ export default function Payment() {
   };
   //end of stripe part
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+    setAction("regeneration");
+  }, []);
   return (
-    <React.Fragment>
+    <div className="board">
+      <div className="hero_img_field">
+        <img
+          className="hero_imgage"
+          src="/src/assets/backgroundImage _1.png"
+          draggable={false}
+          alt="hero_imgage"
+        />
+      </div>
       <Button variant="outlined" onClick={handleClickOpen}>
         Slide in alert dialog
       </Button>
       <Dialog
         open={open}
+        maxWidth="xl"
+        sx={{
+          "& .MuiPaper-root": {
+            borderRadius: "10px",
+            width: "280px",
+            height: "470px",
+          },
+        }}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
+        {/* Ribbon */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: "68px", // Adjust to fine-tune the position
+            left: "10px", // Adjust to fine-tune the position
+            // backgroundColor: "red",
+            color: "white",
+            padding: "5px 30px",
+            fontSize: "14px",
+            fontFamily: "Poppins-bold",
+            transform: "translate(-29.3%) rotate(-45deg)",
+            transformOrigin: "top left",
+            zIndex: 2, // Ensure it is above other content
+            boxShadow: "0px 4px 6px rgba(0,0,0,0.2)", // Optional: Add shadow for a better
+            background:
+              "linear-gradient(to right, rgb(28, 216, 210) 0%, rgb(147, 237, 199) 51%, rgb(28, 216, 210) 100%)",
+            backgroundSize: "200% auto",
+          }}
+        >
+          Christmas!
+        </Box>
         <DialogTitle>
-          <div style={{ fontFamily: "PlayfairDisplay-Bold" }}>$0.99</div>
+          <div
+            style={{
+              //fontFamily: "PlayfairDisplay-Bold",
+              fontWeight: "900",
+              fontSize: "40px",
+              fontFamily: "Poppins-bold",
+            }}
+            className="gradient-text"
+          >
+            $0.99
+          </div>
         </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
+        <DialogContent sx={{ zIndex: 1 }}>
+          <DialogContentText
+            id="alert-dialog-slide-description"
+            sx={{
+              marginTop: "10px",
+            }}
+          >
             <div className="stripe">
               <button
                 style={{
                   width: "100%",
                 }}
+                className="stripeBtn"
                 onClick={handleStripe}
               >
                 <img
+<<<<<<< Updated upstream
                   style={{ width: "100%", height: "30px" }}
                   src={getImageURL("./assets/stripe.svg")}
+=======
+                  style={{
+                    width: "100%",
+                    height: "30px",
+                  }}
+                  src="/src/assets/stripe.svg"
+>>>>>>> Stashed changes
                 ></img>
               </button>
             </div>
             <div className="paypal">
-              <button style={{ width: "100%" }} onClick={handlePayPal}>
+              <button
+                style={{ width: "100%" }}
+                onClick={handlePayPal}
+                className="paypalBtn"
+              >
                 <img
                   style={{ width: "100%", height: "30px" }}
                   src={getImageURL("./assets/paypal.svg")}
@@ -138,14 +206,28 @@ export default function Payment() {
                 ></img>
               </button>
             </div>
-            <hr></hr>
+            <hr style={{ opacity: 20, zIndex: -1 }}></hr>
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose}>Agree</Button>
+        <DialogActions sx={{ zIndex: 1 }}>
+          <Button onClick={handleClose} sx={{ fontFamily: "Poppins-bold" }}>
+            Close
+          </Button>
         </DialogActions>
+        <div
+          style={{
+            position: "absolute",
+            zIndex: 0,
+            bottom: "0",
+            right: "0",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <img style={{ objectFit: "cover" }} src="/src/assets/santa.png"></img>
+        </div>
       </Dialog>
-    </React.Fragment>
+    </div>
   );
 }

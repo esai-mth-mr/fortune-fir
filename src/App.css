@@ -1,7 +1,11 @@
 @import url("https://fonts.google.com/specimen/Rubik+Mono+One");
 
 body {
+<<<<<<< Updated upstream
   font-family: "Rubik+Mono+One";
+=======
+  font-family: 'Rubik+Mono+One';
+>>>>>>> Stashed changes
 }
 
 #root {
@@ -46,6 +50,7 @@ body {
 }
 
 .app {
+<<<<<<< Updated upstream
   height: 100vh; /* Full height */
   position: relative;
 }
@@ -55,6 +60,10 @@ body {
   top: 3px;
   left: 3px;
   z-index: 100;
+=======
+  height: 100vh;
+  /* Full height */
+>>>>>>> Stashed changes
 }
 
 @media (max-width: 450px) {
@@ -162,82 +171,141 @@ body {
   font-family: "ProstoOne-Regular";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/ProstoOne-Regular.ttf") format("truetype");
+=======
+  src: url('./font/ProstoOne-Regular.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "PlayfairDisplay-Black";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/PlayfairDisplay-Black.ttf") format("truetype");
+=======
+  src: url('./font/PlayfairDisplay-Black.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "PlayfairDisplay-BlackItalic";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/PlayfairDisplay-BlackItalic.ttf") format("truetype");
+=======
+  src: url('./font/PlayfairDisplay-BlackItalic.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "PlayfairDisplay-Bold";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/PlayfairDisplay-Bold.ttf") format("truetype");
+=======
+  src: url('./font/PlayfairDisplay-Bold.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "PlayfairDisplay-BoldItalic";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/PlayfairDisplay-BoldItalic.ttf") format("truetype");
+=======
+  src: url('./font/PlayfairDisplay-BoldItalic.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "PlayfairDisplay-Italic";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/PlayfairDisplay-Italic.ttf") format("truetype");
+=======
+  src: url('./font/PlayfairDisplay-Italic.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "PlayfairDisplay-Regular";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/PlayfairDisplay-Regular.ttf") format("truetype");
+=======
+  src: url('./font/PlayfairDisplay-Regular.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "Caveat";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/Caveat-VariableFont_wght.ttf") format("truetype");
+=======
+  src: url('./font/Caveat-VariableFont_wght.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "TitanOne";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/TitanOne-Regular.ttf") format("truetype");
+=======
+  src: url('./font/TitanOne-Regular.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "RubikMonoOne";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/RubikMonoOne-Regular.ttf") format("truetype");
+=======
+  src: url('./font/RubikMonoOne-Regular.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "PlaywriteDESASGuides";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/PlaywriteDESASGuides-Regular.ttf") format("truetype");
+=======
+  src: url('./font/PlaywriteDESASGuides-Regular.ttf') format('truetype');
+>>>>>>> Stashed changes
 }
 
 @font-face {
   font-family: "AlfaSlabOne";
   font-style: normal;
   font-weight: normal;
+<<<<<<< Updated upstream
   src: url("./font/AlfaSlabOne-Regular.ttf") format("truetype");
 }
+=======
+  src: url('./font/AlfaSlabOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins-BoldItalic';
+  src: url('./font/Poppins/Poppins-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins-Bold';
+  src: url('./font/Poppins/Poppins-Bold.ttf') format('truetype');
+}
+>>>>>>> Stashed changes
