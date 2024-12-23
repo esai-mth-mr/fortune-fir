@@ -17,7 +17,7 @@
         width: 20%;
         position: absolute;
         animation-name: move_icon;
-        animation-duration: 1s;
+        animation-duration: 2s;
         animation-delay: 0.3s;
         animation-fill-mode: both;
         z-index: 65;
@@ -52,7 +52,7 @@
         font-weight: bold;
         position: absolute;
         animation-name: score;
-        animation-duration: 1s;
+        animation-duration: 2s;
         animation-fill-mode: both;
         z-index: 65;
         text-shadow: 1px 1px 1px black;
@@ -64,7 +64,7 @@
         font-weight: bold;
         position: absolute;
         animation-name: score;
-        animation-duration: 1s;
+        animation-duration: 2s;
         animation-fill-mode: both;
         z-index: 65;
         text-shadow: 1px 1px 1px black;
@@ -94,9 +94,8 @@
             font-size: 30px;
             font-weight: 100;
             text-align: center;
-            text-shadow: 1px 1px 1px  black;
-            color: red;
-            // color: #f8b7b7;
+            text-shadow: 1px 1px 1px  white;
+            color: #59c34a;
         }
         .modal_desc{
             width: 95%;
@@ -106,7 +105,7 @@
             font-weight: 100;
             text-align: center;
             text-shadow: 1px 1px 10px  white;
-            color: black;
+            color: #0a4516;
         }
         
     }

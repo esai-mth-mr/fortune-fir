@@ -18,7 +18,7 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
   useEffect(() => {
     setTimeout(() => {
       setAllowClose(true);
-    }, 1600);
+    }, 2600);
   }, [score]);
 
   return (
