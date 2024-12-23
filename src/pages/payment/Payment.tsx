@@ -217,7 +217,10 @@ export default function Payment() {
             justifyContent: "center",
           }}
         >
-          <img style={{ objectFit: "cover" }} src="/src/assets/santa.png"></img>
+          <img
+            style={{ objectFit: "cover" }}
+            src={getImageURL("./assets/santa.png")}
+          ></img>
         </div>
       </Dialog>
     </div>

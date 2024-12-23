@@ -3,7 +3,7 @@ import setAuthToken from "../../utils/setAuthToken";
 import axios from "../../utils/axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../common/Loading";
-
+import getImageURL from "../../utils/getImageURL";
 const Result = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -64,7 +64,8 @@ const Result = () => {
         <div className="hero_img_field">
           <img
             className="hero_imgage"
-            src="/src/assets/santa2.png"
+            src={getImageURL("./assets/santa2.png")}
+            // src="/src/assets/santa2.png"
             draggable={false}
             alt="hero_imgage"
           />
