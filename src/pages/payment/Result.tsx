@@ -11,9 +11,12 @@ const Result = () => {
 
   const queryParams = new URLSearchParams(location.search);
 
-  const payerId = queryParams.get("payerId");
+  const payerId = queryParams.get("PayerID");
   const paymentId = queryParams.get("paymentId");
   const state = queryParams.get("state");
+  console.log(payerId);
+  console.log(paymentId);
+  console.log(state);
   const fetchDataAPI = async () => {
     try {
       const res = await axios.post(
