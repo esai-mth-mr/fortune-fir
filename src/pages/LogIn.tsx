@@ -39,7 +39,7 @@ function LogIn() {
     <div className="board">
       <img
         className="sign_header"
-        src={getImageURL("./assets/santamodel.png")}
+        src={getImageURL("./assets/santamodel-1.webp")}
         alt="hero"
         draggable="false"
       />

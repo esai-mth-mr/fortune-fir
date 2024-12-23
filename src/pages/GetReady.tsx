@@ -9,7 +9,7 @@ function GetReady() {
       <div className="getready_img_field">
         <img
           className="getready_img"
-          src={getImageURL("./assets/backgroundImage _1.png")}
+          src={getImageURL("./assets/backgroundImage _1.webp")}
           alt="ready"
           draggable="false"
         />

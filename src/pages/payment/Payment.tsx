@@ -174,7 +174,7 @@ export default function Payment(props: {
             >
               <img
                 style={{ width: "100%", height: "30px" }}
-                src={getImageURL("./assets/stripe.svg")}
+                src={getImageURL("./assets/stripe.webp")}
               ></img>
             </button>
           </div>
@@ -186,7 +186,7 @@ export default function Payment(props: {
             >
               <img
                 style={{ width: "100%", height: "30px" }}
-                src={getImageURL("./assets/paypal.svg")}
+                src={getImageURL("./assets/paypal.webp")}
                 alt="PayPal Logo"
                 draggable="false"
               ></img>
@@ -213,7 +213,7 @@ export default function Payment(props: {
       >
         <img
           style={{ objectFit: "cover" }}
-          src={getImageURL("./assets/santa.png")}
+          src={getImageURL("./assets/santa-1.webp")}
         ></img>
       </div>
     </Dialog>
