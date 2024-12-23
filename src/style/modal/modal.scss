@@ -95,12 +95,12 @@
             font-weight: 100;
             text-align: center;
             text-shadow: 1px 1px 1px  white;
-            color: #59c34a;
+            color: #126706;
         }
         .modal_desc{
             width: 95%;
             height: 70%;
-            font-family: 'DM Sans';
+            font-family: 'DM Sans'; 
             font-size: 20px;
             font-weight: 100;
             text-align: center;
@@ -154,7 +154,7 @@
 
 @keyframes move_icon{
     0%{ top: 45%; left:42%; opacity: 1;}
-    // 95%{top: 30%; left:35%; opacity: 1;}
-    100%{top: 32%; left:42%; opacity: 0;}
+    90%{top: 30%; left:42%; opacity: 1;}
+    100%{top: 29%; left:42%; opacity: 0;}
 }
 
