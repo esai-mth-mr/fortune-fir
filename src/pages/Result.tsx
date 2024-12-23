@@ -430,7 +430,6 @@ function Result() {
         </div>
         {/* display for description */}
         <div
-          onClick={() => setIsResultOpen(false)}
           className={`${
             isresultOpen == true ? `result_state_desc` : `result_state_desc1`
           }`}
@@ -484,7 +483,6 @@ function Result() {
             alt="result_close"
           />
           <img
-            onClick={() => setIsResultOpen(false)}
             className="result_santa"
             src={getImageURL("./assets/santa-1.webp")}
             draggable={false}
