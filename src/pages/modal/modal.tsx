@@ -25,6 +25,7 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
     <>
       <div className="modal">
         <img onClick={() => {
+<<<<<<< Updated upstream
             allowclose == true && setIsOpen(false);
             setAllowClose(false);
           }}
@@ -32,6 +33,24 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
           src="assets/close.png" 
           draggable={false} 
           alt="modal_close"/>
+=======
+            allowclose == true && setIsOpen(false);
+            setAllowClose(false);
+          }}
+          className="modal_close" 
+          src="assets/close.png" 
+          draggable={false} 
+          alt="modal_close"/>
+        {/* <div
+          className="modal_close"
+          onClick={() => {
+            allowclose == true && setIsOpen(false);
+            setAllowClose(false);
+          }}
+        >
+          X
+        </div> */}
+>>>>>>> Stashed changes
         <div className="modal_darkbg" />
         <img
           className="modal_gift"
