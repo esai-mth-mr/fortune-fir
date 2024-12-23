@@ -414,7 +414,7 @@
             }
             .result_santa{
                 position: absolute;
-                opacity: 1;
+                opacity: 0.5;
                 right: 12%;
                 width: 70%;
                 bottom: -12%;
@@ -431,7 +431,6 @@
             bottom: 5%;
             display: flex;
             justify-content: center;
-            z-index: 70;
             .result_page{
                 width: 95%;
             }

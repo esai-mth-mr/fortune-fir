@@ -24,15 +24,14 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
   return (
     <>
       <div className="modal">
-        <div
-          className="modal_close"
-          onClick={() => {
+        <img onClick={() => {
             allowclose == true && setIsOpen(false);
             setAllowClose(false);
           }}
-        >
-          X
-        </div>
+          className="modal_close" 
+          src="assets/close.png" 
+          draggable={false} 
+          alt="modal_close"/>
         <div className="modal_darkbg" />
         <img
           className="modal_gift"
@@ -46,6 +45,16 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
           <div className="modal_icon">{modalData.name}</div>
           <div className="modal_desc">{modalData.desc}</div>
         </div>
+
+        {/* run sounds */}
+        {score>200&&score<=300?<audio className="hidden" controls autoPlay><source src="./sounds/exe_good.wav" /></audio>:<></>}
+        {score>100&&score<=200?<audio className="hidden" controls autoPlay><source src="./sounds/very_good.wav" /></audio>:<></>}
+        {score>0&&score<=100?<audio className="hidden" controls autoPlay><source src="./sounds/good.wav" /></audio>:<></>}
+        {score>-100&&score<=0?<audio className="hidden" controls autoPlay><source src="./sounds/bad.mp3" /></audio>:<></>}
+        {score>-200&&score<=-100?<audio className="hidden" controls autoPlay><source src="./sounds/very_bad.mp3" /></audio>:<></>}
+        {score>-200&&score<=-300?<audio className="hidden" controls autoPlay><source src="./sounds/exe_bad.wav" /></audio>:<></>}
+
+        {score>200&&score<=300}
       </div>
     </>
   );
