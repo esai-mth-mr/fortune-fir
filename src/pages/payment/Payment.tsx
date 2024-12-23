@@ -179,16 +179,8 @@ export default function Payment() {
                 onClick={handleStripe}
               >
                 <img
-<<<<<<< Updated upstream
                   style={{ width: "100%", height: "30px" }}
                   src={getImageURL("./assets/stripe.svg")}
-=======
-                  style={{
-                    width: "100%",
-                    height: "30px",
-                  }}
-                  src="/src/assets/stripe.svg"
->>>>>>> Stashed changes
                 ></img>
               </button>
             </div>
