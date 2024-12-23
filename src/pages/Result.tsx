@@ -12,6 +12,10 @@ import { checkRegenerationApi } from "../api/checkRegenerationApi";
 import { upgradeRoundApi } from "../api/upgradeRoundApi";
 import Loading from "../common/Loading";
 import PredictionAndTipsComponent from "../components/PredictionAndTipsComponent";
+<<<<<<< Updated upstream
+=======
+import test from "node:test";
+>>>>>>> Stashed changes
 
 function Result() {
   const [isresultOpen, setIsResultOpen] = useState<boolean>(true);
@@ -279,7 +283,7 @@ function Result() {
             {month <= 12 ? (
               <>
                 <div>Year:{year_point}</div>
-                <div>Month:{month_point}</div>
+                <div>Mon:{month_point}</div>
               </>
             ) : (
               <>Year:{year_point}</>
