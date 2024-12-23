@@ -38,6 +38,12 @@ const Result = () => {
   useEffect(() => {
     setIsLoading(true);
     if (!payerId || !paymentId || !state) {
+      // axios
+      //   .post("/api/stripe/session-complete", {}, setAuthToken())
+      //   .then((res) => {
+      //     console.log(res.data);
+      //   })
+      //   .catch((err) => console.error(err));
       navigate("/payment/cancel");
       return;
     }
