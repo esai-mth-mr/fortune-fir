@@ -44,8 +44,8 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
           {score > 0 ? "+" + score! : score}
         </div>
         <div className="modal_content">
-          <div className="modal_icon">{modalData.name}</div>
-          <div className="modal_desc">{modalData.desc}</div>
+          <div className="modal_icon" style={{color: score<0?"black":"#126706"}}>{modalData.name}</div>
+          <div className="modal_desc" style={{color: score<0?"black":"#0f4c06"}}>{modalData.desc}</div>
         </div>
 
         {/* run sounds */}
