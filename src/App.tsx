@@ -24,9 +24,20 @@ import ResultPayment from "./pages/payment/Result";
 import NotFound from "./pages/NotFound";
 import Help from "./pages/Help";
 import getImageURL from "./utils/getImageURL";
+import AudioPlayer from "./common/AudioPlayer";
 
 function App() {
   const navigate = useNavigate();
+
+  useEffect(() => {  
+    const audio = document.getElementById('main-audio') as HTMLAudioElement;  
+    if (audio) {  
+      audio.play().catch((error) => {  
+        console.error('Failed to play audio:', error);  
+      });  
+    }  
+  }, []); // Empty dependency array means this runs once on mount  
+
 
   useEffect(() => {
     try {
@@ -48,16 +59,20 @@ function App() {
       <div className="app">
         <Link className="app-logo" to="/">
           <img
-            src={getImageURL("./assets/HowLucky2025_logo.png")}
+            src={getImageURL("./assets/HowLucky2025_logo.webp")}
             width="50px"
             height="50px"
           ></img>
         </Link>
+        <AudioPlayer/>
+        {/* <audio id="main-audio" className="hidden" autoPlay loop>
+          <source  src="./sounds/main_page.mp3" />
+        </audio> */}
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
-          <Route path="/getready" element={<GetReady />} />
           <Route path="/required" element={<Required />} />
           <Route path="/verifing" element={<Verifing />} />
           <Route path="/successful" element={<Succesful />} />

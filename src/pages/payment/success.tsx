@@ -12,14 +12,14 @@ const Success = () => {
       <div className="hero_img_field">
         <img
           className="hero_imgage"
-          src={getImageURL("./assets/backgroundImage _1.png")}
+          src={getImageURL("./assets/backgroundImage _1.webp")}
           draggable={false}
           alt="hero_imgage"
         />
       </div>
       <div className="successIcon_field">
         <img
-          src={getImageURL("./assets/successIcon.png")}
+          src={getImageURL("./assets/successIcon.webp")}
           draggable="false"
           alt="successIcon"
           className="successIcon"

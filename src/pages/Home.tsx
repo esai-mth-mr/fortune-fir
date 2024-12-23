@@ -31,7 +31,7 @@ function Home() {
       <div className="home_header">
         <img
           className="landing"
-          src={getImageURL("./assets/santa2.png")}
+          src={getImageURL("./assets/santa2.webp")}
           alt="santa"
           draggable={false}
         />

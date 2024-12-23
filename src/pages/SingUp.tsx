@@ -124,7 +124,7 @@ const SignUp: React.FC = () => {
     <div className="board">
       <img
         className="sign_header"
-        src={getImageURL("./assets/santamodel.png")}
+        src={getImageURL("./assets/santamodel-1.webp")}
         alt="Header"
         draggable="false"
       />

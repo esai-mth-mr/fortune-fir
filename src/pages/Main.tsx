@@ -362,11 +362,11 @@ function Main() {
       <div
         className={loading ? "disabled-content board_content" : "board_content"}
       >
-        <div className="main_audio">
+        {/* <div className="main_audio">
           <audio id="main-audio" className="hidden" autoPlay loop>
             <source  src="./sounds/main_page.mp3" />
           </audio>
-        </div>
+        </div> */}
         <div className="main_month">
           <div className="month_title">2025</div>
           <div className="month_num">
@@ -379,7 +379,7 @@ function Main() {
           <div className={`${countnum == false ? `available` : `available1`}`}>
             <img
               className="modal_count_img"
-              src={getImageURL("./assets/svg/Gifts/gift_1.svg")}
+              src={getImageURL("./assets/svg/Gifts/gift_1.webp")}
               draggable={false}
               alt="modal_gift"
               width={22}
@@ -399,7 +399,7 @@ function Main() {
         <div className="main_img_field">
           <img
             className="main_img"
-            src={getImageURL("./assets/backgroundImage _1.png")}
+            src={getImageURL("./assets/backgroundImage _1.webp")}
             draggable={false}
             alt="main_img"
           />
@@ -417,9 +417,9 @@ function Main() {
                     src={
                       AllowOpen[index]
                         ? getImageURL(
-                            `./assets/svg/Gifts/gift_${gifts[index]}.svg`
+                            `./assets/svg/Gifts/gift_${gifts[index]}.webp`
                           )
-                        : getImageURL(`./assets/openbox.png`)
+                        : getImageURL(`./assets/openbox.webp`)
                     }
                     onClick={() => {
                       handleItemClick(
@@ -446,9 +446,9 @@ function Main() {
                       src={
                         AllowOpen[index]
                           ? getImageURL(
-                              `./assets/svg/Gifts/gift_${gifts[index]}.svg`
+                              `./assets/svg/Gifts/gift_${gifts[index]}.webp`
                             )
-                          : getImageURL(`./assets/openbox.png`)
+                          : getImageURL(`./assets/openbox.webp`)
                       }
                       onClick={() => {
                         handleItemClick(

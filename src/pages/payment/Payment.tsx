@@ -224,7 +224,71 @@ export default function Payment(props: {
             src={getImageURL("./assets/santa.png")}
           ></img>
         </div>
+<<<<<<< HEAD
       </Dialog>
     </div>
+=======
+      </DialogTitle>
+      <DialogContent sx={{ zIndex: 1 }}>
+        <DialogContentText
+          id="alert-dialog-slide-description"
+          sx={{
+            marginTop: "10px",
+          }}
+        >
+          <div className="stripe">
+            <button
+              style={{
+                width: "100%",
+              }}
+              className="stripeBtn"
+              onClick={handleStripe}
+            >
+              <img
+                style={{ width: "100%", height: "30px" }}
+                src={getImageURL("./assets/stripe.webp")}
+              ></img>
+            </button>
+          </div>
+          <div className="paypal">
+            <button
+              style={{ width: "100%" }}
+              onClick={handlePayPal}
+              className="paypalBtn"
+            >
+              <img
+                style={{ width: "100%", height: "30px" }}
+                src={getImageURL("./assets/paypal.webp")}
+                alt="PayPal Logo"
+                draggable="false"
+              ></img>
+            </button>
+          </div>
+          <hr style={{ opacity: 20, zIndex: -1 }}></hr>
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions sx={{ zIndex: 1 }}>
+        <Button onClick={handleClose} sx={{ fontFamily: "Poppins-bold" }}>
+          Close
+        </Button>
+      </DialogActions>
+      <div
+        style={{
+          position: "absolute",
+          zIndex: 0,
+          bottom: "0",
+          right: "0",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <img
+          style={{ objectFit: "cover" }}
+          src={getImageURL("./assets/santa-1.webp")}
+        ></img>
+      </div>
+    </Dialog>
+>>>>>>> 52281012f2354aec25a1445db1cc4796feb54058
   );
 }
