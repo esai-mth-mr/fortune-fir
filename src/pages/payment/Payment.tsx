@@ -18,7 +18,7 @@ import getImageURL from "../../utils/getImageURL";
 import Loading from "../../common/Loading";
 
 const stripePromise = loadStripe(
-  "pk_test_51QXkg1A9YfpPkxIlDXG9iEGhAWo0bEaxfukGsLYfyzBkcMV4jipebVVh3XnfKjj9YZjL3uv8uiexgIkwgoWTcTqu00tZhUIpUx"
+  "pk_live_51QXkg1A9YfpPkxIlsLfvi5mV2iQiCf02XalFhJPCMaQ1lma1ZqTri9B8O4jjo8UESH3PGIS5Xgttgu8BooVpZjgi00nInxQPOY"
 );
 
 const Transition = React.forwardRef(function Transition(
@@ -35,8 +35,6 @@ export default function Payment(props: {
   open: boolean;
   setOpen: any;
 }) {
-  // const [open, setOpen] = React.useState(false);
-  const [action, setAction] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   //crypto part
   //end of crypto part
@@ -82,7 +80,7 @@ export default function Payment(props: {
     await axios
       .post(
         "api/payment/stripe/session-initiate",
-        { action: action },
+        { action: props.action },
         setAuthToken()
       )
       .then(async (res) => {
@@ -99,7 +97,6 @@ export default function Payment(props: {
           }
           const { error } = await stripe?.redirectToCheckout({ sessionId });
           if (error) {
-            console.log("heheheheheh");
             toast.error("Error redirecting to Stripe");
           }
           setLoading(false);
@@ -115,9 +112,7 @@ export default function Payment(props: {
   //end of stripe part
 
   React.useEffect(() => {
-    console.log(props.action);
-
-    setAction("regeneration");
+    //setAction(props.action);
   }, []);
   return (
     <div>
@@ -131,6 +126,8 @@ export default function Payment(props: {
             width: "280px",
             height: "470px",
             backgroundColor: "#f5f5f5",
+            boxShadow:
+              "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px !important",
           },
         }}
         TransitionComponent={Transition}

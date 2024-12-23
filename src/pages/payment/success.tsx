@@ -44,6 +44,7 @@ const Success = () => {
             fontFamily: "Poppins",
             borderRadius: "20px",
             color: "white",
+            padding: "8px 15px",
           }}
           className="button"
           onClick={handleBack}
