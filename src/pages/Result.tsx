@@ -88,6 +88,12 @@ function Result() {
     setPayed(false);
   });
 
+  //display express level
+  useEffect(()=>{
+    console.log("month", month);
+    setIsResultOpen(true);
+  },[month])
+
   //navigate
   const handleRegenerate = () => {
     navigate(
@@ -169,7 +175,7 @@ function Result() {
           <div className="result_page">
             <Stack style={{ width: "100%" }} spacing={1}>
               <Pagination
-                onChange={handlePageChange}
+                onChange={()=>handlePageChange}
                 count={12}
                 variant="outlined"
               />
