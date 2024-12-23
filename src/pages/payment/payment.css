@@ -87,7 +87,7 @@
 }
 
 .stripeBtn {
-    background: linear-gradient(to right, rgb(54, 209, 220) 0%, #646ede 51%, rgb(54, 209, 220) 100%);
+    background: linear-gradient(to right, rgb(0, 198, 255) 0%, rgb(0, 114, 255) 51%, rgb(0, 198, 255) 100%);
     background-size: 200% auto;
     transition: all 0.3s ease-in-out;
 }

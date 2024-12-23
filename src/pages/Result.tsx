@@ -91,8 +91,10 @@ function Result() {
 
   //navigate
   const handlePreview = () => {
-    setOpenPayment(true);
-    setAction("preview");
+    if (!paystate) {
+      setOpenPayment(true);
+      setAction("preview");
+    }
   };
   const handleRegenerate = async () => {
     setAction("regeneration");
@@ -151,10 +153,12 @@ function Result() {
         toast.error(res.message);
         return false;
       } else {
-        if (res.message.payment) return true;
-        else {
+        if (res.message.payment) {
+          setPayed(true);
+          return true;
+        } else {
           setOpenPayment(true);
-
+          setPayed(false);
           return false;
 
           // return true;
@@ -188,7 +192,6 @@ function Result() {
 
   //navigate with main
   useEffect(() => {
-    // setPayed(true);
     const queryParams = new URLSearchParams(location.search);
     if (queryParams.size == 1) {
       const result_month = queryParams.get("main_month");
