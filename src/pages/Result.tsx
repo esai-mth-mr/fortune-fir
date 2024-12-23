@@ -95,7 +95,8 @@ function Result() {
     if (!paystate) {
       setOpenPayment(true);
       setAction("preview");
-    }
+    } else{
+    toast.success("You have already paid.");
   };
   const handleRegenerate = async () => {
     setAction("regeneration");
