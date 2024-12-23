@@ -385,6 +385,9 @@
             bottom: 0;
             left: 0;
             background-color: whitesmoke;
+            // animation-name: opacitypro;
+            animation-name: rise;
+            animation-duration:0.2s;
             .result_state_desc_title{
                 margin-top: 15%;
                 width: 100%;
@@ -403,6 +406,7 @@
                 position: absolute;
                 top: 3%;
                 left: 5%;
+                animation: scale 1s infinite;
             }
             .result_state_desc_desc{
                 width: 97%;
@@ -455,8 +459,7 @@
             margin-top: -30%;
             overflow-y: auto;
             z-index: 30;
-            // animation-name: opacitypro;
-            // animation-duration:2s;
+    
             .result_title{
                 color: lightcoral;
                 font-family: "monospace";
@@ -523,14 +526,24 @@
   }
 
 @keyframes opacitypro {
-    0%{opacity: 0;}
+    0%{opacity: 0.7;}
     100%{opacity: 1;}
+}
+
+@keyframes opacitypro_opponent {
+    0%{opacity: 1;}
+    100%{opacity: 0;}
 }
 
 @keyframes scale{
     0%{transform: scale(1);}
     50%{transform: scale(1.5);}
     100%{transform: scale(1);}
+}
+
+@keyframes rise{
+    0%{bottom: -30%;}
+    100%{bottom: 0%;}
 }
 
 @media (min-height: 600px) and (max-height: 700px){

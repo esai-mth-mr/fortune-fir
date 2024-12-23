@@ -52,7 +52,7 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
         {score>0&&score<=100?<audio className="hidden" controls autoPlay><source src="./sounds/good.wav" /></audio>:<></>}
         {score>-100&&score<=0?<audio className="hidden" controls autoPlay><source src="./sounds/bad.mp3" /></audio>:<></>}
         {score>-200&&score<=-100?<audio className="hidden" controls autoPlay><source src="./sounds/very_bad.mp3" /></audio>:<></>}
-        {score>-200&&score<=-300?<audio className="hidden" controls autoPlay><source src="./sounds/exe_bad.wav" /></audio>:<></>}
+        {score>-200&&score<=-300?<audio className="hidden" controls autoPlay><source src="./sounds/exe_bad.mp3" /></audio>:<></>}
 
         {score>200&&score<=300?<img src={getImageURL("./assets/exe_good.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}
         {score>100&&score<=200?<img src={getImageURL("./assets/very_good.png")} className="modal_luck" alt="modol_luck_icon" draggable={false}></img>:<></>}

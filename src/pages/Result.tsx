@@ -117,12 +117,23 @@ function Result() {
     }
   }, []);
 
+  useEffect(() => {  
+    const audio = document.getElementById('result-audio') as HTMLAudioElement;  
+    if (audio) {  
+      audio.play().catch((error) => {  
+        console.error('Failed to play audio:', error);  
+      });  
+    }  
+  }, []); // Empty dependency array means this runs once on mount  
+
   return (
     <div className="board">
       <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
       <div className="board_content">
         <div className="result_audio">
-          <audio className="hidden" autoPlay loop ><source src="./sounds/main_page.mp3" /></audio>
+          <audio id="result-audio" className="hidden" autoPlay loop >
+            <source src="./sounds/result_page.mp3" />
+          </audio>
         </div>
         {month <= 12 ? (
           <div className={`${month <= 12 ? `main_month` : ``}`}>
