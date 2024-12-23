@@ -47,7 +47,7 @@ const Result = () => {
       //     console.log(res.data);
       //   })
       //   .catch((err) => console.error(err));
-      navigate("/payment/cancel");
+      //navigate("/payment/cancel");
       return;
     }
 
@@ -56,7 +56,7 @@ const Result = () => {
 
       if (!result) {
         setIsLoading(false);
-        navigate("/payment/cancel");
+        //navigate("/payment/cancel");
         return;
       }
       setIsLoading(false);
