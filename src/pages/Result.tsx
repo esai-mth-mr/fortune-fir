@@ -134,7 +134,6 @@ function Result() {
         setYearPoint(res.message.message.year_point);
         setPayed(res.message.display);
         if (res.message.message.story) setDesc(res.message.message.story);
-        console.log(res.message);
         return true;
       }
     } catch (error) {
