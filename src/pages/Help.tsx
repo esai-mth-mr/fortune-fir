@@ -7,7 +7,7 @@ function Help() {
       <div className="help-getready_img_field">
         <img
           className="help-sign_header"
-          src={getImageURL("./assets/santamodel.png")}
+          src={getImageURL("./assets/santamodel-1.webp")}
           alt="hero"
           draggable="false"
         />

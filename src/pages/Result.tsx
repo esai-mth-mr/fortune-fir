@@ -180,7 +180,7 @@ function Result() {
         <div className="main_img_field">
           <img
             className="main_img"
-            src={getImageURL("./assets/backgroundImage _1.png")}
+            src={getImageURL("./assets/backgroundImage _1.webp")}
             alt="main"
             draggable="false"
           />
@@ -362,14 +362,14 @@ function Result() {
               : ""}
           </div>
 
-          <img onClick={()=>setIsResultOpen(false)} className="result_close" src={getImageURL("./assets/close.png")} draggable={false} alt="result_close"/>
-          <img onClick={()=>setIsResultOpen(false)} className="result_santa" src={getImageURL("./assets/santa.png")} draggable={false} alt="result_santa"/>
+          <img onClick={()=>setIsResultOpen(false)} className="result_close" src={getImageURL("./assets/close.webp")} draggable={false} alt="result_close"/>
+          <img onClick={()=>setIsResultOpen(false)} className="result_santa" src={getImageURL("./assets/santa-1.webp")} draggable={false} alt="result_santa"/>
 
           {allowdata[month - 1].point >= 1400 &&
           allowdata[month - 1].point <= 2100 ? (
             <img
               className="result_anim_luck"
-              src={getImageURL("./assets/exe_good.png")}
+              src={getImageURL("./assets/exe_good.webp")}
               draggable={false}
               alt="result_anim"
             />
@@ -380,7 +380,7 @@ function Result() {
           allowdata[month - 1].point < 1400 ? (
             <img
               className="result_anim_luck"
-              src={getImageURL("./assets/very_good.png")}
+              src={getImageURL("./assets/very_good.webp")}
               draggable={false}
               alt="result_anim"
             />
@@ -391,7 +391,7 @@ function Result() {
           allowdata[month - 1].point < 700 ? (
             <img
               className="result_anim_luck"
-              src={getImageURL("./assets/good.png")}
+              src={getImageURL("./assets/good.webp")}
               draggable={false}
               alt="result_anim"
             />
@@ -402,7 +402,7 @@ function Result() {
           allowdata[month - 1].point < 0 ? (
             <img
               className="result_anim_luck"
-              src={getImageURL("./assets/bad.png")}
+              src={getImageURL("./assets/bad.webp")}
               draggable={false}
               alt="result_anim"
             />
@@ -413,7 +413,7 @@ function Result() {
           allowdata[month - 1].point < -700 ? (
             <img
               className="result_anim_luck"
-              src={getImageURL("./assets/very_bad.png")}
+              src={getImageURL("./assets/very_bad.webp")}
               draggable={false}
               alt="result_anim"
             />
@@ -424,7 +424,7 @@ function Result() {
           allowdata[month - 1].point < -1400 ? (
             <img
               className="result_anim_luck"
-              src={getImageURL("./assets/exe_bad.png")}
+              src={getImageURL("./assets/exe_bad.webp")}
               draggable={false}
               alt="result_anim"
             />
