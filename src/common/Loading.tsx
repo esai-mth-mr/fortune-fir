@@ -36,7 +36,7 @@ const Loading = () => {
           >
             <CircularProgress 
               color="error"
-              sx={{position:'absolute',right:'9px',top:'5px', display:'flex', justifyContent:'center', alignItems:'center', width: '50px', height: '50px'}}
+              sx={{position:'absolute',right:'-9px',top:'-20px', display:'flex', justifyContent:'center', alignItems:'center', width: '100px !important', height: '100px !important'}}
               // size={'30rem'}
             />
           </Box>
