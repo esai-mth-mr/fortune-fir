@@ -108,7 +108,7 @@ function Main() {
         setMonth(res.message.month);
         setDisplayYear(res.message.year_point);
         setyearpoint(res.message.year_point);
-        console.log("database",res.message);
+        console.log("database", res.message);
       }
     } catch (error) {
       toast.error("Failed to fetch data!");
@@ -181,7 +181,7 @@ function Main() {
       setGifts(shuffleArray([...array]));
     }
   }, [count]);
-  
+
   //display for animation
   useEffect(() => {
     if (point != 0) {
