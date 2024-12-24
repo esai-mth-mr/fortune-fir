@@ -227,26 +227,37 @@ function Result() {
   };
   return (
     <div className="board">
-      {open==true&&<div className="result_modal">
-        <div className="result_modal_img">
-          <img style={{width:'auto', height:'auto'}}
+      {open == true && (
+        <div className="result_modal">
+          <div className="result_modal_img">
+            <img
+              style={{ width: "auto", height: "auto" }}
               src={getImageURL("./assets/santa-1.webp")}
               alt="main"
               draggable="false"
-          />
-        </div>
-        <div className="result_modal_desc">If you click reround, all data will be deleted and you have to edit again.</div>
-        <div className="result_modal_buttons">
-          <div className="result_modal_button" onClick={handleReround}>Accept</div>
-          <div className="result_modal_button" onClick={handleClose}>Cancel</div>
-        </div>
-        <img className="result_modal_close"
+            />
+          </div>
+          <div className="result_modal_desc">
+            If you click reround, all data will be deleted and you have to edit
+            again.
+          </div>
+          <div className="result_modal_buttons">
+            <div className="result_modal_button" onClick={handleReround}>
+              Accept
+            </div>
+            <div className="result_modal_button" onClick={handleClose}>
+              Cancel
+            </div>
+          </div>
+          <img
+            className="result_modal_close"
             src={getImageURL("./assets/close.webp")}
             alt="main"
             draggable="false"
             onClick={handleClose}
-        />
-      </div>}
+          />
+        </div>
+      )}
       {loading && <Loading />}
       <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
       <div
@@ -439,127 +450,129 @@ function Result() {
           </div>
         </div>
         {/* display for description */}
-        {paystate==false&&<div
-          className={`${
-            isresultOpen == true ? `result_state_desc` : `result_state_desc1`
-          }`}
-        >
-          <div className="result_state_desc_title">
-            {month_point >= 1400 && month_point <= 2100
-              ? eval_data[0].eval_state
-              : ""}
-            {month_point >= 700 && month_point < 1400
-              ? eval_data[1].eval_state
-              : ""}
-            {month_point >= 0 && month_point < 700
-              ? eval_data[2].eval_state
-              : ""}
-            {month_point >= -700 && month_point < 0
-              ? eval_data[3].eval_state
-              : ""}
-            {month_point >= -1400 && month_point < -700
-              ? eval_data[4].eval_state
-              : ""}
-            {month_point >= -2100 && month_point < -1400
-              ? eval_data[5].eval_state
-              : ""}
-          </div>
-          <div className="result_state_desc_desc">
-            {month_point >= 1400 && month_point <= 2100
-              ? eval_data[0].eval_content
-              : ""}
-            {month_point >= 700 && month_point < 1400
-              ? eval_data[1].eval_content
-              : ""}
-            {month_point >= 0 && month_point < 700
-              ? eval_data[2].eval_content
-              : ""}
-            {month_point >= -700 && month_point < 0
-              ? eval_data[3].eval_content
-              : ""}
-            {month_point >= -1400 && month_point < -700
-              ? eval_data[4].eval_content
-              : ""}
-            {month_point >= -2100 && month_point < -1400
-              ? eval_data[5].eval_content
-              : ""}
-          </div>
+        {paystate == false && (
+          <div
+            className={`${
+              isresultOpen == true ? `result_state_desc` : `result_state_desc1`
+            }`}
+          >
+            <div className="result_state_desc_title">
+              {month_point >= 1400 && month_point <= 2100
+                ? eval_data[0].eval_state
+                : ""}
+              {month_point >= 700 && month_point < 1400
+                ? eval_data[1].eval_state
+                : ""}
+              {month_point >= 0 && month_point < 700
+                ? eval_data[2].eval_state
+                : ""}
+              {month_point >= -700 && month_point < 0
+                ? eval_data[3].eval_state
+                : ""}
+              {month_point >= -1400 && month_point < -700
+                ? eval_data[4].eval_state
+                : ""}
+              {month_point >= -2100 && month_point < -1400
+                ? eval_data[5].eval_state
+                : ""}
+            </div>
+            <div className="result_state_desc_desc">
+              {month_point >= 1400 && month_point <= 2100
+                ? eval_data[0].eval_content
+                : ""}
+              {month_point >= 700 && month_point < 1400
+                ? eval_data[1].eval_content
+                : ""}
+              {month_point >= 0 && month_point < 700
+                ? eval_data[2].eval_content
+                : ""}
+              {month_point >= -700 && month_point < 0
+                ? eval_data[3].eval_content
+                : ""}
+              {month_point >= -1400 && month_point < -700
+                ? eval_data[4].eval_content
+                : ""}
+              {month_point >= -2100 && month_point < -1400
+                ? eval_data[5].eval_content
+                : ""}
+            </div>
 
-          <img
-            onClick={() => setIsResultOpen(false)}
-            className="result_close"
-            src={getImageURL("./assets/close.webp")}
-            draggable={false}
-            alt="result_close"
-          />
-          <img
-            className="result_santa"
-            src={getImageURL("./assets/santa-1.webp")}
-            draggable={false}
-            alt="result_santa"
-          />
+            <img
+              onClick={() => setIsResultOpen(false)}
+              className="result_close"
+              src={getImageURL("./assets/close.webp")}
+              draggable={false}
+              alt="result_close"
+            />
+            <img
+              className="result_santa"
+              src={getImageURL("./assets/santa-1.webp")}
+              draggable={false}
+              alt="result_santa"
+            />
 
-          {month_point >= 1400 && month_point <= 2100 ? (
-            <img
-              className="result_anim_luck"
-              src={getImageURL("./assets/exe_good.webp")}
-              draggable={false}
-              alt="result_anim"
-            />
-          ) : (
-            ""
-          )}
-          {month_point >= 700 && month_point < 1400 ? (
-            <img
-              className="result_anim_luck"
-              src={getImageURL("./assets/very_good.webp")}
-              draggable={false}
-              alt="result_anim"
-            />
-          ) : (
-            ""
-          )}
-          {month_point >= 0 && month_point < 700 ? (
-            <img
-              className="result_anim_luck"
-              src={getImageURL("./assets/good.webp")}
-              draggable={false}
-              alt="result_anim"
-            />
-          ) : (
-            ""
-          )}
-          {month_point >= -700 && month_point < 0 ? (
-            <img
-              className="result_anim_luck"
-              src={getImageURL("./assets/bad.webp")}
-              draggable={false}
-              alt="result_anim"
-            />
-          ) : (
-            ""
-          )}
-          {month_point >= -1400 && month_point < -700 ? (
-            <img
-              className="result_anim_luck"
-              src={getImageURL("./assets/very_bad.webp")}
-              draggable={false}
-              alt="result_anim"
-            />
-          ) : (
-            ""
-          )}
-          {month_point >= -2100 && month_point < -1400 ? (
-            <img
-              className="result_anim_luck"
-              src={getImageURL("./assets/exe_bad.webp")}
-              draggable={false}
-              alt="result_anim"
-            />
-          ) : (
-            ""
-          )}
-        </div>}
+            {month_point >= 1400 && month_point <= 2100 ? (
+              <img
+                className="result_anim_luck"
+                src={getImageURL("./assets/exe_good.webp")}
+                draggable={false}
+                alt="result_anim"
+              />
+            ) : (
+              ""
+            )}
+            {month_point >= 700 && month_point < 1400 ? (
+              <img
+                className="result_anim_luck"
+                src={getImageURL("./assets/very_good.webp")}
+                draggable={false}
+                alt="result_anim"
+              />
+            ) : (
+              ""
+            )}
+            {month_point >= 0 && month_point < 700 ? (
+              <img
+                className="result_anim_luck"
+                src={getImageURL("./assets/good.webp")}
+                draggable={false}
+                alt="result_anim"
+              />
+            ) : (
+              ""
+            )}
+            {month_point >= -700 && month_point < 0 ? (
+              <img
+                className="result_anim_luck"
+                src={getImageURL("./assets/bad.webp")}
+                draggable={false}
+                alt="result_anim"
+              />
+            ) : (
+              ""
+            )}
+            {month_point >= -1400 && month_point < -700 ? (
+              <img
+                className="result_anim_luck"
+                src={getImageURL("./assets/very_bad.webp")}
+                draggable={false}
+                alt="result_anim"
+              />
+            ) : (
+              ""
+            )}
+            {month_point >= -2100 && month_point < -1400 ? (
+              <img
+                className="result_anim_luck"
+                src={getImageURL("./assets/exe_bad.webp")}
+                draggable={false}
+                alt="result_anim"
+              />
+            ) : (
+              ""
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
