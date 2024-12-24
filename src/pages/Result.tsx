@@ -382,7 +382,7 @@ function Result() {
               className="common_btn"
               onClick={handlePreview}
             >
-              Preview
+              View
             </div>
             <div
               onClick={handleRegenerate}
