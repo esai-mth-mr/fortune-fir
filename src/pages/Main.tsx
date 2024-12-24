@@ -64,8 +64,6 @@ function Main() {
     "Dec",
   ];
 
-
-
   const array: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Type the array
   const [gifts, setGifts] = useState<number[]>([]); // Make sure gifts holds an array of numbers
 
@@ -101,16 +99,6 @@ function Main() {
     return array.sort(() => 0.5 - Math.random());
   };
 
-
-  interface DataType {
-    _id: string;
-    name: string;
-    luck: string;
-    index: number;
-    description: string;
-    url: string;
-  }
-
   const shuffleData = (array: DataType[]): DataType[] => {  
     for (let i = array.length - 1; i > 0; i--) {  
         const j = Math.floor(Math.random() * (i + 1)); // Get a random index  
@@ -133,11 +121,13 @@ function Main() {
         toast.error(res.message);
       } else {
         setData(res.message.data);
+
         setGifts(shuffleArray([...array]));
 
         setMonth(res.message.month);
         setDisplayYear(res.message.year_point);
         setyearpoint(res.message.year_point);
+        console.log("database",res.message);
       }
     } catch (error) {
       toast.error("Failed to fetch data!");
@@ -274,6 +264,7 @@ function Main() {
         assets: sendArray,
         month: month,
       };
+
       const result = await saveMonthStory(sendData);
 
       if (result) {

@@ -12,7 +12,7 @@ const Loading = () => {
           >
             <CircularProgress 
               color="success"
-              sx={{position:'absolute',right:'-10px',top:'-21px', display:'flex', justifyContent:'center', alignItems:'center', width: '100px !important', height: '100px !important'}}
+              sx={{position:'absolute',right:'-1px',top:'-12px', display:'flex', justifyContent:'center', alignItems:'center', width: '80px !important', height: '80px !important'}}
             />
           </Box>
           <img
