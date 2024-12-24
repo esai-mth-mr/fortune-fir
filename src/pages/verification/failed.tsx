@@ -28,7 +28,7 @@ function Failed() {
         ></img>
       </div>
       <div className="title">Email Verification</div>
-      <div className="content">
+      <div className="content1">
         Your account access expired. <br />
         Please try again.
       </div>
