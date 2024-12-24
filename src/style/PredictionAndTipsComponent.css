@@ -8,6 +8,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: ease-in-out all 0.3s;
+  user-select: none;
 }
 
 .prediction-tips-container h2 {
