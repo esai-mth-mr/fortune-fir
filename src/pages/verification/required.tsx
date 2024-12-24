@@ -58,7 +58,7 @@ function Required() {
         </div>
       </div>
 
-      <div className="verify_button_field" style={{ marginTop: "10px" }}>
+      <div className="verify_button_field1">
         Need help? &nbsp;
         <Link className="verify_button" to="/contact">
           Contact Us

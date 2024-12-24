@@ -29,7 +29,7 @@ const PredictionAndTipsComponent: React.FC<PredictionAndTipsProps> = ({
 
     const structuredTipsData = structureTips(structuredData.tips);
     setStructuredTips(structuredTipsData);
-  }, []);
+  }, [input]);
 
   return (
     <div className={`prediction-tips-container `}>
