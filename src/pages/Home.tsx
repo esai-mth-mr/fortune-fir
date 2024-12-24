@@ -1,28 +1,25 @@
 import "@src/style/pages/home.scss";
 import "@src/style/global.scss";
 import { useNavigate } from "react-router-dom";
-import axios from "../utils/axios";
-import setAuthToken from "../utils/setAuthToken";
 import getImageURL from "../utils/getImageURL";
+import { checkAuthApi } from "../api/checkAuthApi";
 
 function Home() {
   const navigate = useNavigate();
-  const handleStart = () => {
-    const pretoken = localStorage.getItem("token");
-    if (pretoken) {
-      axios
-        .post("/api/auth/checkUser", {}, setAuthToken())
-        .then((res) => {
-          console.log(res.data.message);
-          navigate("/main");
-        })
-        .catch((err) => {
-          console.log(err);
-          navigate("/login");
-        });
 
+  const handleStart = async () => {
+    const pretoken = localStorage.getItem("token");
+
+    if (pretoken) {
+      const res = await checkAuthApi();
+      if (res.status == 200) {
+        navigate("/main");
+      } else {
+        navigate("/login");
+      }
       return;
     }
+
     navigate("/login");
   };
 
