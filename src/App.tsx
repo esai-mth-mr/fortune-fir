@@ -23,7 +23,8 @@ import ResultPayment from "./pages/payment/Result";
 import NotFound from "./pages/NotFound";
 import Help from "./pages/Help";
 import AudioPlayer from "./common/AudioPlayer";
-import HomeSharpIcon from '@mui/icons-material/HomeSharp';
+import HomeSharpIcon from "@mui/icons-material/HomeSharp";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const navigate = useNavigate();
@@ -58,17 +59,18 @@ function App() {
         <Link className="app-logo" to="/">
           <HomeSharpIcon
             sx={{
-              width: '100% !important', 
-              height: 'auto', 
-              color: '#eda9a9',
-              zIndex: '100',
-              marginLeft: '0.3%',
-              marginTop: '0.3%'
+              width: "100% !important",
+              height: "auto",
+              color: "#eda9a9",
+              zIndex: "100",
+              marginLeft: "0.3%",
+              marginTop: "0.3%",
             }}
           />
         </Link>
         <AudioPlayer />
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
@@ -79,17 +81,16 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/help" element={<Help />} />
 
-          {/* private routes */}
-          {/* <Route path="/main" element={<PrivateRoute />}>
+          {/* Private Routes */}
+          <Route element={<PrivateRoute />}>
             <Route path="/main" element={<Main />}></Route>
-          </Route> */}
-          <Route path="/main" element={<Main />}></Route>
 
-          <Route path="/result" element={<Result />} />
-          {/* <Route path="/payment" element={<Payment />} /> */}
-          <Route path="/payment/paypal/result" element={<ResultPayment />} />
-          <Route path="/payment/cancel" element={<Failure />} />
-          <Route path="/payment/success" element={<Success />} />
+            <Route path="/result" element={<Result />} />
+            <Route path="/payment/paypal/result" element={<ResultPayment />} />
+            <Route path="/payment/cancel" element={<Failure />} />
+            <Route path="/payment/success" element={<Success />} />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
         {/* <Router /> */}
