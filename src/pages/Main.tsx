@@ -101,6 +101,7 @@ function Main() {
         }
         toast.error(res.message);
       } else {
+        console.log(res.message.data);
         setData(shuffleData(res.message.data));
         setGifts(shuffleArray([...array]));
 
@@ -126,7 +127,6 @@ function Main() {
         setMonth(res.message.month);
         setDisplayYear(res.message.year_point);
         setyearpoint(res.message.year_point);
-        console.log(res.message);
       }
     } catch (error) {
       toast.error("Failed to fetch data!");
