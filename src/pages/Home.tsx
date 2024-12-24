@@ -28,6 +28,29 @@ function Home() {
 
   return (
     <div className="board">
+      <div className="snow">
+        {Array.from({ length: 50 }).map((_, index) => {
+          const randomDelay = Math.random() * 3; // Random delay between 0 and 5 seconds
+          const randomDuration = 7 + Math.random() * 10; // Random duration between 5 and 10 seconds
+          const randomLeft = Math.random() * 100; // Random horizontal position (0% to 100%)
+          const randomSize = 5 + Math.random() * 7; // Random size between 10px and 30px
+
+          return (
+            <div
+              key={index}
+              className="snowflake"
+              style={{
+                animationDelay: `${randomDelay}s`,
+                animationDuration: `${randomDuration}s`,
+                left: `${randomLeft}%`,
+                width: `${randomSize}px`,
+                height: `${randomSize}px`,
+              }}
+            ></div>
+          );
+        })}
+      </div>
+
       <div className="home_header">
         <img
           className="landing"
