@@ -16,9 +16,16 @@ import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import getImageURL from "../../utils/getImageURL";
 import Loading from "../../common/Loading";
+<<<<<<< Updated upstream
 import { STRIPE_PUB_KEY } from "../../constant";
 
 const stripePromise = loadStripe(STRIPE_PUB_KEY);
+=======
+import Crypto from "./Crypto";
+const stripePromise = loadStripe(
+  "pk_live_51QXkg1A9YfpPkxIlsLfvi5mV2iQiCf02XalFhJPCMaQ1lma1ZqTri9B8O4jjo8UESH3PGIS5Xgttgu8BooVpZjgi00nInxQPOY"
+);
+>>>>>>> Stashed changes
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -124,7 +131,7 @@ export default function Payment(props: {
           "& .MuiPaper-root": {
             borderRadius: "10px",
             width: "280px",
-            height: "470px",
+            height: "700px",
             backgroundColor: "#f5f5f5",
             boxShadow:
               "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px !important",
@@ -215,16 +222,17 @@ export default function Payment(props: {
             </div>
             <hr style={{ opacity: 20, zIndex: -1 }}></hr>
           </DialogContentText>
+          <Crypto />
         </DialogContent>
         <DialogActions sx={{ zIndex: 1 }}>
           <Button onClick={handleClose} sx={{ fontFamily: "Poppins" }}>
             Close
           </Button>
         </DialogActions>
-        <div
+        {/* <div
           style={{
             position: "absolute",
-            zIndex: 0,
+            zIndex: -1,
             bottom: "0",
             right: "0",
             width: "100%",
@@ -236,7 +244,7 @@ export default function Payment(props: {
             style={{ objectFit: "cover" }}
             src={getImageURL("./assets/santa-1.webp")}
           ></img>
-        </div>
+        </div> */}
       </Dialog>
     </div>
   );

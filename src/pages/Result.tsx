@@ -140,7 +140,7 @@ function Result() {
       const res = await showResultApi(sendData);
       if (res.status !== 200) {
         toast.error(res.message);
-        navigate("/main");
+        //navigate("/main");
         return false;
       } else {
         setMonth(res.message.message.month);

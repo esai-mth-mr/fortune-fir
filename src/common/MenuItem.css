@@ -1,0 +1,31 @@
+.crypto-container {
+    display: flex;
+    align-items: center;
+
+}
+
+.crypto-content {
+    margin-left: 10px;
+}
+
+.crypto-name {
+    font-size: 16px;
+}
+
+.crypto-label,
+.crypto-description {
+    font-size: 14px;
+}
+
+.crypto-label {
+    margin-left: 5px;
+    font-size: 12px;
+    color: white;
+    border-radius: 2px;
+    padding: 1px 4px;
+    background-color: rgb(79, 173, 208);
+}
+
+.crypto-description {
+    color: #a4a4a4;
+}
