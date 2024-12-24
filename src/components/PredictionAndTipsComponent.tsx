@@ -34,7 +34,7 @@ const PredictionAndTipsComponent: React.FC<PredictionAndTipsProps> = ({
   return (
     <div className={`prediction-tips-container `}>
       <div className="prediction">
-        <h2>Prediction</h2>
+        <h2>Horoscope</h2>
         <p>{structuredContent.prediction}</p>
       </div>
 
