@@ -20,6 +20,12 @@ const Loading = () => {
                 width: "100px !important",
                 height: "100px !important",
               }}
+          <Box 
+            sx={{ display: 'flex'}}
+          >
+            <CircularProgress 
+              color="success"
+              sx={{position:'absolute',right:'-1px',top:'-12px', display:'flex', justifyContent:'center', alignItems:'center', width: '80px !important', height: '80px !important'}}
             />
           </Box>
           <img

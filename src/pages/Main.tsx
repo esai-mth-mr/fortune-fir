@@ -90,6 +90,7 @@ function Main() {
   const [allownext, setAllowNext] = useState<boolean>(false);
 
   // =============================API functions===================================
+
   const getInitData = useCallback(async () => {
     setLoading(true); // Start loading
     try {
@@ -104,10 +105,10 @@ function Main() {
         console.log(res.message.data);
         setData(shuffleData(res.message.data));
         setGifts(shuffleArray([...array]));
-
         setMonth(res.message.month);
         setDisplayYear(res.message.year_point);
         setyearpoint(res.message.year_point);
+        console.log("database",res.message);
       }
     } catch (error) {
       toast.error("Failed to fetch data!");
@@ -180,7 +181,7 @@ function Main() {
       setGifts(shuffleArray([...array]));
     }
   }, [count]);
-
+  
   //display for animation
   useEffect(() => {
     if (point != 0) {
