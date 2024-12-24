@@ -40,8 +40,16 @@
             background-color: red;
             color: white;
             margin-bottom: 28%;
+            font-weight: bold;
             cursor: pointer;
+            animation: getready_scale 1s infinite;
         }
     }
     
+}
+
+@keyframes getready_scale{
+    0%{transform: scale(1);}
+    50%{transform: scale(1.05);}
+    100%{transform: scale(1);}
 }
