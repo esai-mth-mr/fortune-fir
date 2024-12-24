@@ -25,6 +25,9 @@ import Help from "./pages/Help";
 import AudioPlayer from "./common/AudioPlayer";
 import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import PrivateRoute from "./components/PrivateRoute";
+import Admin from "./admin/admin_pages/Admin";
+import AdminUser from "./admin/admin_pages/AdminUser";
+import AdminPayment from "./admin/admin_pages/AdminPayment";
 
 function App() {
   const navigate = useNavigate();
@@ -80,6 +83,10 @@ function App() {
           <Route path="/failed" element={<Failed />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/help" element={<Help />} />
+          {/* Admin public Routes */}
+          <Route path="/admin/Admin" element={<Admin/>}/>
+          <Route path="/admin/AdminUser" element={<AdminUser/>}/>
+          <Route path="/admin/AdminPayment" element={<AdminPayment/>}/>
 
           {/* Private Routes */}
           <Route element={<PrivateRoute />}>
