@@ -12,7 +12,17 @@ const Loading = () => {
           >
             <CircularProgress 
               color="success"
-              sx={{position:'absolute',right:'-1px',top:'-12px', display:'flex', justifyContent:'center', alignItems:'center', width: '80px !important', height: '80px !important'}}
+              sx={{
+                position:'absolute',
+                right:'-1px',
+                top:'-12px', 
+                display:'flex', 
+                justifyContent:'center', 
+                alignItems:'center', 
+                width: '80px !important', 
+                height: '80px !important'
+              }}
+              thickness={1.5}
             />
           </Box>
           <img
@@ -21,6 +31,7 @@ const Loading = () => {
             height={60}
             src={getImageURL("./assets/HowLucky2025_logo.webp")}
           ></img>
+          <div className="loading_content">Loading</div>
         </div>
       </div>
     </div>
