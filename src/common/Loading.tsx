@@ -7,6 +7,19 @@ const Loading = () => {
     <div className="loading-container">
       <div className="loading-content">
         <div className="spinner-img-container">
+          <Box sx={{ display: "flex" }}>
+            <CircularProgress
+              color="error"
+              sx={{
+                position: "absolute",
+                right: "-9px",
+                top: "-20px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100px !important",
+                height: "100px !important",
+              }}
           <Box 
             sx={{ display: 'flex'}}
           >

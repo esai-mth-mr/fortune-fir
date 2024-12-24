@@ -81,9 +81,10 @@ function Help() {
             </span>
           </div>
         </div>
-
+        <br />
         <div className="help-content-board">
           <div className="help-title">Privacy Policy</div>
+          <br />
           <div className="help-letter">
             <span className="help-content-bold">1. Introduction</span>
             <br />
