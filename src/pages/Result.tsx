@@ -227,6 +227,12 @@ function Result() {
   };
   return (
     <div className="board">
+      <audio
+        id="audio_player"
+        src="./sounds/main_page.mp3"
+        autoPlay
+        loop
+      ></audio>
       {open == true && (
         <div className="result_modal">
           <div className="result_modal_img">
