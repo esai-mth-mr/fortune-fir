@@ -56,11 +56,6 @@ function App() {
     <>
       <div className="app">
         <Link className="app-logo" to="/">
-          {/* <img
-            src={getImageURL("./assets/HowLucky2025_logo.webp")}
-            width="50px"
-            height="50px"
-          ></img> */}
           <HomeSharpIcon
             sx={{
               width: '100% !important', 

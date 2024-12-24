@@ -20,6 +20,7 @@ import {
   ISaveSendYearDataType,
 } from "../types";
 import { shuffleData } from "../utils/randomArrangeArray";
+import AudioPlayer from "../common/AudioPlayer";
 
 function Main() {
   //========================Declare variables================================
@@ -370,11 +371,15 @@ function Main() {
 
   return (
     <div className="board">
+      <AudioPlayer/>
+      <audio id="audio_player" src="./sounds/main_page.mp3" autoPlay loop></audio>
       {loading && <Loading />}
       {/* Main Content */}
       <div
         className={loading ? "disabled-content board_content" : "board_content"}
       >
+        <AudioPlayer/>
+        <audio src="./sounds/main_page.mp3" autoPlay loop></audio>
         <div className="main_month">
           <div className="month_title">2025</div>
           <div className="month_num">
