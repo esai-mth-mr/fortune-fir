@@ -25,7 +25,7 @@ function Result() {
   const [month, setMonth] = useState(1);
   const [month_point, setMonthPoint] = useState<number>(0);
   const [year_point, setYearPoint] = useState<number>(0);
-  const [desc, setDesc] = useState<String>("");
+  const [desc, setDesc] = useState<string>("");
 
   //For the Description Fullscreen flag
   const [dFullScreen, setDFullScreen] = useState<boolean>(false);
@@ -269,7 +269,7 @@ function Result() {
         }
       >
         <PredictionAndTipsComponent
-          input={{ inputString: test_input }}
+          input={{ inputString: desc }}
           onZoomClick={_handleClickFullScrenn}
         />
       </div>
@@ -437,10 +437,12 @@ function Result() {
         >
           <div className={paystate ? "result_content" : "result_content2"}>
             {paystate ? (
-              <PredictionAndTipsComponent
-                input={{ inputString: desc.toString() }}
-                onZoomClick={_handleClickFullScrenn}
-              />
+              <>
+                <PredictionAndTipsComponent
+                  input={{ inputString: desc }}
+                  onZoomClick={_handleClickFullScrenn}
+                />
+              </>
             ) : (
               <PredictionAndTipsComponent
                 input={{ inputString: test_input }}
