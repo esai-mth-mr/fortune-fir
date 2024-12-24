@@ -22,8 +22,8 @@ import Success from "./pages/payment/success";
 import ResultPayment from "./pages/payment/Result";
 import NotFound from "./pages/NotFound";
 import Help from "./pages/Help";
-import getImageURL from "./utils/getImageURL";
 import AudioPlayer from "./common/AudioPlayer";
+import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 
 function App() {
   const navigate = useNavigate();
@@ -56,11 +56,21 @@ function App() {
     <>
       <div className="app">
         <Link className="app-logo" to="/">
-          <img
+          {/* <img
             src={getImageURL("./assets/HowLucky2025_logo.webp")}
             width="50px"
             height="50px"
-          ></img>
+          ></img> */}
+          <HomeSharpIcon
+            sx={{
+              width: '100% !important', 
+              height: 'auto', 
+              color: '#eda9a9',
+              zIndex: '100',
+              marginLeft: '0.3%',
+              marginTop: '0.3%'
+            }}
+          />
         </Link>
         <AudioPlayer />
         <Routes>

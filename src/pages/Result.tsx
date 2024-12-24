@@ -29,6 +29,10 @@ function Result() {
 
   //For the Description Fullscreen flag
   const [dFullScreen, setDFullScreen] = useState<boolean>(false);
+  //modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const test_input = `  Prediction: This is template. This is template.This is template.This is template.
   This is template.This is template.This is template.This is template.This is template.
@@ -223,6 +227,26 @@ function Result() {
   };
   return (
     <div className="board">
+      {open==true&&<div className="result_modal">
+        <div className="result_modal_img">
+          <img style={{width:'auto', height:'auto'}}
+              src={getImageURL("./assets/santa-1.webp")}
+              alt="main"
+              draggable="false"
+          />
+        </div>
+        <div className="result_modal_desc">If you click reround, all data will be deleted and you have to edit again.</div>
+        <div className="result_modal_buttons">
+          <div className="result_modal_button" onClick={handleReround}>Accept</div>
+          <div className="result_modal_button" onClick={handleClose}>Cancel</div>
+        </div>
+        <img className="result_modal_close"
+            src={getImageURL("./assets/close.webp")}
+            alt="main"
+            draggable="false"
+            onClick={handleClose}
+        />
+      </div>}
       {loading && <Loading />}
       <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
       <div
@@ -330,7 +354,8 @@ function Result() {
               Total Story
             </div>
             <div
-              onClick={handleReround}
+              onClick={handleOpen}
+              // onClick={handleReround}
               style={{
                 right: "1%",
                 bottom: "12%",
@@ -381,7 +406,8 @@ function Result() {
               Regenerate
             </div>
             <div
-              onClick={handleReround}
+              onClick={handleOpen}
+              // onClick={handleReround}
               style={{
                 right: "5%",
                 bottom: "18%",
@@ -413,7 +439,7 @@ function Result() {
           </div>
         </div>
         {/* display for description */}
-        <div
+        {paystate==false&&<div
           className={`${
             isresultOpen == true ? `result_state_desc` : `result_state_desc1`
           }`}
@@ -533,7 +559,7 @@ function Result() {
           ) : (
             ""
           )}
-        </div>
+        </div>}
       </div>
     </div>
   );

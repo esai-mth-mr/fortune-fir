@@ -80,8 +80,60 @@
   }
 
 .board {
-    // position: relative;
-    //result page
+    .result_modal{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 95%;
+        height: 47%;
+        background-color: #f5f5f5;
+        z-index: 70;
+        border-radius: 20px;
+        border: 1px solid red;
+        .result_modal_img{
+            height: 40%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .result_modal_desc{
+            width: 95%;
+            height: 30%;    
+            text-align: center;
+            font-family: 'Poppins';
+            font-size: 16px;
+        }
+        .result_modal_buttons{
+            display: flex;
+            justify-content: center;
+            gap: 30%;
+            .result_modal_button{
+                width: 100%;
+                height: 100%;
+                background-color: red;
+                color: white;
+                font-family: 'Poppins';
+                padding: 2% 10%;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                border: 1px solid white;
+                border-radius: 20px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+        .result_modal_close{
+            position: absolute;
+            width: 10%;
+            height: auto;
+            top: 5%;
+            right: 5%;
+            cursor: pointer;
+        }
+    }
     .board_content{
         .main_audio{
             width: 0%;
