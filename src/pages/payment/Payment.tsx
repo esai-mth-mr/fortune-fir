@@ -16,16 +16,9 @@ import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import getImageURL from "../../utils/getImageURL";
 import Loading from "../../common/Loading";
-<<<<<<< Updated upstream
 import { STRIPE_PUB_KEY } from "../../constant";
 
 const stripePromise = loadStripe(STRIPE_PUB_KEY);
-=======
-import Crypto from "./Crypto";
-const stripePromise = loadStripe(
-  "pk_live_51QXkg1A9YfpPkxIlsLfvi5mV2iQiCf02XalFhJPCMaQ1lma1ZqTri9B8O4jjo8UESH3PGIS5Xgttgu8BooVpZjgi00nInxQPOY"
-);
->>>>>>> Stashed changes
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
