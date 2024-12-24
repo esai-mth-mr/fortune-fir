@@ -13,7 +13,7 @@ function Home() {
     if (pretoken) {
       const res = await checkAuthApi();
       if (res.status == 200) {
-        navigate("/main");
+        navigate("/getready");
       } else {
         navigate("/login");
       }
