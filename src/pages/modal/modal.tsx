@@ -10,10 +10,15 @@ interface ModalProps {
     name: string;
     desc: string;
   };
-  // modalstate: number
+  handleNext: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
+const Modal: React.FC<ModalProps> = ({
+  setIsOpen,
+  score,
+  modalData,
+  handleNext,
+}) => {
   const [allowclose, setAllowClose] = useState(false);
   useEffect(() => {
     setTimeout(() => {
@@ -21,14 +26,19 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
     }, 2600);
   }, [score]);
 
+  const handleClose = () => {
+    if (allowclose) {
+      setIsOpen(false);
+      handleNext();
+    }
+    setAllowClose(false);
+  };
+
   return (
     <>
       <div className="modal">
         <img
-          onClick={() => {
-            allowclose == true && setIsOpen(false);
-            setAllowClose(false);
-          }}
+          onClick={handleClose}
           className="modal_close"
           src={getImageURL("./assets/close.webp")}
           draggable={false}
@@ -44,8 +54,18 @@ const Modal: React.FC<ModalProps> = ({ setIsOpen, score, modalData }) => {
           {score > 0 ? "+" + score! : score}
         </div>
         <div className="modal_content">
-          <div className="modal_icon" style={{color: score<0?"black":"#126706"}}>{modalData.name}</div>
-          <div className="modal_desc" style={{color: score<0?"black":"#0f4c06"}}>{modalData.desc}</div>
+          <div
+            className="modal_icon"
+            style={{ color: score < 0 ? "black" : "#126706" }}
+          >
+            {modalData.name}
+          </div>
+          <div
+            className="modal_desc"
+            style={{ color: score < 0 ? "black" : "#0f4c06" }}
+          >
+            {modalData.desc}
+          </div>
         </div>
 
         {/* run sounds */}

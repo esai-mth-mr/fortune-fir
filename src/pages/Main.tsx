@@ -12,7 +12,7 @@ import getImageURL from "../utils/getImageURL";
 import Loading from "../common/Loading";
 import { saveYearStoryApi } from "../api/saveYearStoryApi";
 import { getRegenerationAssetsApi } from "../api/getRegenerationAssetsApi";
-import { GETDATA_ERROR } from "../constant";
+
 import {
   IInitDataType,
   IModalDataType,
@@ -21,6 +21,7 @@ import {
 } from "../types";
 import { shuffleData } from "../utils/randomArrangeArray";
 import AudioPlayer from "../common/AudioPlayer";
+import { ERRORS } from "../constant";
 
 function Main() {
   //========================Declare variables================================
@@ -97,11 +98,15 @@ function Main() {
     try {
       const res = await getInitDataApi();
       if (res.status !== 200) {
-        if (res.message === GETDATA_ERROR) {
+        if (res.message === ERRORS.getDataError) {
           navigate("/result");
           return;
+        } else {
+          toast.error(res.message);
+          if (res.message === ERRORS.accountNotFound) navigate("/login");
+          if (res.message === ERRORS.activateAccountRequired)
+            navigate("/required");
         }
-        toast.error(res.message);
       } else {
         console.log(res.message.data);
         setData(shuffleData(res.message.data));
@@ -109,7 +114,6 @@ function Main() {
         setMonth(res.message.month);
         setDisplayYear(res.message.year_point);
         setyearpoint(res.message.year_point);
-        console.log("database", res.message);
       }
     } catch (error) {
       toast.error("Failed to fetch data!");
@@ -371,14 +375,19 @@ function Main() {
 
   return (
     <div className="board">
-      <AudioPlayer/>
-      <audio id="audio_player" src="./sounds/main_page.mp3" autoPlay loop></audio>
+      <AudioPlayer />
+      <audio
+        id="audio_player"
+        src="./sounds/main_page.mp3"
+        autoPlay
+        loop
+      ></audio>
       {loading && <Loading />}
       {/* Main Content */}
       <div
         className={loading ? "disabled-content board_content" : "board_content"}
       >
-        <AudioPlayer/>
+        <AudioPlayer />
         <audio src="./sounds/main_page.mp3" autoPlay loop></audio>
         <div className="main_month">
           <div className="month_title">2025</div>
@@ -479,17 +488,23 @@ function Main() {
           </div>
         </div>
         {isOpen && (
-          <Modal setIsOpen={setIsOpen} score={point} modalData={modalData} />
+          <Modal
+            setIsOpen={setIsOpen}
+            score={point}
+            modalData={modalData}
+            handleNext={handleNextButton}
+          />
         )}{" "}
         {/* Render the modal conditionally */}
         <div
-          onClick={handleNextButton}
-          style={{
-            backgroundColor: !isEdit ? (count < 1 ? "#f5f5f5" : "red") : "red",
-            borderColor: !isEdit ? (count < 1 ? "#c7c7c7" : "red") : "white",
-            color: !isEdit ? (count < 1 ? "#c7c7c7" : "white") : "white",
-          }}
-          className={`${!isEdit ? "gift_next_btn" : "edit_btn"}`}
+          // onClick={handleNextButton}
+          // style={{
+          //   backgroundColor: !isEdit ? (count < 1 ? "#f5f5f5" : "red") : "red",
+          //   borderColor: !isEdit ? (count < 1 ? "#c7c7c7" : "red") : "white",
+          //   color: !isEdit ? (count < 1 ? "#c7c7c7" : "white") : "white",
+          // }}
+          // className={`${!isEdit ? "gift_next_btn" : "edit_btn"}`}
+          style={{ display: "none" }}
         >
           {!isEdit ? (month < 12 ? "Next" : "") : "Submit"}
           {
