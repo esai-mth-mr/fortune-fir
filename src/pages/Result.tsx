@@ -8,7 +8,6 @@ import getImageURL from "../utils/getImageURL";
 import Payment from "./payment/Payment";
 import { showResultApi } from "../api/showResultApi";
 import toast from "react-hot-toast";
-import { upgradeRoundApi } from "../api/upgradeRoundApi";
 import Loading from "../common/Loading";
 import PredictionAndTipsComponent from "../components/PredictionAndTipsComponent";
 
