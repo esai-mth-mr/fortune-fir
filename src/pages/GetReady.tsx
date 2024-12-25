@@ -1,10 +1,9 @@
 import "@src/style/pages/getready.scss";
-import { useNavigate } from "react-router-dom";
 import getImageURL from "../utils/getImageURL";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Payment from "./payment/Payment";
 // import Loading from "../common/LoadingMain";
-import LoadingMain from "../common/LoadingMain";
+import LoadingMain from "../common/Loading";
 // import { checkAuthApi } from "../api/checkAuthApi";
 
 function GetReady() {
@@ -14,6 +13,12 @@ function GetReady() {
     const handleOnPayment = () => {
         setOpenPayment(true);
     }
+    //delete this part, this is initialization
+    useEffect(()=>{
+        setLoading(false);
+        setAction("")
+    },[])
+    //
     return (
         <div className="board">
             <div className="snow">
