@@ -2,6 +2,7 @@ import axios from "../utils/axios";
 import setAuthToken from "../utils/setAuthToken";
 
 export const saveYearStoryApi = async (data: any) => {
+  console.log(data);
   try {
     const res = await axios.post(
       "api/story/add-year-story",
