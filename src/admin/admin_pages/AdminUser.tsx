@@ -13,38 +13,30 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import { UserDataType } from "../admin_types";
+import { UserModalDataType } from "../admin_types";
+
+import AdminUserModal from "../admin_common/AdminUserModal";
 
 function AdminUser(){
-    const [userdata, setUserData] = useState<UserDataType[]>([]);
+    // const [userdata, setUserData] = useState<UserDataType[]>([]);
     const [usermodaldata, setUserModalData] = useState<UserModalDataType>();
     const [open, setOpen] = useState(false);
-    // const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const handleOpen =(modalname: string, modalaccountStatus: string) =>{
+    const handleOpen =() =>{
         setUserModalData({
-            name: modalname,
-            accountStatus: modalaccountStatus,
+            totalamount: 1000,
+            totaluseramount: 300,
+            provider: "Ethereum",
+            username: "Bahubali",
+            useremail: "starofmath@gmail.com"
         });
         setOpen(true);
     }
     const navigate = useNavigate();
-    //   name, email, gender, current_round, job, accountStatus,
-    interface UserDataType{
-        name: string,
-        email: string,
-        gender: string,
-        current_round: number,
-        job: string,
-        accountStatus: string
-    }
-
-    interface UserModalDataType{
-        name: string,
-        accountStatus: string
-    }
 
     const userDataRows: UserDataType[] = [  
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },  
+        { name: 'superdragon', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },  
         { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },  
         { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },  
         { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },  
@@ -57,43 +49,55 @@ function AdminUser(){
         { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },  
 
     ];  
-    
-    useEffect(()=>{
-        setUserData([...userDataRows]);
-    }, [])
 
     const handleAdmin = () => {
         navigate(`/admin/Admin`);
     };
-
-    
       
     return(
         <div className="admin">
             <div className="admin_userdata_content">
-            <Modal
+                <AdminUserModal modaldata={usermodaldata}/>
+            {/* <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={{  position: 'absolute',
+                <Box sx={{  
+                            position: 'absolute',
                             top: '50%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: 400,
+                            width: 700,
                             bgcolor: 'background.paper',
                             border: '2px solid #000',
                             boxShadow: 24,
-                            p: 4,}} onClick={handleClose}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    {usermodaldata?.name}
+                            py: 4,
+                            px: 8
+                            }} onClick={handleClose}>
+                <Typography id="modal-modal-title" sx={{borderBottom: '1px solid black'}} variant="h6" component="h2">
+                    Total Amount: {usermodaldata?.totalamount}
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    {usermodaldata?.accountStatus}
+                <Typography id="modal-modal-description" sx={{ py:0.5, display: 'flex', borderBottom: '1px solid black'}}>
+                    <div style={{width: '100%', height: 'auto', display: 'flex', justifyContent: 'space-between'}}>
+                        <div style={{width: '25%'}}>Total Useramount</div>
+                        <div style={{width: '25%'}}>Provider</div>
+                        <div style={{width: '25%'}}>Username</div>
+                        <div style={{width: '25%'}}>Useremail</div>
+                    </div>
                 </Typography>
+                <Typography id="modal-modal-description" sx={{ py:0.5, display: 'flex', borderBottom: '1px solid black'}}>
+                    <div style={{width: '100%', height: 'auto', display: 'flex', justifyContent: 'space-between'}}>
+                        <div style={{width: '25%'}}>{usermodaldata?.totaluseramount}</div>
+                        <div style={{width: '25%'}}>{usermodaldata?.provider}</div>
+                        <div style={{width: '25%'}}>{usermodaldata?.username}</div>
+                        <div style={{width: '25%', display: 'flex', }}>{usermodaldata?.useremail}</div>
+                    </div>
+                </Typography>
+                
                 </Box>
-            </Modal>
+            </Modal> */}
 
                 <Modal 
                     className="admin_table"
@@ -128,9 +132,9 @@ function AdminUser(){
                                 </TableRow>
                                 </TableHead>
                                 <TableBody sx={{overflow:'auto'}}>
-                                {userdata.map((row, index) => (
+                                {userDataRows.map((row, index) => (
                                     <TableRow
-                                    onClick={()=>handleOpen(row.name, row.accountStatus)}
+                                    onClick={()=>handleOpen()}
                                     key={row.name}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
