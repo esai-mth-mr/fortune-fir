@@ -15,6 +15,12 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import getImageURL from "../utils/getImageURL";
 
+import Loading from "../common/Loading";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs, { Dayjs } from "dayjs";
+
 type ErrorType = {
   username?: string;
   email?: string;
@@ -31,20 +37,37 @@ const SignUp: React.FC = () => {
     username: "",
     password: "",
     gender: "male",
-    birthday: "",
+    birthday: "2024-12-25",
     job: "",
   });
   const [errors, setErrors] = useState<ErrorType>({});
+  const [loading, setLoading] = useState<Boolean>(false);
+
   const navigate = useNavigate();
 
   const handleInput = (e: any) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
 
-    // Clear the error for the field being updated
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: undefined,
+    }));
+  };
+
+  const handleDateChange = (newValue: Dayjs | null) => {
+    setFormData({
+      ...formData,
+      birthday: newValue ? newValue.format("YYYY-MM-DD") : "",
+    });
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      birthday: undefined,
     }));
   };
 
@@ -88,6 +111,7 @@ const SignUp: React.FC = () => {
       return;
     }
 
+    setLoading(true);
     const newUser = {
       email: formData.email,
       name: formData.username,
@@ -102,9 +126,11 @@ const SignUp: React.FC = () => {
       .then((res) => {
         console.log(res.status);
         localStorage.setItem("email", formData.email);
+        setLoading(false);
         navigate("/required");
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err);
         toast.error("Please Sign up later");
       });
@@ -122,6 +148,7 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="board">
+      {loading && <Loading />}
       <img
         className="sign_header"
         src={getImageURL("./assets/santamodel-1.webp")}
@@ -193,25 +220,28 @@ const SignUp: React.FC = () => {
               }}
             />
           ) : (
-            <TextField
-              variant="outlined"
-              label="Birthday"
-              size="small"
-              type="date"
-              value={formData.birthday}
-              name="birthday"
-              fullWidth
-              onChange={handleInput}
-              error={!!errors.birthday} // Show error state
-              helperText={errors.birthday} // Display error message
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <CelebrationIcon className="form_icon" />
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                name="birthday"
+                value={dayjs(formData.birthday)}
+                onChange={handleDateChange}
+                slots={{
+                  textField: (params) => (
+                    <TextField
+                      {...params}
+                      InputProps={{
+                        ...params.InputProps,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <CelebrationIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  ),
+                }}
+              />
+            </LocalizationProvider>
           )}
         </div>
         {/* Password or Job */}
