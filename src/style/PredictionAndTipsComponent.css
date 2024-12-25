@@ -10,6 +10,7 @@
   transition: ease-in-out all 0.3s;
   overflow-y: auto;
   height: 100%;
+  box-sizing: border-box;
 }
 
 .prediction-tips-container::-webkit-scrollbar {
