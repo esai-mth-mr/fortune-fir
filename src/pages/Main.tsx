@@ -9,7 +9,7 @@ import { getInitDataApi } from "../api/getInitDataApi";
 import { saveMonthStoryApi } from "../api/saveMonthStoryApi";
 import toast from "react-hot-toast";
 import getImageURL from "../utils/getImageURL";
-import Loading from "../common/Loading";
+import Loading from "../common/LoadingMain";
 import { saveYearStoryApi } from "../api/saveYearStoryApi";
 import { getRegenerationAssetsApi } from "../api/getRegenerationAssetsApi";
 
@@ -22,6 +22,8 @@ import {
 import { shuffleData } from "../utils/randomArrangeArray";
 import AudioPlayer from "../common/AudioPlayer";
 import { ERRORS } from "../constant";
+import DescriptionModal from "./modal/descriptionModal";
+import PredictionAndTipsComponent from "../components/PredictionAndTipsComponent";
 
 function Main() {
   //========================Declare variables================================
@@ -91,6 +93,12 @@ function Main() {
   //allow moving to next
   const [allownext, setAllowNext] = useState<boolean>(false);
 
+  const [desc, setDesc] = useState<string>("");
+  const [descModal, setDescModal] = useState(false);
+
+  //For the Description Fullscreen flag
+  const [dFullScreen, setDFullScreen] = useState<boolean>(false);
+
   // =============================API functions===================================
 
   const getInitData = useCallback(async () => {
@@ -98,6 +106,8 @@ function Main() {
     try {
       const res = await getInitDataApi();
       if (res.status !== 200) {
+        if (res.status === 402) navigate("getready");
+
         if (res.message === ERRORS.getDataError) {
           navigate("/result");
           return;
@@ -127,6 +137,7 @@ function Main() {
     try {
       const res = await getRegenerationAssetsApi(data);
       if (res.status !== 200) {
+        if (res.status === 402) navigate("/getready");
         toast.error(res.message);
       } else {
         setData(res.message.data);
@@ -146,10 +157,13 @@ function Main() {
     try {
       const res = await saveMonthStoryApi(sendData);
       if (res.status !== 200) {
+        if (res.status === 402) navigate("/getready");
         toast.error(res.message);
         return false;
       } else {
-        console.log(res.message);
+        setDesc(res.message);
+        setIsOpen(false);
+        setDescModal(true);
         return true;
       }
     } catch (error) {
@@ -165,6 +179,7 @@ function Main() {
     try {
       const res = await saveYearStoryApi(sendData);
       if (res.status !== 200) {
+        if (res.status === 402) navigate("getready");
         toast.error(res.message);
         return false;
       } else {
@@ -305,7 +320,7 @@ function Main() {
     navigate(`/result/?main_month=${month}`);
   };
 
-  const handleItemClick = (
+  const handleItemClick = async (
     index: number,
     luck: string,
     name: string,
@@ -313,6 +328,8 @@ function Main() {
     assetIndex: number
   ) => {
     if (AllowOpen[index] && count < 1) {
+      setLoading(true);
+
       setCount((prev) => prev + 1);
       setAllowOpen((prev) =>
         prev.map((isOpen, i) => (i === index ? false : isOpen))
@@ -325,36 +342,41 @@ function Main() {
       });
       setCountNum((prev) => !prev);
       setSendArray((prev) => [...prev, assetIndex]);
+
+      const sendData = {
+        point: monthpoint,
+        total_point: yearpoint,
+        assets: [assetIndex],
+        month: month,
+      };
+
+      await saveMonthStory(sendData);
+
+      setLoading(false);
     }
+  };
+
+  const _handleClickFullScrenn = () => {
+    setDFullScreen(!dFullScreen);
   };
 
   const handleNextButton = async () => {
     if (!isEdit && allownext && count === 1) {
-      const sendData = {
-        point: monthpoint,
-        total_point: yearpoint,
-        assets: sendArray,
-        month: month,
-      };
-
-      const result = await saveMonthStory(sendData);
-
-      if (result) {
-        if (month !== 12) {
-          setMonth(month + 1);
+      if (month === 12) {
+        console.log("----------year-----", yearpoint);
+        const sendYearData = {
+          total_point: yearpoint,
+        };
+        const result_year = await saveYearStory(sendYearData);
+        if (result_year) {
+          navigate("/result");
+          return;
         } else {
-          const sendYearData = {
-            total_point: yearpoint,
-          };
-          const result_year = await saveYearStory(sendYearData);
-          if (result_year) {
-            navigate("/result");
-            return;
-          } else {
-            toast.error("Failed save year story. Please try agin.");
-          }
+          toast.error("Failed save year story. Please try agin.");
         }
       }
+
+      setMonth(month + 1);
 
       getInitData();
 
@@ -366,6 +388,8 @@ function Main() {
       setCountNum(false);
       // setyearpoint(0);
       setSendArray([]);
+      setDescModal(false);
+      setIsOpen(false);
     }
 
     if (isEdit && count === 1) {
@@ -382,8 +406,22 @@ function Main() {
         autoPlay
         loop
       ></audio>
+
       {loading && <Loading />}
       {/* Main Content */}
+      <div
+        className="modal_description_full"
+        style={
+          dFullScreen
+            ? { height: "100%" }
+            : { height: "0px", margin: "0px", padding: "0px" }
+        }
+      >
+        <PredictionAndTipsComponent
+          input={desc}
+          onZoomClick={_handleClickFullScrenn}
+        />
+      </div>
       <div
         className={loading ? "disabled-content board_content" : "board_content"}
       >
@@ -487,14 +525,14 @@ function Main() {
             </div>
           </div>
         </div>
-        {isOpen && (
-          <Modal
-            setIsOpen={setIsOpen}
-            score={point}
-            modalData={modalData}
-            handleNext={handleNextButton}
+        {isOpen && <Modal score={point} modalData={modalData} />}
+        {descModal && (
+          <DescriptionModal
+            desc={desc}
+            onZoomClick={_handleClickFullScrenn}
+            onNextClick={handleNextButton}
           />
-        )}{" "}
+        )}
         {/* Render the modal conditionally */}
         <div
           // onClick={handleNextButton}

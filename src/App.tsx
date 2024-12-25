@@ -25,6 +25,7 @@ import Help from "./pages/Help";
 import AudioPlayer from "./common/AudioPlayer";
 import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import PrivateRoute from "./components/PrivateRoute";
+import GetReady from "./pages/GetReady";
 
 function App() {
   const navigate = useNavigate();
@@ -83,6 +84,7 @@ function App() {
 
           {/* Private Routes */}
           <Route element={<PrivateRoute />}>
+            <Route path="/getready" element={<GetReady/>}></Route>
             <Route path="/main" element={<Main />}></Route>
 
             <Route path="/result" element={<Result />} />

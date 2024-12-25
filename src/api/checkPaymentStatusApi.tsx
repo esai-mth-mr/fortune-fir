@@ -1,20 +1,14 @@
 import axios from "../utils/axios";
 import setAuthToken from "../utils/setAuthToken";
 
-export const saveMonthStoryApi = async (data: any) => {
-  console.log(data);
+export const checkPaymentStatusApi = async () => {
   try {
-    const res = await axios.post(
-      "api/story/add-month-story",
-      data,
-      setAuthToken()
-    );
+    const res = await axios.post("api/payment/checkStatus", {}, setAuthToken());
     return {
       status: 200,
-      message: res.data.message,
+      message: res.data,
     };
   } catch (error: any) {
-    console.log(error.response);
     if (error.response) {
       return {
         status: error.response.status,

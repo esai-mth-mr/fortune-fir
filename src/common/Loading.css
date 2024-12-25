@@ -36,12 +36,6 @@
     }
 }
 
-.loading-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .front-text {
   font-size: 35px;
   margin-right: 5px;
@@ -71,6 +65,9 @@
 }
 
 .loading_content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Poppins';
     font-size: 14px;
     position: absolute;
@@ -80,6 +77,21 @@
     font-weight: bold;
     border: 1px 1px 1px white;
     animation: content_scale 0.5s infinite;
+}
+
+.loading_content_main{
+  position: absolute;
+  width: 150px;
+  font-family: 'Poppins';
+  font-size: 14px;
+  position: absolute;
+  bottom: -70px;
+  left: -45px;
+  color:rgb(86, 171, 47);
+  font-weight: bold;
+  border: 1px 1px 1px white;
+  animation: content_scale 0.5s infinite;
+  text-align: center;
 }
 
 @keyframes content_scale{

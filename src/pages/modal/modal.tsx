@@ -1,49 +1,40 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import "@src/style/modal/modal.scss";
 import getImageURL from "../../utils/getImageURL";
 
 interface ModalProps {
-  setIsOpen: (isOpen: boolean) => void;
   score: number;
   modalData: {
     name: string;
     desc: string;
   };
-  handleNext: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({
-  setIsOpen,
-  score,
-  modalData,
-  handleNext,
-}) => {
-  const [allowclose, setAllowClose] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      setAllowClose(true);
-    }, 2600);
-  }, [score]);
+const Modal: React.FC<ModalProps> = ({ score, modalData }) => {
+  // const [allowclose, setAllowClose] = useState(false);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setAllowClose(true);
+  //   }, 2600);
+  // }, [score]);
 
-  const handleClose = () => {
-    if (allowclose) {
-      setIsOpen(false);
-      handleNext();
-    }
-    setAllowClose(false);
-  };
+  // const handleClose = () => {
+  //   if (allowclose) {
+  //     setIsOpen(false);
+  //   }
+  //   setAllowClose(false);
+  // };
 
   return (
     <>
       <div className="modal">
-        <img
+        {/* <img
           onClick={handleClose}
           className="modal_close"
           src={getImageURL("./assets/close.webp")}
           draggable={false}
           alt="modal_close"
-        />
+        /> */}
         <div className="modal_darkbg" />
         <img
           className="modal_gift"
@@ -60,12 +51,12 @@ const Modal: React.FC<ModalProps> = ({
           >
             {modalData.name}
           </div>
-          <div
+          {/* <div
             className="modal_desc"
             style={{ color: score < 0 ? "black" : "#0f4c06" }}
           >
             {modalData.desc}
-          </div>
+          </div> */}
         </div>
 
         {/* run sounds */}

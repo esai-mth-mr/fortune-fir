@@ -12,6 +12,27 @@
         bottom: 0px;
         position: absolute;
         border-radius:0 0 10px 10px;
+
+        .modal_next_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+            width: 30%;
+            height: 35px;
+            position: absolute; /* Change to 'absolute' */
+            bottom: 5%; /* Keeps the element in its original position */
+            left: 35%; /* Keeps the element in its original position */
+            opacity: 0.8;
+            border: 2px solid #ff0d0d;
+            font-family: "Poppins";
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            z-index: 50;
+        }
+        
     }
     .modal_luck{
         width: 20%;
@@ -132,6 +153,8 @@
         /* Darker color on hover */
     }
    
+
+ 
 }
 
 @keyframes luck {
