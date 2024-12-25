@@ -11,15 +11,17 @@ function GetReady() {
   const [action, setAction] = useState<string>("");
   const [openPayment, setOpenPayment] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
-  
+
   const handleOnPayment = () => {
     setOpenPayment(true);
   };
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     const checkPayment = async () => {
       const res = await checkPaymentStatusApi();
+      setLoading(false);
       if (res.status === 200) {
         navigate("/main");
         return;
@@ -75,7 +77,7 @@ function GetReady() {
         <div className="getready_btn" onClick={handleOnPayment}>
           Get Ready
         </div>
-        {loading&&<Loading/>}
+        {loading && <Loading />}
         <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
       </div>
     </div>
