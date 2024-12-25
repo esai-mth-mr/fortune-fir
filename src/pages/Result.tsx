@@ -56,6 +56,7 @@ function Result() {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
+    console.log(event.type);
     await showResult(value);
     setMonth(value);
   };
