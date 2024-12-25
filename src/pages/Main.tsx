@@ -30,7 +30,6 @@ function Main() {
   const [month, setMonth] = useState(1);
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [data, setData] = useState([]);
 

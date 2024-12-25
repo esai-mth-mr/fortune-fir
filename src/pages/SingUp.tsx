@@ -100,6 +100,7 @@ const SignUp: React.FC = () => {
     axios
       .post("api/auth/register", newUser)
       .then((res) => {
+        console.log(res.status);
         localStorage.setItem("email", formData.email);
         navigate("/required");
       })
