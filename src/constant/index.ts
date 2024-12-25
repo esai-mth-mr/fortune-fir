@@ -1,6 +1,6 @@
-// const BACKEND_URL = "https://howlucky2025.com";
+const BACKEND_URL = "https://howlucky2025.com";
 // const BACKEND_URL = "http://localhost:8000";
-const BACKEND_URL = "http://54.167.191.81:8000";
+// const BACKEND_URL = "http://54.167.191.81:8000";
 const TOKEN_SECRET_KEY = "aceron20030612";
 const ERRORS = {
     getDataError: "You have already processed all months",
