@@ -29,7 +29,7 @@ const LoadingMain = () => {
               color="success"
               sx={{
                 position:'absolute',
-                right:'-1px',
+                right:'12px',
                 top:'-12px', 
                 display:'flex', 
                 justifyContent:'center', 
@@ -46,12 +46,13 @@ const LoadingMain = () => {
             height={60}
             src={getImageURL("./assets/HowLucky2025_logo.webp")}
           ></img>
-         
+          {loading?<div className="loading_content_loading">Uploading</div>:<></>}
+          {analysing?<div className="loading_content_loading">Analysing</div>:<></>}
+          {almost?<div className="loading_content_loading">Almost Done</div>:<></>}
         </div>
         <div className="spinner-content">
-          {loading?<div className="loading_content_loading">Uploading</div>:<></>}
-          {analysing?<div className="loading_content_analysing">Analysing</div>:<></>}
-          {almost?<div className="loading_content_done">Almost Done</div>:<></>}
+
+          
         </div>
       </div>
     </div>
