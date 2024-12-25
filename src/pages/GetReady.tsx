@@ -2,13 +2,15 @@ import "@src/style/pages/getready.scss";
 import getImageURL from "../utils/getImageURL";
 import { useEffect, useState } from "react";
 import Payment from "./payment/Payment";
-// import Loading from "../common/LoadingMain";
+import Loading from "../common/Loading";
 import { checkPaymentStatusApi } from "../api/checkPaymentStatusApi";
 import { useNavigate } from "react-router-dom";
 
 function GetReady() {
   const [action, setAction] = useState<string>("");
   const [openPayment, setOpenPayment] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+  
   const handleOnPayment = () => {
     setOpenPayment(true);
   };
@@ -72,6 +74,7 @@ function GetReady() {
         <div className="getready_btn" onClick={handleOnPayment}>
           Get Ready
         </div>
+        {loading&&<Loading/>}
         <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
       </div>
     </div>

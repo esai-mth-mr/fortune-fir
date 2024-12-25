@@ -29,7 +29,11 @@ const Loading = () => {
             height={60}
             src={getImageURL("./assets/HowLucky2025_logo.webp")}
           ></img>
-          <div className="loading_content">Loading</div>
+          <div className="loading_content">
+            <div className="loading_content_loading">
+              Loading
+            </div>
+          </div>
         </div>
       </div>
     </div>
