@@ -1,7 +1,7 @@
 import "@src/style/global.scss";
 import "@src/style/pages/main.scss";
 import { useEffect, useState, useCallback } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Modal from "./modal/modal";
 import "animate.css";
 import { getRandomNum } from "../helper/Helper";
