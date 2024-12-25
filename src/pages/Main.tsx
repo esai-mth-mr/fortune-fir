@@ -11,7 +11,6 @@ import toast from "react-hot-toast";
 import getImageURL from "../utils/getImageURL";
 import Loading from "../common/LoadingMain";
 import { saveYearStoryApi } from "../api/saveYearStoryApi";
-import { getRegenerationAssetsApi } from "../api/getRegenerationAssetsApi";
 
 import {
   IInitDataType,
@@ -73,7 +72,6 @@ function Main() {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [isEdit, setEdit] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
 
   const [yearpoint, setyearpoint] = useState<number>(0);
@@ -111,13 +109,11 @@ function Main() {
           navigate("/result");
           return;
         } else {
-          toast.error(res.message);
           if (res.message === ERRORS.accountNotFound) navigate("/login");
           if (res.message === ERRORS.activateAccountRequired)
             navigate("/required");
         }
       } else {
-        console.log(res.message.data);
         setData(shuffleData(res.message.data));
         setGifts(shuffleArray([...array]));
         setMonth(res.message.month);
@@ -125,31 +121,11 @@ function Main() {
         setyearpoint(res.message.year_point);
       }
     } catch (error) {
-      toast.error("Failed to fetch data!");
+      toast.error("Something went wrong. Please try again later!");
     } finally {
       setLoading(false); // Stop loading
     }
   }, []);
-
-  const getRegenerateData = async (data: any) => {
-    setLoading(true); // Start loading
-    try {
-      const res = await getRegenerationAssetsApi(data);
-      if (res.status !== 200) {
-        if (res.status === 402) navigate("/getready");
-        toast.error(res.message);
-      } else {
-        setData(res.message.data);
-        setMonth(res.message.month);
-        setDisplayYear(res.message.year_point);
-        setyearpoint(res.message.year_point);
-      }
-    } catch (error) {
-      toast.error("Failed to fetch data!");
-    } finally {
-      setLoading(false); // Stop loading
-    }
-  };
 
   const saveMonthStory = async (sendData: ISaveSendDataType) => {
     setLoading(true); // Start loading
@@ -157,7 +133,6 @@ function Main() {
       const res = await saveMonthStoryApi(sendData);
       if (res.status !== 200) {
         if (res.status === 402) navigate("/getready");
-        toast.error(res.message);
         return false;
       } else {
         setDesc(res.message);
@@ -166,7 +141,6 @@ function Main() {
         return true;
       }
     } catch (error) {
-      toast.error("Failed to fetch data!");
       return false;
     } finally {
       setLoading(false); // Stop loading
@@ -179,14 +153,11 @@ function Main() {
       const res = await saveYearStoryApi(sendData);
       if (res.status !== 200) {
         if (res.status === 402) navigate("/getready");
-        toast.error(res.message);
         return false;
       } else {
-        console.log(res.message);
         return true;
       }
     } catch (error) {
-      toast.error("Failed to fetch data!");
       return false;
     } finally {
       setLoading(false); // Stop loading
@@ -261,28 +232,8 @@ function Main() {
   }, [count]);
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
+    getInitData();
 
-    if (queryParams.size == 1) {
-      let result_month = queryParams.get("result_month");
-      const result_data = [...result_month?.split("_")!];
-      console.log("result_data", result_data[0]);
-      console.log("result_data_1", result_data[1]);
-      if (result_month) {
-        setMonth(parseInt(result_data[0]));
-        setDisplayYear(parseInt(result_data[1]));
-        setyearpoint(parseInt(result_data[1]));
-      }
-      setEdit(true);
-
-      getRegenerateData(parseInt(result_month!));
-    } else {
-      setEdit(false);
-      getInitData();
-    }
-  }, []);
-
-  useEffect(() => {
     const audio = document.getElementById("main-audio") as HTMLAudioElement;
     if (audio) {
       audio.play().catch((error) => {
@@ -315,10 +266,6 @@ function Main() {
   };
 
   //==========================handle data===============================
-  const handleRegenerate = () => {
-    navigate(`/result/?main_month=${month}`);
-  };
-
   const handleItemClick = async (
     index: number,
     luck: string,
@@ -334,7 +281,10 @@ function Main() {
         prev.map((isOpen, i) => (i === index ? false : isOpen))
       );
       setIsOpen(true);
-      setPoint(getpoint(luck)!);
+
+      const updatedpoint = getpoint(luck);
+
+      setPoint(updatedpoint!);
       setModalData({
         name: name,
         desc: description,
@@ -343,7 +293,7 @@ function Main() {
 
       const sendData = {
         point: monthpoint,
-        total_point: yearpoint,
+        total_point: yearpoint + updatedpoint!,
         assets: [assetIndex],
         month: month,
       };
@@ -359,9 +309,8 @@ function Main() {
   };
 
   const handleNextButton = async () => {
-    if (!isEdit && allownext && count === 1) {
+    if (allownext && count === 1) {
       if (month === 12) {
-        console.log("----------year-----", yearpoint);
         const sendYearData = {
           total_point: yearpoint,
         };
@@ -370,7 +319,7 @@ function Main() {
           navigate("/result");
           return;
         } else {
-          toast.error("Failed save year story. Please try agin.");
+          toast.error("Something went wrong. Please try again.");
         }
       }
 
@@ -387,10 +336,6 @@ function Main() {
       // setyearpoint(0);
       setDescModal(false);
       setIsOpen(false);
-    }
-
-    if (isEdit && count === 1) {
-      handleRegenerate();
     }
   };
 
@@ -541,20 +486,15 @@ function Main() {
           // className={`${!isEdit ? "gift_next_btn" : "edit_btn"}`}
           style={{ display: "none" }}
         >
-          {!isEdit ? (month < 12 ? "Next" : "") : "Submit"}
-          {
+          {month < 12 ? "Next" : ""}
+          {/* {
             !isEdit &&
               month === 12 &&
               // <div className="gift_finish">
               "Finish"
             // </div>
-          }
+          } */}
         </div>
-        {isEdit && (
-          <div className="cancel_btn" onClick={handleRegenerate}>
-            Cancel
-          </div>
-        )}
       </div>
     </div>
   );
