@@ -78,7 +78,7 @@ function Result() {
     try {
       const res = await showResultApi(sendData);
       if (res.status !== 200) {
-        if (res.status === 402) navigate("getready");
+        if (res.status === 402) navigate("/getready");
         toast.error(res.message);
         navigate("/main");
         return false;
