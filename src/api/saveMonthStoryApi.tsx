@@ -2,7 +2,6 @@ import axios from "../utils/axios";
 import setAuthToken from "../utils/setAuthToken";
 
 export const saveMonthStoryApi = async (data: any) => {
-  console.log(data);
   try {
     const res = await axios.post(
       "api/story/add-month-story",
@@ -14,7 +13,6 @@ export const saveMonthStoryApi = async (data: any) => {
       message: res.data.message,
     };
   } catch (error: any) {
-    console.log(error.response);
     if (error.response) {
       return {
         status: error.response.status,

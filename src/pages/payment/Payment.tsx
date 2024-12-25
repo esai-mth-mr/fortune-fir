@@ -86,7 +86,6 @@ export default function Payment(props: {
         if (res.status === 200) {
           const stripe = await stripePromise;
           const sessionId = res.data.sessionId;
-          console.log(sessionId);
           if (!stripe) {
             toast.error("Failed to load stripe");
             return;
