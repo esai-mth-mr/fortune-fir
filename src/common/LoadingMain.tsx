@@ -2,7 +2,24 @@ import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import "./Loading.css";
 import getImageURL from "../utils/getImageURL";
+import { useEffect, useState } from "react";
 const LoadingMain = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [analysing, setAnalysing] = useState<boolean>(false);
+  const [almost, setAlmost] = useState<boolean>(false);
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setLoading(false);
+      setAnalysing(true);
+    }, 60000)
+    setTimeout(()=>{
+      setAnalysing(false);
+      setAlmost(true);
+    }, 120000)
+
+  }, [])
+
   return (
     <div className="loading-container">
       <div className="loading-content">
@@ -29,8 +46,12 @@ const LoadingMain = () => {
             height={60}
             src={getImageURL("./assets/HowLucky2025_logo.webp")}
           ></img>
-          <div className="loading_content_main">Analysing Data Bring you the best results</div>
-          
+         
+        </div>
+        <div className="spinner-content">
+          {loading?<div className="loading_content_loading">Uploading</div>:<></>}
+          {analysing?<div className="loading_content_analysing">Analysing</div>:<></>}
+          {almost?<div className="loading_content_done">Almost Done</div>:<></>}
         </div>
       </div>
     </div>
