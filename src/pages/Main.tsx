@@ -9,7 +9,7 @@ import { getInitDataApi } from "../api/getInitDataApi";
 import { saveMonthStoryApi } from "../api/saveMonthStoryApi";
 import toast from "react-hot-toast";
 import getImageURL from "../utils/getImageURL";
-import Loading from "../common/Loading";
+import Loading from "../common/LoadingMain";
 import { saveYearStoryApi } from "../api/saveYearStoryApi";
 import { getRegenerationAssetsApi } from "../api/getRegenerationAssetsApi";
 
