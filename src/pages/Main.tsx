@@ -21,7 +21,6 @@ import {
   ISaveSendYearDataType,
 } from "../types";
 import { shuffleData } from "../utils/randomArrangeArray";
-import AudioPlayer from "../common/AudioPlayer";
 import { ERRORS } from "../constant";
 import DescriptionModal from "./modal/descriptionModal";
 import PredictionAndTipsComponent from "../components/PredictionAndTipsComponent";
@@ -74,6 +73,8 @@ function Main() {
   const [isOpen, setIsOpen] = useState(false);
 
   const [loading, setLoading] = useState(false);
+  const [loadingResult, setLoadingResult] = useState(false);
+  const [loadingMain, setLoadingMain] = useState(false);
 
   const [yearpoint, setyearpoint] = useState<number>(0);
   const [monthpoint, setmonthpoint] = useState<number>(0);
@@ -129,7 +130,7 @@ function Main() {
   }, []);
 
   const saveMonthStory = async (sendData: ISaveSendDataType) => {
-    setLoading(true); // Start loading
+    setLoadingResult(true); // Start loading
     try {
       const res = await saveMonthStoryApi(sendData);
       if (res.status !== 200) {
@@ -144,12 +145,12 @@ function Main() {
     } catch (error) {
       return false;
     } finally {
-      setLoading(false); // Stop loading
+      setLoadingResult(false); // Stop loading
     }
   };
 
   const saveYearStory = async (sendData: ISaveSendYearDataType) => {
-    setLoading(true); // Start loading
+    setLoadingMain(true); // Start loading
     try {
       const res = await saveYearStoryApi(sendData);
       if (res.status !== 200) {
@@ -161,7 +162,7 @@ function Main() {
     } catch (error) {
       return false;
     } finally {
-      setLoading(false); // Stop loading
+      setLoadingMain(false); // Stop loading
     }
   };
 
@@ -232,6 +233,9 @@ function Main() {
     }
   }, [count]);
 
+  useEffect(() => {
+    getInitData();
+  }, []);
   //===============================custom functions===================================
 
   const shuffleArray = (array: number[]): number[] => {
@@ -264,8 +268,6 @@ function Main() {
     assetIndex: number
   ) => {
     if (AllowOpen[index] && count < 1) {
-      setLoading(true);
-
       setCount((prev) => prev + 1);
       setAllowOpen((prev) =>
         prev.map((isOpen, i) => (i === index ? false : isOpen))
@@ -289,8 +291,6 @@ function Main() {
       };
 
       await saveMonthStory(sendData);
-
-      setLoading(false);
     }
   };
 
@@ -332,9 +332,9 @@ function Main() {
   return (
     <div className="board">
       {loading && <Loading />}
-      {/* <LoadingMain/> */}
-      {/* <LoadingResult/>   */}
-      {/* <Loading/> */}
+      {loadingResult && <LoadingResult />}
+      {loadingMain && <LoadingMain />}
+
       {/* Main Content */}
       <div
         className="modal_description_full"

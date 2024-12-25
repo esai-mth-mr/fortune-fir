@@ -132,7 +132,7 @@ const SignUp: React.FC = () => {
       .catch((err) => {
         setLoading(false);
         console.log(err);
-        toast.error("Please Sign up later");
+        toast.error(err.response.data.message);
       });
   };
 
