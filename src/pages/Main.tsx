@@ -32,7 +32,6 @@ function Main() {
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
-  const [sendArray, setSendArray] = useState<number[]>([]);
 
   const [data, setData] = useState([]);
 
@@ -341,7 +340,6 @@ function Main() {
         desc: description,
       });
       setCountNum((prev) => !prev);
-      setSendArray((prev) => [...prev, assetIndex]);
 
       const sendData = {
         point: monthpoint,
@@ -387,7 +385,6 @@ function Main() {
       setDisplaypoint(0);
       setCountNum(false);
       // setyearpoint(0);
-      setSendArray([]);
       setDescModal(false);
       setIsOpen(false);
     }
