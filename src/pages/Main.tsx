@@ -105,7 +105,7 @@ function Main() {
     try {
       const res = await getInitDataApi();
       if (res.status !== 200) {
-        if (res.status === 402) navigate("getready");
+        if (res.status === 402) navigate("/getready");
 
         if (res.message === ERRORS.getDataError) {
           navigate("/result");
