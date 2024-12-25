@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import getImageURL from "../utils/getImageURL";
 import { useState } from "react";
 import Payment from "./payment/Payment";
-import Loading from "../common/Loading";
+// import Loading from "../common/LoadingMain";
+import LoadingMain from "../common/LoadingMain";
 // import { checkAuthApi } from "../api/checkAuthApi";
 
 function GetReady() {
@@ -62,7 +63,7 @@ function GetReady() {
                     onClick={handleOnPayment}>
                     Get Ready
                 </div>
-                {loading && <Loading />}
+                {loading && <LoadingMain />}
                 <Payment action={action} setOpen={setOpenPayment} open={openPayment} />
             </div>
 
