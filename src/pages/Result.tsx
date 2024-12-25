@@ -7,7 +7,6 @@ import { Pagination } from "@mui/material";
 import getImageURL from "../utils/getImageURL";
 import Payment from "./payment/Payment";
 import { showResultApi } from "../api/showResultApi";
-import toast from "react-hot-toast";
 import Loading from "../common/Loading";
 import PredictionAndTipsComponent from "../components/PredictionAndTipsComponent";
 
@@ -57,7 +56,6 @@ function Result() {
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
-    console.log(event);
     await showResult(value);
     setMonth(value);
   };
@@ -79,7 +77,6 @@ function Result() {
       const res = await showResultApi(sendData);
       if (res.status !== 200) {
         if (res.status === 402) navigate("/getready");
-        toast.error(res.message);
         navigate("/main");
         return false;
       } else {
@@ -91,7 +88,6 @@ function Result() {
         return true;
       }
     } catch (error) {
-      toast.error("Failed to fetch data!");
       navigate("/main");
 
       return false;
