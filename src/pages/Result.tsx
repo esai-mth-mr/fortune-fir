@@ -174,7 +174,7 @@ function Result() {
 
         {month === 13 ? (
           <div className="totalstory">
-            Total<br></br>story
+            Year<br></br>Luck
           </div>
         ) : (
           <></>
@@ -229,7 +229,7 @@ function Result() {
           <div
             onClick={handleShowTotalStory}
             style={{
-              left: "2%",
+              left: "10%",
               bottom: "12%",
               width: "30%",
               height: "30px",
@@ -242,7 +242,7 @@ function Result() {
             onClick={handleOpen}
             // onClick={handleReround}
             style={{
-              right: "1%",
+              right: "10%",
               bottom: "12%",
               width: "30%",
               height: "30px",

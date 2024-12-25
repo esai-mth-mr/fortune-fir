@@ -9,7 +9,9 @@ import { getInitDataApi } from "../api/getInitDataApi";
 import { saveMonthStoryApi } from "../api/saveMonthStoryApi";
 import toast from "react-hot-toast";
 import getImageURL from "../utils/getImageURL";
-import Loading from "../common/LoadingMain";
+import Loading from "../common/Loading";
+import LoadingMain from "../common/LoadingMain";
+import LoadingResult from "../common/LoadingResult";
 import { saveYearStoryApi } from "../api/saveYearStoryApi";
 
 import {
@@ -19,7 +21,6 @@ import {
   ISaveSendYearDataType,
 } from "../types";
 import { shuffleData } from "../utils/randomArrangeArray";
-import AudioPlayer from "../common/AudioPlayer";
 import { ERRORS } from "../constant";
 import DescriptionModal from "./modal/descriptionModal";
 import PredictionAndTipsComponent from "../components/PredictionAndTipsComponent";
@@ -72,6 +73,8 @@ function Main() {
   const [isOpen, setIsOpen] = useState(false);
 
   const [loading, setLoading] = useState(false);
+  const [loadingResult, setLoadingResult] = useState(false);
+  const [loadingMain, setLoadingMain] = useState(false);
 
   const [yearpoint, setyearpoint] = useState<number>(0);
   const [monthpoint, setmonthpoint] = useState<number>(0);
@@ -127,7 +130,7 @@ function Main() {
   }, []);
 
   const saveMonthStory = async (sendData: ISaveSendDataType) => {
-    setLoading(true); // Start loading
+    setLoadingResult(true); // Start loading
     try {
       const res = await saveMonthStoryApi(sendData);
       if (res.status !== 200) {
@@ -142,12 +145,12 @@ function Main() {
     } catch (error) {
       return false;
     } finally {
-      setLoading(false); // Stop loading
+      setLoadingResult(false); // Stop loading
     }
   };
 
   const saveYearStory = async (sendData: ISaveSendYearDataType) => {
-    setLoading(true); // Start loading
+    setLoadingMain(true); // Start loading
     try {
       const res = await saveYearStoryApi(sendData);
       if (res.status !== 200) {
@@ -159,7 +162,7 @@ function Main() {
     } catch (error) {
       return false;
     } finally {
-      setLoading(false); // Stop loading
+      setLoadingMain(false); // Stop loading
     }
   };
 
@@ -232,15 +235,7 @@ function Main() {
 
   useEffect(() => {
     getInitData();
-
-    const audio = document.getElementById("main-audio") as HTMLAudioElement;
-    if (audio) {
-      audio.play().catch((error) => {
-        console.error("Failed to play audio:", error);
-      });
-    }
   }, []);
-
   //===============================custom functions===================================
 
   const shuffleArray = (array: number[]): number[] => {
@@ -273,8 +268,6 @@ function Main() {
     assetIndex: number
   ) => {
     if (AllowOpen[index] && count < 1) {
-      setLoading(true);
-
       setCount((prev) => prev + 1);
       setAllowOpen((prev) =>
         prev.map((isOpen, i) => (i === index ? false : isOpen))
@@ -298,8 +291,6 @@ function Main() {
       };
 
       await saveMonthStory(sendData);
-
-      setLoading(false);
     }
   };
 
@@ -340,15 +331,10 @@ function Main() {
 
   return (
     <div className="board">
-      <AudioPlayer />
-      <audio
-        id="audio_player"
-        src="./sounds/main_page.mp3"
-        autoPlay
-        loop
-      ></audio>
-
       {loading && <Loading />}
+      {loadingResult && <LoadingResult />}
+      {loadingMain && <LoadingMain />}
+
       {/* Main Content */}
       <div
         className="modal_description_full"
@@ -366,7 +352,6 @@ function Main() {
       <div
         className={loading ? "disabled-content board_content" : "board_content"}
       >
-        <AudioPlayer />
         <audio src="./sounds/main_page.mp3" autoPlay loop></audio>
         <div className="main_month">
           <div className="month_title">2025</div>
