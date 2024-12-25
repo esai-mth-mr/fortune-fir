@@ -1,0 +1,18 @@
+==============
+data for users 
+
+name, email, gender, current_round, job, accountStatus,
+
+=============
+payment data
+
+total_amount, 
+total_user_amount, provider, username, useremail
+
+=============
+If click 1 item of user, then it should open modal and show user story status.
+
+================
+user story status data
+
+user_name, current_round, last_story_month

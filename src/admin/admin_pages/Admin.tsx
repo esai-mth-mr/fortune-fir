@@ -1,10 +1,22 @@
 import "@src/admin/admin_style/Admin.scss";
+import { useNavigate } from "react-router-dom";
 function Admin(){
+    const navigate = useNavigate();
+
+    const handleUserData = () =>{
+        navigate("/admin/AdminUser");
+    }
+
+    const handlePaymentData = () =>{
+        navigate("/admin/AdminPayment");
+    }
+
     return(
         <div className="admin">
             <div className="admin_dash">
-                <div className="admin_dash_select">User Data</div>
-                <div className="admin_dash_select">Payment Data</div>
+                <div className="admin_title">Admin Dashboard</div>
+                <div className="admin_dash_select" onClick={handleUserData}>User Data</div>
+                <div className="admin_dash_select" onClick={handlePaymentData}>Payment Data</div>
             </div>
         </div>
     )
