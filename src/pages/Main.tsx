@@ -178,7 +178,7 @@ function Main() {
     try {
       const res = await saveYearStoryApi(sendData);
       if (res.status !== 200) {
-        if (res.status === 402) navigate("getready");
+        if (res.status === 402) navigate("/getready");
         toast.error(res.message);
         return false;
       } else {
