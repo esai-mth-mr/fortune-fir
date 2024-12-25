@@ -9,7 +9,9 @@ import { getInitDataApi } from "../api/getInitDataApi";
 import { saveMonthStoryApi } from "../api/saveMonthStoryApi";
 import toast from "react-hot-toast";
 import getImageURL from "../utils/getImageURL";
-import Loading from "../common/LoadingMain";
+import Loading from "../common/Loading";
+import LoadingMain from "../common/LoadingMain";
+import LoadingResult from "../common/LoadingResult";
 import { saveYearStoryApi } from "../api/saveYearStoryApi";
 
 import {
@@ -230,17 +232,6 @@ function Main() {
     }
   }, [count]);
 
-  useEffect(() => {
-    getInitData();
-
-    const audio = document.getElementById("main-audio") as HTMLAudioElement;
-    if (audio) {
-      audio.play().catch((error) => {
-        console.error("Failed to play audio:", error);
-      });
-    }
-  }, []);
-
   //===============================custom functions===================================
 
   const shuffleArray = (array: number[]): number[] => {
@@ -340,15 +331,10 @@ function Main() {
 
   return (
     <div className="board">
-      <AudioPlayer />
-      <audio
-        id="audio_player"
-        src="./sounds/main_page.mp3"
-        autoPlay
-        loop
-      ></audio>
-
       {loading && <Loading />}
+      {/* <LoadingMain/> */}
+      {/* <LoadingResult/>   */}
+      {/* <Loading/> */}
       {/* Main Content */}
       <div
         className="modal_description_full"
@@ -366,7 +352,6 @@ function Main() {
       <div
         className={loading ? "disabled-content board_content" : "board_content"}
       >
-        <AudioPlayer />
         <audio src="./sounds/main_page.mp3" autoPlay loop></audio>
         <div className="main_month">
           <div className="month_title">2025</div>
