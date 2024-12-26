@@ -5,7 +5,8 @@ export interface UserDataType{
     gender: string,
     current_round: number,
     job: string,
-    accountStatus: PaymentDataType
+    accountStatus: PaymentDataType,
+    lastmonthstory: string
 }
 //userstory
 export interface UserModalDataType{

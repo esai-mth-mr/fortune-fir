@@ -27,7 +27,8 @@ import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import PrivateRoute from "./components/PrivateRoute";
 import Admin from "./admin/admin_pages/Admin";
 import AdminUser from "./admin/admin_pages/AdminUser";
-import AdminPayment from "./admin/admin_pages/AdminPayment";
+import AdminPost from "./admin/admin_pages/AdminPost";
+import AdminLogin from "./admin/admin_pages/AdminLogin";
 
 function App() {
   const navigate = useNavigate();
@@ -84,9 +85,10 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/help" element={<Help />} />
           {/* Admin public Routes */}
+          <Route path="/account/admin/AdminLogin" element={<AdminLogin/>}/>
           <Route path="/account/admin/Admin" element={<Admin/>}/>
           <Route path="/account/admin/AdminUser" element={<AdminUser/>}/>
-          <Route path="/account/admin/AdminPayment" element={<AdminPayment/>}/>
+          <Route path="/account/admin/AdminPost" element={<AdminPost/>}/>
 
           {/* Private Routes */}
           <Route element={<PrivateRoute />}>

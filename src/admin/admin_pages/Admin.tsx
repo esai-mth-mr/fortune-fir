@@ -7,8 +7,8 @@ function Admin(){
         navigate("/account/admin/AdminUser");
     }
 
-    const handlePaymentData = () =>{
-        navigate("/account/admin/AdminPayment");
+    const handlePostData = () =>{
+        navigate("/account/admin/AdminPost");
     }
 
     return(
@@ -16,7 +16,7 @@ function Admin(){
             <div className="admin_dash">
                 <div className="admin_title">Admin Dashboard</div>
                 <div className="admin_dash_select" onClick={handleUserData}>User Data</div>
-                <div className="admin_dash_select" onClick={handlePaymentData}>Payment Data</div>
+                <div className="admin_dash_select" onClick={handlePostData} >Admin Post</div>
             </div>
         </div>
     )

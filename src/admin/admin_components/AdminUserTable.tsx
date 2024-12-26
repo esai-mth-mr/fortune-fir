@@ -10,16 +10,14 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import { AdminUserTableProps } from "../admin_types";
-import { FormControl, InputLabel, MenuItem, Select, Stack } from "@mui/material";
+import { MenuItem, Select, Stack } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
-
-
 function AdminUserTable(props: AdminUserTableProps) {
-    // const [currentPage, setCurrentPage] = useState<number>(1);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    const [age, setAge] = useState<string | number>('10');
+    const [open, setOpen] = useState(false);
 
     const handlePageChange = (
         event: React.ChangeEvent<unknown>,
@@ -28,9 +26,6 @@ function AdminUserTable(props: AdminUserTableProps) {
         setCurrentPage(value);
     };
 
-    const [age, setAge] = useState<string | number>('');
-    const [open, setOpen] = useState(false);
-  
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
       setAge(event.target.value as number);
       console.log("age",event.target.value as number);

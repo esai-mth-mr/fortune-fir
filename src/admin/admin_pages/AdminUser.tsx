@@ -26,7 +26,7 @@ function AdminUser() {
         setUserModalData({
             username: row.name,
             useremail: row.email,
-            lastmonthstory: "kkkkkkkkkkkkk"
+            lastmonthstory: row.lastmonthstory
         });
         setOpen(true);
     };
@@ -43,17 +43,17 @@ function AdminUser() {
     const navigate = useNavigate();
 
     const userDataRows: UserDataType[] = [
-        { name: 'superdragon', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
-        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'superdragon', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome',accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome', accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome',accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome',accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome',accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome',accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome',accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome',accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome',accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome',accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
+        { name: 'kk', email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', lastmonthstory: 'you are welcome',accountStatus: {totalamount: 500, stripeamount: 300, paypalamount: 200} },
     ];
 
     const handleAdmin = () => {
