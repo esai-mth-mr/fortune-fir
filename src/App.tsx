@@ -84,9 +84,9 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/help" element={<Help />} />
           {/* Admin public Routes */}
-          <Route path="/admin/Admin" element={<Admin/>}/>
-          <Route path="/admin/AdminUser" element={<AdminUser/>}/>
-          <Route path="/admin/AdminPayment" element={<AdminPayment/>}/>
+          <Route path="/account/admin/Admin" element={<Admin/>}/>
+          <Route path="/account/admin/AdminUser" element={<AdminUser/>}/>
+          <Route path="/account/admin/AdminPayment" element={<AdminPayment/>}/>
 
           {/* Private Routes */}
           <Route element={<PrivateRoute />}>

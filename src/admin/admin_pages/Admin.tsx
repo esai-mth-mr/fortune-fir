@@ -4,11 +4,11 @@ function Admin(){
     const navigate = useNavigate();
 
     const handleUserData = () =>{
-        navigate("/admin/AdminUser");
+        navigate("/account/admin/AdminUser");
     }
 
     const handlePaymentData = () =>{
-        navigate("/admin/AdminPayment");
+        navigate("/account/admin/AdminPayment");
     }
 
     return(

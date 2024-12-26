@@ -10,11 +10,20 @@ export interface UserDataType{
 }
 
 export interface UserModalDataType{
-    totalamount: number,
-    totaluseramount: number,
-    provider: string,
     username: string,
-    useremail: string
+    useremail: string,
+    lastmonthstory: string
 }
 
+
+export interface AdminModalProps{
+    modaldata: UserModalDataType;
+    handleclose: () => void;
+}
+
+
+export interface AdminUserTableProps{
+    usertabledata: UserDataType[];
+    onRowClick: (row: UserDataType) => void;
+}
 //payment data
