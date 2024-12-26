@@ -25,10 +25,10 @@ import Help from "./pages/Help";
 import AudioPlayer from "./common/AudioPlayer";
 import HomeSharpIcon from "@mui/icons-material/HomeSharp";
 import PrivateRoute from "./components/PrivateRoute";
-// import Admin from "./admin/admin_pages/Admin";
-// import AdminUser from "./admin/admin_pages/AdminUser";
-// import AdminPost from "./admin/admin_pages/AdminPost";
-// import AdminLogin from "./admin/admin_pages/AdminLogin";
+import Admin from "./admin/admin_pages/Admin";
+import AdminUser from "./admin/admin_pages/AdminUser";
+import AdminPost from "./admin/admin_pages/AdminPost";
+import AdminLogin from "./admin/admin_pages/AdminLogin";
 import GetReady from "./pages/GetReady";
 
 function App() {
@@ -87,10 +87,10 @@ function App() {
           <Route path="/help" element={<Help />} />
 
           {/* Admin public Routes */}
-          {/* <Route path="/account/admin/AdminLogin" element={<AdminLogin/>}/>
-          <Route path="/account/admin/Admin" element={<Admin/>}/>
-          <Route path="/account/admin/AdminUser" element={<AdminUser/>}/>
-          <Route path="/account/admin/AdminPost" element={<AdminPost/>}/> */}
+          <Route path="/account/admin/AdminLogin" element={<AdminLogin />} />
+          <Route path="/account/admin/Admin" element={<Admin />} />
+          <Route path="/account/admin/AdminUser" element={<AdminUser />} />
+          <Route path="/account/admin/AdminPost" element={<AdminPost />} />
 
           {/* Private Routes */}
           <Route element={<PrivateRoute />}>

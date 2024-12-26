@@ -1,0 +1,36 @@
+.admin{
+    .admin-post-dash{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3%;
+        width: 80%;
+        height: 80%;
+        border: 1px solid red;
+        border-radius: 30px;
+        .admin-post-cap{
+            font-family: 'Poppins';
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .admin-post-title{
+            display: flex;
+        }
+        .admin-post-content{
+            display: flex;
+        }
+        .admin-post-btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20%;
+            height: 20px;
+            background-color: grey;
+            font-family: 'Poppins';
+            padding: 5% 10%;
+            color: white;
+            border-radius: 20px;
+        }
+    }
+}
