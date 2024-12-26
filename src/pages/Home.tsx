@@ -13,7 +13,7 @@ function Home() {
     if (pretoken) {
       const res = await checkAuthApi();
       if (res.status == 200) {
-        navigate("/main");
+        navigate("/getready");
       } else {
         navigate("/login");
       }
@@ -25,6 +25,12 @@ function Home() {
 
   return (
     <div className="board">
+      <audio
+        id="audio_player"
+        src="./sounds/main_page.mp3"
+        autoPlay
+        loop
+      ></audio>
       <div className="snow">
         {Array.from({ length: 50 }).map((_, index) => {
           const randomDelay = Math.random() * 3; // Random delay between 0 and 5 seconds
@@ -49,6 +55,12 @@ function Home() {
       </div>
 
       <div className="home_header">
+      <audio
+        id="audio_player"
+        src="./sounds/main_page.mp3"
+        autoPlay
+        loop
+      ></audio>
         <img
           className="landing"
           src={getImageURL("./assets/santa2.webp")}

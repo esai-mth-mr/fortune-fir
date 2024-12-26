@@ -1,7 +1,7 @@
 import "@src/style/global.scss";
 import "@src/style/pages/main.scss";
 import { useEffect, useState, useCallback } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Modal from "./modal/modal";
 import "animate.css";
 import { getRandomNum } from "../helper/Helper";
@@ -10,9 +10,10 @@ import { saveMonthStoryApi } from "../api/saveMonthStoryApi";
 import toast from "react-hot-toast";
 import getImageURL from "../utils/getImageURL";
 import Loading from "../common/Loading";
+import LoadingMain from "../common/LoadingMain";
+import LoadingResult from "../common/LoadingResult";
 import { saveYearStoryApi } from "../api/saveYearStoryApi";
-import { getRegenerationAssetsApi } from "../api/getRegenerationAssetsApi";
-import { GETDATA_ERROR } from "../constant";
+
 import {
   IInitDataType,
   IModalDataType,
@@ -20,7 +21,9 @@ import {
   ISaveSendYearDataType,
 } from "../types";
 import { shuffleData } from "../utils/randomArrangeArray";
-import AudioPlayer from "../common/AudioPlayer";
+import { ERRORS } from "../constant";
+import DescriptionModal from "./modal/descriptionModal";
+import PredictionAndTipsComponent from "../components/PredictionAndTipsComponent";
 
 function Main() {
   //========================Declare variables================================
@@ -28,8 +31,6 @@ function Main() {
   const [month, setMonth] = useState(1);
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
-  const location = useLocation();
-  const [sendArray, setSendArray] = useState<number[]>([]);
 
   const [data, setData] = useState([]);
 
@@ -71,8 +72,9 @@ function Main() {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [isEdit, setEdit] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
+  const [loadingResult, setLoadingResult] = useState(false);
+  const [loadingMain, setLoadingMain] = useState(false);
 
   const [yearpoint, setyearpoint] = useState<number>(0);
   const [monthpoint, setmonthpoint] = useState<number>(0);
@@ -90,6 +92,12 @@ function Main() {
   //allow moving to next
   const [allownext, setAllowNext] = useState<boolean>(false);
 
+  const [desc, setDesc] = useState<string>("");
+  const [descModal, setDescModal] = useState(false);
+
+  //For the Description Fullscreen flag
+  const [dFullScreen, setDFullScreen] = useState<boolean>(false);
+
   // =============================API functions===================================
 
   const getInitData = useCallback(async () => {
@@ -97,81 +105,64 @@ function Main() {
     try {
       const res = await getInitDataApi();
       if (res.status !== 200) {
-        if (res.message === GETDATA_ERROR) {
+        if (res.status === 402) navigate("/getready");
+
+        if (res.message === ERRORS.getDataError) {
           navigate("/result");
           return;
+        } else {
+          if (res.message === ERRORS.accountNotFound) navigate("/login");
+          if (res.message === ERRORS.activateAccountRequired)
+            navigate("/required");
         }
-        toast.error(res.message);
       } else {
-        console.log(res.message.data);
         setData(shuffleData(res.message.data));
         setGifts(shuffleArray([...array]));
         setMonth(res.message.month);
         setDisplayYear(res.message.year_point);
         setyearpoint(res.message.year_point);
-        console.log("database", res.message);
       }
     } catch (error) {
-      toast.error("Failed to fetch data!");
+      toast.error("Something went wrong. Please try again later!");
     } finally {
       setLoading(false); // Stop loading
     }
   }, []);
 
-  const getRegenerateData = async (data: any) => {
-    setLoading(true); // Start loading
-    try {
-      const res = await getRegenerationAssetsApi(data);
-      if (res.status !== 200) {
-        toast.error(res.message);
-      } else {
-        setData(res.message.data);
-        setMonth(res.message.month);
-        setDisplayYear(res.message.year_point);
-        setyearpoint(res.message.year_point);
-      }
-    } catch (error) {
-      toast.error("Failed to fetch data!");
-    } finally {
-      setLoading(false); // Stop loading
-    }
-  };
-
   const saveMonthStory = async (sendData: ISaveSendDataType) => {
-    setLoading(true); // Start loading
+    setLoadingResult(true); // Start loading
     try {
       const res = await saveMonthStoryApi(sendData);
       if (res.status !== 200) {
-        toast.error(res.message);
+        if (res.status === 402) navigate("/getready");
         return false;
       } else {
-        console.log(res.message);
+        setDesc(res.message);
+        setIsOpen(false);
+        setDescModal(true);
         return true;
       }
     } catch (error) {
-      toast.error("Failed to fetch data!");
       return false;
     } finally {
-      setLoading(false); // Stop loading
+      setLoadingResult(false); // Stop loading
     }
   };
 
   const saveYearStory = async (sendData: ISaveSendYearDataType) => {
-    setLoading(true); // Start loading
+    setLoadingMain(true); // Start loading
     try {
       const res = await saveYearStoryApi(sendData);
       if (res.status !== 200) {
-        toast.error(res.message);
+        if (res.status === 402) navigate("/getready");
         return false;
       } else {
-        console.log(res.message);
         return true;
       }
     } catch (error) {
-      toast.error("Failed to fetch data!");
       return false;
     } finally {
-      setLoading(false); // Stop loading
+      setLoadingMain(false); // Stop loading
     }
   };
 
@@ -243,36 +234,8 @@ function Main() {
   }, [count]);
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-
-    if (queryParams.size == 1) {
-      let result_month = queryParams.get("result_month");
-      const result_data = [...result_month?.split("_")!];
-      console.log("result_data", result_data[0]);
-      console.log("result_data_1", result_data[1]);
-      if (result_month) {
-        setMonth(parseInt(result_data[0]));
-        setDisplayYear(parseInt(result_data[1]));
-        setyearpoint(parseInt(result_data[1]));
-      }
-      setEdit(true);
-
-      getRegenerateData(parseInt(result_month!));
-    } else {
-      setEdit(false);
-      getInitData();
-    }
+    getInitData();
   }, []);
-
-  useEffect(() => {
-    const audio = document.getElementById("main-audio") as HTMLAudioElement;
-    if (audio) {
-      audio.play().catch((error) => {
-        console.error("Failed to play audio:", error);
-      });
-    }
-  }, []);
-
   //===============================custom functions===================================
 
   const shuffleArray = (array: number[]): number[] => {
@@ -297,11 +260,7 @@ function Main() {
   };
 
   //==========================handle data===============================
-  const handleRegenerate = () => {
-    navigate(`/result/?main_month=${month}`);
-  };
-
-  const handleItemClick = (
+  const handleItemClick = async (
     index: number,
     luck: string,
     name: string,
@@ -314,43 +273,47 @@ function Main() {
         prev.map((isOpen, i) => (i === index ? false : isOpen))
       );
       setIsOpen(true);
-      setPoint(getpoint(luck)!);
+
+      const updatedpoint = getpoint(luck);
+
+      setPoint(updatedpoint!);
       setModalData({
         name: name,
         desc: description,
       });
       setCountNum((prev) => !prev);
-      setSendArray((prev) => [...prev, assetIndex]);
-    }
-  };
 
-  const handleNextButton = async () => {
-    if (!isEdit && allownext && count === 1) {
       const sendData = {
         point: monthpoint,
-        total_point: yearpoint,
-        assets: sendArray,
+        total_point: yearpoint + updatedpoint!,
+        assets: [assetIndex],
         month: month,
       };
 
-      const result = await saveMonthStory(sendData);
+      await saveMonthStory(sendData);
+    }
+  };
 
-      if (result) {
-        if (month !== 12) {
-          setMonth(month + 1);
+  const _handleClickFullScrenn = () => {
+    setDFullScreen(!dFullScreen);
+  };
+
+  const handleNextButton = async () => {
+    if (allownext && count === 1) {
+      if (month === 12) {
+        const sendYearData = {
+          total_point: yearpoint,
+        };
+        const result_year = await saveYearStory(sendYearData);
+        if (result_year) {
+          navigate("/result");
+          return;
         } else {
-          const sendYearData = {
-            total_point: yearpoint,
-          };
-          const result_year = await saveYearStory(sendYearData);
-          if (result_year) {
-            navigate("/result");
-            return;
-          } else {
-            toast.error("Failed save year story. Please try agin.");
-          }
+          toast.error("Something went wrong. Please try again.");
         }
       }
+
+      setMonth(month + 1);
 
       getInitData();
 
@@ -361,24 +324,34 @@ function Main() {
       setDisplaypoint(0);
       setCountNum(false);
       // setyearpoint(0);
-      setSendArray([]);
-    }
-
-    if (isEdit && count === 1) {
-      handleRegenerate();
+      setDescModal(false);
+      setIsOpen(false);
     }
   };
 
   return (
     <div className="board">
-      <AudioPlayer/>
-      <audio id="audio_player" src="./sounds/main_page.mp3" autoPlay loop></audio>
       {loading && <Loading />}
+      {loadingResult && <LoadingResult />}
+      {loadingMain && <LoadingMain />}
+
       {/* Main Content */}
+      <div
+        className="modal_description_full"
+        style={
+          dFullScreen
+            ? { height: "100%" }
+            : { height: "0px", margin: "0px", padding: "0px" }
+        }
+      >
+        <PredictionAndTipsComponent
+          input={desc}
+          onZoomClick={_handleClickFullScrenn}
+        />
+      </div>
       <div
         className={loading ? "disabled-content board_content" : "board_content"}
       >
-        <AudioPlayer/>
         <audio src="./sounds/main_page.mp3" autoPlay loop></audio>
         <div className="main_month">
           <div className="month_title">2025</div>
@@ -478,33 +451,34 @@ function Main() {
             </div>
           </div>
         </div>
-        {isOpen && (
-          <Modal setIsOpen={setIsOpen} score={point} modalData={modalData} />
-        )}{" "}
+        {isOpen && <Modal score={point} modalData={modalData} />}
+        {descModal && (
+          <DescriptionModal
+            desc={desc}
+            onZoomClick={_handleClickFullScrenn}
+            onNextClick={handleNextButton}
+          />
+        )}
         {/* Render the modal conditionally */}
         <div
-          onClick={handleNextButton}
-          style={{
-            backgroundColor: !isEdit ? (count < 1 ? "#f5f5f5" : "red") : "red",
-            borderColor: !isEdit ? (count < 1 ? "#c7c7c7" : "red") : "white",
-            color: !isEdit ? (count < 1 ? "#c7c7c7" : "white") : "white",
-          }}
-          className={`${!isEdit ? "gift_next_btn" : "edit_btn"}`}
+          // onClick={handleNextButton}
+          // style={{
+          //   backgroundColor: !isEdit ? (count < 1 ? "#f5f5f5" : "red") : "red",
+          //   borderColor: !isEdit ? (count < 1 ? "#c7c7c7" : "red") : "white",
+          //   color: !isEdit ? (count < 1 ? "#c7c7c7" : "white") : "white",
+          // }}
+          // className={`${!isEdit ? "gift_next_btn" : "edit_btn"}`}
+          style={{ display: "none" }}
         >
-          {!isEdit ? (month < 12 ? "Next" : "") : "Submit"}
-          {
+          {month < 12 ? "Next" : ""}
+          {/* {
             !isEdit &&
               month === 12 &&
               // <div className="gift_finish">
               "Finish"
             // </div>
-          }
+          } */}
         </div>
-        {isEdit && (
-          <div className="cancel_btn" onClick={handleRegenerate}>
-            Cancel
-          </div>
-        )}
       </div>
     </div>
   );

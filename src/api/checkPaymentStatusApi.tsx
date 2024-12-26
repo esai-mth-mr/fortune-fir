@@ -1,13 +1,9 @@
 import axios from "../utils/axios";
 import setAuthToken from "../utils/setAuthToken";
 
-export const getRegenerationAssetsApi = async (data: any) => {
+export const checkPaymentStatusApi = async () => {
   try {
-    const res = await axios.post(
-      "api/story/regeneration",
-      { month: data },
-      setAuthToken()
-    );
+    const res = await axios.post("api/payment/checkStatus", {}, setAuthToken());
     return {
       status: 200,
       message: res.data,

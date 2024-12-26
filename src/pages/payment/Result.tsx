@@ -14,9 +14,6 @@ const Result = () => {
   const payerId = queryParams.get("PayerID");
   const paymentId = queryParams.get("paymentId");
   const state = queryParams.get("state");
-  console.log(payerId);
-  console.log(paymentId);
-  console.log(state);
   const fetchDataAPI = async () => {
     try {
       const res = await axios.post(
@@ -41,12 +38,6 @@ const Result = () => {
   useEffect(() => {
     setIsLoading(true);
     if (!payerId || !paymentId || !state) {
-      // axios
-      //   .post("/api/stripe/session-complete", {}, setAuthToken())
-      //   .then((res) => {
-      //     console.log(res.data);
-      //   })
-      //   .catch((err) => console.error(err));
       navigate("/payment/cancel");
       return;
     }

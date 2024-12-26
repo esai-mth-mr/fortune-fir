@@ -18,7 +18,6 @@ function Required() {
     axios
       .post("api/auth/resend-email", { email })
       .then((res) => {
-        console.log(res);
         toast.success(res.data.message);
       })
       .catch((err) => {

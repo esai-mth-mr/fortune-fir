@@ -7,7 +7,7 @@ import {
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 
 type PredictionAndTipsProps = {
-  input: { inputString: string };
+  input: string;
   onZoomClick: () => void;
 };
 
@@ -24,7 +24,7 @@ const PredictionAndTipsComponent: React.FC<PredictionAndTipsProps> = ({
   >([]);
 
   useEffect(() => {
-    const structuredData = structurePredictionAndTips(input.inputString);
+    const structuredData = structurePredictionAndTips(input);
     setStructuredContent(structuredData);
 
     const structuredTipsData = structureTips(structuredData.tips);
@@ -32,7 +32,7 @@ const PredictionAndTipsComponent: React.FC<PredictionAndTipsProps> = ({
   }, [input]);
 
   return (
-    <div className={`prediction-tips-container `}>
+    <div className="prediction-tips-container">
       <div className="prediction">
         <h2>Horoscope</h2>
         <p>{structuredContent.prediction}</p>

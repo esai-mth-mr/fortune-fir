@@ -1,0 +1,65 @@
+.board{
+    .getready_dash{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .getready_img_field{
+            width: 120%;
+            height: 60%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            border-radius: 0% 0% 50% 50%;
+            top: 0px;
+            .getready_img{
+                width: 100%;
+                height: 100%;
+                
+            }
+        }
+        .getready_title{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            width: 80%;
+            font-family: 'Prosto One';
+            font-size: 24px;
+            color:black;
+            position: absolute;
+            top: 65%;
+        }
+        .getready_content{
+            text-align: center;
+            font-family: 'Poppins';
+            font-size: 18px;
+            color: black;
+            position: absolute;
+            top: 78%;
+        }
+        .getready_btn{
+            font-family: 'Poppins';
+            padding: 3% 7%;
+            border: 1px solid white;
+            border-radius: 30px;
+            background-color: red;
+            color: white;
+            position: absolute;
+            bottom: 8%;
+            font-weight: bold;
+            cursor: pointer;
+            animation: getready_scale 1s infinite;
+        }
+    }
+    
+}
+
+@keyframes getready_scale{
+    0%{transform: scale(1);}
+    50%{transform: scale(1.05);}
+    100%{transform: scale(1);}
+}
