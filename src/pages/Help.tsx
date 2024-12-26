@@ -36,7 +36,6 @@ function Help() {
           <div className="help-letter">
             <span className="help-content-bold">Monthly Boxes: </span>
             <br />
-            <br />
             Each month, you will be allocated 12 boxes. <br />
             <br />
             <span className="help-content-bold">Each box contains: </span>
