@@ -21,19 +21,21 @@ function AdminLogin(){
             <div className="admin_dash">
                 <div className="admin_title">Admin Login</div>
                 <div className="admin_dash_input">
-                    User Name: 
+                    {/* User Name:  */}
                     <Input
                         value={userName}
                         onChange={handleName}
                         name='username'
+                        placeholder='Enter Name'
                     />
                 </div>
                 <div className="admin_dash_input">
-                    User Email: 
+                    {/* User Email:  */}
                     <Input
                         value={userpassword}
                         onChange={handlePassword}
                         name='userpassword'
+                        placeholder='Enter Password'
                     />
                 </div>
                 <div className='admin_dash_select'>
