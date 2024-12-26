@@ -166,7 +166,7 @@ export default function Payment(props: {
             }}
             className="gradient-text"
           >
-            $0.99
+            $4.99
           </div>
         </DialogTitle>
         <DialogContent sx={{ zIndex: 1 }}>
