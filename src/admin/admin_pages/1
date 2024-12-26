@@ -1,0 +1,151 @@
+==============
+data for users 
+
+name, email, gender, current_round, job, accountStatus,
+
+=============
+payment data
+
+total_amount, 
+total_user_amount, provider, username, useremail
+
+=============
+If click 1 item of user, then it should open modal and show user story status.
+
+================
+user story status data
+
+user_name, current_round, last_story_month
+
+import { useEffect, useState } from "react";
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+
+import { AdminUserTableProps } from "../admin_types";
+
+import { UserDataType } from "../admin_types";
+
+
+function AdminUserTable(props: AdminUserTableProps) {
+    // const columns: GridColDef[] = [
+    //     { field: 'name', headerName: 'name', width: 70 },
+    //     { field: 'email', headerName: 'email', width: 130 },
+    //     { field: 'gender', headerName: 'gender', width: 130 },
+    //     { field: 'current_round', headerName: 'current_round', width: 130 },
+    //     { field: 'job', headerName: 'job', width: 130 },
+    //     { field: 'accountStatus', headerName: 'accountStatus', width: 130 },
+    // ];
+
+    const columns: GridColDef[] = [
+        { field: 'name', headerName: 'ID', width: 70 },
+        { field: 'email', headerName: 'First name', width: 130 },
+        { field: 'gender', headerName: 'Last name', width: 130 },
+      ];
+
+    const rows = [
+        {  name: 'Snow', email: 'Jon', gender: 'kjkj' },
+        {  name: 'Lannister', email: 'Cersei', gender: 'kjkj' },
+        {  name: 'Lannister', email: 'Jaime',gender: 'kjkj' },
+        {  name: 'Stark', email: 'Arya', gender: 'kjkj' },
+        { name: 'Targaryen', email: 'Daenerys', gender: 'kjkj' },
+        {  name: 'Melisandre', email: null, gender: 'kjkj' },
+        {  name: 'Clifford', email: 'Ferrara', gender: 'kjkj' },
+        {  name: 'Frances', email: 'Rossini', gender: 'kjkj' },
+        {  name: 'Roxie', email: 'Harvey', gender: 'kjkj' },
+      ];
+
+    const userDataRows = [
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+            { email: 'kk@example.com', gender: 'female', current_round: 2, job: 'developer', accountStatus: 'paypal' },
+        ];
+
+    const paginationModel = { page: 0, pageSize: 5 };
+
+    return (
+        <div>
+            <Box sx={{
+                position: 'absolute',
+                top: '50%', left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '95%',
+                height: '90%',
+                bgcolor: 'background.paper',
+                p: 4, cursor: 'pointer'
+            }}>
+                <ArrowCircleLeftIcon onClick={props.onhandleAdmin} sx={{ position: "absolute", cursor: "pointer", left: "3%", top: "3%", width: "45px !important", height: "45px !important" }}
+                />
+                <div className="admin_table_title"
+                    style={{ textAlign: 'center', fontFamily: 'Poppins', fontSize: '24px', fontWeight: 'bold' }}
+                >User Data</div>
+                <div style={{ overflow: 'auto', height: '95%' }}>
+                    {/* <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 400 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow key={"nav"}>
+                                    <TableCell>No</TableCell>
+                                    <TableCell align="right">Username</TableCell>
+                                    <TableCell align="right">Email</TableCell>
+                                    <TableCell align="right">Gender</TableCell>
+                                    <TableCell align="right">Current Round</TableCell>
+                                    <TableCell align="right">Job</TableCell>
+                                    <TableCell align="right">AccountStatus</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody sx={{ overflow: 'auto' }}>
+                                {props.usertabledata.map((row, index) => (
+                                    <TableRow
+                                        onClick={() => props.onRowClick(row)}
+                                        key={index}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell scope="row">
+                                            {index + 1}
+                                        </TableCell>
+                                        <TableCell align="right">{row.name}</TableCell>
+                                        <TableCell align="right">{row.email}</TableCell>
+                                        <TableCell align="right">{row.gender}</TableCell>
+                                        <TableCell align="right">{row.current_round}</TableCell>
+                                        <TableCell align="right">{row.job}</TableCell>
+                                        <TableCell align="right">{row.accountStatus}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer> */}
+
+                    {/* <Paper sx={{ height: 630, width: '100%' }}>
+                        <DataGrid
+                            rows={rows}
+                            columns={columns}
+                            initialState={{ pagination: { paginationModel } }}
+                            pageSizeOptions={[5, 10]}
+                            checkboxSelection
+                            sx={{ border: 0 }}
+                        />
+                    </Paper> */}
+                </div>
+            </Box>
+        </div>
+    )
+}
+
+export default AdminUserTable;
