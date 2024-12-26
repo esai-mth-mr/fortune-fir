@@ -22,7 +22,7 @@ function Help() {
             HowLucky2025 is a fun and interactive app designed to let users
             explore their luck month by month. Each month, users are allocated
             12 boxes, each containing unique items representing their luck
-            status and points. Users select 7 boxes to reveal their luck for the
+            status and points. Users select one box to reveal their luck for the
             month and accumulate points to see their overall luck for the year.
             Users can preview their yearly results by paying $4.99 or wait until
             Christmas Day or New Year’s Day to view their results for free. If
@@ -50,7 +50,7 @@ function Help() {
             <br />
             <span className="help-content-bold"> Select Your Boxes: </span>
             <br />
-            Choose 7 boxes each month to determine your luck for that month. The
+            Choose one box each month to determine your luck for that month. The
             luck status and points from the selected boxes will contribute to
             your monthly and yearly luck score. <br />
             <br />
