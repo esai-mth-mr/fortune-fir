@@ -3,26 +3,28 @@ import AdminSelect from "../admin_common/AdminSelect";
 import { useState } from "react";
 import AdminPagination from "../admin_common/AdminPagination";
 import AdminSearch from "../admin_common/AdminSearch";
+import { SelectChangeEvent } from "@mui/material";
 
 function AdminPaymentTable() {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [open, setOpen] = useState(false);
-    const [select, setSelect] = useState<string | number>('10');
-    const [search, setSearch] = useState<string | number>('10');
+    const [select, setSelect] = useState<number>(10);
+    const [search, setSearch] = useState<number>(10);
 
 
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleChange = (event: SelectChangeEvent<number>) => {
         setSelect(event.target.value as number);
         console.log("select1111",event.target.value as number);
-      };
+    };
+
 
     const handlePageChange = (
             event: React.ChangeEvent<unknown>,
             value: number
         ) => {
             setCurrentPage(value);
-            console.log("currentPage", currentPage);
-        };
+            console.log("currentPage", event);
+    };
     
     const handleClose = () => {
     setOpen(false);
@@ -69,7 +71,7 @@ function AdminPaymentTable() {
                         },
                         {
                             provider: "Crypto", amount: 1
-                        }].map((item:{provider: string, amount: number}, index)=>(
+                        }].map((item:{provider: string, amount: number})=>(
                         <div className="adminPayTotalCol" style={{display: 'flex', width: '25%'}}>
                             <div className="adminPayTotalColrow" style={{width: '50%'}}>{item.provider}</div>
                             <div className="adminPayTotalColrow" style={{width: '50%'}}>{item.amount}</div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,14 +10,10 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import { AdminUserTableProps, UserDataType } from "../admin_types";
-import Pagination from "@mui/material/Pagination";
-import Input from '@mui/material/Input';
-import SearchIcon from '@mui/icons-material/Search';
 import AdminSelect from "../admin_common/AdminSelect";
 import AdminPagination from "../admin_common/AdminPagination";
 import AdminSearch from "../admin_common/AdminSearch";
-
-// import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { SelectChangeEvent } from "@mui/material";
 
 function AdminUserTable(props: AdminUserTableProps) {
     const userDataRows: UserDataType[] = [
@@ -35,8 +31,8 @@ function AdminUserTable(props: AdminUserTableProps) {
     ];
 
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [select, setSelect] = useState<string | number>('10');
-    const [search, setSearch] = useState<string | number>('10');
+    const [select, setSelect] = useState<number>(10);
+    const [search, setSearch] = useState<number>(10);
     const [open, setOpen] = useState(false);
 
     const handlePageChange = (
@@ -44,9 +40,10 @@ function AdminUserTable(props: AdminUserTableProps) {
         value: number
     ) => {
         setCurrentPage(value);
+        console.log(event);
     };
 
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleChange = (event: SelectChangeEvent<number>) => {
       setSelect(event.target.value as number);
       console.log("select",event.target.value as number);
     };
@@ -116,7 +113,7 @@ function AdminUserTable(props: AdminUserTableProps) {
                                         <TableCell  align="right">{row.current_round}</TableCell>
                                         <TableCell  align="right">{row.job}</TableCell>
                                         <TableCell align="right">{row.lastmonthstory}</TableCell>
-                                        <TableCell align="right">{row.accountStatus}</TableCell>
+                                        <TableCell align="right">{row.accountStatus==true ? 'true' : 'false'}</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

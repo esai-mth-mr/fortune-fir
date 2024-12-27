@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from "@mui/material";
 //userdata
 export interface UserDataType{
     name: string,
@@ -25,21 +26,21 @@ export interface PaymentDataType{
 //select data
 export interface SelectDataType{
     open: boolean,
-    select: string | number,
+    select: number,
     name: string,
     handleClose: () => void,
     handleOpen: () => void,
-    handleChange: () => void,
+    handleChange: (event: SelectChangeEvent<number>) => void,
 }
 
 export interface PaginationDataType{
     currentPage: number,
-    handlePageChange: () => void,
+    handlePageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
 export interface SearchDataType{
-    search: string | number,
-    handleSearchChange: () => void,
+    search: number,
+    handleSearchChange: (event: React.ChangeEvent<{ value: unknown }>) => void,
     name: string
 }
 
