@@ -22,12 +22,12 @@ function Help() {
             HowLucky2025 is a fun and interactive app designed to let users
             explore their luck month by month. Each month, users are allocated
             12 boxes, each containing unique items representing their luck
-            status and points. Users select 7 boxes to reveal their luck for the
+            status and points. Users select one box to reveal their luck for the
             month and accumulate points to see their overall luck for the year.
-            Users can preview their yearly results by paying $0.99 or wait until
+            Users can preview their yearly results by paying $4.99 or wait until
             Christmas Day or New Year’s Day to view their results for free. If
             users wish to retry their luck for any specific month, they can do
-            so by paying $0.99. Payments are securely handled via Stripe or
+            so by paying $4.99. Payments are securely handled via Stripe or
             PayPal.
           </div>
         </div>
@@ -50,14 +50,14 @@ function Help() {
             <br />
             <span className="help-content-bold"> Select Your Boxes: </span>
             <br />
-            Choose 7 boxes each month to determine your luck for that month. The
+            Choose one box each month to determine your luck for that month. The
             luck status and points from the selected boxes will contribute to
             your monthly and yearly luck score. <br />
             <br />
             <span className="help-content-bold">View Your Results: </span>
             <br />
             <br />
-            <span className="help-content-bold">• Paid Users:</span> Pay $0.99
+            <span className="help-content-bold">• Paid Users:</span> Pay $4.99
             to preview your yearly results anytime.
             <br />
             <span className="help-content-bold">• Non-Paid Users: </span>
@@ -67,7 +67,7 @@ function Help() {
             <span className="help-content-bold">Retry Luck: </span>
             <br />
             If you want to update your luck for any specific month, you can
-            retry by paying $0.99.
+            retry by paying $4.99.
             <br />
             <br />
             <span className="help-content-bold"> Payment Options: </span>
